@@ -4,86 +4,86 @@
 
 We list the things we talk about
 
-# Introduction
+## Introduction
 
 We very quickly summarize what we're doing
 
-## Purpose
+### Purpose
 
 We make a thing
 
-## Scope
+### Scope
 
 Discuss things we want to do, and things we *don't* want to do
 
-## Definitions, acronyms, and abbreviations
+### Definitions, acronyms, and abbreviations
 
 Anything not obvious
 
-## References
+### References
 
 That IEEE document, I guess?
 
-## Overview
+### Overview
 
 Is this part even really necessary?  Introductions are supposed to be quick summaries; should I really have to read a list of definitions before I understand an introduction?
 
-# Overall description
+## Overall description
 
-## Product perspective
+### Product perspective
 
 Why are we doing this
 
-## Product functions
+### Product functions
 
 What are we doing?
 
-## User characteristics
+### User characteristics
 
 Who is our target audience?
 
-## Constraints
+### Constraints
 
 What gotchas should we consider?
 
-## Assumptions and dependencies
+### Assumptions and dependencies
 
 What are we assuming actually exists or holds true?  (E.g. most of our users probably have up-to-date browsers)
 
-# Specific requirements
+## Specific requirements
 
-## External interfaces
+### External interfaces
 
 How will the user interact?
 
-## Functions
+### Functions
 
 Now we discuss things we actually have to do.  UI mockups will probably be dotted around here
 
-### Thing
+#### Thing
   - List of things
   - Let's keep it concise
 
-### Other thing
+#### Other thing
   - This is text
   - I like words
 
-## Performance requirements
+### Performance requirements
 
 Should we expect the user to go make a cup of coffee while waiting for something to happen?  (Hint: no)
 
-## Logical database requirements
+### Logical database requirements
 
 @bsabz this is your time to shine (ER diagrams will probably go here, too)
 
-## Design constraints
+### Design constraints
 
 What restrictions (not conscious choices; I.e. don't say "we use Bootstrap") must we consider when designing this app?
 
-## Software system attributes
+### Software system attributes
 
 What ultimately describes what Mixxy should be?  Yes, the usualy gamut of "reliable", "secure", etc. but remember, this is for people.  "Fun", "social", etc. are just as important
 
-## Additional comments
+### Additional comments
 
 I write more things
