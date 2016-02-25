@@ -18,7 +18,29 @@ Discuss things we want to do, and things we *don't* want to do
 
 ### Definitions, acronyms, and abbreviations
 
-Anything not obvious
+**Work:** Any content a user has posted to Mixxy, typically an illustration.
+
+**Remix:** The act of one user making a copy of another's work for the purpose of editing, improving upon, or otherwise modifying the original work.  (The original work is *not* modified in the process; remixing cannot be used for vandalism.)
+
+**Content:** The subject matter of a work.
+
+**18+:** Content which prominently features any of the following themes:
+
+  - Explicit sexual themes (e.g. nudity or pornography)
+  - Realistic violence and gore
+  - Excessive strong language
+  - Extreme treatment of controversial topics
+
+*18+ content is fully permitted*, so long as it is categorized as such by its creator.
+
+**Forbidden content:** Content that contains any of the following:
+
+  - Child pornography
+  - Copyright violations
+  - Hateful speech and threats of violence
+  - Links to any of the above
+
+**Under no circumstances may a work with forbidden content be posted.  Forbidden content and any remixes thereof will be forcibly removed, and if necessary the relevant authorities will be contacted.**
 
 ### References
 
