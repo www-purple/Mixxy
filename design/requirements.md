@@ -70,9 +70,19 @@ Children under the age of 13 may not use Mixxy, due to legal requirements that w
 
 The following issues arose in the design of Mixxy, all of which affect our options as developers:
 
+- Content will need some form of moderation, in order to prevent Mixxy from being associated with illegal or unsavory material (e.g. child pornography).
+- We cannot allow children under the age of 13 to use Mixxy, as we are not prepared to comply with COPPA.
+- For legal reasons, all user works posted on Mixxy must be released under a license that permits free distribution and modification.
+- We have no budget to speak of.
+- As we are constrained to Google App Engine and Java 7, we may not be able to use certain libraries and tools.
+- The in-browser editor must support raster image editing.  This implies that user works must be stored in raster format, resulting in higher storage and bandwidth requirements.
+
 ### Assumptions and dependencies
 
 Any invalidation of these assumptions can affect the requirements.
+
+- Our target audience likely has an up-to-date Web browser
+- Our target audience is comfortable with other people being able to freely modify their own work
 
 ## Specific requirements
 
