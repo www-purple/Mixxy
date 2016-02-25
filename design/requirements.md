@@ -10,7 +10,7 @@ We very quickly summarize what we're doing
 
 ### Purpose
 
-We make a thing
+The purpose of this document is to summarize a thing
 
 ### Scope
 
@@ -44,11 +44,11 @@ Who is our target audience?
 
 ### Constraints
 
-What gotchas should we consider?
+The following issues arose in the design of Mixxy, all of which affect our options as developers:
 
 ### Assumptions and dependencies
 
-What are we assuming actually exists or holds true?  (E.g. most of our users probably have up-to-date browsers)
+Any invalidation of these assumptions can affect the requirements.
 
 ## Specific requirements
 
