@@ -36,29 +36,31 @@ The following are *not* within the scope of this document:
 
 ### Definitions, acronyms, and abbreviations
 
-**Work:** Any content a user has posted to Mixxy, typically an illustration.
+**Work (n.):** Any content a user has posted to Mixxy, typically an illustration.
 
-**Remix:** The act of one user making a copy of another's work for the purpose of editing, improving upon, or otherwise modifying the original work.  (The original work is *not* modified in the process; remixing cannot be used for vandalism.)
+**Remix (v.):** The act of one user making a copy of another's work for the purpose of editing, improving upon, or otherwise modifying the original work.
 
-**Content:** The subject matter of a work.
+**Remix (n.):** The result of a user's modifications to a work.
 
-**18+:** Content which prominently features any of the following themes:
+*When remixing a work, the original is not modified in the process.  Remixing cannot be used for vandalism.*
+
+**18+ (adj.):** Prominent depiction of any of the following themes:
 
   - Explicit sexual themes (e.g. nudity or pornography)
   - Realistic violence and gore
   - Excessive strong language
   - Extreme treatment of controversial topics
 
-*18+ content is fully permitted*, so long as it is categorized as such by its creator.
+*18+ content is fully permitted, so long as it is categorized as such by its creator.*
 
-**Forbidden content:** Content that contains any of the following:
+**Forbidden (adj.):** Any amount of depiction of the following:
 
   - Child pornography
   - Copyright violations
   - Hateful speech and threats of violence
-  - Links to any of the above
+  - External links to any of the above
 
-**Under no circumstances may a work with forbidden content be posted.  Forbidden content and any remixes thereof will be forcibly removed, and if necessary the relevant authorities will be contacted.**
+*Under no circumstances may forbidden content be posted.  Forbidden content and any remixes thereof will be forcibly removed, and if necessary the relevant authorities will be contacted.*
 
 ### References
 
