@@ -268,10 +268,16 @@ The following issues arose in the design of Mixxy, all of which affect our optio
 
 ### Assumptions and dependencies
 
-Any invalidation of these assumptions can affect the requirements.
+In designing Mixxy, we have assumed the following:
 
-- Our target audience likely has an up-to-date Web browser
+- Our target audience has a desktop or laptop computer
+- Our target audience has a recent Web browser
 - Our target audience is comfortable with other people being able to freely modify their own work
+- Not all followers of a given user are themselves skilled artists.
+- Users do not necessarily have accounts with other social platforms (e.g. DeviantArt)
+- Users are vigilant enough to report any violation of Mixxy's code of conduct.
+
+This document may require revision if any of the stated assumptions are violated.
 
 ## Specific requirements
 
