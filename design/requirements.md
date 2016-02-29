@@ -83,6 +83,12 @@ App Engine Datastore is a schemaless NoSQL datastore providing robust, scalable 
 - Strong consistency for reads and ancestor queries
 - Eventual consistency for all other queries
 
+**Stored Database Entities:** 
+- **Person**: Information containing basic attributes of a person signing up for the webapp, such as: username, first name, last name, phone number, etc.
+- **Users**: The user will be given attributes of all its account information from the "Person" entity, along with references to their comic creations and favorited comics.
+- **Moderators**: Similar entity to a "User" but with escalated privilege that will allow them to carry their duties, such as: banning a user, suspending a user, deleting a remixed or original comic.
+- **Comics**: Rendered images for the comic, original user that it was created by, user that remixed the comic.
+
 ### Design constraints
 
 What restrictions (not conscious choices; I.e. don't say "we use Bootstrap") must we consider when designing this app?
