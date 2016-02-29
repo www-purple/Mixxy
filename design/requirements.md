@@ -66,10 +66,6 @@ The following are *not* within the scope of this document:
 
 That IEEE document, I guess?
 
-### Overview
-
-Is this part even really necessary?  Introductions are supposed to be quick summaries; should I really have to read a list of definitions before I understand an introduction?
-
 ## Overall description
 
 ### Product perspective
