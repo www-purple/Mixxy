@@ -74,7 +74,21 @@ Should we expect the user to go make a cup of coffee while waiting for something
 
 ### Logical database requirements
 
-@bsabz this is your time to shine (ER diagrams will probably go here, too)
+**Data Technology:** The data technology we will be using for this project will primarily be the GAE standard low-level Datastore Java API since it utilizes the Datastore to its full potential.
+
+App Engine Datastore is a schemaless NoSQL datastore providing robust, scalable storage for your web application, with the following features:
+- No planned downtime
+- Atomic transactions
+- High availability of reads and writes
+- Strong consistency for reads and ancestor queries
+- Eventual consistency for all other queries
+
+**Stored Database Entities:** 
+
+- **Users**: The user will be given attributes of all its account information such as: username, first name, last name, phone number, along with references to their comic creations and favorited comics. The User will also have a role attribute for escalated privilege that will allow them to carry their duties, such as: banning a user, suspending a user, deleting a remixed or original comic, if they are a moderator.
+
+- **Comics**: Rendered raster images for the comic, original user that it was created by, and user that remixed the comic will be stored as a Comics Entity. We will be using DeviantArt Muro and most of these comics created by the users will be stored on DeviantArt. The comics created by non-DeviantArt users will be stored as a raster image in the database and will need a considerable amount of storage. 
+
 
 ### Design constraints
 
