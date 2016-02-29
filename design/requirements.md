@@ -64,7 +64,7 @@ The following are *not* within the scope of this document:
 
 ### References
 
-That IEEE document, I guess?
+That IEEE document, I guess?  I dunno, maybe we'll need to fill this out later.
 
 ## Overall description
 
