@@ -84,10 +84,11 @@ App Engine Datastore is a schemaless NoSQL datastore providing robust, scalable 
 - Eventual consistency for all other queries
 
 **Stored Database Entities:** 
-- **Person**: Information containing basic attributes of a person signing up for the webapp, such as: username, first name, last name, phone number, etc.
-- **Users**: The user will be given attributes of all its account information from the "Person" entity, along with references to their comic creations and favorited comics.
-- **Moderators**: Similar entity to a "User" but with escalated privilege that will allow them to carry their duties, such as: banning a user, suspending a user, deleting a remixed or original comic.
-- **Comics**: Rendered images for the comic, original user that it was created by, user that remixed the comic.
+
+- **Users**: The user will be given attributes of all its account information such as: username, first name, last name, phone number, along with references to their comic creations and favorited comics. The User will also have a role attribute for escalated privilege that will allow them to carry their duties, such as: banning a user, suspending a user, deleting a remixed or original comic, if they are a moderator.
+
+- **Comics**: Rendered raster images for the comic, original user that it was created by, and user that remixed the comic will be stored as a Comics Entity. We will be using DeviantArt Muro and most of these comics created by the users will be stored on DeviantArt. The comics created by non-DeviantArt users will be stored as a raster image in the database and will need a considerable amount of storage. 
+
 
 ### Design constraints
 
