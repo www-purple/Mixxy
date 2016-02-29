@@ -9,7 +9,7 @@ Developed by www.purple, consisting of:
 
 ## Table of Contents
 
-We list the things we talk about
+This will be written out at the end -- man, I wish we could generate this automatically...can we?
 
 ## Introduction
 
