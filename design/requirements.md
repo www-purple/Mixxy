@@ -74,7 +74,14 @@ Should we expect the user to go make a cup of coffee while waiting for something
 
 ### Logical database requirements
 
-@bsabz this is your time to shine (ER diagrams will probably go here, too)
+**Data Technology:** The data technology we will be using for this project will primarily be the GAE standard low-level Datastore Java API since it utilizes the Datastore to its full potential.
+
+App Engine Datastore is a schemaless NoSQL datastore providing robust, scalable storage for your web application, with the following features:
+- No planned downtime
+- Atomic transactions
+- High availability of reads and writes
+- Strong consistency for reads and ancestor queries
+- Eventual consistency for all other queries
 
 ### Design constraints
 
