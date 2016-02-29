@@ -1,5 +1,12 @@
 # Mixxy
 
+Developed by www.purple, consisting of:
+
+- Jesse Talavera-Greenberg
+- Brian Sabzjadid
+- Kathleen Cleary
+- Cristiano Miranda
+
 ## Table of Contents
 
 We list the things we talk about
