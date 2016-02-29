@@ -19,7 +19,20 @@ We opted for a holistic approach in the creation of this document; we give prefe
 
 ### Scope
 
-Discuss things we want to do, and things we *don't* want to do
+This document is written to specify the following of Mixxy:
+
+- High-level requirements and constraints
+- The mission-critical data, on a high level
+- Use cases
+- The problem solved
+
+The following are *not* within the scope of this document:
+
+- Detailed information about data storage requirements
+- Specification of algorithms or functionality in a formal syntax
+- A detailed analysis of the target audience
+- Business plan details
+- Architecture, software design, or other implementation issues
 
 ### Definitions, acronyms, and abbreviations
 
