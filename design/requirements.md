@@ -60,17 +60,6 @@ How will the user interact?
 
 Now we discuss things we actually have to do.  UI mockups will probably be dotted around here
 
-### Use Cases
-
-####**Administrative Use Case Sample**
-| Use Case | Primary Actor |
-| --- | --- |
-| Sign-in | User |
-| Sign-out | User |
-
->**NOTE: This is just a template**
-
-
 #### Thing
   - List of things
   - Let's keep it concise
