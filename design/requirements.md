@@ -68,60 +68,27 @@ Note that “Clicks” always refers to a left-mouse-button click, as so does �
 diagrams should be fed as input directly into Section 3.1, external interfaces, which is where the design
 of the user interface is specified. Here is the full list of UML Use-Case Diagrams:
 
-**Overview of Use-Case Diagrams**
+#### Basic Search
+| Use Case | Information 
+|-------------------------------|-----------|
+|                 Primary actor | User, Lurker        
+|               Goal in context | Find a work given broad criteria
+|                 Preconditions | None        
+|                       Trigger | User enters a single text string as search criteria
+|                         Steps | <ol><li>Enter text string in search field</li><li>Navigate through results</li><li>Navigate to any desired works that fit the criterion</li></ol>
+|                    Exceptions | No existing works may fit the requested criteria.  The user will be notified of this.
+|              Frequency of use | At will
 
-| Use Case | Page | Use Case |
-|----------|------|----------|
-| 2.1      | Home | Sign in  |
-| 2.2      |      |          |
-| 2.3      |      |          |
-| 2.4      |      |          |
-| 2.5      |      |          |
-| 2.6      |      |          |
-| 2.7      |      |          |
-| 2.8      |      |          |
-| 2.9      |      |          |
-| 2.10     |      |          |
-| 2.11     |      |          |
-| 2.12     |      |          |
-| 2.13     |      |          |
-| ...      |      |          |
-
-**Use Case 2.1: Sign in**
-
-|                      Use case | Sign in |
-|------------------------------:|---------|
-|                 Primary actor |         |
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                      Scenario |         |
-|                    Exceptions |         |
-|                      Priority |         |
-|                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
-|                   Open issues |         |
-
-**Use Case 2.2:**
-
-|                      Use case |         |
-|------------------------------:|---------|
-|                 Primary actor |         |
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                      Scenario |         |
-|                    Exceptions |         |
-|                      Priority |         |
-|                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
-|                   Open issues |         |
+#### Advanced Search
+| Use Case | Information 
+|-------------------------------|-----------|
+|                 Primary actor | User, Lurker        
+|               Goal in context | Find a work given multiple specific criteria
+|                 Preconditions | None        
+|                       Trigger | User navigates to the advanced search page
+|                         Steps | <ol><li>Provide criteria based on authorship, popularity, age, and tags, among other thing</li><li>Navigate through results</li><li>Navigate to any desired works that fit the criterion</li></ol>
+|                    Exceptions | No existing works may fit the requested criteria.  The user will be notified of this.
+|              Frequency of use | At will
 
 **Use Case 2.3:**
 
