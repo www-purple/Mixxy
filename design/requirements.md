@@ -73,9 +73,9 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 | Use Case | Page | Use Case |
 |----------|------|----------|
 | 2.1      | Home | Sign in  |
-| 2.2      |      |          |
-| 2.3      |      |          |
-| 2.4      |      |          |
+| 2.2      | Home | Sign out |
+| 2.3      | Home | Register |
+| 2.4      | Home | Ban a User |
 | 2.5      |      |          |
 | 2.6      |      |          |
 | 2.7      |      |          |
@@ -91,7 +91,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 
 |                      Use case | Sign in |
 |------------------------------:|---------|
-|                 Primary actor |         |
+|                 Primary actor |User, Admin|
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
@@ -105,11 +105,11 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 | Channels to  secondary actors |         |
 |                   Open issues |         |
 
-**Use Case 2.2:**
+**Use Case 2.2: Sign Out**
 
-|                      Use case |         |
+|                      Use case | Sign Out|
 |------------------------------:|---------|
-|                 Primary actor |         |
+|                 Primary actor |User, Admin|
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
@@ -123,11 +123,11 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 | Channels to  secondary actors |         |
 |                   Open issues |         |
 
-**Use Case 2.3:**
+**Use Case 2.3: Register**
 
-|                      Use case |         |
+|                      Use case | Register|
 |------------------------------:|---------|
-|                 Primary actor |         |
+|                 Primary actor |User, Admin|
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
@@ -141,11 +141,11 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 | Channels to  secondary actors |         |
 |                   Open issues |         |
 
-**Use Case 2.4:**
+**Use Case 2.4: Ban a User**
 
-|                      Use case |         |
+|                      Use case |Ban a User |
 |------------------------------:|---------|
-|                 Primary actor |         |
+|                 Primary actor |User, Admin|
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
