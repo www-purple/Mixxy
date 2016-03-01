@@ -60,6 +60,213 @@ With the advent of social media, much of digital culture now revolves around fre
 
 More formally, Mixxy is an art platform where users can not only post and share their own work, but freely remix that of others.  Users may provide or remix content with either the provided in-browser image editor or through their own preferred toolset, uploading their work to Mixxy upon its completion.  Users can discuss works with one another, follow creators they admire, or find works based on a particular subject matter.
 
+### User Interfaces
+
+The table below summarizes the ways with which the user
+will interact with Mixxy, which will be further detailed using UML Use Case diagrams.
+Note that “Clicks” always refers to a left-mouse-button click, as so does “Drags”. These Use-Case
+diagrams should be fed as input directly into Section 3.1, external interfaces, which is where the design
+of the user interface is specified. Here is the full list of UML Use-Case Diagrams:
+
+**Overview of Use-Case Diagrams**
+
+| Use Case | Page | Use Case |
+|----------|------|----------|
+| 2.1      | Home | Sign in  |
+| 2.2      |      |          |
+| 2.3      |      |          |
+| 2.4      |      |          |
+| 2.5      |      |          |
+| 2.6      |      |          |
+| 2.7      |      |          |
+| 2.8      |      |          |
+| 2.9      |      |          |
+| 2.10     |      |          |
+| 2.11     |      |          |
+| 2.12     |      |          |
+| 2.13     |      |          |
+| ...      |      |          |
+
+**Use Case 2.1: Sign in**
+
+|                      Use case | Sign in |
+|------------------------------:|---------|
+|                 Primary actor |         |
+|               Goal in context |         |
+|                 Preconditions |         |
+|                       Trigger |         |
+|                      Scenario |         |
+|                    Exceptions |         |
+|                      Priority |         |
+|                When available |         |
+|              Frequency of use |         |
+|              Channel to actor |         |
+|              Secondary actors |         |
+| Channels to  secondary actors |         |
+|                   Open issues |         |
+
+**Use Case 2.2:**
+
+|                      Use case |         |
+|------------------------------:|---------|
+|                 Primary actor |         |
+|               Goal in context |         |
+|                 Preconditions |         |
+|                       Trigger |         |
+|                      Scenario |         |
+|                    Exceptions |         |
+|                      Priority |         |
+|                When available |         |
+|              Frequency of use |         |
+|              Channel to actor |         |
+|              Secondary actors |         |
+| Channels to  secondary actors |         |
+|                   Open issues |         |
+
+**Use Case 2.3:**
+
+|                      Use case |         |
+|------------------------------:|---------|
+|                 Primary actor |         |
+|               Goal in context |         |
+|                 Preconditions |         |
+|                       Trigger |         |
+|                      Scenario |         |
+|                    Exceptions |         |
+|                      Priority |         |
+|                When available |         |
+|              Frequency of use |         |
+|              Channel to actor |         |
+|              Secondary actors |         |
+| Channels to  secondary actors |         |
+|                   Open issues |         |
+
+**Use Case 2.4:**
+
+|                      Use case |         |
+|------------------------------:|---------|
+|                 Primary actor |         |
+|               Goal in context |         |
+|                 Preconditions |         |
+|                       Trigger |         |
+|                      Scenario |         |
+|                    Exceptions |         |
+|                      Priority |         |
+|                When available |         |
+|              Frequency of use |         |
+|              Channel to actor |         |
+|              Secondary actors |         |
+| Channels to  secondary actors |         |
+|                   Open issues |         |
+
+**Use Case 2.5:**
+
+|                      Use case |         |
+|------------------------------:|---------|
+|                 Primary actor |         |
+|               Goal in context |         |
+|                 Preconditions |         |
+|                       Trigger |         |
+|                      Scenario |         |
+|                    Exceptions |         |
+|                      Priority |         |
+|                When available |         |
+|              Frequency of use |         |
+|              Channel to actor |         |
+|              Secondary actors |         |
+| Channels to  secondary actors |         |
+|                   Open issues |         |
+
+**Use Case 2.6:**
+
+|                      Use case |         |
+|------------------------------:|---------|
+|                 Primary actor |         |
+|               Goal in context |         |
+|                 Preconditions |         |
+|                       Trigger |         |
+|                      Scenario |         |
+|                    Exceptions |         |
+|                      Priority |         |
+|                When available |         |
+|              Frequency of use |         |
+|              Channel to actor |         |
+|              Secondary actors |         |
+| Channels to  secondary actors |         |
+|                   Open issues |         |
+
+**Use Case 2.7:**
+
+|                      Use case |         |
+|------------------------------:|---------|
+|                 Primary actor |         |
+|               Goal in context |         |
+|                 Preconditions |         |
+|                       Trigger |         |
+|                      Scenario |         |
+|                    Exceptions |         |
+|                      Priority |         |
+|                When available |         |
+|              Frequency of use |         |
+|              Channel to actor |         |
+|              Secondary actors |         |
+| Channels to  secondary actors |         |
+|                   Open issues |         |
+
+**Use Case 2.8:**
+
+|                      Use case |         |
+|------------------------------:|---------|
+|                 Primary actor |         |
+|               Goal in context |         |
+|                 Preconditions |         |
+|                       Trigger |         |
+|                      Scenario |         |
+|                    Exceptions |         |
+|                      Priority |         |
+|                When available |         |
+|              Frequency of use |         |
+|              Channel to actor |         |
+|              Secondary actors |         |
+| Channels to  secondary actors |         |
+|                   Open issues |         |
+
+**Use Case 2.9:**
+
+|                      Use case |         |
+|------------------------------:|---------|
+|                 Primary actor |         |
+|               Goal in context |         |
+|                 Preconditions |         |
+|                       Trigger |         |
+|                      Scenario |         |
+|                    Exceptions |         |
+|                      Priority |         |
+|                When available |         |
+|              Frequency of use |         |
+|              Channel to actor |         |
+|              Secondary actors |         |
+| Channels to  secondary actors |         |
+|                   Open issues |         |
+
+**Use Case 2.10:**
+
+|                      Use case |         |
+|------------------------------:|---------|
+|                 Primary actor |         |
+|               Goal in context |         |
+|                 Preconditions |         |
+|                       Trigger |         |
+|                      Scenario |         |
+|                    Exceptions |         |
+|                      Priority |         |
+|                When available |         |
+|              Frequency of use |         |
+|              Channel to actor |         |
+|              Secondary actors |         |
+| Channels to  secondary actors |         |
+|                   Open issues |         |
+
 ### User characteristics
 
 Mixxy is designed primarily for the benefit of artists and their enthusiasts, with particular attention to the comic fanbase.  We expect that most potential users are young (typically ages 15-30) and reasonably tech-savvy.
