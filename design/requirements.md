@@ -62,33 +62,9 @@ More formally, Mixxy is an art platform where users can not only post and share 
 
 ### User Interfaces
 
-The table below summarizes the ways with which the user
-will interact with Mixxy, which will be further detailed using UML Use Case diagrams.
-Note that “Clicks” always refers to a left-mouse-button click, as so does “Drags”. These Use-Case
-diagrams should be fed as input directly into Section 3.1, external interfaces, which is where the design
-of the user interface is specified. Here is the full list of UML Use-Case Diagrams:
+The table below summarizes the ways with which the user will interact with Mixxy, which will be further detailed using UML Use Case diagrams.  Note that "Clicks" always refers to a left-mouse-button click, as so does "Drags". These Use-Case  diagrams should be fed as input directly into Section 3.1, external interfaces, which is where the design  of the user interface is specified. Here is the full list of UML Use-Case Diagrams:
 
-**Overview of Use-Case Diagrams**
-
-| Use Case | Page | Use Case |
-|----------|------|----------|
-| 2.1      | Home | Sign in  |
-| 2.2      | Home | Sign out |
-| 2.3      | Home | Register |
-| 2.4      | Home | Ban a User |
-| 2.5      | Sign in | Forgot a password |
-| 2.6      |      |          |
-| 2.7      |      |          |
-| 2.8      |      |          |
-| 2.9      |      |          |
-| 2.10     |      |          |
-| 2.11     |      |          |
-| 2.12     |      |          |
-| 2.13     |      |          |
-| ...      |      |          |
-
-**Use Case 2.1: Sign in**
-
+#### Sign In
 |                      Use case | Sign in |
 |------------------------------:|---------|
 |                 Primary actor |User, Admin|
@@ -101,8 +77,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |                When available |         |
 |              Frequency of use | Used as often as a user will log in and out of their account. |
 
-**Use Case 2.2: Sign Out**
-
+#### Sign Out
 |                      Use case | Sign out |
 |------------------------------:|---------|
 |                 Primary actor |User, Admin|
@@ -115,8 +90,29 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |                When available |         |
 |              Frequency of use | Used as often as a user will log in and out of their account. |
 
-**Use Case 2.3: Register**
+#### Basic Search
+| Use Case | Information 
+|-------------------------------|-----------|
+|                 Primary actor | User, Lurker        
+|               Goal in context | Find a work given broad criteria
+|                 Preconditions | None        
+|                       Trigger | User enters a single text string as search criteria
+|                         Steps | <ol><li>Enter text string in search field</li><li>Navigate through results</li><li>Navigate to any desired works that fit the criterion</li></ol>
+|                    Exceptions | No existing works may fit the requested criteria.  The user will be notified of this.
+|              Frequency of use | At will
 
+#### Advanced Search
+| Use Case | Information 
+|-------------------------------|-----------|
+|                 Primary actor | User, Lurker        
+|               Goal in context | Find a work given multiple specific criteria
+|                 Preconditions | None        
+|                       Trigger | User navigates to the advanced search page
+|                         Steps | <ol><li>Provide criteria based on authorship, popularity, age, and tags, among other thing</li><li>Navigate through results</li><li>Navigate to any desired works that fit the criterion</li></ol>
+|                    Exceptions | No existing works may fit the requested criteria.  The user will be notified of this.
+|              Frequency of use | At will
+
+#### Register
 |                      Use case | Register|
 |------------------------------:|---------|
 |                 Primary actor |User, Admin|
@@ -129,8 +125,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |                When available |         |
 |              Frequency of use | Used as often as a user will decide to create a new account. |
 
-**Use Case 2.4: Ban a User**
-
+#### Ban User
 |                      Use case |Ban a User |
 |------------------------------:|---------|
 |                 Primary actor |Admin|
@@ -143,8 +138,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |                When available |         |
 |              Frequency of use | Used as often as an admin feels that a user is violating the guidelines. |
 
-**Use Case 2.5: Forgot a password**
-
+#### Reset Password
 |                      Use case | Forgot a password |
 |------------------------------:|---------|
 |                 Primary actor |User, Admin|
@@ -156,91 +150,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |                      Priority | Essential, must be implemented |
 |                When available |         |
 |              Frequency of use | Used as often as the user feels that they forgot their password. |
-
-**Use Case 2.6:**
-
-|                      Use case |         |
-|------------------------------:|---------|
-|                 Primary actor |         |
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                         Steps |         |
-|                    Exceptions |         |
-|                      Priority |         |
-|                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
-
-**Use Case 2.7:**
-
-|                      Use case |         |
-|------------------------------:|---------|
-|                 Primary actor |         |
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                         Steps |         |
-|                    Exceptions |         |
-|                      Priority |         |
-|                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
-
-**Use Case 2.8:**
-
-|                      Use case |         |
-|------------------------------:|---------|
-|                 Primary actor |         |
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                         Steps |         |
-|                    Exceptions |         |
-|                      Priority |         |
-|                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
-
-**Use Case 2.9:**
-
-|                      Use case |         |
-|------------------------------:|---------|
-|                 Primary actor |         |
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                         Steps |         |
-|                    Exceptions |         |
-|                      Priority |         |
-|                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
-
-**Use Case 2.10:**
-
-|                      Use case |         |
-|------------------------------:|---------|
-|                 Primary actor |         |
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                         Steps |         |
-|                    Exceptions |         |
-|                      Priority |         |
-|                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
 
 ### User characteristics
 
