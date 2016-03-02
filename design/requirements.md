@@ -33,6 +33,7 @@ The following are *not* within the scope of this document:
 - A detailed analysis of the target audience
 - Business plan and monetization details
 - Architecture, software design, or other implementation issues
+- Technology choices for non-critical components (e.g. utility libraries, parsers)
 
 ### Definitions, acronyms, and abbreviations
 
