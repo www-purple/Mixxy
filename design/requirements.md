@@ -256,7 +256,7 @@ Any invalidation of these assumptions can affect the requirements.
 
 ### External interfaces
 
-The user will be able to remix the comics of their choosing on the web app via access from access from their laptop or desktop computers. They will be able to post, comment, like that comic, and if they so choose, they can subscribe to the user who post tasteful comics to receive a feed of their posts. The iOS app will be a compliment to the web app, where users get to view the comics they have remixed and other user content.
+The user will be able to remix the comics of their choosing on the web app via access from their laptop or desktop computers. They will be able to post, comment, like that comic, and if they so choose, they can subscribe to the user who post tasteful comics to receive a feed of their posts. The iOS app will be a compliment to the web app, where users get to view the comics they have remixed and other user content.
 
 ### Functions
 
