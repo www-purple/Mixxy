@@ -31,10 +31,15 @@ The following are *not* within the scope of this document:
 - Detailed information about data storage requirements
 - Specification of algorithms or functionality in a formal syntax
 - A detailed analysis of the target audience
-- Business plan details
+- Business plan and monetization details
 - Architecture, software design, or other implementation issues
+- Technology choices for non-critical components (e.g. utility libraries, parsers)
 
-### Definitions, acronyms, and abbreviations
+### Definitions
+
+**User (n.):** A person who registers for an account with Mixxy and partakes in its services.  Does not necessarily contribute content (but we'd like them to).
+
+**Moderator (n.):** A user who enforces community standards and responds to violations, taking disciplinary actions if necessary.
 
 **Work (n.):** Any content a user has posted to Mixxy, typically an illustration.
 
@@ -53,124 +58,122 @@ The following are *not* within the scope of this document:
 
 *18+ content is fully permitted, so long as it is categorized as such by its creator.*
 
-**Forbidden (adj.):** Any amount of depiction of the following:
+**Forbidden (adj.):** Any presence of the following themes:
 
-  - Child pornography
+  - Child pornography, bestiality, rape, and other illegal sexual activity
   - Copyright violations
-  - Hateful speech and threats of violence
+  - Hateful speech, harassment, and cyber-bullying
+  - Threats of violence or other disruptive activity
+  - Encouragement of criminal activity
   - External links to any of the above
 
 *Under no circumstances may forbidden content be posted.  Forbidden content and any remixes thereof will be forcibly removed, and if necessary the relevant authorities will be contacted.*
-
-### References
-
-That IEEE document, I guess?  I dunno, maybe we'll need to fill this out later.
 
 ## Overall description
 
 ### Rationale
 
-With the advent of social media, much of digital culture now revolves around freely sharing--and occasionally modifying--user-made content.  Mixxy is designed with this trend in mind, to empower artists and illustrators of all skills to put their own twist on an existing work.  How this is applied is left entirely to the user base -- community-built stories, collaborative works, and even outright parody come to mind, though by no means should they be seen as limits.
-
-### Function summary
+With the advent of social media, much of digital culture now revolves around freely sharing--and occasionally modifying--user-made content.  Mixxy is designed with this trend in mind, to empower artists and illustrators of all skills to put their own twist on an existing work.  How this is applied is left entirely to the user base -- community-built stories, collaborative works, and even outright parody come to mind, though by no means should they be seen as limits.  Clever and emergent uses of the platform are highly encouraged.
 
 More formally, Mixxy is an art platform where users can not only post and share their own work, but freely remix that of others.  Users may provide or remix content with either the provided in-browser image editor or through their own preferred toolset, uploading their work to Mixxy upon its completion.  Users can discuss works with one another, follow creators they admire, or find works based on a particular subject matter.
 
 Mixxy is *not* designed as:
 
 - A platform to exchange works for monetary value
-- A static art gallery
+- A static art gallery or portfolio Web page
+- A conventional image sharing/hosting service or imageboard (e.g. Imgur, 4chan)
+- A recruiting service for artists
+- A repository of artwork for use in other media (e.g. clip art websites, Open Game Art)
+- A tutorial service for art and illustration skills
+
+Users are, however, welcome to use Mixxy for these purposes unless otherwise stated.
 
 ### User Interfaces
 
 The table below summarizes the ways with which the user will interact with Mixxy, which will be further detailed using UML Use Case diagrams.  Note that "Clicks" always refers to a left-mouse-button click, as so does "Drags". These Use-Case  diagrams should be fed as input directly into Section 3.1, external interfaces, which is where the design  of the user interface is specified. Here is the full list of UML Use-Case Diagrams:
 
 #### Sign In
-|                      Use case | Sign in |
-|------------------------------:|---------|
-|                 Primary actor |User, Admin|
-|               Goal in context | The user may at any point log in to the website with their username and password. Note that the user can only log in to one session.|
-|                 Preconditions | The application has no user session. |
-|                       Trigger | The user clicks on the “Sign In” button|
-|                      Steps    | <ol><li>User starts the web application, which loads the homepage</li><li> User clicks on the “Sign In” button</li></ol>|
-|                    Exceptions | This button should always be enabled when the user isn't logged in. Note that should a user already be logged in, the application shouldn't display this button.|
-|                      Priority | Essential, must be implemented |
-|                When available |         |
-|              Frequency of use | Used as often as a user will log in and out of their account. |  
+|                     Attribute | Details |
+|-------------------------------|---------|
+|                 Primary actor | User, Admin
+|                          Goal | To associate Mixxy activity with a given user.
+|                 Preconditions | The User is not currently signed in.
+|                       Trigger | Provide credentials to Mixxy.
+|                         Steps | <ol><li>User starts the web application, which loads the homepage</li><li> User clicks on "Sign In" button</li></ol>|
+|                    Exceptions | A user may provide invalid credentials.  In such a case, they are not signed in.
+|              Frequency of use | Frequently, though usually automated if the user configures their browser to sign in automatically.
 
 #### Sign Out
-|                      Use case | Sign out |
-|------------------------------:|---------|
-|                 Primary actor |User, Admin|
-|               Goal in context | The user may at any point log out from the website. Note that the user can only log out from one session.|
-|                 Preconditions | The application has a current user session. |
-|                       Trigger | The user clicks on the “Sign Out” button|
-|                      Steps    | <ol><li>User starts the web application, which loads the homepage</li><li> User clicks on the “Sign Out” button</li></ol>|
-|                    Exceptions | This button should always be enabled when the user is logged in. Note that should a user already be logged out, the application shouldn't display this button.|
-|                      Priority | Essential, must be implemented |
-|                When available |         |
-|              Frequency of use | Used as often as a user will log in and out of their account. |
+|                     Attribute | Details |
+|-------------------------------|---------|
+|                 Primary actor | User, Admin
+|                          Goal | To stop associating Mixxy activity with a given user.
+|                 Preconditions | User is signed in.
+|                       Trigger | Click "Sign Out" button, or the session expires.
+|                         Steps | <ol><li> User clicks on the “Sign Out” button</li></ol>
+|                    Exceptions | If the user is not currently signed in, they will be shown an error.  No further action shall be taken.
+|              Frequency of use | Frequently, though usually automated if the user configures their browser to sign out automatically.
 
-#### Draw Comic
-|                      Use case | Draw Comic  |
-|------------------------------:|-------------|
+#### Draw Work
+|                     Attribute | Details |
+|-------------------------------|---------|
 |                 Primary actor | User
-|               Goal in context | Create a new comic
-|                 Preconditions | User is logged in
-|                       Trigger | Click 'Create New' button from Draw tab
-|                      Scenario | <ol><li>Actor clicks 'create new' button from Draw menu</li><li>Muro loads in browser, allowing user to create their comic</li><li>Image is displayed in browser, allows actor confirm via button click to add image to profile or cancel to return to Draw menu</li></ol>       
-|                    Exceptions | user is not logged in             
-|              Frequency of use | Frequently - we anticipate a good amount of content creation   
+|                          Goal | Give users a creative outlet.
+|                 Preconditions | User is currently signed in.
+|                       Trigger | Click "Create New" button from Draw tab
+|                      Scenario | <ol><li>User clicks "Create New" button from Draw menu</li><li>Image editor loads in browser, allowing user to create a work</li><li>Image is displayed in browser, user can publish work</li></ol>
+|                    Exceptions | Created work is too large.
+|              Frequency of use | At will
 
-#### Upload Comic
-|                      Use case | Upload Comic  |
-|------------------------------:|---------------|
+#### Upload Work
+|                     Attribute | Details |
+|-------------------------------|---------|
 |                 Primary actor | User
-|               Goal in context | Upload a previously created comic
-|                 Preconditions | User is logged in
+|                          Goal | Allow users to create works with their preferred tools.
+|                 Preconditions | User is signed in and able to upload work.
 |                       Trigger | Click 'Upload' button from Draw tab
-|                      Scenario | <ol><li>Actor clicks upload button from Draw menu</li><li>File chooser loads, prompting actor to select file to be uploaded</li><li>Image is displayed in browser, allows actor confirm via button click to add image to profile or cancel to return to Draw menu</li></ol>       
-|                    Exceptions | Wrong file format, user is not logged in                    
-|              Frequency of use | Frequently - we anticipate a good amount of image uploading    
+|                      Scenario | <ol><li>User clicks upload button from Draw menu</li><li>File chooser loads, prompting actor to select file to be uploaded</li><li>Image is displayed in browser, allows actor confirm via button click to add image to profile or cancel to return to Draw menu</li></ol>       
+|                    Exceptions | Uploaded work is too large, or not in a known file format.
+|              Frequency of use | At will
 
-#### Edit Comic
-|                      Use case | Edit Comic  |
-|------------------------------:|-------------|
+#### Edit Work
+|                     Attribute | Details |
+|-------------------------------|---------|
 |                 Primary actor | User
-|               Goal in context | Edit a preexisting comic
-|                 Preconditions | User is logged in
+|                          Goal | Revise or improve a user's own existing work
+|                 Preconditions | User is signed in and has previously posted works,
 |                       Trigger | Click 'edit' link in sidebar of owned comic
 |                      Scenario | <ol><li>Actor opens comic, clicks 'edit' in the sidebar</li><li>Comic is opened in Muro for editing</li><li>Image is displayed in browser, allows actor confirm via button click to add image to profile or cancel to return to Draw menu</li></ol>    
-|                    Exceptions | user does not own comic            
+|                    Exceptions | None
 |              Frequency of use | Infrequently
 
-#### Remix Comic
-|                      Use case | Remix Comic  |
-|------------------------------:|-------------|
+#### Remix Work
+|                     Attribute | Details |
+|-------------------------------|---------|
 |                 Primary actor | User
-|               Goal in context | Remix a preexisting comic
-|                 Preconditions | User is logged in, viewing a comic
+|                          Goal | Improve upon or otherwise creatively mutate existing works.
+|                 Preconditions | User is signed in, and works available for remixing exist.
 |                       Trigger | Click 'remix' link in sidebar of comic
 |                      Scenario | <ol><li>Actor opens comic, clicks 'remix' in the sidebar</li><li>Comic is opened in Muro for remixing</li><li>Image is displayed in browser, allows actor confirm via button click to add image to profile or cancel to return to Draw menu</li></ol>    
-|                    Exceptions | user is not logged in            
-|              Frequency of use | Infrequently
+|                    Exceptions | None
+|              Frequency of use | Frequent
 
-#### Delete Comic
-|                      Use case | Delete Comic |
-|------------------------------:|--------------|
-|                 Primary actor | User, Admin
-|               Goal in context | Delete a comic owned by the user, or violating TOS
-|                 Preconditions | User is logged in as comic owner, or is an authenticated admin
+#### Delete Work
+|                     Attribute | Details |
+|-------------------------------|---------|
+|                 Primary actor | User, Moderator
+|                          Goal | Remove a work that no longer represents a user's skill level, or remove a work that violates the Terms of Service.
+|                 Preconditions | User is signed in, and is either an administrator or has previously posted a work.
 |                       Trigger | Click 'delete' link in sidebar of owned comic
 |                      Scenario | <ol><li>Actor opens comic, clicks delete in the sidebar</li><li>Popup message appears asking actor to confirm deletion</li><li><ul><li>If actor confirms, comic is deleted</li><li>If actor clicks cancel, they are returned to comic</li></ul></li></ol>       
-|                    Exceptions | User does not own comic
+|                    Exceptions | None
 |              Frequency of use | Infrequently  
 
 #### Basic Search
-| Use Case                      | Information 
-|-------------------------------|-----------|
+|                     Attribute | Details |
+|-------------------------------|---------|
 |                 Primary actor | User, Lurker
-|               Goal in context | Find a work given broad criteria
+|                          Goal | Find a work given broad criteria
 |                 Preconditions | None
 |                       Trigger | User enters a single text string as search criteria
 |                         Steps | <ol><li>Enter text string in search field</li><li>Navigate through results</li><li>Navigate to any desired works that fit the criterion</li></ol>
@@ -178,10 +181,10 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |              Frequency of use | At will
 
 #### Advanced Search
-| Use Case                      | Information 
-|-------------------------------|-----------|
+|                     Attribute | Details |
+|-------------------------------|---------|
 |                 Primary actor | User, Lurker
-|               Goal in context | Find a work given multiple specific criteria
+|                          Goal | Find a work given multiple specific criteria
 |                 Preconditions | None
 |                       Trigger | User navigates to the advanced search page
 |                         Steps | <ol><li>Provide criteria based on authorship, popularity, age, and tags, among other thing</li><li>Navigate through results</li><li>Navigate to any desired works that fit the criterion</li></ol>
@@ -189,23 +192,21 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |              Frequency of use | At will
 
 #### Register
-|                      Use case | Register|
-|------------------------------:|---------|
-|                 Primary actor |User, Admin|
-|               Goal in context | The user may at any point register for a new account from the website. Note that the user can only register for an account if they aren't logged in already.|
-|                 Preconditions | The application has no user session. |
-|                       Trigger | The user clicks on the “Register” button|
-|                      Steps    | <ol><li>User starts the web application, which loads the homepage</li><li> User clicks on the “Register” button</li></ol>|
-|                    Exceptions | This button should always be enabled when the user is not logged in. Note that should a user already be logged in, the application shouldn't display this button.|
-|                      Priority | Essential, must be implemented |
-|                When available |         |
-|              Frequency of use | Used as often as a user will decide to create a new account. |
+|                     Attribute | Details |
+|-------------------------------|---------|
+|                 Primary actor | User
+|                          Goal | Grant a user access to Mixxy's functionality.
+|                 Preconditions | The user is not currently signed in.
+|                       Trigger | The user clicks on the “Register” button
+|                      Steps    | <ol><li>User starts the web application, which loads the homepage</li><li> User clicks on the “Register” button</li></ol>
+|                    Exceptions | This button should always be enabled when the user is not logged in. Note that should a user already be logged in, the application shouldn't display this button.
+|              Frequency of use | Once, typically on first use
 
 #### Tagging Works
-| Use Case                      | Information 
-|-------------------------------|-----------|
+|                     Attribute | Details |
+|-------------------------------|---------|
 |                 Primary actor | User
-|               Goal in context | Categorize a work based on its content for easy retrieval
+|                          Goal | Categorize a work based on its content for easy retrieval
 |                 Preconditions | Work in question must belong to user
 |                       Trigger | User creates, remixes, or edits a work
 |                         Steps | <ol><li>Enter delimited text strings that categorize the work</li><li>Finalize submission or update of work</li></ol>
@@ -213,41 +214,37 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |              Frequency of use | When creating or updating a work
 
 #### Navigating to Similar Works
-| Use Case                      | Information 
-|-------------------------------|-----------|
+|                     Attribute | Details |
+|-------------------------------|---------|
 |                 Primary actor | User, Lurker
-|               Goal in context | Find works with similar content that the user might enjoy.
-|                 Preconditions | Work in question must belong to user
+|                          Goal | Find works with similar content that the user might enjoy.
+|                 Preconditions | None
 |                       Trigger | User navigates to related works near existing ones
 |                         Steps | <ol><li>Given a small palette of similar works, navigate to any that are appealing.</li></ol>
 |                    Exceptions | Not enough similar works may exist.  In practice, the definition of "similar" will be broadened, but in the early days there may simply not be enough works to go around.
-|              Frequency of use | While viewing any work
+|              Frequency of use | Frequently, while viewing any work
 
 #### Ban User
-|                      Use case |Ban a User |
-|------------------------------:|---------|
-|                 Primary actor |Admin|
-|               Goal in context |The admin may at any point ban/kick a user from the website for violating the website's guidelines. Note that the user has to exist for this feature to be applicable.|
-|                 Preconditions | The user being banned/kicked exists in the Database. |
-|                       Trigger | The admin clicks on a "ban/kick" button for a specific user. |
-|                      Steps    | <ol><li>Admin starts the web application, which loads the homepage</li><li> Admin locates the user and clicks on the “ban/kick” button</li></ol>|
-|                    Exceptions | This button should always be enabled when the user exists and is not banned/kicked already. Note that should a user already be banned/kicked, the application shouldn't display this button. |
-|                      Priority | Essential, must be implemented |
-|                When available |         |
-|              Frequency of use | Used as often as an admin feels that a user is violating the guidelines. |
+|                     Attribute | Details |
+|-------------------------------|---------|
+|                 Primary actor | Moderator
+|                          Goal | Enforce Mixxy's community guidelines and Terms of Service.
+|                 Preconditions | The user being disciplined has violated the Terms of Service.
+|                       Trigger | The admin clicks on a "ban/kick" button for a specific user.
+|                         Steps | <ol><li>Admin starts the web application, which loads the homepage</li><li>Admin locates the user and clicks on the “ban/kick” button</li></ol>
+|                    Exceptions | None, barring human error.
+|              Frequency of use | Infrequently
 
 #### Reset Password
-|                      Use case | Forgot a password |
-|------------------------------:|---------|
-|                 Primary actor |User, Admin|
-|               Goal in context |The user may at any point request a change password form incase they have forgotten their password. Note that the user has to exist and have a password for this feature to be applicable.|
-|                 Preconditions | The user has no logged in session. |
-|                       Trigger | The user clicks on the "Forgot Password" button. |
-|                      Steps    | <ol><li>User starts the web application, which loads the homepage</li><li> User locates the "Sign In" button which tkes them to the Sign In page.</li><li>The user enters their username or email and clicks on the "Forgot Password" button.</li></ol>|
-|                    Exceptions | This button should always be enabled when the user exists and is not logged in yet. |
-|                      Priority | Essential, must be implemented |
-|                When available |         |
-|              Frequency of use | Used as often as the user feels that they forgot their password. |
+|                     Attribute | Details |
+|-------------------------------|---------|
+|                 Primary actor | User
+|                          Goal | Help a user sign in again if they don't remember their credentials.
+|                 Preconditions | The user exists, but is not currently signed in.
+|                       Trigger | The user clicks on the "Forgot Password" button.
+|                         Steps | <ol><li>User starts the web application, which loads the homepage</li><li> User locates the "Sign In" button which tkes them to the Sign In page.</li><li>The user enters their username or email and clicks on the "Forgot Password" button.</li></ol>
+|                    Exceptions | This button should always be enabled when the user exists and is not logged in yet.
+|              Frequency of use | Infrequently
 
 #### Post Comment
 | Use Case                      | Information 
@@ -326,7 +323,7 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |                    Exceptions | User is not logged in.
 |              Frequency of use | At will.
 
-### Target audience
+### Target Audience
 
 Mixxy is designed primarily for the benefit of artists and their enthusiasts, with particular attention to the comic fanbase.  We expect that most potential users are young (typically ages 15-30) and reasonably tech-savvy.
 
@@ -341,46 +338,38 @@ The following issues arose in the design of Mixxy, all of which affect our optio
 - For legal reasons, all user works posted on Mixxy must be released under a license that permits free distribution and modification.
 - We have no budget to speak of.
 - As we are constrained to Google App Engine and Java 7, we may not be able to use certain libraries and tools.
+- Our use of DeviantArt Muro as an image editor tightly couples Mixxy to the service.
 - The in-browser editor must support raster image editing.  This implies that user works must be stored in raster format, resulting in higher storage and bandwidth requirements.
 
-### Assumptions and dependencies
+### Assumptions and Dependencies
 
 In designing Mixxy, we have assumed the following:
 
-- Our target audience has a desktop or laptop computer
-- Our target audience has a recent Web browser
-- Our target audience is comfortable with other people being able to freely modify their own work
+- Users will have a desktop or laptop computer
+- Users will have a recent Web browser installed
+  - Said browser must support modern Web standards such as HTML5, `<canvas>`, and the like.
+- Users are comfortable with allowing other users to modify their work.
 - Not all followers of a given user are themselves skilled artists.
-- Users do not necessarily have accounts with other social platforms (e.g. DeviantArt)
+- Users do not necessarily have accounts with other social platforms (e.g. DeviantArt).
 - Users are vigilant enough to report any violation of Mixxy's code of conduct.
 
 This document may require revision if any of the stated assumptions are violated.
 
-## Specific requirements
+## Specific Requirements
 
 ### External interfaces
 
 The user will be able to remix the comics of their choosing on the web app via access from their laptop or desktop computers. They will be able to post, comment, like that comic, and if they so choose, they can subscribe to the user who post tasteful comics to receive a feed of their posts. The iOS app will be a compliment to the web app, where users get to view the comics they have remixed and other user content.
 
-### Functions
-
-Now we discuss things we actually have to do.  UI mockups will probably be dotted around here
-
-#### Thing
-  - List of things
-  - Let's keep it concise
-
-#### Other thing
-  - This is text
-  - I like words
-
-### Performance requirements
+### Performance Requirements
 
 Should we expect the user to go make a cup of coffee while waiting for something to happen?  (Hint: no)
 
 ### Logical database requirements
 
-**Data Technology:** The data technology we will be using for this project will primarily be the GAE standard low-level Datastore Java API since it utilizes the Datastore to its full potential.
+#### Data Technology
+
+The data technology we will be using for this project will primarily be the GAE standard low-level Datastore Java API since it utilizes the Datastore to its full potential.
 
 App Engine Datastore is a schemaless NoSQL datastore providing robust, scalable storage for your web application, with the following features:
 - No planned downtime
@@ -389,21 +378,14 @@ App Engine Datastore is a schemaless NoSQL datastore providing robust, scalable 
 - Strong consistency for reads and ancestor queries
 - Eventual consistency for all other queries
 
-**Stored Database Entities:** 
+#### Stored Database Entities
 
-- **Users**: The user will be given attributes of all its account information such as: username, first name, last name, phone number, along with references to their comic creations and favorited comics. The User will also have a role attribute for escalated privilege that will allow them to carry their duties, such as: banning a user, suspending a user, deleting a remixed or original comic, if they are a moderator.
+This section describes, on a high level, the most important entities that must be stored in the database.
 
-- **Comics**: Rendered raster images for the comic, original user that it was created by, and user that remixed the comic will be stored as a Comics Entity. We will be using DeviantArt Muro and most of these comics created by the users will be stored on DeviantArt. The comics created by non-DeviantArt users will be stored as a raster image in the database and will need a considerable amount of storage. 
+##### Users
 
+Users will have associated with them the typical details of account registration (e-mail, password, moderator permissions, etc.).  Alongside this, users will have associated with them the works they submit or remix, as well as a list of other uses they follow or works they like.
 
-### Design constraints
+##### Works
 
-What restrictions (not conscious choices; I.e. don't say "we use Bootstrap") must we consider when designing this app?
-
-### Software system attributes
-
-What ultimately describes what Mixxy should be?  Yes, the usualy gamut of "reliable", "secure", etc. but remember, this is for people.  "Fun", "social", etc. are just as important
-
-### Additional comments
-
-I write more things
+Works are images stored in raster format.  Associated with them are the user that authored it, all derived remixes, and the users who like this work.  Of note is that our DeviantArt Muro integration allows us to store most (but not all) images off-site, on DeviantArt's servers.  Works created by those without a DeviantArt account can be stored on our servers directly.
