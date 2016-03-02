@@ -249,6 +249,83 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |                When available |         |
 |              Frequency of use | Used as often as the user feels that they forgot their password. |
 
+#### Post Comment
+| Use Case                      | Information 
+|-------------------------------|-----------|
+|                 Primary actor | User
+|               Goal in context | Write a comment under a comic.
+|                 Preconditions | User must be logged in, viewing a comic.
+|                       Trigger | User navigates to comment section of comic.
+|                         Steps | <ol><li>Click on comment text field.</li><li>Write comment.</li><li>Click on comment button.</li></ol>
+|                    Exceptions | Comments disabled by comic's author.
+|              Frequency of use | At will.
+
+#### Up Comment
+| Use Case                      | Information 
+|-------------------------------|-----------|
+|                 Primary actor | User
+|               Goal in context | Up a comment under a comic.
+|                 Preconditions | User must be logged in, viewing a comic.
+|                       Trigger | User navigates to comment section of comic.
+|                         Steps | <ol><li>Navigate to comment.</li><li>Click Up button.</li></ol>
+|                    Exceptions | Comments disabled by comic's author.
+|              Frequency of use | At will.
+
+#### Down Comment
+| Use Case                      | Information 
+|-------------------------------|-----------|
+|                 Primary actor | User
+|               Goal in context | Down a comment under a comic.
+|                 Preconditions | User must be logged in, viewing a comic.
+|                       Trigger | User navigates to comment section of comic.
+|                         Steps | <ol><li>Navigate to comment.</li><li>Click Down button.</li></ol>
+|                    Exceptions | Comments disabled by comic's author.
+|              Frequency of use | At will.
+
+#### Flag Comment
+| Use Case                      | Information 
+|-------------------------------|-----------|
+|                 Primary actor | User
+|               Goal in context | Flag a comment under a comic.
+|                 Preconditions | User must be logged in, viewing a comic.
+|                       Trigger | User navigates to comment section of comic.
+|                         Steps | <ol><li>Navigate to comment.</li><li>Click Flag button.</li></ol>
+|                    Exceptions | Comments disabled by comic's author.
+|              Frequency of use | At will.
+
+#### Like Comic
+| Use Case                      | Information 
+|-------------------------------|-----------|
+|                 Primary actor | User
+|               Goal in context | Like a comic.
+|                 Preconditions | User must be logged in, viewing a comic.
+|                       Trigger | User navigates to a comic.
+|                         Steps | <ol><li>Navigate to comic.</li><li>Click on Like button.</li></ol>
+|                    Exceptions | User is not logged in.
+|              Frequency of use | At will.
+
+#### Flag Comic
+| Use Case                      | Information 
+|-------------------------------|-----------|
+|                 Primary actor | User
+|               Goal in context | Flag a comic with forbidden content.
+|                 Preconditions | User must be logged in, viewing a commic.
+|                       Trigger | User navigates to a comic.
+|                         Steps | <ol><li>Navigate to comic.</li><li>Click on Flag button.</li></ol>
+|                    Exceptions | User is not logged in.
+|              Frequency of use | At will.
+
+#### Share Comic
+| Use Case                      | Information 
+|-------------------------------|-----------|
+|                 Primary actor | User
+|               Goal in context | Share comic on social networks.
+|                 Preconditions | User must be logged in, viewing a comic.
+|                       Trigger | User navigates to a comic.
+|                         Steps | <ol><li>Navigate to comic.</li><li>Click on Share button.</li><li>Pick social network to share to.</li></ol>
+|                    Exceptions | User is not logged in.
+|              Frequency of use | At will.
+
 ### Target audience
 
 Mixxy is designed primarily for the benefit of artists and their enthusiasts, with particular attention to the comic fanbase.  We expect that most potential users are young (typically ages 15-30) and reasonably tech-savvy.
