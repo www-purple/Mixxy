@@ -31,7 +31,7 @@ The following are *not* within the scope of this document:
 - Detailed information about data storage requirements
 - Specification of algorithms or functionality in a formal syntax
 - A detailed analysis of the target audience
-- Business plan details
+- Business plan and monetization details
 - Architecture, software design, or other implementation issues
 
 ### Definitions, acronyms, and abbreviations
