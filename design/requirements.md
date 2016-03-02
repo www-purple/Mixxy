@@ -92,36 +92,28 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |                      Use case | Sign in |
 |------------------------------:|---------|
 |                 Primary actor |User, Admin|
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                      Scenario |         |
-|                    Exceptions |         |
-|                      Priority |         |
+|               Goal in context | The user may at any point log in to the website with their username and password. Note that the user can only log in to one session.|
+|                 Preconditions | The application has no user session. |
+|                       Trigger | The user clicks on the “Sign In” button|
+|                      Steps    | <ol><li>User starts the web application, which loads the homepage</li><li> User clicks on the “Sign In” button</li></ol>|
+|                    Exceptions | This button should always be enabled when the user isn't logged in. Note that should a user already be logged in, the application shouldn't display this button.|
+|                      Priority | Essential, must be implemented |
 |                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
-|                   Open issues |         |
+|              Frequency of use | Used as often as a user will log in and out of their account. |
 
 **Use Case 2.2: Sign Out**
 
-|                      Use case | Sign Out|
+|                      Use case | Sign out |
 |------------------------------:|---------|
 |                 Primary actor |User, Admin|
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                      Scenario |         |
-|                    Exceptions |         |
-|                      Priority |         |
+|               Goal in context | The user may at any point log out from the website. Note that the user can only log out from one session.|
+|                 Preconditions | The application has a current user session. |
+|                       Trigger | The user clicks on the “Sign Out” button|
+|                      Steps    | <ol><li>User starts the web application, which loads the homepage</li><li> User clicks on the “Sign Out” button</li></ol>|
+|                    Exceptions | This button should always be enabled when the user is logged in. Note that should a user already be logged out, the application shouldn't display this button.|
+|                      Priority | Essential, must be implemented |
 |                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
-|                   Open issues |         |
+|              Frequency of use | Used as often as a user will log in and out of their account. |
 
 **Use Case 2.3: Register**
 
@@ -131,7 +123,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
-|                      Scenario |         |
+|                         Steps |         |
 |                    Exceptions |         |
 |                      Priority |         |
 |                When available |         |
@@ -139,7 +131,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |              Channel to actor |         |
 |              Secondary actors |         |
 | Channels to  secondary actors |         |
-|                   Open issues |         |
 
 **Use Case 2.4: Ban a User**
 
@@ -149,7 +140,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
-|                      Scenario |         |
+|                         Steps |         |
 |                    Exceptions |         |
 |                      Priority |         |
 |                When available |         |
@@ -157,7 +148,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |              Channel to actor |         |
 |              Secondary actors |         |
 | Channels to  secondary actors |         |
-|                   Open issues |         |
 
 **Use Case 2.5:**
 
@@ -167,7 +157,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
-|                      Scenario |         |
+|                         Steps |         |
 |                    Exceptions |         |
 |                      Priority |         |
 |                When available |         |
@@ -175,7 +165,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |              Channel to actor |         |
 |              Secondary actors |         |
 | Channels to  secondary actors |         |
-|                   Open issues |         |
 
 **Use Case 2.6:**
 
@@ -185,7 +174,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
-|                      Scenario |         |
+|                         Steps |         |
 |                    Exceptions |         |
 |                      Priority |         |
 |                When available |         |
@@ -193,7 +182,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |              Channel to actor |         |
 |              Secondary actors |         |
 | Channels to  secondary actors |         |
-|                   Open issues |         |
 
 **Use Case 2.7:**
 
@@ -203,7 +191,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
-|                      Scenario |         |
+|                         Steps |         |
 |                    Exceptions |         |
 |                      Priority |         |
 |                When available |         |
@@ -211,7 +199,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |              Channel to actor |         |
 |              Secondary actors |         |
 | Channels to  secondary actors |         |
-|                   Open issues |         |
 
 **Use Case 2.8:**
 
@@ -221,7 +208,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
-|                      Scenario |         |
+|                         Steps |         |
 |                    Exceptions |         |
 |                      Priority |         |
 |                When available |         |
@@ -229,7 +216,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |              Channel to actor |         |
 |              Secondary actors |         |
 | Channels to  secondary actors |         |
-|                   Open issues |         |
 
 **Use Case 2.9:**
 
@@ -239,7 +225,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
-|                      Scenario |         |
+|                         Steps |         |
 |                    Exceptions |         |
 |                      Priority |         |
 |                When available |         |
@@ -247,7 +233,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |              Channel to actor |         |
 |              Secondary actors |         |
 | Channels to  secondary actors |         |
-|                   Open issues |         |
 
 **Use Case 2.10:**
 
@@ -257,7 +242,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
-|                      Scenario |         |
+|                         Steps |         |
 |                    Exceptions |         |
 |                      Priority |         |
 |                When available |         |
@@ -265,7 +250,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |              Channel to actor |         |
 |              Secondary actors |         |
 | Channels to  secondary actors |         |
-|                   Open issues |         |
 
 ### User characteristics
 
