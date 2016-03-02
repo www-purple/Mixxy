@@ -353,13 +353,14 @@ The following issues arose in the design of Mixxy, all of which affect our optio
 - As we are constrained to Google App Engine and Java 7, we may not be able to use certain libraries and tools.
 - The in-browser editor must support raster image editing.  This implies that user works must be stored in raster format, resulting in higher storage and bandwidth requirements.
 
-### Assumptions and dependencies
+### Assumptions and Dependencies
 
 In designing Mixxy, we have assumed the following:
 
-- Our target audience has a desktop or laptop computer
-- Our target audience has a recent Web browser
-- Our target audience is comfortable with other people being able to freely modify their own work
+- Users will have a desktop or laptop computer
+- Users will have a recent Web browser installed
+  - Said browser must support modern Web standards such as HTML5, `<canvas>`, and the like.
+- Users are comfortable with allowing other users to modify their work.
 - Not all followers of a given user are themselves skilled artists.
 - Users do not necessarily have accounts with other social platforms (e.g. DeviantArt)
 - Users are vigilant enough to report any violation of Mixxy's code of conduct.
