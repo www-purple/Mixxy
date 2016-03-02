@@ -247,21 +247,21 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |              Frequency of use | Infrequently
 
 #### Post Comment
-| Use Case                      | Information 
-|-------------------------------|-----------|
+|                     Attribute | Details |
+|-------------------------------|---------|
 |                 Primary actor | User
-|               Goal in context | Write a comment under a comic.
-|                 Preconditions | User must be logged in, viewing a comic.
-|                       Trigger | User navigates to comment section of comic.
+|                          Goal | Discuss a work with other users.
+|                 Preconditions | User is signed in and viewing a work.
+|                       Trigger | User navigates to comment section of work.
 |                         Steps | <ol><li>Click on comment text field.</li><li>Write comment.</li><li>Click on comment button.</li></ol>
-|                    Exceptions | Comments disabled by comic's author.
+|                    Exceptions | Comments disabled by work's author.
 |              Frequency of use | At will.
 
 #### Up Comment
-| Use Case                      | Information 
-|-------------------------------|-----------|
+|                     Attribute | Details |
+|-------------------------------|---------|
 |                 Primary actor | User
-|               Goal in context | Up a comment under a comic.
+|                          Goal | Up a comment under a comic.
 |                 Preconditions | User must be logged in, viewing a comic.
 |                       Trigger | User navigates to comment section of comic.
 |                         Steps | <ol><li>Navigate to comment.</li><li>Click Up button.</li></ol>
@@ -269,10 +269,10 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |              Frequency of use | At will.
 
 #### Down Comment
-| Use Case                      | Information 
-|-------------------------------|-----------|
+|                     Attribute | Details |
+|-------------------------------|---------|
 |                 Primary actor | User
-|               Goal in context | Down a comment under a comic.
+|                          Goal | Down a comment under a comic.
 |                 Preconditions | User must be logged in, viewing a comic.
 |                       Trigger | User navigates to comment section of comic.
 |                         Steps | <ol><li>Navigate to comment.</li><li>Click Down button.</li></ol>
@@ -280,10 +280,10 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |              Frequency of use | At will.
 
 #### Flag Comment
-| Use Case                      | Information 
-|-------------------------------|-----------|
+|                     Attribute | Details | 
+|-------------------------------|---------|
 |                 Primary actor | User
-|               Goal in context | Flag a comment under a comic.
+|                          Goal | Flag a comment under a comic.
 |                 Preconditions | User must be logged in, viewing a comic.
 |                       Trigger | User navigates to comment section of comic.
 |                         Steps | <ol><li>Navigate to comment.</li><li>Click Flag button.</li></ol>
@@ -291,21 +291,21 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |              Frequency of use | At will.
 
 #### Like Comic
-| Use Case                      | Information 
-|-------------------------------|-----------|
+|                     Attribute | Details |
+|-------------------------------|---------|
 |                 Primary actor | User
-|               Goal in context | Like a comic.
-|                 Preconditions | User must be logged in, viewing a comic.
+|                          Goal | Express a user's appreciation for a work.
+|                 Preconditions | User must be signed in.
 |                       Trigger | User navigates to a comic.
 |                         Steps | <ol><li>Navigate to comic.</li><li>Click on Like button.</li></ol>
-|                    Exceptions | User is not logged in.
+|                    Exceptions | None.
 |              Frequency of use | At will.
 
 #### Flag Comic
-| Use Case                      | Information 
-|-------------------------------|-----------|
+|                     Attribute | Details |
+|-------------------------------|---------|
 |                 Primary actor | User
-|               Goal in context | Flag a comic with forbidden content.
+|                          Goal | Flag a comic with forbidden content.
 |                 Preconditions | User must be logged in, viewing a commic.
 |                       Trigger | User navigates to a comic.
 |                         Steps | <ol><li>Navigate to comic.</li><li>Click on Flag button.</li></ol>
@@ -313,10 +313,10 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |              Frequency of use | At will.
 
 #### Share Comic
-| Use Case                      | Information 
-|-------------------------------|-----------|
+|                     Attribute | Details | 
+|-------------------------------|---------|
 |                 Primary actor | User
-|               Goal in context | Share comic on social networks.
+|                          Goal | Share comic on social networks.
 |                 Preconditions | User must be logged in, viewing a comic.
 |                       Trigger | User navigates to a comic.
 |                         Steps | <ol><li>Navigate to comic.</li><li>Click on Share button.</li><li>Pick social network to share to.</li></ol>
