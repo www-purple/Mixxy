@@ -388,21 +388,14 @@ App Engine Datastore is a schemaless NoSQL datastore providing robust, scalable 
 - Strong consistency for reads and ancestor queries
 - Eventual consistency for all other queries
 
-#### Stored Database Entities 
+#### Stored Database Entities
 
-- **Users**: The user will be given attributes of all its account information such as: username, first name, last name, phone number, along with references to their comic creations and favorited comics. The User will also have a role attribute for escalated privilege that will allow them to carry their duties, such as: banning a user, suspending a user, deleting a remixed or original comic, if they are a moderator.
+This section describes, on a high level, the most important entities that must be stored in the database.
 
-- **Comics**: Rendered raster images for the comic, original user that it was created by, and user that remixed the comic will be stored as a Comics Entity. We will be using DeviantArt Muro and most of these comics created by the users will be stored on DeviantArt. The comics created by non-DeviantArt users will be stored as a raster image in the database and will need a considerable amount of storage. 
+##### Users
 
+Users will have associated with them the typical details of account registration (e-mail, password, moderator permissions, etc.).  Alongside this, users will have associated with them the works they submit or remix, as well as a list of other uses they follow or works they like.
 
-### Design constraints
+##### Works
 
-What restrictions (not conscious choices; I.e. don't say "we use Bootstrap") must we consider when designing this app?
-
-### Software system attributes
-
-What ultimately describes what Mixxy should be?  Yes, the usualy gamut of "reliable", "secure", etc. but remember, this is for people.  "Fun", "social", etc. are just as important
-
-### Additional comments
-
-I write more things
+Works are images stored in raster format.  Associated with them are the user that authored it, all derived remixes, and the users who like this work.  Of note is that our DeviantArt Muro integration allows us to store most (but not all) images off-site, on DeviantArt's servers.  Works created by those without a DeviantArt account can be stored on our servers directly.
