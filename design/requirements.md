@@ -69,10 +69,6 @@ The following are *not* within the scope of this document:
 
 *Under no circumstances may forbidden content be posted.  Forbidden content and any remixes thereof will be forcibly removed, and if necessary the relevant authorities will be contacted.*
 
-### References
-
-That IEEE document, I guess?  I dunno, maybe we'll need to fill this out later.
-
 ## Overall description
 
 ### Rationale
