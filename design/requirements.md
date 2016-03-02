@@ -76,16 +76,20 @@ That IEEE document, I guess?  I dunno, maybe we'll need to fill this out later.
 
 ### Rationale
 
-With the advent of social media, much of digital culture now revolves around freely sharing--and occasionally modifying--user-made content.  Mixxy is designed with this trend in mind, to empower artists and illustrators of all skills to put their own twist on an existing work.  How this is applied is left entirely to the user base -- community-built stories, collaborative works, and even outright parody come to mind, though by no means should they be seen as limits.
-
-### Function summary
+With the advent of social media, much of digital culture now revolves around freely sharing--and occasionally modifying--user-made content.  Mixxy is designed with this trend in mind, to empower artists and illustrators of all skills to put their own twist on an existing work.  How this is applied is left entirely to the user base -- community-built stories, collaborative works, and even outright parody come to mind, though by no means should they be seen as limits.  Clever and emergent uses of the platform are highly encouraged.
 
 More formally, Mixxy is an art platform where users can not only post and share their own work, but freely remix that of others.  Users may provide or remix content with either the provided in-browser image editor or through their own preferred toolset, uploading their work to Mixxy upon its completion.  Users can discuss works with one another, follow creators they admire, or find works based on a particular subject matter.
 
 Mixxy is *not* designed as:
 
 - A platform to exchange works for monetary value
-- A static art gallery
+- A static art gallery or portfolio Web page
+- A conventional image sharing/hosting service or imageboard (e.g. Imgur, 4chan)
+- A recruiting service for artists
+- A repository of artwork for use in other media (e.g. clip art websites, Open Game Art)
+- A tutorial service for art and illustration skills
+
+Users are, however, welcome to use Mixxy for these purposes unless otherwise stated.
 
 ### User Interfaces
 
