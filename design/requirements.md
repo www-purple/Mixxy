@@ -91,22 +91,22 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |              Frequency of use | Used as often as a user will log in and out of their account. |
 
 #### Basic Search
-| Use Case | Information 
+| Use Case                      | Information 
 |-------------------------------|-----------|
-|                 Primary actor | User, Lurker        
+|                 Primary actor | User, Lurker
 |               Goal in context | Find a work given broad criteria
-|                 Preconditions | None        
+|                 Preconditions | None
 |                       Trigger | User enters a single text string as search criteria
 |                         Steps | <ol><li>Enter text string in search field</li><li>Navigate through results</li><li>Navigate to any desired works that fit the criterion</li></ol>
 |                    Exceptions | No existing works may fit the requested criteria.  The user will be notified of this.
 |              Frequency of use | At will
 
 #### Advanced Search
-| Use Case | Information 
+| Use Case                      | Information 
 |-------------------------------|-----------|
-|                 Primary actor | User, Lurker        
+|                 Primary actor | User, Lurker
 |               Goal in context | Find a work given multiple specific criteria
-|                 Preconditions | None        
+|                 Preconditions | None
 |                       Trigger | User navigates to the advanced search page
 |                         Steps | <ol><li>Provide criteria based on authorship, popularity, age, and tags, among other thing</li><li>Navigate through results</li><li>Navigate to any desired works that fit the criterion</li></ol>
 |                    Exceptions | No existing works may fit the requested criteria.  The user will be notified of this.
@@ -124,6 +124,28 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |                      Priority | Essential, must be implemented |
 |                When available |         |
 |              Frequency of use | Used as often as a user will decide to create a new account. |
+
+#### Tagging Works
+| Use Case                      | Information 
+|-------------------------------|-----------|
+|                 Primary actor | User
+|               Goal in context | Categorize a work based on its content for easy retrieval
+|                 Preconditions | Work in question must belong to user
+|                       Trigger | User creates, remixes, or edits a work
+|                         Steps | <ol><li>Enter delimited text strings that categorize the work</li><li>Finalize submission or update of work</li></ol>
+|                    Exceptions | Certain tags may be reserved, or may only be used conditionally.  In such cases, the user may not post or update their work.
+|              Frequency of use | When creating or updating a work
+
+#### Navigating to Similar Works
+| Use Case                      | Information 
+|-------------------------------|-----------|
+|                 Primary actor | User, Lurker
+|               Goal in context | Find works with similar content that the user might enjoy.
+|                 Preconditions | Work in question must belong to user
+|                       Trigger | User navigates to related works near existing ones
+|                         Steps | <ol><li>Given a small palette of similar works, navigate to any that are appealing.</li></ol>
+|                    Exceptions | Not enough similar works may exist.  In practice, the definition of "similar" will be broadened, but in the early days there may simply not be enough works to go around.
+|              Frequency of use | While viewing any work
 
 #### Ban User
 |                      Use case |Ban a User |
