@@ -206,7 +206,7 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |                    Exceptions | This button should always be enabled when the user is not logged in. Note that should a user already be logged in, the application shouldn't display this button.|
 |                      Priority | Essential, must be implemented |
 |                When available |         |
-|              Frequency of use | Used as often as a user will decide to create a new account. |
+|              Frequency of use | Once, typically on first use |
 
 #### Tagging Works
 | Use Case                      | Information 
