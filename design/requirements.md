@@ -283,7 +283,7 @@ This document may require revision if any of the stated assumptions are violated
 
 ### External interfaces
 
-How will the user interact?
+The user will be able to remix the comics of their choosing on the web app via access from their laptop or desktop computers. They will be able to post, comment, like that comic, and if they so choose, they can subscribe to the user who post tasteful comics to receive a feed of their posts. The iOS app will be a compliment to the web app, where users get to view the comics they have remixed and other user content.
 
 ### Functions
 
