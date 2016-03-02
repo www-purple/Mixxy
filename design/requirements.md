@@ -36,6 +36,10 @@ The following are *not* within the scope of this document:
 
 ### Definitions, acronyms, and abbreviations
 
+**User (n.):** A person who registers for an account with Mixxy and partakes in its services.  Does not necessarily contribute content (but we'd like them to).
+
+**Moderator (n.):** A user who enforces community standards and responds to violations, taking disciplinary actions if necessary.
+
 **Work (n.):** Any content a user has posted to Mixxy, typically an illustration.
 
 **Remix (v.):** The act of one user making a copy of another's work for the purpose of editing, improving upon, or otherwise modifying the original work.
@@ -53,11 +57,13 @@ The following are *not* within the scope of this document:
 
 *18+ content is fully permitted, so long as it is categorized as such by its creator.*
 
-**Forbidden (adj.):** Any amount of depiction of the following:
+**Forbidden (adj.):** Any presence of the following themes:
 
-  - Child pornography
+  - Child pornography, bestiality, rape, and other illegal sexual activity
   - Copyright violations
-  - Hateful speech and threats of violence
+  - Hateful speech, harassment, and cyber-bullying
+  - Threats of violence or other disruptive activity
+  - Encouragement of criminal activity
   - External links to any of the above
 
 *Under no circumstances may forbidden content be posted.  Forbidden content and any remixes thereof will be forcibly removed, and if necessary the relevant authorities will be contacted.*
