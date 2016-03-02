@@ -35,7 +35,7 @@ The following are *not* within the scope of this document:
 - Architecture, software design, or other implementation issues
 - Technology choices for non-critical components (e.g. utility libraries, parsers)
 
-### Definitions, acronyms, and abbreviations
+### Definitions
 
 **User (n.):** A person who registers for an account with Mixxy and partakes in its services.  Does not necessarily contribute content (but we'd like them to).
 
@@ -337,7 +337,7 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |                    Exceptions | User is not logged in.
 |              Frequency of use | At will.
 
-### Target audience
+### Target Audience
 
 Mixxy is designed primarily for the benefit of artists and their enthusiasts, with particular attention to the comic fanbase.  We expect that most potential users are young (typically ages 15-30) and reasonably tech-savvy.
 
@@ -368,7 +368,7 @@ In designing Mixxy, we have assumed the following:
 
 This document may require revision if any of the stated assumptions are violated.
 
-## Specific requirements
+## Specific Requirements
 
 ### External interfaces
 
@@ -386,13 +386,15 @@ Now we discuss things we actually have to do.  UI mockups will probably be dotte
   - This is text
   - I like words
 
-### Performance requirements
+### Performance Requirements
 
 Should we expect the user to go make a cup of coffee while waiting for something to happen?  (Hint: no)
 
 ### Logical database requirements
 
-**Data Technology:** The data technology we will be using for this project will primarily be the GAE standard low-level Datastore Java API since it utilizes the Datastore to its full potential.
+#### Data Technology
+
+The data technology we will be using for this project will primarily be the GAE standard low-level Datastore Java API since it utilizes the Datastore to its full potential.
 
 App Engine Datastore is a schemaless NoSQL datastore providing robust, scalable storage for your web application, with the following features:
 - No planned downtime
@@ -401,7 +403,7 @@ App Engine Datastore is a schemaless NoSQL datastore providing robust, scalable 
 - Strong consistency for reads and ancestor queries
 - Eventual consistency for all other queries
 
-**Stored Database Entities:** 
+#### Stored Database Entities 
 
 - **Users**: The user will be given attributes of all its account information such as: username, first name, last name, phone number, along with references to their comic creations and favorited comics. The User will also have a role attribute for escalated privilege that will allow them to carry their duties, such as: banning a user, suspending a user, deleting a remixed or original comic, if they are a moderator.
 
