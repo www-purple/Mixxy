@@ -73,10 +73,10 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 | Use Case | Page | Use Case |
 |----------|------|----------|
 | 2.1      | Home | Sign in  |
-| 2.2      |      |          |
-| 2.3      |      |          |
-| 2.4      |      |          |
-| 2.5      |      |          |
+| 2.2      | Home | Sign out |
+| 2.3      | Home | Register |
+| 2.4      | Home | Ban a User |
+| 2.5      | Sign in | Forgot a password |
 | 2.6      |      |          |
 | 2.7      |      |          |
 | 2.8      |      |          |
@@ -91,91 +91,71 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 
 |                      Use case | Sign in |
 |------------------------------:|---------|
-|                 Primary actor |         |
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                      Scenario |         |
-|                    Exceptions |         |
-|                      Priority |         |
+|                 Primary actor |User, Admin|
+|               Goal in context | The user may at any point log in to the website with their username and password. Note that the user can only log in to one session.|
+|                 Preconditions | The application has no user session. |
+|                       Trigger | The user clicks on the “Sign In” button|
+|                      Steps    | <ol><li>User starts the web application, which loads the homepage</li><li> User clicks on the “Sign In” button</li></ol>|
+|                    Exceptions | This button should always be enabled when the user isn't logged in. Note that should a user already be logged in, the application shouldn't display this button.|
+|                      Priority | Essential, must be implemented |
 |                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
-|                   Open issues |         |
+|              Frequency of use | Used as often as a user will log in and out of their account. |
 
-**Use Case 2.2:**
+**Use Case 2.2: Sign Out**
 
-|                      Use case |         |
+|                      Use case | Sign out |
 |------------------------------:|---------|
-|                 Primary actor |         |
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                      Scenario |         |
-|                    Exceptions |         |
-|                      Priority |         |
+|                 Primary actor |User, Admin|
+|               Goal in context | The user may at any point log out from the website. Note that the user can only log out from one session.|
+|                 Preconditions | The application has a current user session. |
+|                       Trigger | The user clicks on the “Sign Out” button|
+|                      Steps    | <ol><li>User starts the web application, which loads the homepage</li><li> User clicks on the “Sign Out” button</li></ol>|
+|                    Exceptions | This button should always be enabled when the user is logged in. Note that should a user already be logged out, the application shouldn't display this button.|
+|                      Priority | Essential, must be implemented |
 |                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
-|                   Open issues |         |
+|              Frequency of use | Used as often as a user will log in and out of their account. |
 
-**Use Case 2.3:**
+**Use Case 2.3: Register**
 
-|                      Use case |         |
+|                      Use case | Register|
 |------------------------------:|---------|
-|                 Primary actor |         |
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                      Scenario |         |
-|                    Exceptions |         |
-|                      Priority |         |
+|                 Primary actor |User, Admin|
+|               Goal in context | The user may at any point register for a new account from the website. Note that the user can only register for an account if they aren't logged in already.|
+|                 Preconditions | The application has no user session. |
+|                       Trigger | The user clicks on the “Register” button|
+|                      Steps    | <ol><li>User starts the web application, which loads the homepage</li><li> User clicks on the “Register” button</li></ol>|
+|                    Exceptions | This button should always be enabled when the user is not logged in. Note that should a user already be logged in, the application shouldn't display this button.|
+|                      Priority | Essential, must be implemented |
 |                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
-|                   Open issues |         |
+|              Frequency of use | Used as often as a user will decide to create a new account. |
 
-**Use Case 2.4:**
+**Use Case 2.4: Ban a User**
 
-|                      Use case |         |
+|                      Use case |Ban a User |
 |------------------------------:|---------|
-|                 Primary actor |         |
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                      Scenario |         |
-|                    Exceptions |         |
-|                      Priority |         |
+|                 Primary actor |Admin|
+|               Goal in context |The admin may at any point ban/kick a user from the website for violating the website's guidelines. Note that the user has to exist for this feature to be applicable.|
+|                 Preconditions | The user being banned/kicked exists in the Database. |
+|                       Trigger | The admin clicks on a "ban/kick" button for a specific user. |
+|                      Steps    | <ol><li>Admin starts the web application, which loads the homepage</li><li> Admin locates the user and clicks on the “ban/kick” button</li></ol>|
+|                    Exceptions | This button should always be enabled when the user exists and is not banned/kicked already. Note that should a user already be banned/kicked, the application shouldn't display this button. |
+|                      Priority | Essential, must be implemented |
 |                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
-|                   Open issues |         |
+|              Frequency of use | Used as often as an admin feels that a user is violating the guidelines. |
 
-**Use Case 2.5:**
+**Use Case 2.5: Forgot a password**
 
-|                      Use case |         |
+|                      Use case | Forgot a password |
 |------------------------------:|---------|
-|                 Primary actor |         |
-|               Goal in context |         |
-|                 Preconditions |         |
-|                       Trigger |         |
-|                      Scenario |         |
-|                    Exceptions |         |
-|                      Priority |         |
+|                 Primary actor |User, Admin|
+|               Goal in context |The user may at any point request a change password form incase they have forgotten their password. Note that the user has to exist and have a password for this feature to be applicable.|
+|                 Preconditions | The user has no logged in session. |
+|                       Trigger | The user clicks on the "Forgot Password" button. |
+|                      Steps    | <ol><li>User starts the web application, which loads the homepage</li><li> User locates the "Sign In" button which tkes them to the Sign In page.</li><li>The user enters their username or email and clicks on the "Forgot Password" button.</li></ol>|
+|                    Exceptions | This button should always be enabled when the user exists and is not logged in yet. |
+|                      Priority | Essential, must be implemented |
 |                When available |         |
-|              Frequency of use |         |
-|              Channel to actor |         |
-|              Secondary actors |         |
-| Channels to  secondary actors |         |
-|                   Open issues |         |
+|              Frequency of use | Used as often as the user feels that they forgot their password. |
 
 **Use Case 2.6:**
 
@@ -185,7 +165,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
-|                      Scenario |         |
+|                         Steps |         |
 |                    Exceptions |         |
 |                      Priority |         |
 |                When available |         |
@@ -193,7 +173,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |              Channel to actor |         |
 |              Secondary actors |         |
 | Channels to  secondary actors |         |
-|                   Open issues |         |
 
 **Use Case 2.7:**
 
@@ -203,7 +182,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
-|                      Scenario |         |
+|                         Steps |         |
 |                    Exceptions |         |
 |                      Priority |         |
 |                When available |         |
@@ -211,7 +190,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |              Channel to actor |         |
 |              Secondary actors |         |
 | Channels to  secondary actors |         |
-|                   Open issues |         |
 
 **Use Case 2.8:**
 
@@ -221,7 +199,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
-|                      Scenario |         |
+|                         Steps |         |
 |                    Exceptions |         |
 |                      Priority |         |
 |                When available |         |
@@ -229,7 +207,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |              Channel to actor |         |
 |              Secondary actors |         |
 | Channels to  secondary actors |         |
-|                   Open issues |         |
 
 **Use Case 2.9:**
 
@@ -239,7 +216,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
-|                      Scenario |         |
+|                         Steps |         |
 |                    Exceptions |         |
 |                      Priority |         |
 |                When available |         |
@@ -247,7 +224,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |              Channel to actor |         |
 |              Secondary actors |         |
 | Channels to  secondary actors |         |
-|                   Open issues |         |
 
 **Use Case 2.10:**
 
@@ -257,7 +233,7 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |               Goal in context |         |
 |                 Preconditions |         |
 |                       Trigger |         |
-|                      Scenario |         |
+|                         Steps |         |
 |                    Exceptions |         |
 |                      Priority |         |
 |                When available |         |
@@ -265,7 +241,6 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 |              Channel to actor |         |
 |              Secondary actors |         |
 | Channels to  secondary actors |         |
-|                   Open issues |         |
 
 ### User characteristics
 
