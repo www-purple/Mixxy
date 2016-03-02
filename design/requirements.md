@@ -105,6 +105,56 @@ of the user interface is specified. Here is the full list of UML Use-Case Diagra
 | Channels to  secondary actors |         |
 |                   Open issues |         |
 
+|                      Use case | Delete Comic |
+|------------------------------:|--------------|
+|                 Primary actor | User, Admin
+|               Goal in context | Delete a comic owned by the user, or violating TOS
+|                 Preconditions | User is logged in as comic owner, or is an authenticated admin
+|                       Trigger | Click 'delete' link in sidebar of owned comic
+|                      Scenario | <ol><li>Actor opens comic, clicks delete in the sidebar</li><li>Popup message appears asking actor to confirm deletion</li><li><ul><li>If actor confirms, comic is deleted</li><li>If actor clicks cancel, they are returned to comic</li></ul></li></ol>       
+|                    Exceptions | User does not own comic
+|              Frequency of use | Infrequently       
+
+|                      Use case | Upload Comic  |
+|------------------------------:|---------------|
+|                 Primary actor | User
+|               Goal in context | Upload a previously created comic
+|                 Preconditions | User is logged in
+|                       Trigger | Click 'Upload' button from Draw tab
+|                      Scenario | <ol><li>Actor clicks upload button from Draw menu</li><li>File chooser loads, prompting actor to select file to be uploaded</li><li>Image is displayed in browser, allows actor confirm via button click to add image to profile or cancel to return to Draw menu</li></ol>       
+|                    Exceptions | Wrong file format, user is not logged in                    
+|              Frequency of use | Frequently - we anticipate a good amount of image uploading    
+
+|                      Use case | Draw Comic  |
+|------------------------------:|-------------|
+|                 Primary actor | User
+|               Goal in context | Create a new comic
+|                 Preconditions | User is logged in
+|                       Trigger | Click 'Create New' button from Draw tab
+|                      Scenario | <ol><li>Actor clicks 'create new' button from Draw menu</li><li>Muro loads in browser, allowing user to create their comic</li><li>Image is displayed in browser, allows actor confirm via button click to add image to profile or cancel to return to Draw menu</li></ol>       
+|                    Exceptions | user is not logged in             
+|              Frequency of use | Frequently - we anticipate a good amount of content creation 
+
+|                      Use case | Edit Comic  |
+|------------------------------:|-------------|
+|                 Primary actor | User
+|               Goal in context | Edit a preexisting comic
+|                 Preconditions | User is logged in
+|                       Trigger | Click 'edit' link in sidebar of owned comic
+|                      Scenario | <ol><li>Actor opens comic, clicks 'edit' in the sidebar</li><li>Comic is opened in Muro for editing</li><li>Image is displayed in browser, allows actor confirm via button click to add image to profile or cancel to return to Draw menu</li></ol>    
+|                    Exceptions | user does not own comic            
+|              Frequency of use | Infrequently
+
+|                      Use case | Remix Comic  |
+|------------------------------:|-------------|
+|                 Primary actor | User
+|               Goal in context | Remix a preexisting comic
+|                 Preconditions | User is logged in, viewing a comic
+|                       Trigger | Click 'remix' link in sidebar of comic
+|                      Scenario | <ol><li>Actor opens comic, clicks 'remix' in the sidebar</li><li>Comic is opened in Muro for remixing</li><li>Image is displayed in browser, allows actor confirm via button click to add image to profile or cancel to return to Draw menu</li></ol>    
+|                    Exceptions | user is not logged in            
+|              Frequency of use | Infrequently
+
 **Use Case 2.2:**
 
 |                      Use case |         |
