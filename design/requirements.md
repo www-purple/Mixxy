@@ -1,64 +1,85 @@
 # Mixxy
 
+Developed by www.purple, consisting of:
+
+- Jesse Talavera-Greenberg
+- Brian Sabzjadid
+- Kathleen Cleary
+- Cristiano Miranda
+
 ## Table of Contents
 
-We list the things we talk about
+This will be written out at the end -- man, I wish we could generate this automatically...can we?
 
 ## Introduction
 
-We very quickly summarize what we're doing
+The purpose of this document is to specify our plans for the development of Mixxy, a Web-based collaborative art platform.  Specifically, we discuss the relevance of such a service, the functionality we see as required in order to declare Mixxy a fulfilling experience, and the challenges we expect to encounter in the development process.
 
-### Purpose
-
-The purpose of this document is to summarize a thing
+We opted for a holistic approach in the creation of this document; we give preference to simplicity and conciseness over strict conformance to a standard, expecting that a reader will be able to parse and understand this document in its entirety.  We also expect that the reader is able and willing to contact us regarding clarifications, and that this document will be updated accordingly.
 
 ### Scope
 
-Discuss things we want to do, and things we *don't* want to do
+This document is written to specify the following of Mixxy:
+
+- High-level requirements and constraints
+- The mission-critical data, on a high level
+- Use cases
+- The problem solved
+
+The following are *not* within the scope of this document:
+
+- Detailed information about data storage requirements
+- Specification of algorithms or functionality in a formal syntax
+- A detailed analysis of the target audience
+- Business plan details
+- Architecture, software design, or other implementation issues
 
 ### Definitions, acronyms, and abbreviations
 
-**Work:** Any content a user has posted to Mixxy, typically an illustration.
+**Work (n.):** Any content a user has posted to Mixxy, typically an illustration.
 
-**Remix:** The act of one user making a copy of another's work for the purpose of editing, improving upon, or otherwise modifying the original work.  (The original work is *not* modified in the process; remixing cannot be used for vandalism.)
+**Remix (v.):** The act of one user making a copy of another's work for the purpose of editing, improving upon, or otherwise modifying the original work.
 
-**Content:** The subject matter of a work.
+**Remix (n.):** The result of a user's modifications to a work.
 
-**18+:** Content which prominently features any of the following themes:
+*When remixing a work, the original is not modified in the process.  Remixing cannot be used for vandalism.*
+
+**18+ (adj.):** Prominent depiction of any of the following themes:
 
   - Explicit sexual themes (e.g. nudity or pornography)
   - Realistic violence and gore
   - Excessive strong language
   - Extreme treatment of controversial topics
 
-*18+ content is fully permitted*, so long as it is categorized as such by its creator.
+*18+ content is fully permitted, so long as it is categorized as such by its creator.*
 
-**Forbidden content:** Content that contains any of the following:
+**Forbidden (adj.):** Any amount of depiction of the following:
 
   - Child pornography
   - Copyright violations
   - Hateful speech and threats of violence
-  - Links to any of the above
+  - External links to any of the above
 
-**Under no circumstances may a work with forbidden content be posted.  Forbidden content and any remixes thereof will be forcibly removed, and if necessary the relevant authorities will be contacted.**
+*Under no circumstances may forbidden content be posted.  Forbidden content and any remixes thereof will be forcibly removed, and if necessary the relevant authorities will be contacted.*
 
 ### References
 
-That IEEE document, I guess?
-
-### Overview
-
-Is this part even really necessary?  Introductions are supposed to be quick summaries; should I really have to read a list of definitions before I understand an introduction?
+That IEEE document, I guess?  I dunno, maybe we'll need to fill this out later.
 
 ## Overall description
 
-### Product perspective
+### Rationale
 
 With the advent of social media, much of digital culture now revolves around freely sharing--and occasionally modifying--user-made content.  Mixxy is designed with this trend in mind, to empower artists and illustrators of all skills to put their own twist on an existing work.  How this is applied is left entirely to the user base -- community-built stories, collaborative works, and even outright parody come to mind, though by no means should they be seen as limits.
 
-### Product functions
+### Function summary
 
 More formally, Mixxy is an art platform where users can not only post and share their own work, but freely remix that of others.  Users may provide or remix content with either the provided in-browser image editor or through their own preferred toolset, uploading their work to Mixxy upon its completion.  Users can discuss works with one another, follow creators they admire, or find works based on a particular subject matter.
+
+Mixxy is *not* designed as:
+
+- A platform to exchange works for monetary value
+- A static art gallery
 
 ### User Interfaces
 
@@ -228,11 +249,11 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |                When available |         |
 |              Frequency of use | Used as often as the user feels that they forgot their password. |
 
-### User characteristics
+### Target audience
 
 Mixxy is designed primarily for the benefit of artists and their enthusiasts, with particular attention to the comic fanbase.  We expect that most potential users are young (typically ages 15-30) and reasonably tech-savvy.
 
-Children under the age of 13 may not use Mixxy, due to legal requirements that we cannot meet pertaining to the Children's Online Privacy Protection Act.
+Children under the age of 13 may not use Mixxy, because we do not have the resources to comply with the Children's Online Privacy Protection Act.
 
 ### Constraints
 
@@ -247,10 +268,16 @@ The following issues arose in the design of Mixxy, all of which affect our optio
 
 ### Assumptions and dependencies
 
-Any invalidation of these assumptions can affect the requirements.
+In designing Mixxy, we have assumed the following:
 
-- Our target audience likely has an up-to-date Web browser
+- Our target audience has a desktop or laptop computer
+- Our target audience has a recent Web browser
 - Our target audience is comfortable with other people being able to freely modify their own work
+- Not all followers of a given user are themselves skilled artists.
+- Users do not necessarily have accounts with other social platforms (e.g. DeviantArt)
+- Users are vigilant enough to report any violation of Mixxy's code of conduct.
+
+This document may require revision if any of the stated assumptions are violated.
 
 ## Specific requirements
 
