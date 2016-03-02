@@ -352,6 +352,7 @@ The following issues arose in the design of Mixxy, all of which affect our optio
 - For legal reasons, all user works posted on Mixxy must be released under a license that permits free distribution and modification.
 - We have no budget to speak of.
 - As we are constrained to Google App Engine and Java 7, we may not be able to use certain libraries and tools.
+- Our use of DeviantArt Muro as an image editor tightly couples Mixxy to the service.
 - The in-browser editor must support raster image editing.  This implies that user works must be stored in raster format, resulting in higher storage and bandwidth requirements.
 
 ### Assumptions and Dependencies
