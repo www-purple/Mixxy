@@ -37,11 +37,23 @@ The following are *not* within the scope of this document:
 
 ### Definitions
 
+**Guest (n.):** A person who browses Mixxy without being signed in.  May include users who have not yet signed in.
+
 **User (n.):** A person who registers for an account with Mixxy and partakes in its services.  Does not necessarily contribute content (but we'd like them to).
 
-**Moderator (n.):** A user who enforces community standards and responds to violations, taking disciplinary actions if necessary.
+**Moderator (n.):** A user who enforces community standards through disciplinary action.
 
-**Work (n.):** Any content a user has posted to Mixxy, typically an illustration.
+**Comment (n.):** A user's contribution to the discussion of a work.
+
+**Comment (v.):** The act of a user contributing to the discussion of a work.
+
+**Work (n.):** Any content posted to Mixxy, typically an illustration.
+
+**Flag (v.):** The act of a user reporting to a moderator a work, comment, or user profile that violates community standards.
+
+**Ban (n.):** A revocation of a user's ability to post works or otherwise contribute to Mixxy, typically for violating the terms of service.  May be temporary or permanent, depending on the severity of the offense.
+
+**Ban (v.):** The act of a moderator awarding a ban on a user who has violated the terms of service.
 
 **Remix (v.):** The act of one user making a copy of another's work for the purpose of editing, improving upon, or otherwise modifying the original work.
 
@@ -56,12 +68,12 @@ The following are *not* within the scope of this document:
   - Excessive strong language
   - Extreme treatment of controversial topics
 
-*18+ content is fully permitted, so long as it is categorized as such by its creator.*
+*18+ content is fully permitted, so long as it is categorized as such by its creator.*  May also be referred to informally as "mature", "adult", or "NSFW" (not safe for work).
 
 **Forbidden (adj.):** Any presence of the following themes:
 
   - Child pornography, bestiality, rape, and other illegal sexual activity
-  - Copyright violations
+  - Violations of copyright and privacy
   - Hateful speech, harassment, and cyber-bullying
   - Threats of violence or other disruptive activity
   - Encouragement of criminal activity
