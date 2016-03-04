@@ -379,27 +379,12 @@ Users will primarily access Mixxy and all of its functionality through our websi
 
 Should we expect the user to go make a cup of coffee while waiting for something to happen?  (Hint: no)
 
-### Logical database requirements
+### Data Requirements
 
-#### Data Technology
-
-The data technology we will be using for this project will primarily be the GAE standard low-level Datastore Java API since it utilizes the Datastore to its full potential.
-
-App Engine Datastore is a schemaless NoSQL datastore providing robust, scalable storage for your web application, with the following features:
-- No planned downtime
-- Atomic transactions
-- High availability of reads and writes
-- Strong consistency for reads and ancestor queries
-- Eventual consistency for all other queries
-
-#### Stored Database Entities
-
-This section describes, on a high level, the most important entities that must be stored in the database.
-
-##### Users
+#### Users
 
 Users will have associated with them the typical details of account registration (e-mail, password, moderator permissions, etc.).  Alongside this, users will have associated with them the works they submit or remix, as well as a list of other uses they follow or works they like.
 
-##### Works
+#### Works
 
 Works are images stored in raster format.  Associated with them are the user that authored it, all derived remixes, and the users who like this work.  Of note is that our DeviantArt Muro integration allows us to store most (but not all) images off-site, on DeviantArt's servers.  Works created by those without a DeviantArt account can be stored on our servers directly.
