@@ -102,6 +102,8 @@ Users are, however, welcome to use Mixxy for these and other purposes unless oth
 
 ### Use Cases
 
+This section describes the ways in which users will interact with Mixxy.  Some use cases may be added, removed, or merged as development proceeds.  This UML diagram summarizes the following use cases, with more detailed information to follow:
+
 [ UML diagram to provide in another pull request ]
 
 #### Sign In
