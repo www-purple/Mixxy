@@ -373,7 +373,7 @@ This document may require revision if any of the stated assumptions are violated
 
 ### External interfaces
 
-The user will be able to remix the comics of their choosing on the web app via access from their laptop or desktop computers. They will be able to post, comment, like that comic, and if they so choose, they can subscribe to the user who post tasteful comics to receive a feed of their posts. The iOS app will be a compliment to the web app, where users get to view the comics they have remixed and other user content.
+Users will primarily access Mixxy and all of its functionality through our website on a desktop or laptop computer.  All functionality will be supported on mobile devices except for submitting, editing, and remixing works.  A RESTful API that allows developers to interface with Mixxy in any way they so choose is also planned, as is an iOS app to demonstrate this feature.
 
 ### Performance Requirements
 
