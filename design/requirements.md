@@ -347,7 +347,7 @@ In designing Mixxy, we have assumed the following:
 
 - Users will have a desktop or laptop computer
 - Users will have a recent Web browser installed
-  - Said browser must support modern Web standards such as HTML5, `<canvas>`, and the like.
+  - Said browser will support modern Web standards such as HTML5, `<canvas>`, and the like.
 - Users are comfortable with allowing other users to modify their work.
 - Not all followers of a given user are themselves skilled artists.
 - Users do not necessarily have accounts with other social platforms (e.g. DeviantArt).
