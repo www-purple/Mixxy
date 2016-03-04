@@ -21,10 +21,10 @@ We opted for a holistic approach in the creation of this document; we give prefe
 
 This document is written to specify the following of Mixxy:
 
+- Description of Mixxy's potential user appeal
 - High-level requirements and constraints
-- The mission-critical data, on a high level
+- Summary of mission-critical data
 - Use cases
-- The problem solved
 
 The following are *not* within the scope of this document:
 
