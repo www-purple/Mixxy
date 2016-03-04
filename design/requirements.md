@@ -9,7 +9,7 @@ Developed by www.purple, consisting of:
 
 ## Table of Contents
 
-This will be written out at the end -- man, I wish we could generate this automatically...can we?
+[ To be generated and provided in another pull request. ]
 
 ## Introduction
 
@@ -90,7 +90,7 @@ Users are, however, welcome to use Mixxy for these purposes unless otherwise sta
 
 ### User Interfaces
 
-The table below summarizes the ways with which the user will interact with Mixxy, which will be further detailed using UML Use Case diagrams.  Note that "Clicks" always refers to a left-mouse-button click, as so does "Drags". These Use-Case  diagrams should be fed as input directly into Section 3.1, external interfaces, which is where the design  of the user interface is specified. Here is the full list of UML Use-Case Diagrams:
+[ UML diagram to provide in another pull request ]
 
 #### Sign In
 |                     Attribute | Details |
