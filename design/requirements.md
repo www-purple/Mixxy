@@ -156,7 +156,7 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |                       Trigger | Click 'remix' link in sidebar of comic
 |                      Scenario | <ol><li>Actor opens comic, clicks 'remix' in the sidebar</li><li>Comic is opened in Muro for remixing</li><li>Image is displayed in browser, allows actor confirm via button click to add image to profile or cancel to return to Draw menu</li></ol>    
 |                    Exceptions | None
-|              Frequency of use | Frequent
+|              Frequency of use | At will
 
 #### Delete Work
 |                     Attribute | Details |
@@ -228,7 +228,7 @@ The table below summarizes the ways with which the user will interact with Mixxy
 |                     Attribute | Details |
 |-------------------------------|---------|
 |                 Primary actor | Moderator
-|                          Goal | Enforce Mixxy's community guidelines and Terms of Service.
+|                          Goal | Enforce Mixxy's Terms of Service.
 |                 Preconditions | The user being disciplined has violated the Terms of Service.
 |                       Trigger | The admin clicks on a "ban/kick" button for a specific user.
 |                         Steps | <ol><li>Admin starts the web application, which loads the homepage</li><li>Admin locates the user and clicks on the “ban/kick” button</li></ol>
