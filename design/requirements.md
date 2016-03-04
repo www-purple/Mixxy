@@ -93,12 +93,12 @@ Mixxy is *not* designed as:
 
 - A platform to exchange works for monetary value
 - A static art gallery or portfolio Web page
-- A conventional image sharing/hosting service or imageboard (e.g. Imgur, 4chan)
+- A conventional image sharing service or imageboard (e.g. Imgur, 4chan)
 - A recruiting service for artists
 - A repository of artwork for use in other media (e.g. clip art websites, Open Game Art)
 - A tutorial service for art and illustration skills
 
-Users are, however, welcome to use Mixxy for these purposes unless otherwise stated.
+Users are, however, welcome to use Mixxy for these and other purposes unless otherwise stated.
 
 ### User Interfaces
 
