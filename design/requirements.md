@@ -139,6 +139,10 @@ This section describes the ways in which users will interact with Mixxy.  Some u
 |                    Exceptions | Resulting work exceeds size limitations.  The user will be notified and the work will not be posted.
 |                     Frequency | Moderate to Frequent
 
+##### Mockup
+
+![Drawing an image in Mixxy](img/draw.png "Drawing an image in Mixxy")
+
 #### Upload Work
 |                     Attribute | Details |
 |-------------------------------|---------|
