@@ -100,7 +100,7 @@ Mixxy is *not* designed as:
 
 Users are, however, welcome to use Mixxy for these and other purposes unless otherwise stated.
 
-### User Interfaces
+### Use Cases
 
 [ UML diagram to provide in another pull request ]
 
@@ -214,7 +214,7 @@ Users are, however, welcome to use Mixxy for these and other purposes unless oth
 |                    Exceptions | This button should always be enabled when the user is not logged in. Note that should a user already be logged in, the application shouldn't display this button.
 |                     Frequency | Once
 
-#### Tagging Works
+#### Tag Work
 |                     Attribute | Details |
 |-------------------------------|---------|
 |                 Primary actor | User, Moderator
@@ -269,7 +269,7 @@ Users are, however, welcome to use Mixxy for these and other purposes unless oth
 |                    Exceptions | Comments disabled by work's author.
 |                     Frequency | Frequently
 
-#### Up Comment
+#### Upvote Comment
 |                     Attribute | Details |
 |-------------------------------|---------|
 |                         Actor | User
@@ -280,7 +280,7 @@ Users are, however, welcome to use Mixxy for these and other purposes unless oth
 |                    Exceptions | Comments disabled by comic's author.
 |                     Frequency | Frequently
 
-#### Down Comment
+#### Downvote Comment
 |                     Attribute | Details |
 |-------------------------------|---------|
 |                         Actor | User
@@ -302,7 +302,7 @@ Users are, however, welcome to use Mixxy for these and other purposes unless oth
 |                    Exceptions | Comments disabled by comic's author.
 |                     Frequency | At will.
 
-#### Like Comic
+#### Like Work
 |                     Attribute | Details |
 |-------------------------------|---------|
 |                         Actor | User
@@ -313,7 +313,7 @@ Users are, however, welcome to use Mixxy for these and other purposes unless oth
 |                    Exceptions | None.
 |                     Frequency | Frequently
 
-#### Flag Comic
+#### Flag Work
 |                     Attribute | Details |
 |-------------------------------|---------|
 |                         Actor | User
@@ -324,7 +324,7 @@ Users are, however, welcome to use Mixxy for these and other purposes unless oth
 |                    Exceptions | User is not logged in.
 |                     Frequency | Infrequently
 
-#### Share Comic
+#### Share Work
 |                     Attribute | Details | 
 |-------------------------------|---------|
 |                         Actor | Guest, User
