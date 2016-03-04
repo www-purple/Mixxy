@@ -375,10 +375,6 @@ This document may require revision if any of the stated assumptions are violated
 
 Users will primarily access Mixxy and all of its functionality through our website on a desktop or laptop computer.  All functionality will be supported on mobile devices except for submitting, editing, and remixing works.  A RESTful API that allows developers to interface with Mixxy in any way they so choose is also planned, as is an iOS app to demonstrate this feature.
 
-### Performance Requirements
-
-Should we expect the user to go make a cup of coffee while waiting for something to happen?  (Hint: no)
-
 ### Data Requirements
 
 #### Users
