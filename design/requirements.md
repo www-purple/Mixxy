@@ -308,7 +308,7 @@ This section describes the ways in which users will interact with Mixxy.  Some u
 |                     Attribute | Details |
 |-------------------------------|---------|
 |                         Actor | User
-|                          Goal | Express a appreciation for a work.
+|                          Goal | Express appreciation for a work.
 |                 Preconditions | User must be signed in.
 |                       Trigger | User navigates to a comic.
 |                         Steps | <ol><li>Navigate to comic.</li><li>Click on Like button.</li></ol>
