@@ -341,6 +341,10 @@ This section describes the ways in which users will interact with Mixxy.  Some u
 
 This section proposes layouts and overall style for Mixxy.  These mockups are *descriptive*, not *prescriptive*; that is, they describe our suggested design for the frontend, but do not themselves specify how the final product will appear.  The functionality will be more or less unchanged, however.
 
+#### Overall Page Flow
+
+![Page flow diagram for Mixxy](img/page-flow.svg "Page flow")
+
 #### Main Page
 
 ![Mockup of main page for Mixxy](img/main.png "Main page")
