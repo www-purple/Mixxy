@@ -9,7 +9,53 @@ Developed by www.purple, consisting of:
 
 ## Table of Contents
 
-[ To be generated and provided in another pull request. ]
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Introduction](#introduction)
+  - [Scope](#scope)
+  - [Definitions](#definitions)
+- [Overall description](#overall-description)
+  - [Rationale](#rationale)
+  - [Use Cases](#use-cases)
+    - [Sign In](#sign-in)
+    - [Sign Out](#sign-out)
+    - [Draw Work](#draw-work)
+    - [Upload Work](#upload-work)
+    - [Edit Work](#edit-work)
+    - [Remix Work](#remix-work)
+    - [Delete Work](#delete-work)
+    - [Basic Search](#basic-search)
+    - [Advanced Search](#advanced-search)
+    - [Register](#register)
+    - [Tag Work](#tag-work)
+    - [Navigate to Similar Works](#navigate-to-similar-works)
+    - [Ban User](#ban-user)
+    - [Reset Password](#reset-password)
+    - [Post Comment](#post-comment)
+    - [Upvote Comment](#upvote-comment)
+    - [Downvote Comment](#downvote-comment)
+    - [Flag Comment](#flag-comment)
+    - [Like Work](#like-work)
+    - [Flag Work](#flag-work)
+    - [Share Work](#share-work)
+  - [Mockups](#mockups)
+    - [Overall Page Flow](#overall-page-flow)
+    - [Main Page](#main-page)
+    - [Viewing a Work](#viewing-a-work)
+    - [Drawing](#drawing)
+    - [Search](#search)
+    - [Proposed Mobile Viewer](#proposed-mobile-viewer)
+  - [Target Audience](#target-audience)
+  - [Constraints](#constraints)
+  - [Assumptions and Dependencies](#assumptions-and-dependencies)
+- [Specific Requirements](#specific-requirements)
+  - [External interfaces](#external-interfaces)
+  - [Data Requirements](#data-requirements)
+    - [Users](#users)
+    - [Works](#works)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Introduction
 
