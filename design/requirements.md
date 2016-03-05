@@ -139,10 +139,6 @@ This section describes the ways in which users will interact with Mixxy.  Some u
 |                    Exceptions | Resulting work exceeds size limitations.  The user will be notified and the work will not be posted.
 |                     Frequency | Moderate to Frequent
 
-##### Mockup
-
-![Drawing an image in Mixxy](img/draw.png "Drawing an image in Mixxy")
-
 #### Upload Work
 |                     Attribute | Details |
 |-------------------------------|---------|
@@ -340,6 +336,30 @@ This section describes the ways in which users will interact with Mixxy.  Some u
 |                         Steps | <ol><li>Navigate to comic.</li><li>Click on Share button.</li><li>Pick social network to share to.</li></ol>
 |                    Exceptions | None
 |                     Frequency | Frequently
+
+### Mockups
+
+This section proposes layouts and overall style for Mixxy.  These mockups are *descriptive*, not *prescriptive*; that is, they describe our suggested design for the frontend, but do not themselves specify how the final product will appear.  The functionality will be more or less unchanged, however.
+
+#### Main Page
+
+![Mockup of main page for Mixxy](img/main.png "Main page")
+
+#### Viewing a Work
+
+![Mockup of view page for Mixxy](img/read.png "Reading a comic")
+
+#### Drawing
+
+![Mockup of draw page for Mixxy](img/draw.png "Drawing an image")
+
+#### Search
+
+![Mockup of search page for Mixxy](img/search.png "Searching for dinosaur images")
+
+#### Proposed Mobile Viewer
+
+![Mockup of mobile client for Mixxy](img/ios.png "Mixxy on iOS")
 
 ### Target Audience
 
