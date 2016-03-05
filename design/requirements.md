@@ -343,7 +343,7 @@ This section proposes layouts and overall style for Mixxy.  These mockups are *d
 
 #### Overall Page Flow
 
-![Page flow diagram for Mixxy](img/page-flow.svg "Page flow")
+![Page flow diagram for Mixxy](https://cdn.rawgit.com/JesseTG/7edcc6a57743211f573d/raw/591d4268befeabb050d81615b079e24459e84fb1/page-flow.svg "Page flow")
 
 #### Main Page
 
