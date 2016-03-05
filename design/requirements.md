@@ -308,7 +308,7 @@ This section describes the ways in which users will interact with Mixxy.  Some u
 |                     Attribute | Details |
 |-------------------------------|---------|
 |                         Actor | User
-|                          Goal | Express a appreciation for a work.
+|                          Goal | Express appreciation for a work.
 |                 Preconditions | User must be signed in.
 |                       Trigger | User navigates to a comic.
 |                         Steps | <ol><li>Navigate to comic.</li><li>Click on Like button.</li></ol>
@@ -336,6 +336,30 @@ This section describes the ways in which users will interact with Mixxy.  Some u
 |                         Steps | <ol><li>Navigate to comic.</li><li>Click on Share button.</li><li>Pick social network to share to.</li></ol>
 |                    Exceptions | None
 |                     Frequency | Frequently
+
+### Mockups
+
+This section proposes layouts and overall style for Mixxy.  These mockups are *descriptive*, not *prescriptive*; that is, they describe our suggested design for the frontend, but do not themselves specify how the final product will appear.  The functionality will be more or less unchanged, however.
+
+#### Main Page
+
+![Mockup of main page for Mixxy](img/main.png "Main page")
+
+#### Viewing a Work
+
+![Mockup of view page for Mixxy](img/read.png "Reading a comic")
+
+#### Drawing
+
+![Mockup of draw page for Mixxy](img/draw.png "Drawing an image")
+
+#### Search
+
+![Mockup of search page for Mixxy](img/search.png "Searching for dinosaur images")
+
+#### Proposed Mobile Viewer
+
+![Mockup of mobile client for Mixxy](img/ios.png "Mixxy on iOS")
 
 ### Target Audience
 
