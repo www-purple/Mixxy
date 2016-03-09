@@ -12,6 +12,7 @@ This repo is only open so we can take advantage of the free Travis plan.  Theref
 8. *Please* write as many tests as you possibly can.
 9. Issues or PRs that do not see any activity for three days (discussions or commits) should be bumped, and the submitter and assignee reminded.  This may be a good time to update us on progress, or simply close the issue/PR.
 10. If a PR isn't approved because it's half-baked, don't close it; keep working on it!  Only close a PR if it's no longer relevant, not useful to Mixxy, or irredeemably flawed.
+11. You can submit a PR whenever in its development you'd like, but if it's not ready to be merged then say so!  And if that's the case, let us know when it *is* ready to be merged, and then we'll review it.
 
 If you break these rules, the rest of us are granted the right to slap your shit.  No, seriously; if there weren't road rules that everybody agreed on (e.g. line placement, speed limits, sign placement conventions), traffic wouldn't work.
 
