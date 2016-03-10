@@ -75,14 +75,14 @@ public class ApiControllerTest extends NinjaTest {
         response = ninjaTestBrowser.postJson(getServerAddress()
                 + "api/bob@gmail.com/article.json", articleDto);
 
-        assertTrue(response.contains("Error. Forbidden."));
+        assertTrue(response.contains("forbidden"));
 
         doLogin();
 
         response = ninjaTestBrowser.postJson(getServerAddress()
                 + "api/bob@gmail.com/article.json", articleDto);
 
-        assertFalse(response.contains("Error. Forbidden."));
+        assertFalse(response.contains("forbidden"));
 
         // /////////////////////////////////////////////////////////////////////
         // Fetch articles again => assert we got a new one ...
@@ -126,14 +126,14 @@ public class ApiControllerTest extends NinjaTest {
         response = ninjaTestBrowser.postXml(getServerAddress()
                 + "api/bob@gmail.com/article.xml", articleDto);
 
-        assertTrue(response.contains("Error. Forbidden."));
+        assertTrue(response.contains("forbidden"));
 
         doLogin();
 
         response = ninjaTestBrowser.postXml(getServerAddress()
                 + "api/bob@gmail.com/article.xml", articleDto);
 
-        assertFalse(response.contains("Error. Forbidden."));
+        assertFalse(response.contains("forbidden"));
 
         // /////////////////////////////////////////////////////////////////////
         // Fetch articles again => assert we got a new one ...
