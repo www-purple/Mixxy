@@ -18,6 +18,7 @@
         <ninja-appengine.version>1.9.31</ninja-appengine.version>
         <appengine.version>1.9.31</appengine.version>
         <appengine.generated.dir>target/${project.artifactId}-${project.version}/WEB-INF/appengine-generated</appengine.generated.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <build>
