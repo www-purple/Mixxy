@@ -111,7 +111,6 @@ public class ApiControllerTest extends NinjaTest {
         module.setDefaultUseWrapper(false);
         XmlMapper xmlMapper = new XmlMapper(module);
         
-
         ArticlesDto articlesDto = xmlMapper.readValue(response, ArticlesDto.class);
 
         assertEquals(3, articlesDto.articles.size());
