@@ -194,7 +194,6 @@
    <rule ref="rulesets/java/logging-jakarta-commons.xml/UseCorrectExceptionLogging"/>
    <rule ref="rulesets/java/logging-java.xml/AvoidPrintStackTrace"/>
    <rule ref="rulesets/java/logging-java.xml/GuardLogStatementJavaUtil"/>
-   <rule ref="rulesets/java/logging-java.xml/LoggerIsNotStaticFinal"/>
    <rule ref="rulesets/java/logging-java.xml/MoreThanOneLogger"/>
    <rule ref="rulesets/java/logging-java.xml/SystemPrintln"/>
    <rule ref="rulesets/java/migrating.xml/AvoidAssertAsIdentifier"/>
