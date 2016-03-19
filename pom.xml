@@ -183,8 +183,7 @@
                 <configuration>
                     <verbose>true</verbose>
                     <rulesets>
-                      <ruleset>/rulesets/java/braces.xml</ruleset>
-                        <ruleset>/rulesets/java/naming.xml</ruleset>
+                        <ruleset>.ruleset</ruleset>
                     </rulesets>
                 </configuration>
             </plugin>
