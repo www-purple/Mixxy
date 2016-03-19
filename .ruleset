@@ -244,11 +244,6 @@
          <property name="minimum" value="4"/>
       </properties>
    </rule>
-   <rule ref="rulesets/java/naming.xml/ShortMethodName">
-      <properties>
-         <property name="minimum" value="2"/>
-      </properties>
-   </rule>
    <rule ref="rulesets/java/naming.xml/ShortVariable"/>
    <rule ref="rulesets/java/naming.xml/SuspiciousConstantFieldName"/>
    <rule ref="rulesets/java/naming.xml/SuspiciousEqualsMethodName"/>
