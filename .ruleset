@@ -302,15 +302,6 @@
    <rule ref="rulesets/jsp/basic.xml/NoLongScripts"/>
    <rule ref="rulesets/jsp/basic.xml/NoScriptlets"/>
    <rule ref="rulesets/jsp/basic.xml/NoUnsanitizedJSPExpression"/>
-   <rule ref="rulesets/vm/basic.xml/AvoidDeeplyNestedIfStmts"/>
-   <rule ref="rulesets/vm/basic.xml/AvoidReassigningParameters"/>
-   <rule ref="rulesets/vm/basic.xml/CollapsibleIfStatements"/>
-   <rule ref="rulesets/vm/basic.xml/EmptyForeachStmt"/>
-   <rule ref="rulesets/vm/basic.xml/EmptyIfStmt"/>
-   <rule ref="rulesets/vm/basic.xml/ExcessiveTemplateLength"/>
-   <rule ref="rulesets/vm/basic.xml/NoInlineJavaScript"/>
-   <rule ref="rulesets/vm/basic.xml/NoInlineStyles"/>
-   <rule ref="rulesets/vm/basic.xml/UnusedMacroParameter"/>
    <rule ref="rulesets/xml/basic.xml/MistypedCDATASection"/>
    <rule ref="rulesets/xsl/xpath.xml/AvoidAxisNavigation"/>
    <rule ref="rulesets/xsl/xpath.xml/UseConcatOnce"/>
