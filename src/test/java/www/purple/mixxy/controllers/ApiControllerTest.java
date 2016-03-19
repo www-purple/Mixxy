@@ -41,6 +41,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
+@Deprecated
 public class ApiControllerTest extends NinjaTest {
     
     @Before
@@ -58,7 +59,6 @@ public class ApiControllerTest extends NinjaTest {
         // /////////////////////////////////////////////////////////////////////
         String response = ninjaTestBrowser.makeJsonRequest(getServerAddress()
                 + "api/bob@gmail.com/articles.json");
-        System.out.println("response: " + response);
 
         ArticlesDto articlesDto = getGsonWithLongToDateParsing().fromJson(
                 response, ArticlesDto.class);
@@ -104,7 +104,6 @@ public class ApiControllerTest extends NinjaTest {
         // /////////////////////////////////////////////////////////////////////
         String response = ninjaTestBrowser.makeXmlRequest(getServerAddress()
                 + "api/bob@gmail.com/articles.xml");
-        System.out.println("response xml: " + response);
         
         JacksonXmlModule module = new JacksonXmlModule();
         // and then configure, for example:

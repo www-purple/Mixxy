@@ -8,14 +8,9 @@ import www.purple.mixxy.models.Article;
 import www.purple.mixxy.models.User;
 
 public class ObjectifyProvider implements Provider<Objectify> {
-    
-    @Override
-    public Objectify get() {
-        return ObjectifyService.ofy();
-    }
 
-    public static String post1Title = "Hello to the blog example!";
-    public static String post1Content
+    public static final String POST1_TITLE = "Hello to the blog example!";
+    public static final String POST1_CONTENT
             = "<p>Hi and welcome to the demo of Ninja!</p> "
             + "<p>This example shows how you can use Ninja in the wild. Some things you can learn:</p>"
             + "<ul>"
@@ -31,7 +26,13 @@ public class ObjectifyProvider implements Provider<Objectify> {
             + "</ul>"
             + "<p>We are always happy to see you on our mailing list! "
             + "Check out <a href=\"http://www.ninjaframework.org\">our website for more</a>.</p>";
-
+    private static final String LIPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed nisl sed lorem commodo elementum in a leo. Aliquam erat volutpat. Nulla libero odio, consectetur eget rutrum ac, varius vitae orci. Suspendisse facilisis tempus elit, facilisis ultricies massa condimentum in. Aenean id felis libero. Quisque nisl eros, accumsan eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula.";
+    
+    @Override
+    public Objectify get() {
+        return ObjectifyService.ofy();
+    }
+    
     static {
 
         ObjectifyService.register(User.class);
@@ -42,9 +43,6 @@ public class ObjectifyProvider implements Provider<Objectify> {
 
 
     public static void setup() {
-
-        String lipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed nisl sed lorem commodo elementum in a leo. Aliquam erat volutpat. Nulla libero odio, consectetur eget rutrum ac, varius vitae orci. Suspendisse facilisis tempus elit, facilisis ultricies massa condimentum in. Aenean id felis libero. Quisque nisl eros, accumsan eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula. eget ornare id, pharetra eget felis. Aenean purus erat, egestas nec scelerisque non, eleifend id ligula.";
-
         Objectify ofy = ObjectifyService.ofy();
         User user = ofy.load().type(User.class).first().now();
 
@@ -55,15 +53,15 @@ public class ObjectifyProvider implements Provider<Objectify> {
             ofy.save().entity(bob).now();
 
             // Create a new post
-            Article bobPost3 = new Article(bob, "My third post", lipsum);
+            Article bobPost3 = new Article(bob, "My third post", LIPSUM);
             ofy.save().entity(bobPost3).now();
 
             // Create a new post
-            Article bobPost2 = new Article(bob, "My second post", lipsum);
+            Article bobPost2 = new Article(bob, "My second post", LIPSUM);
             ofy.save().entity(bobPost2).now();
 
             // Create a new post
-            Article bobPost1 = new Article(bob, post1Title, post1Content);
+            Article bobPost1 = new Article(bob, POST1_TITLE, POST1_CONTENT);
             ofy.save().entity(bobPost1).now();
         }
 

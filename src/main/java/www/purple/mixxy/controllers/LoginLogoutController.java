@@ -32,13 +32,13 @@ import com.google.inject.Singleton;
 public class LoginLogoutController {
     
     @Inject
-    UserDao userDao;
+    private UserDao userDao;
     
     
     ///////////////////////////////////////////////////////////////////////////
     // Login
     ///////////////////////////////////////////////////////////////////////////
-    public Result login(Context context) {
+    public Result login(@SuppressWarnings("unused") Context context) {
 
         return Results.html();
 
@@ -48,20 +48,20 @@ public class LoginLogoutController {
                             @Param("password") String password,
                             Context context) {
 
-        boolean isUserNameAndPasswordValid = userDao.isUserAndPasswordValid(username, password);
+        boolean areCredentialsValid = userDao.isUserAndPasswordValid(username, password);
         
         
-        if (isUserNameAndPasswordValid) {
-            context.getSessionCookie().put("username", username);
-            context.getFlashCookie().success("login.loginSuccessful");
+        if (areCredentialsValid) {
+            context.getSession().put("username", username);
+            context.getFlashScope().success("login.loginSuccessful");
             
             return Results.redirect("/");
             
         } else {
             
             // something is wrong with the input or password not found.
-            context.getFlashCookie().put("username", username);
-            context.getFlashCookie().error("login.errorLogin");
+            context.getFlashScope().put("username", username);
+            context.getFlashScope().error("login.errorLogin");
 
             return Results.redirect("/login");
             
@@ -75,8 +75,8 @@ public class LoginLogoutController {
     public Result logout(Context context) {
 
         // remove any user dependent information
-        context.getSessionCookie().clear();
-        context.getFlashCookie().success("login.logoutSuccessful");
+        context.getSession().clear();
+        context.getFlashScope().success("login.logoutSuccessful");
 
         return Results.redirect("/");
 

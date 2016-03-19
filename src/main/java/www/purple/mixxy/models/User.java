@@ -14,10 +14,10 @@ public class User {
     public String password;
     public String fullname;
     public boolean isAdmin;
+
+    public User() { /* Needed by Objectify */ }
     
-    public User() {}
-    
-    public User(String username, String password, String fullname) {
+    public User(final String username, final String password, final String fullname) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;

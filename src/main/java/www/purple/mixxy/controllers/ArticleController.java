@@ -22,11 +22,12 @@ import com.google.inject.Singleton;
 public class ArticleController {
     
     @Inject
-    ArticleDao articleDao;
+    private ArticleDao articleDao;
 
     ///////////////////////////////////////////////////////////////////////////
     // Show article
     ///////////////////////////////////////////////////////////////////////////
+    @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
     public Result articleShow(@PathParam("id") Long id) {
 
         Article article = null;

@@ -10,4 +10,4 @@ import ninja.params.WithArgumentExtractor;
 @WithArgumentExtractor(LoggedInUserExtractor.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.PARAMETER})
-public @interface LoggedInUser {}
+public @interface LoggedInUser { /* annotation */ }

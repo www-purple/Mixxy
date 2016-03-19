@@ -17,6 +17,7 @@
 package www.purple.mixxy.controllers;
 
 import java.lang.reflect.Type;
+import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.Map;
 
@@ -36,13 +37,14 @@ import com.google.gson.JsonParseException;
 
 import de.devbliss.apitester.ApiResponse;
 
+@Deprecated
 public class ApiControllerDocTest extends NinjaApiDocTest {
     
-    String GET_ARTICLES_URL = "/api/{username}/articles.json";
-    String POST_ARTICLE_URL = "/api/{username}/article.json";
-    String LOGIN_URL = "/login";
+    private static final String GET_ARTICLES_URL = "/api/{username}/articles.json";
+    private static final String POST_ARTICLE_URL = "/api/{username}/article.json";
+    private static final String LOGIN_URL = "/login";
     
-    String USER = "bob@gmail.com";
+    private static final String USER = "bob@gmail.com";
 
     @Test
     public void testGetAndPostArticleViaJson() throws Exception {
@@ -55,7 +57,7 @@ public class ApiControllerDocTest extends NinjaApiDocTest {
         
         say("Retrieving all articles of a user is a GET request to " + GET_ARTICLES_URL);
         
-        ApiResponse apiResponse = makeGetRequest(buildUri(GET_ARTICLES_URL.replace("{username}", "bob@gmail.com")));
+        ApiResponse apiResponse = makeGetRequest(buildUri(GET_ARTICLES_URL.replace("{username}", USER)));
 
         ArticlesDto articlesDto = getGsonWithLongToDateParsing().fromJson(apiResponse.payload, ArticlesDto.class);
 
@@ -87,7 +89,7 @@ public class ApiControllerDocTest extends NinjaApiDocTest {
         // /////////////////////////////////////////////////////////////////////
         
         say("If we now fetch the articles again we are getting a new article (the one we have posted successfully");
-        apiResponse = makeGetRequest(buildUri(GET_ARTICLES_URL.replace("{username}", "bob@gmail.com")));
+        apiResponse = makeGetRequest(buildUri(GET_ARTICLES_URL.replace("{username}", USER)));
 
         articlesDto = getGsonWithLongToDateParsing().fromJson(apiResponse.payload, ArticlesDto.class);
         // one new result:
@@ -114,13 +116,13 @@ public class ApiControllerDocTest extends NinjaApiDocTest {
         return gson;
     }
 
-    private void doLogin() throws Exception {
+    private void doLogin() throws URISyntaxException, Exception {
 
         say("To authenticate we send our credentials to " + LOGIN_URL);
         say("We are then issued a cookie from the server that authenticates us in further requests");
 
         Map<String, String> formParameters = Maps.newHashMap();
-        formParameters.put("username", "bob@gmail.com");
+        formParameters.put("username", USER);
         formParameters.put("password", "secret");
         
         makePostRequest(buildUri(LOGIN_URL, formParameters));

@@ -9,7 +9,7 @@ import www.purple.mixxy.models.User;
 public class UserDao {
 
     @Inject
-    Provider<Objectify> objectify;
+    private Provider<Objectify> objectify;
     
     public boolean isUserAndPasswordValid(String username, String password) {
         
@@ -18,15 +18,9 @@ public class UserDao {
             User user = objectify.get().load().type(User.class)
                     .filter("username", username).first().now();
             
-            if (user != null) {
-                
-                if (user.password.equals(password)) {
-
-                    return true;
-                }
-                
+            if (user != null && user.password.equals(password)) {
+                return true;              
             }
-
         }
         
         return false;

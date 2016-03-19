@@ -18,10 +18,8 @@ package www.purple.mixxy.controllers;
 import java.util.List;
 import java.util.Map;
 
-import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
-import ninja.appengine.AppEngineFilter;
 import www.purple.mixxy.conf.ObjectifyProvider;
 import www.purple.mixxy.dao.ArticleDao;
 import www.purple.mixxy.models.Article;
@@ -29,7 +27,6 @@ import www.purple.mixxy.models.Article;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.googlecode.objectify.Objectify;
 
 import ninja.appengine.AppEngineEnvironment;
 
@@ -40,22 +37,17 @@ import ninja.appengine.AppEngineEnvironment;
 public class ApplicationController {
 
     @Inject
-    ArticleDao articleDao;
-    
-    public ApplicationController() {
-
-    }
+    private ArticleDao articleDao;
     
     /**
      * Method to put initial data in the db...
-     * @return
+     * @return A successful Result
      */
     public Result setup() {
         
         ObjectifyProvider.setup();
         
         return Results.ok();
-        
     }
 
     public Result index() {

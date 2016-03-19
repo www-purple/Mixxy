@@ -16,7 +16,7 @@ public class NinjaAppengineBackendTest {
     private final LocalServiceTestHelper helper = new LocalServiceTestHelper(
             new LocalDatastoreServiceTestConfig());
     
-    Closeable session;
+    private Closeable session;
 
     @Before
     public void setUp() {
