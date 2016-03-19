@@ -68,11 +68,8 @@
    <rule ref="rulesets/java/controversial.xml/AssignmentInOperand"/>
    <rule ref="rulesets/java/controversial.xml/AtLeastOneConstructor"/>
    <rule ref="rulesets/java/controversial.xml/AvoidAccessibilityAlteration"/>
-   <rule ref="rulesets/java/controversial.xml/AvoidFinalLocalVariable"/>
    <rule ref="rulesets/java/controversial.xml/AvoidLiteralsInIfCondition"/>
-   <rule ref="rulesets/java/controversial.xml/AvoidPrefixingMethodParameters"/>
    <rule ref="rulesets/java/controversial.xml/AvoidUsingNativeCode"/>
-   <rule ref="rulesets/java/controversial.xml/AvoidUsingShortType"/>
    <rule ref="rulesets/java/controversial.xml/AvoidUsingVolatile"/>
    <rule ref="rulesets/java/controversial.xml/BooleanInversion"/>
    <rule ref="rulesets/java/controversial.xml/CallSuperInConstructor"/>
@@ -99,7 +96,6 @@
    <rule ref="rulesets/java/coupling.xml/LoosePackageCoupling"/>
    <rule ref="rulesets/java/design.xml/AbstractClassWithoutAbstractMethod"/>
    <rule ref="rulesets/java/design.xml/AbstractClassWithoutAnyMethod"/>
-   <rule ref="rulesets/java/design.xml/AccessorClassGeneration"/>
    <rule ref="rulesets/java/design.xml/AssignmentToNonFinalStatic"/>
    <rule ref="rulesets/java/design.xml/AvoidConstantsInterface"/>
    <rule ref="rulesets/java/design.xml/AvoidDeeplyNestedIfStmts"/>
@@ -141,7 +137,6 @@
    <rule ref="rulesets/java/design.xml/SingularField"/>
    <rule ref="rulesets/java/design.xml/SwitchDensity"/>
    <rule ref="rulesets/java/design.xml/SwitchStmtsShouldHaveDefault"/>
-   <rule ref="rulesets/java/design.xml/TooFewBranchesForASwitchStatement"/>
    <rule ref="rulesets/java/design.xml/UncommentedEmptyConstructor"/>
    <rule ref="rulesets/java/design.xml/UncommentedEmptyMethodBody"/>
    <rule ref="rulesets/java/design.xml/UnnecessaryLocalBeforeReturn"/>
@@ -189,7 +184,6 @@
    <rule ref="rulesets/java/j2ee.xml/UseProperClassLoader"/>
    <rule ref="rulesets/java/javabeans.xml/BeanMembersShouldSerialize"/>
    <rule ref="rulesets/java/javabeans.xml/MissingSerialVersionUID"/>
-   <rule ref="rulesets/java/junit.xml/JUnitAssertionsShouldIncludeMessage"/>
    <rule ref="rulesets/java/junit.xml/JUnitSpelling"/>
    <rule ref="rulesets/java/junit.xml/JUnitStaticSuite"/>
    <rule ref="rulesets/java/junit.xml/JUnitTestContainsTooManyAsserts"/>
