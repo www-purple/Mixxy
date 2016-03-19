@@ -177,7 +177,6 @@
    <rule ref="rulesets/java/j2ee.xml/StaticEJBFieldShouldBeFinal"/>
    <rule ref="rulesets/java/j2ee.xml/UseProperClassLoader"/>
    <rule ref="rulesets/java/javabeans.xml/MissingSerialVersionUID"/>
-   <rule ref="rulesets/java/junit.xml/JUnitSpelling"/>
    <rule ref="rulesets/java/junit.xml/JUnitStaticSuite"/>
    <rule ref="rulesets/java/junit.xml/JUnitTestContainsTooManyAsserts"/>
    <rule ref="rulesets/java/junit.xml/JUnitTestsShouldIncludeAssert"/>
