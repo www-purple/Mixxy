@@ -63,7 +63,6 @@
    <rule ref="rulesets/java/codesize.xml/StdCyclomaticComplexity"/>
    <rule ref="rulesets/java/codesize.xml/TooManyFields"/>
    <rule ref="rulesets/java/codesize.xml/TooManyMethods"/>
-   <rule ref="rulesets/java/comments.xml/CommentRequired"/>
    <rule ref="rulesets/java/controversial.xml/AssignmentInOperand"/>
    <rule ref="rulesets/java/controversial.xml/AvoidAccessibilityAlteration"/>
    <rule ref="rulesets/java/controversial.xml/AvoidLiteralsInIfCondition"/>
@@ -81,7 +80,6 @@
          <property name="strictMode" value="true"/>
       </properties>
    </rule>
-   <rule ref="rulesets/java/controversial.xml/OnlyOneReturn"/>
    <rule ref="rulesets/java/controversial.xml/SuspiciousOctalEscape"/>
    <rule ref="rulesets/java/controversial.xml/UnnecessaryConstructor"/>
    <rule ref="rulesets/java/controversial.xml/UnnecessaryParentheses"/>
@@ -91,7 +89,6 @@
    <rule ref="rulesets/java/coupling.xml/ExcessiveImports"/>
    <rule ref="rulesets/java/coupling.xml/LawOfDemeter"/>
    <rule ref="rulesets/java/coupling.xml/LooseCoupling"/>
-   <rule ref="rulesets/java/coupling.xml/LoosePackageCoupling"/>
    <rule ref="rulesets/java/design.xml/AbstractClassWithoutAbstractMethod"/>
    <rule ref="rulesets/java/design.xml/AbstractClassWithoutAnyMethod"/>
    <rule ref="rulesets/java/design.xml/AssignmentToNonFinalStatic"/>
