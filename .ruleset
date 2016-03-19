@@ -17,6 +17,7 @@
    <rule ref="rulesets/ecmascript/braces.xml/IfElseStmtsMustUseBraces"/>
    <rule ref="rulesets/ecmascript/braces.xml/IfStmtsMustUseBraces"/>
    <rule ref="rulesets/ecmascript/braces.xml/WhileLoopsMustUseBraces"/>
+   <rule ref="rulesets/ecmascript/controversial.xml/AvoidWithStatement"/>
    <rule ref="rulesets/ecmascript/unnecessary.xml/UnnecessaryBlock"/>
    <rule ref="rulesets/ecmascript/unnecessary.xml/UnnecessaryParentheses"/>
    <rule ref="rulesets/java/android.xml/CallSuperFirst"/>
