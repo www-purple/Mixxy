@@ -20,9 +20,6 @@
    <rule ref="rulesets/ecmascript/controversial.xml/AvoidWithStatement"/>
    <rule ref="rulesets/ecmascript/unnecessary.xml/UnnecessaryBlock"/>
    <rule ref="rulesets/ecmascript/unnecessary.xml/UnnecessaryParentheses"/>
-   <rule ref="rulesets/java/android.xml/CallSuperFirst"/>
-   <rule ref="rulesets/java/android.xml/CallSuperLast"/>
-   <rule ref="rulesets/java/android.xml/DoNotHardCodeSDCard"/>
    <rule ref="rulesets/java/basic.xml/AvoidBranchingStatementAsLastInLoop"/>
    <rule ref="rulesets/java/basic.xml/AvoidDecimalLiteralsInBigDecimalConstructor"/>
    <rule ref="rulesets/java/basic.xml/AvoidMultipleUnaryOperators"/>
