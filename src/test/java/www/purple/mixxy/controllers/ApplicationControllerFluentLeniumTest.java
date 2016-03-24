@@ -28,23 +28,20 @@ public class ApplicationControllerFluentLeniumTest extends NinjaFluentLeniumTest
     public void setup() {
         
         goTo(getServerAddress() + "setup");
+        goTo(getServerAddress() + "/");
         
     }
 
     @Test
     public void testThatHomepageWorks() {
-        
-        goTo(getServerAddress() + "/");
-        
-        System.out.println("title: " + title());
-        
         assertTrue(title().contains("Home page"));
-        
+    }
+    
+    @Test
+    public void testNavigateToLogin() {
         click("#login");
         
         assertTrue(url().contains("login"));
-
-
     }
 
 }

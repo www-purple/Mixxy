@@ -41,13 +41,12 @@ public class LoggerFilter implements Filter {
     @Inject
     public LoggerFilter(Logger logger) {
         this.logger = logger;
-
     }
 
     @Override
     public Result filter(FilterChain chain, Context context) {
 
-        logger.info("Got request from : " + context.getRequestPath());
+        logger.info("Got request from: %s", context.getRequestPath());
         return chain.next(context);
     }
 

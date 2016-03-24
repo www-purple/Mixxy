@@ -1,9 +1,7 @@
 package www.purple.mixxy.dao;
 
 import java.util.List;
-import java.util.Map;
 
-import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.googlecode.objectify.Objectify;
@@ -16,7 +14,7 @@ import www.purple.mixxy.models.User;
 public class ArticleDao {
     
     @Inject
-    Provider<Objectify> objectify;
+    private Provider<Objectify> objectify;
     
     public ArticlesDto getAllArticles() {
         
@@ -57,7 +55,9 @@ public class ArticleDao {
     }
     
     /**
-     * Returns false if user cannot be found in database.
+     * @param username Name of the user who is posting this Article
+     * @param articleDto ArticleDto that contains Article's content
+     * @return false if user cannot be found in database.
      */
     public boolean postArticle(String username, ArticleDto articleDto) {
         

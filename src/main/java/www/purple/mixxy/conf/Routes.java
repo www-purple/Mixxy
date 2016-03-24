@@ -27,10 +27,11 @@ import www.purple.mixxy.controllers.ApplicationController;
 import www.purple.mixxy.controllers.ArticleController;
 import www.purple.mixxy.controllers.LoginLogoutController;
 
+@SuppressWarnings("PMD.LawOfDemeter")
 public class Routes implements ApplicationRoutes {
     
     @Inject
-    NinjaProperties ninjaProperties;
+    private NinjaProperties ninjaProperties;
 
     /**
      * Using a (almost) nice DSL we can configure the router.
@@ -42,7 +43,7 @@ public class Routes implements ApplicationRoutes {
      *            The default router of this application
      */
     @Override
-    public void init(Router router) {  
+    public void init(final Router router) {  
         
         // puts test data into db:
         if (!ninjaProperties.isProd()) {

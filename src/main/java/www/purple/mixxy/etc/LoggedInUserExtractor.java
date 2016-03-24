@@ -7,7 +7,7 @@ import ninja.params.ArgumentExtractor;
 public class LoggedInUserExtractor implements ArgumentExtractor<String> {
 
     @Override
-    public String extract(Context context) {
+    public String extract(final Context context) {
         
         // if we got no cookies we break:
         if (context.getSession() != null) {

@@ -21,6 +21,7 @@ import www.purple.mixxy.controllers.ApplicationController;
 
 import org.junit.Test;
 
+@Deprecated
 public class RoutesTest extends NinjaRouterTest {
 
     @Test

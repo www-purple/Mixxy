@@ -15,7 +15,7 @@ public class Article {
     
     @Id
     public Long id;
-    
+
     public String title;
     
     public Date postedAt;
@@ -25,9 +25,9 @@ public class Article {
     
     public List<Long> authorIds;
     
-    public Article() {}
+    public Article() { /* needed by Objectify */ }
     
-    public Article(User author, String title, String content) {
+    public Article(final User author, final String title, final String content) {
         this.authorIds = Lists.newArrayList(author.id);
         this.title = title;
         this.content = content;

@@ -13,10 +13,9 @@ import org.junit.Test;
 
 import com.googlecode.objectify.Objectify;
 
+@SuppressWarnings("PMD.JUnitTestContainsTooManyAsserts")
 public class PostTest extends NinjaAppengineBackendTest {
-
-
-    
+  
     @Test
     public void testCreatePost() {
         

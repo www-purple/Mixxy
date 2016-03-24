@@ -29,43 +29,54 @@ import com.google.common.collect.Maps;
 
 public class LoginLogoutControllerTest extends NinjaTest {
     
+    private static final String ARTICLE_ROUTE = "article/new";
+  
+    private Map<String, String> headers;
+    private Map<String, String> formParameters;
+    
     @Before
     public void setup() {
         
         ninjaTestBrowser.makeRequest(getServerAddress() + "setup");
-        
+
+        headers = Maps.newHashMap();
+        formParameters = Maps.newHashMap();
+    }
+    
+    @Test
+    public void testCredentialsNeededForArticle() {
+
+      // /////////////////////////////////////////////////////////////////////
+      // Test posting of article does not work without login
+      // /////////////////////////////////////////////////////////////////////
+      String response = ninjaTestBrowser.makeRequest(getServerAddress()
+              + ARTICLE_ROUTE, headers);
+      assertTrue(response.contains("forbidden"));
+    }
+    
+    @Test
+    public void testLoginAndPostArticle() {
+      formParameters.put("username", "bob@gmail.com");
+      formParameters.put("password", "secret");
+      
+      ninjaTestBrowser.makePostRequestWithFormParameters(getServerAddress()
+          + "login", headers, formParameters);
+
+      String response = ninjaTestBrowser.makeRequest(getServerAddress()
+          + ARTICLE_ROUTE, headers);
+  
+      assertTrue(response.contains("New article"));
     }
 
     @Test
-    public void testLogingLogout() {
+    public void testLoginLogout() {
+        ninjaTestBrowser.makeRequest(getServerAddress() + "article/new", headers);
 
-        Map<String, String> headers = Maps.newHashMap();
-
-        // /////////////////////////////////////////////////////////////////////
-        // Test posting of article does not work without login
-        // /////////////////////////////////////////////////////////////////////
-        String response = ninjaTestBrowser.makeRequest(getServerAddress()
-                + "article/new", headers);
-        System.out.println(response);
-        assertTrue(response.contains("forbidden"));
-
-        // /////////////////////////////////////////////////////////////////////
-        // Login
-        // /////////////////////////////////////////////////////////////////////
-        Map<String, String> formParameters = Maps.newHashMap();
         formParameters.put("username", "bob@gmail.com");
         formParameters.put("password", "secret");
 
         ninjaTestBrowser.makePostRequestWithFormParameters(getServerAddress()
                 + "login", headers, formParameters);
-
-        // /////////////////////////////////////////////////////////////////////
-        // Test posting of article works when are logged in
-        // /////////////////////////////////////////////////////////////////////
-        response = ninjaTestBrowser.makeRequest(getServerAddress()
-                + "article/new", headers);
-        
-        assertTrue(response.contains("New article"));
 
         // /////////////////////////////////////////////////////////////////////
         // Logout
@@ -75,11 +86,9 @@ public class LoginLogoutControllerTest extends NinjaTest {
         // /////////////////////////////////////////////////////////////////////
         // Assert that posting of article does not work any more...
         // /////////////////////////////////////////////////////////////////////
-        response = ninjaTestBrowser.makeRequest(getServerAddress()
-                + "article/new", headers);
-        System.out.println(response);
+        String response = ninjaTestBrowser.makeRequest(getServerAddress()
+                + ARTICLE_ROUTE, headers);
         assertTrue(response.contains("forbidden"));
-
     }
 
 }

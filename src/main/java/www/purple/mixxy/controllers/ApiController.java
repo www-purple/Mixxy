@@ -21,7 +21,6 @@ import ninja.Result;
 import ninja.Results;
 import ninja.SecureFilter;
 import ninja.appengine.AppEngineFilter;
-import ninja.params.PathParam;
 import www.purple.mixxy.dao.ArticleDao;
 import www.purple.mixxy.etc.LoggedInUser;
 import www.purple.mixxy.models.ArticleDto;
@@ -33,8 +32,9 @@ import com.google.inject.Singleton;
 @Singleton
 @FilterWith(AppEngineFilter.class)
 public class ApiController {
-    
+
     @Inject
+    @SuppressWarnings("PMD.DefaultPackage")
     ArticleDao articleDao;
     
     public Result getArticlesJson() {
@@ -59,10 +59,10 @@ public class ApiController {
         
         boolean succeeded = articleDao.postArticle(username, articleDto);
         
-        if (!succeeded) {
-            return Results.notFound();
-        } else {
+        if (succeeded) {
             return Results.json();
+        } else {
+            return Results.notFound();
         }
         
     }
@@ -73,10 +73,10 @@ public class ApiController {
         
         boolean succeeded = articleDao.postArticle(username, articleDto);
         
-        if (!succeeded) {
-            return Results.notFound();
-        } else {
+        if (succeeded) {
             return Results.xml();
+        } else {
+            return Results.notFound();
         }
         
     }

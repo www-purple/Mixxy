@@ -19,7 +19,6 @@ package www.purple.mixxy.controllers;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 import ninja.Result;
-import www.purple.mixxy.controllers.ApiController;
 import www.purple.mixxy.dao.ArticleDao;
 
 import org.junit.Before;
@@ -32,9 +31,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class ApiControllerMockTest {
 
     @Mock
-    ArticleDao articleDao;
+    private ArticleDao articleDao;
     
-    ApiController apiController;
+    private ApiController apiController;
     
     @Before
     public void setupTest() {
