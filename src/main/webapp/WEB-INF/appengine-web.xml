@@ -18,8 +18,8 @@
 
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
 
-    <application>APP_NAME</application>
-    <version>VERSION</version>
+    <application>mixxy-1249</application>
+    <version>${project.version}</version>
 
     <static-files>
         <include path="/assets/**" />
