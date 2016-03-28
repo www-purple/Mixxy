@@ -27,7 +27,6 @@ import www.purple.mixxy.controllers.ApplicationController;
 import www.purple.mixxy.controllers.ArticleController;
 import www.purple.mixxy.controllers.LoginLogoutController;
 
-@SuppressWarnings("PMD.LawOfDemeter")
 public class Routes implements ApplicationRoutes {
 
   @Inject
