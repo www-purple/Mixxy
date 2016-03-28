@@ -19,6 +19,7 @@ package www.purple.mixxy.conf;
 import com.google.inject.Inject;
 
 import ninja.AssetsController;
+import ninja.Results;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
 import ninja.utils.NinjaProperties;
@@ -28,6 +29,9 @@ import www.purple.mixxy.controllers.ArticleController;
 import www.purple.mixxy.controllers.LoginLogoutController;
 
 public class Routes implements ApplicationRoutes {
+
+  // Use this to route to static pages (e.g. for about, privacy policy, etc.)
+  private static final String VIEWS = "www/purple/mixxy/views/";
 
   @Inject
   private NinjaProperties ninjaProperties;
@@ -49,6 +53,13 @@ public class Routes implements ApplicationRoutes {
       router.GET().route("/setup").with(ApplicationController.class, "setup");
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    // Meta pages
+    ///////////////////////////////////////////////////////////////////////
+    router.GET().route("/about").with(Results.html().template(VIEWS + "meta/about.ftl.html"));
+    router.GET().route("/terms").with(Results.html().template(VIEWS + "meta/terms.ftl.html"));
+    router.GET().route("/privacy").with(Results.html().template(VIEWS + "meta/privacy.ftl.html"));
+    router.GET().route("/contact").with(Results.html().template(VIEWS + "meta/contact.ftl.html"));
 
     ///////////////////////////////////////////////////////////////////////
     // Login / Logout
