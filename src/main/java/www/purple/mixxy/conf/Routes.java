@@ -27,6 +27,7 @@ import www.purple.mixxy.controllers.ApiController;
 import www.purple.mixxy.controllers.ApplicationController;
 import www.purple.mixxy.controllers.ArticleController;
 import www.purple.mixxy.controllers.LoginLogoutController;
+import www.purple.mixxy.controllers.UserController;
 
 public class Routes implements ApplicationRoutes {
 
@@ -69,6 +70,12 @@ public class Routes implements ApplicationRoutes {
     router.GET().route("/login").with(LoginLogoutController.class, "login");
     router.POST().route("/login").with(LoginLogoutController.class, "loginPost");
     router.GET().route("/logout").with(LoginLogoutController.class, "logout");
+
+    ///////////////////////////////////////////////////////////////////////
+    // Users
+    ///////////////////////////////////////////////////////////////////////
+    router.GET().route("/api/user/{id}").with(UserController.class, "user");
+    router.GET().route("/user/{id}").with(UserController.class, "user");
 
     ///////////////////////////////////////////////////////////////////////
     // Create new article
