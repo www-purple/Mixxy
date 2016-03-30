@@ -53,6 +53,8 @@ public class Routes implements ApplicationRoutes {
       router.GET().route("/setup").with(ApplicationController.class, "setup");
     }
 
+    router.GET().route("/").with(ApplicationController.class, "index");
+
     ///////////////////////////////////////////////////////////////////////
     // Meta pages
     ///////////////////////////////////////////////////////////////////////
