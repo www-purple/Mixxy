@@ -34,12 +34,12 @@ public class UrlNormalizingFilter implements Filter {
     }
 
     if (transformed) {
-
-      return Results.redirect(path);
+      // If we normalized the URL at all...
+      return filterChain.next(context).redirect(path);
+    } else {
+      return filterChain.next(context);
     }
 
-    return transformed ? Results.redirect(path) : filterChain.next(context);
-    // TODO: Context might be lost!
   }
 
 }
