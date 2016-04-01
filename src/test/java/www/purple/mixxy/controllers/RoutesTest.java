@@ -16,28 +16,123 @@
 
 package www.purple.mixxy.controllers;
 
-import ninja.NinjaRouterTest;
-import www.purple.mixxy.controllers.ApplicationController;
+import ninja.AssetsController;
+import ninja.NinjaTest;
+import ninja.Route;
+import ninja.Router;
 
+import static org.junit.Assert.*;
+
+import org.junit.Before;
 import org.junit.Test;
 
-@Deprecated
-public class RoutesTest extends NinjaRouterTest {
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.Singleton;
 
-    //@Test
-    public void testRouting() {
-        
-        startServerInProdMode();
-        //aRequestLike("GET", "/").isHandledBy(ApplicationController.class, "index");
-        //aRequestLike("GET", "/index").isHandledBy(ApplicationController.class, "index");
-    }
-    
-    //@Test
-    public void testThatSetupIsNotAccessibleInProd() {
-        
-        startServerInProdMode();
-        //aRequestLike("GET", "/setup").isNotHandledBy(ApplicationController.class, "setup");
-        
-    }
+// TODO: Rename RoutingTest
+@Singleton
+public class RoutesTest extends NinjaTest {
 
+  @Inject
+  private Router router;
+
+  @Before
+  public void injectRouter() {
+    Injector injector = getInjector();
+    router = injector.getInstance(Router.class);
+  }
+
+  @Test
+  public void testRouterAvailable() {
+    assertNotNull(router);
+  }
+
+  @Test
+  public void testInvalidRoutesHaveNoController() {
+    Route route = router.getRouteFor("DELETE", "/find/sadfasfadsfasd/asdfasdfsadfjasd");
+
+    assertNull(route);
+  }
+
+  @Test
+  public void testAssetsRouteToAssetsController() {
+    Route route = router.getRouteFor("GET", "/assets/image.png");
+
+    assertEquals(AssetsController.class, route.getControllerClass());
+    assertEquals("serveStatic", route.getControllerMethod().getName());
+  }
+
+  @Test
+  public void testNoPostRouteToAssets() {
+    Route route = router.getRouteFor("POST", "/assets/image.png");
+
+    assertNull(route);
+  }
+
+  @Test
+  public void testUserRouteShortcut() {
+    Route a = router.getRouteFor("GET", "/JamesBond");
+    Route b = router.getRouteFor("GET", "/users/JamesBond");
+
+    assertSame(a, b);
+  }
+
+  @Test
+  public void testAboutDoesntUseUserController() {
+    Route a = router.getRouteFor("GET", "/about");
+
+    assertNotSame(UserController.class, a.getControllerClass());
+  }
+
+  @Test
+  public void testLoginMethodsRouteDifferently() {
+    Route a = router.getRouteFor("GET", "/login");
+    Route b = router.getRouteFor("POST", "/login");
+
+    assertNotSame(a, b);
+  }
+
+  @Test
+  public void testLoginUsesLoginController() {
+    Route a = router.getRouteFor("GET", "/login");
+
+    assertSame(LoginLogoutController.class, a.getControllerClass());
+  }
+
+  @Test
+  public void testApiHeadRoutesToApiController() {
+    Route a = router.getRouteFor("GET", "/api");
+
+    assertSame(ApiController.class, a.getControllerClass());
+  }
+
+  @Test
+  public void testLeadingSlashNeeded() {
+    Route a = router.getRouteFor("GET", "api");
+
+    assertNull(a);
+  }
+
+  @Test
+  public void testTrailingSlashOptional() {
+    Route a = router.getRouteFor("GET", "/api/");
+
+    assertSame(ApiController.class, a.getControllerClass());
+  }
+
+  @Test
+  public void testTrailingSlashResultsInSameRoute() {
+    Route a = router.getRouteFor("GET", "/api/");
+    Route b = router.getRouteFor("GET", "/api");
+
+    assertSame(a, b);
+  }
+
+  @Test
+  public void testAllRoutesEndWithOptionalSlash() {
+    for (final Route r : router.getRoutes()) {
+      assertTrue(r.getUrl().endsWith("/?"));
+    }
+  }
 }
