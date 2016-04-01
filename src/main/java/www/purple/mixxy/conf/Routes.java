@@ -44,8 +44,8 @@ public class Routes implements ApplicationRoutes {
    *          The default router of this application
    */
   @Override
+  @SuppressWarnings({ "PMD.ExcessiveMethodLength", "PMD.AvoidDuplicateLiterals" })
   public void init(final Router router) {
-
     if (!ninjaProperties.isProd()) {
       // If this is not a production build...
       router.GET().route("/setup/?").with(ApplicationController.class, "setup");

@@ -129,6 +129,7 @@ public class RoutesTest extends NinjaTest {
   }
 
   @Test
+  @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
   public void testAllRoutesEndWithOptionalSlash() {
     for (final Route r : router.getRoutes()) {
       assertTrue(r.getUrl().endsWith("/?"));
