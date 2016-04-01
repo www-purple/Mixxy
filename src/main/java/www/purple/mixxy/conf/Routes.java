@@ -66,7 +66,7 @@ public class Routes implements ApplicationRoutes {
     router.GET().route("/terms").with(Results.html().template(VIEWS + "meta/terms.ftl.html"));
     router.GET().route("/privacy").with(Results.html().template(VIEWS + "meta/privacy.ftl.html"));
     router.GET().route("/contact").with(Results.html().template(VIEWS + "meta/contact.ftl.html"));
-    
+
     router.GET().route("/settings").with(UserController.class, "settings");
 
     ///////////////////////////////////////////////////////////////////////////
@@ -95,62 +95,70 @@ public class Routes implements ApplicationRoutes {
 
       // Updates information about this user
       router.METHOD(PATCH).route("/api/user").with(UserController.class, "userSettings");
-    }
 
-    {
-      // Gets the list of everyone subscribed to this user
-      router.GET().route("/api/user/subscribers").with(UserController.class, "subscribers");
-    }
+      {
+        // Gets the list of everyone subscribed to this user
+        router.GET().route("/api/user/subscribers").with(UserController.class, "subscribers");
+      }
 
-    {
-      // Gets the list of everyone this user is subscribed to
-      router.GET().route("/api/user/subscribed").with(UserController.class, "subscribed");
+      {
+        // Gets the list of everyone this user is subscribed to
+        router.GET().route("/api/user/subscribed").with(UserController.class, "subscribed");
 
-      // Adds/removes this user's subscriptions
-      router.METHOD(PATCH).route("/api/user/subscribed").with(UserController.class, "subscribe");
+        // Adds/removes this user's subscriptions
+        router.METHOD(PATCH).route("/api/user/subscribed").with(UserController.class, "subscribe");
 
-      // Subscribe this user to another
-      router.PUT().route("/api/user/subscribed").with(UserController.class, "subscribe");
+        // Subscribe this user to another
+        router.PUT().route("/api/user/subscribed").with(UserController.class, "subscribe");
 
-      // Unsubscribes this user from another
-      router.DELETE().route("/api/user/subscribed").with(UserController.class, "unsubscribe");
-    }
+        // Unsubscribes this user from another
+        router.DELETE().route("/api/user/subscribed").with(UserController.class, "unsubscribe");
+      }
 
-    {
-      // Get the list of all works this user has created
-      router.GET().route("/api/user/works").with(UserController.class, "works");
+      {
+        // Get the list of all works this user has created
+        router.GET().route("/api/user/works").with(UserController.class, "works");
 
-      // Submits a new work on behalf of this user. (Request may contain the URL
-      // for another work to remix.)
-      router.POST().route("/api/user/works").with(ComicController.class, "newWork");
-    }
+        // Submits a new work on behalf of this user. (Request may contain the
+        // URL for another work to remix.)
+        router.POST().route("/api/user/works").with(ComicController.class, "newWork");
 
-    {
-      // Get a specific work from this user
-      router.GET().route("/api/user/work/{work}").with(UserController.class, "work");
+        {
+          // Get a specific work from this user
+          router.GET().route("/api/user/works/{work}").with(UserController.class, "work");
 
-      // Update a work from this user
-      router.METHOD(PATCH).route("/api/user/work/{work}").with(ComicController.class, "update");
+          // Update a user's own work
+          router.METHOD(PATCH).route("/api/user/works/{work}").with(ComicController.class, "update");
 
-      // Removes a work from this user (but remixes will still exist)
-      router.DELETE().route("/api/user/work/{work}").with(ComicController.class, "update");
+          // Removes a work from this user (but remixes will still exist)
+          router.DELETE().route("/api/user/works/{work}").with(ComicController.class, "update");
 
-      // The current user submits a remix for another person's work
-      router.PUT().route("/api/users/{user}/work/{work}").with(ComicController.class, "remix");
-    }
+          {
+            // Get the list of all users that like this work
+            router.GET().route("/api/user/works/{work}/likes").with(ComicController.class, "likes");
 
-    {
-      // Get the list of all works this user has liked
-      router.GET().route("/api/user/likes").with(UserController.class, "likes");
+            // Get the list of all remixes
+            router.GET().route("/api/user/works/{work}/remixes").with(ComicController.class, "likes");
 
-      // Add or remove a like from this user
-      router.METHOD(PATCH).route("/api/user/likes").with(UserController.class, "updateLikes");
+            // Get the parent, if any
+            router.GET().route("/api/user/works/{work}/parent").with(ComicController.class, "likes");
+          }
+        }
+      }
 
-      // This user likes a given work
-      router.PUT().route("/api/user/likes").with(UserController.class, "like");
+      {
+        // Get the list of all works this user has liked
+        router.GET().route("/api/user/likes").with(UserController.class, "likes");
 
-      // This user no longer likes a given work
-      router.DELETE().route("/api/user/likes").with(UserController.class, "unlike");
+        // Add or remove a like from this user
+        router.METHOD(PATCH).route("/api/user/likes").with(UserController.class, "updateLikes");
+
+        // This user likes a given work
+        router.PUT().route("/api/user/likes").with(UserController.class, "like");
+
+        // This user no longer likes a given work
+        router.DELETE().route("/api/user/likes").with(UserController.class, "unlike");
+      }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -158,27 +166,55 @@ public class Routes implements ApplicationRoutes {
     ///////////////////////////////////////////////////////////////////////////
 
     // Get information about any user
-    router.GET().route("/api/users/{user}").with(UserController.class, "user");
+    {
+      router.GET().route("/api/users/{user}").with(UserController.class, "user");
 
-    router.GET().route("/api/users/{user}/subscribers").with(UserController.class, "subscribers");
+      {
+        router.GET().route("/api/users/{user}/subscribers").with(UserController.class, "subscribers");
+      }
 
-    // Gets any user's subcriptions
-    router.GET().route("/api/users/{user}/subscribed").with(UserController.class, "subscribed");
+      {
+        // Gets any user's subcriptions
+        router.GET().route("/api/users/{user}/subscribed").with(UserController.class, "subscribed");
+      }
 
-    // Get a given work from any user
-    router.GET().route("/api/users/{user}/works").with(UserController.class, "works");
+      {
+        // Get a given work from any user
+        router.GET().route("/api/users/{user}/works").with(UserController.class, "works");
 
-    // Get a specific work from any user
-    router.GET().route("/api/users/{user}/work/{work}").with(UserController.class, "work");
+        {
+          // Get a specific work from any user
+          router.GET().route("/api/users/{user}/works/{work}").with(UserController.class, "work");
+        }
+      }
 
-    // Get the list of all works any user has liked
-    router.GET().route("/api/users/{user}/likes").with(UserController.class, "likes");
+      {
+        // Get the list of all works any user has liked
+        router.GET().route("/api/users/{user}/likes").with(UserController.class, "likes");
+      }
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // Site URLs (user-facing)
     ///////////////////////////////////////////////////////////////////////////
-    
-    router.GET().route("/{user}").with(UserController.class, "user");
+
+    // User profile page
+    router.GET().route("(/users)?/{user}").with(UserController.class, "user");
+
+    // Page that lists a user's subscribers
+    router.GET().route("(/users)?/{user}/subscribers").with(UserController.class, "subscribers");
+
+    // Page that lists everyone a user is subscribed to
+    router.GET().route("(/users)?/{user}/subscribed").with(UserController.class, "subscribed");
+
+    // Page that lists all of a user's likes
+    router.GET().route("(/users)?/{user}/likes").with(UserController.class, "likes");
+
+    // Get a given work from any user
+    router.GET().route("(/users)?/{user}/works").with(UserController.class, "works");
+
+    // Get a specific work from any user
+    router.GET().route("(/users)?/{user}(/works)?/{work}").with(UserController.class, "work");
   }
 
 }
