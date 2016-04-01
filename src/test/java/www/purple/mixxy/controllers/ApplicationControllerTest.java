@@ -24,14 +24,14 @@ import org.junit.Test;
 
 public class ApplicationControllerTest extends NinjaTest {
     
-    @Before
+    //@Before
     public void setup() {
         
         ninjaTestBrowser.makeRequest(getServerAddress() + "setup");
         
     }
 
-    @Test
+    //@Test
     public void testThatHomepageWorks() {
 
         // /redirect will send a location: redirect in the headers

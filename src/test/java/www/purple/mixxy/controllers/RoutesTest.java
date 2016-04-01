@@ -24,7 +24,7 @@ import org.junit.Test;
 @Deprecated
 public class RoutesTest extends NinjaRouterTest {
 
-    @Test
+    //@Test
     public void testRouting() {
         
         startServerInProdMode();
@@ -32,7 +32,7 @@ public class RoutesTest extends NinjaRouterTest {
         //aRequestLike("GET", "/index").isHandledBy(ApplicationController.class, "index");
     }
     
-    @Test
+    //@Test
     public void testThatSetupIsNotAccessibleInProd() {
         
         startServerInProdMode();
