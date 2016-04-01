@@ -90,45 +90,35 @@ public class Routes implements ApplicationRoutes {
     // API (current user)
     ///////////////////////////////////////////////////////////////////////////
     {
-      // Get all information about this user
-      router.GET().route("/api/user").with(UserController.class, "user");
 
-      // Updates information about this user
+      router.GET().route("/api/user").with(UserController.class, "user");
       router.METHOD(PATCH).route("/api/user").with(UserController.class, "userSettings");
+      // Get or update information about this user
 
       {
         // Gets the list of everyone subscribed to this user
         router.GET().route("/api/user/subscribers").with(UserController.class, "subscribers");
-      }
 
-      {
-        // Gets the list of everyone this user is subscribed to
         router.GET().route("/api/user/subscribed").with(UserController.class, "subscribed");
-
-        // Subscribe this user to another
         router.PUT().route("/api/user/subscribed").with(UserController.class, "subscribe");
-
-        // Unsubscribes this user from another
         router.DELETE().route("/api/user/subscribed").with(UserController.class, "unsubscribe");
-      }
+        // Gets all, adds one of, or removes one of this user's subscribers
 
-      {
-        // Get the list of all works this user has created
+        router.GET().route("/api/user/likes").with(UserController.class, "likes");
+        router.PUT().route("/api/user/likes").with(UserController.class, "like");
+        router.DELETE().route("/api/user/likes").with(UserController.class, "unlike");
+        // Gets, adds to, or removes from the works this user likes
+
         router.GET().route("/api/user/works").with(UserController.class, "works");
-
-        // Submits a new work on behalf of this user. (Request may contain the
-        // URL for another work to remix.)
         router.POST().route("/api/user/works").with(ComicController.class, "newWork");
+        // Get the list of all works this user has created, or submits a new
+        // one (possibly with a URL with another work to remix)
 
         {
-          // Get a specific work from this user
           router.GET().route("/api/user/works/{work}").with(UserController.class, "work");
-
-          // Update a user's own work
           router.METHOD(PATCH).route("/api/user/works/{work}").with(ComicController.class, "update");
-
-          // Removes a work from this user (but remixes may still exist)
           router.DELETE().route("/api/user/works/{work}").with(ComicController.class, "update");
+          // Gets, updates, or delete's a user's own work
 
           {
             // Get the list of all users that like this work
@@ -139,22 +129,13 @@ public class Routes implements ApplicationRoutes {
 
             // Get the parent, if any
             router.GET().route("/api/user/works/{work}/parent").with(ComicController.class, "likes");
+
+            // Gets the work this one is ultimately based on
+            router.GET().route("/api/user/works/{work}/root").with(ComicController.class, "likes");
           }
         }
       }
-
-      {
-        // Get the list of all works this user has liked
-        router.GET().route("/api/user/likes").with(UserController.class, "likes");
-
-        // This user likes a given work
-        router.PUT().route("/api/user/likes").with(UserController.class, "like");
-
-        // This user no longer likes a given work
-        router.DELETE().route("/api/user/likes").with(UserController.class, "unlike");
-      }
     }
-
     ///////////////////////////////////////////////////////////////////////////
     // API (any user)
     ///////////////////////////////////////////////////////////////////////////
@@ -165,32 +146,43 @@ public class Routes implements ApplicationRoutes {
 
       {
         router.GET().route("/api/users/{user}/subscribers").with(UserController.class, "subscribers");
-      }
 
-      {
-        // Gets any user's subcriptions
         router.GET().route("/api/users/{user}/subscribed").with(UserController.class, "subscribed");
-      }
+        // Gets any user's subcriptions
 
-      {
-        // Get a list of any user's works
+        router.GET().route("/api/users/{user}/likes").with(UserController.class, "likes");
+        // Get the list of all works any user has liked
+
         router.GET().route("/api/users/{user}/works").with(UserController.class, "works");
+        // Get a list of any user's works
 
         {
-          // Get a specific work from any user
           router.GET().route("/api/users/{user}/works/{work}").with(UserController.class, "work");
-        }
-      }
+          // Get a specific work from any user
 
-      {
-        // Get the list of all works any user has liked
-        router.GET().route("/api/users/{user}/likes").with(UserController.class, "likes");
+          {
+            router.GET().route("/api/users/{user}/works/{work}/remixes").with(UserController.class, "work");
+            // Get the remixes of any work
+
+            router.GET().route("/api/users/{user}/works/{work}/likes").with(UserController.class, "work");
+
+            router.GET().route("/api/users/{user}/works/{work}/parent").with(UserController.class, "work");
+
+            router.GET().route("/api/users/{user}/works/{work}/root").with(UserController.class, "work");
+          }
+        }
       }
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Site URLs (user-facing)
     ///////////////////////////////////////////////////////////////////////////
+
+    // Page to create or upload a new work
+    router.GET().route("/create").with(ComicController.class, "create");
+
+    // Page to actually submit a work
+    router.POST().route("/create").with(ComicController.class, "create");
 
     // User profile page
     router.GET().route("(/users)?/{user}").with(UserController.class, "user");
@@ -209,6 +201,12 @@ public class Routes implements ApplicationRoutes {
 
     // Get a specific work from any user
     router.GET().route("(/users)?/{user}(/works)?/{work}").with(UserController.class, "work");
+
+    // Load the remixing page
+    router.GET().route("(/users)?/{user}(/works)?/{work}/remix").with(UserController.class, "work");
+
+    // Submit the remixed work
+    router.POST().route("(/users)?/{user}(/works)?/{work}/remix").with(UserController.class, "work");
   }
 
 }
