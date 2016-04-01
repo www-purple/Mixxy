@@ -15,30 +15,18 @@
  */
 package www.purple.mixxy.controllers;
 
-import java.util.List;
-import java.util.Map;
-
+import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import www.purple.mixxy.conf.ObjectifyProvider;
-import www.purple.mixxy.dao.ArticleDao;
-import www.purple.mixxy.models.Article;
-
-import com.google.common.collect.Maps;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import ninja.appengine.AppEngineEnvironment;
+import ninja.appengine.AppEngineFilter;
 
 @Singleton
-// Just a test to make sure @AppEngineEnvironment works.
-// Usually @FilterWith(AppEngineFilter.class is much better.
-@AppEngineEnvironment 
+@FilterWith(AppEngineFilter.class) 
 public class ApplicationController {
-
-    @Inject
-    private ArticleDao articleDao;
-    
+   
     /**
      * Method to put initial data in the db...
      * @return A successful Result
@@ -52,18 +40,7 @@ public class ApplicationController {
 
     public Result index() {
 
-        Article frontPost = articleDao.getFirstArticleForFrontPage();
-
-        List<Article> olderPosts = articleDao.getOlderArticlesForFrontPage();
-
-        Map<String, Object> map = Maps.newHashMap();
-        map.put("frontArticle", frontPost);
-        map.put("olderArticles", olderPosts);
-
-        return Results
-                .html()
-                .render("frontArticle", frontPost)
-                .render("olderArticles", olderPosts);
+        return Results.ok().html();
 
     }
 

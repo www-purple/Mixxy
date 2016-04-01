@@ -82,4 +82,13 @@ public class LoginLogoutController {
 
     }
 
+    public Result signup() {
+      return Results.TODO();
+    }
+    
+    public Result signupPost() {
+      return Results.TODO();
+    }
+    
+    
 }

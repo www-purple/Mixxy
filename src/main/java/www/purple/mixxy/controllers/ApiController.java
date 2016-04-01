@@ -16,6 +16,7 @@
 
 package www.purple.mixxy.controllers;
 
+import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
@@ -33,51 +34,54 @@ import com.google.inject.Singleton;
 @FilterWith(AppEngineFilter.class)
 public class ApiController {
 
-    @Inject
-    @SuppressWarnings("PMD.DefaultPackage")
-    ArticleDao articleDao;
-    
-    public Result getArticlesJson() {
-        
-        ArticlesDto articlesDto = articleDao.getAllArticles();
-        
-        return Results.json().render(articlesDto);
-        
+  @Inject
+  @SuppressWarnings("PMD.DefaultPackage")
+  ArticleDao articleDao;
+
+  public Result getArticlesJson() {
+
+    ArticlesDto articlesDto = articleDao.getAllArticles();
+
+    return Results.json().render(articlesDto);
+  }
+
+  public Result getArticlesXml() {
+
+    ArticlesDto articlesDto = articleDao.getAllArticles();
+
+    return Results.xml().render(articlesDto);
+
+  }
+
+  @FilterWith(SecureFilter.class)
+  public Result postArticleJson(@LoggedInUser String username,
+      ArticleDto articleDto) {
+
+    boolean succeeded = articleDao.postArticle(username, articleDto);
+
+    if (succeeded) {
+      return Results.json();
+    } else {
+      return Results.notFound();
     }
-    
-    public Result getArticlesXml() {
-        
-        ArticlesDto articlesDto = articleDao.getAllArticles();
-        
-        return Results.xml().render(articlesDto);
-        
+
+  }
+
+  @FilterWith(SecureFilter.class)
+  public Result postArticleXml(@LoggedInUser String username,
+      ArticleDto articleDto) {
+
+    boolean succeeded = articleDao.postArticle(username, articleDto);
+
+    if (succeeded) {
+      return Results.xml();
+    } else {
+      return Results.notFound();
     }
-    
-    @FilterWith(SecureFilter.class)
-    public Result postArticleJson(@LoggedInUser String username,
-                              ArticleDto articleDto) {
-        
-        boolean succeeded = articleDao.postArticle(username, articleDto);
-        
-        if (succeeded) {
-            return Results.json();
-        } else {
-            return Results.notFound();
-        }
-        
-    }
-    
-    @FilterWith(SecureFilter.class)
-    public Result postArticleXml(@LoggedInUser String username,
-                                 ArticleDto articleDto) {        
-        
-        boolean succeeded = articleDao.postArticle(username, articleDto);
-        
-        if (succeeded) {
-            return Results.xml();
-        } else {
-            return Results.notFound();
-        }
-        
-    }
+
+  }
+
+  public Result api(Context context) {
+    return Results.TODO();
+  }
 }

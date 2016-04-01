@@ -6,6 +6,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.PathParam;
+import www.purple.mixxy.filters.JsonEndpoint;
 
 import com.google.inject.Singleton;
 
@@ -13,16 +14,46 @@ import com.google.inject.Singleton;
 @FilterWith(AppEngineFilter.class)
 public class ComicController {
 
-  public Result comic(@PathParam("id") Long id, Context context) {
+  public Result remix() {
     return Results.TODO();
   }
 
-  public Result remix(@PathParam("id") Long id, Context context) {
+  public Result edit() {
     return Results.TODO();
   }
 
-  public Result edit(@PathParam("id") Long id, Context context) {
+  @FilterWith(JsonEndpoint.class)
+  public Result newWork() {
     return Results.TODO();
   }
 
+  @FilterWith(JsonEndpoint.class)
+  public Result likes() {
+    return Results.TODO();
+  }
+
+  @FilterWith(JsonEndpoint.class)
+  public Result remixes() {
+    return Results.TODO();
+  }
+
+  @FilterWith(JsonEndpoint.class)
+  public Result root() {
+    return Results.TODO();
+  }
+
+  @FilterWith(JsonEndpoint.class)
+  public Result parent() {
+    return Results.TODO();
+  }
+
+  @FilterWith(JsonEndpoint.class)
+  public Result delete() {
+    return Results.TODO();
+  }
+
+  @FilterWith(JsonEndpoint.class)
+  public Result update() {
+    return Results.TODO();
+  }
 }
