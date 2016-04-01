@@ -105,9 +105,6 @@ public class Routes implements ApplicationRoutes {
         // Gets the list of everyone this user is subscribed to
         router.GET().route("/api/user/subscribed").with(UserController.class, "subscribed");
 
-        // Adds/removes this user's subscriptions
-        router.METHOD(PATCH).route("/api/user/subscribed").with(UserController.class, "subscribe");
-
         // Subscribe this user to another
         router.PUT().route("/api/user/subscribed").with(UserController.class, "subscribe");
 
@@ -149,9 +146,6 @@ public class Routes implements ApplicationRoutes {
       {
         // Get the list of all works this user has liked
         router.GET().route("/api/user/likes").with(UserController.class, "likes");
-
-        // Add or remove a like from this user
-        router.METHOD(PATCH).route("/api/user/likes").with(UserController.class, "updateLikes");
 
         // This user likes a given work
         router.PUT().route("/api/user/likes").with(UserController.class, "like");
