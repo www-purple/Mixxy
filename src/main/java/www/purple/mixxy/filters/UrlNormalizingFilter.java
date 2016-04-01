@@ -29,6 +29,7 @@ public class UrlNormalizingFilter implements Filter {
     boolean transformed = false;
 
     if (path.endsWith("/")) {
+      // If this URL has a trailing slash...
       transformed = true;
       path = path.substring(0, path.length() - 1);
     }
