@@ -4,7 +4,6 @@ import ninja.Context;
 import ninja.Filter;
 import ninja.FilterChain;
 import ninja.Result;
-import ninja.Results;
 
 /**
  * Any URLs that almost follow a specific convention, but not quite, will be
@@ -20,6 +19,7 @@ import ninja.Results;
  * @author Jesse Talavera-Greenberg
  *
  */
+@SuppressWarnings("PMD.DataflowAnomalyAnalysis")
 public class UrlNormalizingFilter implements Filter {
 
   @Override
