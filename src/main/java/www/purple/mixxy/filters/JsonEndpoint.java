@@ -31,7 +31,7 @@ public class JsonEndpoint implements Filter {
 
     if (context.getRequestPath().startsWith("/api/")) {
       // If the client is asking for API access...
-      return result.contentType(Result.APPLICATION_JSON);
+      return result.json();
 
       // TODO: Is there a better way to tell if a URL refers to an API endpoint
       // than by checking the string prefix?
