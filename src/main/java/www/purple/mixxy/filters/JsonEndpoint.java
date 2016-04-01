@@ -29,7 +29,7 @@ public class JsonEndpoint implements Filter {
 
     Result result = filterChain.next(context);
 
-    if (context.getRequestPath().startsWith("/api")) {
+    if (context.getRequestPath().startsWith("/api/")) {
       // If the client is asking for API access...
       return result.contentType(Result.APPLICATION_JSON);
 
