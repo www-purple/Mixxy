@@ -23,6 +23,7 @@ import ninja.Results;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
 import ninja.utils.NinjaProperties;
+import www.purple.mixxy.controllers.ApiController;
 import www.purple.mixxy.controllers.ApplicationController;
 import www.purple.mixxy.controllers.ComicController;
 import www.purple.mixxy.controllers.LoginLogoutController;
@@ -81,6 +82,9 @@ public class Routes implements ApplicationRoutes {
     router.GET().route("/logout").with(LoginLogoutController.class, "logout");
     router.GET().route("/signup").with(LoginLogoutController.class, "signup");
     router.POST().route("/signup").with(LoginLogoutController.class, "signupPost");
+
+    // Get information about the API (version) and Mixxy in general
+    router.GET().route("/api").with(ApiController.class, "api");
 
     ///////////////////////////////////////////////////////////////////////////
     // API (current user)
