@@ -7,11 +7,12 @@ import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.PathParam;
 import www.purple.mixxy.filters.JsonEndpoint;
+import www.purple.mixxy.filters.UrlNormalizingFilter;
 
 import com.google.inject.Singleton;
 
 @Singleton
-@FilterWith(AppEngineFilter.class)
+@FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class ComicController {
 
   public Result remix() {

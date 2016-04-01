@@ -6,11 +6,12 @@ import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.PathParam;
+import www.purple.mixxy.filters.UrlNormalizingFilter;
 
 import com.google.inject.Singleton;
 
 @Singleton
-@FilterWith(AppEngineFilter.class)
+@FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class SearchController {
 
   public Result search(@PathParam("id") Long id, Context context) {
