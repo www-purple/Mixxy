@@ -127,7 +127,7 @@ public class Routes implements ApplicationRoutes {
           // Update a user's own work
           router.METHOD(PATCH).route("/api/user/works/{work}").with(ComicController.class, "update");
 
-          // Removes a work from this user (but remixes will still exist)
+          // Removes a work from this user (but remixes may still exist)
           router.DELETE().route("/api/user/works/{work}").with(ComicController.class, "update");
 
           {
@@ -173,7 +173,7 @@ public class Routes implements ApplicationRoutes {
       }
 
       {
-        // Get a given work from any user
+        // Get a list of any user's works
         router.GET().route("/api/users/{user}/works").with(UserController.class, "works");
 
         {
