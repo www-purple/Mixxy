@@ -36,7 +36,7 @@ public class UrlNormalizingFilter implements Filter {
 
     if (transformed) {
       // If we normalized the URL at all...
-      return filterChain.next(context).redirect(path);
+      return filterChain.next(context).redirect(path).status(Result.SC_301_MOVED_PERMANENTLY);
     } else {
       return filterChain.next(context);
     }
