@@ -65,6 +65,8 @@ public class Routes implements ApplicationRoutes {
     router.GET().route("/terms").with(Results.html().template(VIEWS + "meta/terms.ftl.html"));
     router.GET().route("/privacy").with(Results.html().template(VIEWS + "meta/privacy.ftl.html"));
     router.GET().route("/contact").with(Results.html().template(VIEWS + "meta/contact.ftl.html"));
+    
+    router.GET().route("/settings").with(UserController.class, "settings");
 
     ///////////////////////////////////////////////////////////////////////////
     // Search
