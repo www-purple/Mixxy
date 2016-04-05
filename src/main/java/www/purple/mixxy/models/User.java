@@ -19,7 +19,6 @@ public class User {
     public String password;
     public String firstname;
     public String lastname;
-    public String displayname;
     public String email;
     public Map<OAuthService, String> authentications = new HashMap<>();
 
@@ -34,14 +33,12 @@ public class User {
                 final String password,
                 final String firstname,
                 final String lastname,
-                final String displayname,
                 final String email) {
 
         this.username = username;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.displayname = displayname;
         this.email = email;
 
         // @Chris - TODO: how are we going to use this map?

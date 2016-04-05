@@ -1,17 +1,15 @@
 package www.purple.mixxy.controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.util.List;
-
+import com.googlecode.objectify.Objectify;
+import org.junit.Test;
 import www.purple.mixxy.conf.ObjectifyProvider;
 import www.purple.mixxy.models.Article;
 import www.purple.mixxy.models.User;
 
-import org.junit.Test;
+import java.util.List;
 
-import com.googlecode.objectify.Objectify;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @SuppressWarnings("PMD.JUnitTestContainsTooManyAsserts")
 public class PostTest extends NinjaAppengineBackendTest {
@@ -23,7 +21,7 @@ public class PostTest extends NinjaAppengineBackendTest {
         Objectify ofy = objectifyProvider.get();
         
         // Create a new user and save it
-        User anotherBob = new User("another_bob@gmail.com", "secret", "Bob");
+        User anotherBob = new User("BobTheBuilderFriend", "secret", "Bob", "Doe", "anotherbob@gmail.com");
         ofy.save().entity(anotherBob).now();
         
         // Create a new post
