@@ -23,12 +23,13 @@ import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.Param;
 import www.purple.mixxy.dao.UserDao;
+import www.purple.mixxy.filters.UrlNormalizingFilter;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-@FilterWith(AppEngineFilter.class)
+@FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class LoginLogoutController {
     
     @Inject
@@ -82,4 +83,13 @@ public class LoginLogoutController {
 
     }
 
+    public Result signup() {
+      return Results.TODO();
+    }
+    
+    public Result signupPost() {
+      return Results.TODO();
+    }
+    
+    
 }
