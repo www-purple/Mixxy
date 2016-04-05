@@ -237,3 +237,6 @@ $RECYCLE.BIN/
 
 # Project specific .iml files
 mixxy.iml
+
+# PMD ruleset added
+.pmd

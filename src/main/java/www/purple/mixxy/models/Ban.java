@@ -11,6 +11,7 @@ import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Load;
 
+@SuppressWarnings("PMD.ShortClassName")
 public class Ban {
 	@Id
 	public Long id;
