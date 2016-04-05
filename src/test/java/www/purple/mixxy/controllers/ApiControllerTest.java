@@ -44,14 +44,14 @@ import com.google.gson.JsonParseException;
 @Deprecated
 public class ApiControllerTest extends NinjaTest {
     
-    @Before
+    //@Before
     public void setup() {
         
         ninjaTestBrowser.makeRequest(getServerAddress() + "setup");
         
     }
 
-    @Test
+    //@Test
     public void testGetAndPostArticleViaJson() throws Exception {
 
         // /////////////////////////////////////////////////////////////////////
@@ -96,7 +96,7 @@ public class ApiControllerTest extends NinjaTest {
 
     }
 
-    @Test
+    //@Test
     public void testGetAndPostArticleViaXml() throws Exception {
 
         // /////////////////////////////////////////////////////////////////////
