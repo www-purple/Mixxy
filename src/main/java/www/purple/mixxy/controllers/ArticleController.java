@@ -11,6 +11,7 @@ import ninja.validation.JSR303Validation;
 import ninja.validation.Validation;
 import www.purple.mixxy.dao.ArticleDao;
 import www.purple.mixxy.etc.LoggedInUser;
+import www.purple.mixxy.filters.UrlNormalizingFilter;
 import www.purple.mixxy.models.Article;
 import www.purple.mixxy.models.ArticleDto;
 
@@ -18,7 +19,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-@FilterWith(AppEngineFilter.class)
+@FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class ArticleController {
     
     @Inject
