@@ -25,17 +25,17 @@ public class UserTest extends NinjaAppengineBackendTest {
         
         
         // Create a new user and save it
-        User user = new User(USER_USERNAME, "secret", USER_FIRSTNAME, USER_LASTNAME, USER_EMAIL);
+        User user = new User(USER_USERNAME, USER_FIRSTNAME, USER_LASTNAME, USER_EMAIL);
         ofy.save().entity(user).now();
         
 
         // Retrieve the user with e-mail address bob@gmail.com
-        User bob = ofy.load().type(User.class).filter("username", USER_EMAIL).first().now();
-
+        User bob = ofy.load().type(User.class).filter("username", USER_USERNAME).first().now();
+        
         // Test
         assertNotNull(bob);
         assertEquals(USER_FIRSTNAME, bob.firstname);
-        assertEquals(USER_FIRSTNAME, bob.lastname);
+        assertEquals(USER_LASTNAME, bob.lastname);
     }
 
 }

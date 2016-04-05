@@ -46,10 +46,9 @@ public class LoginLogoutController {
     }
 
     public Result loginPost(@Param("username") String username,
-                            @Param("password") String password,
                             Context context) {
 
-        boolean areCredentialsValid = userDao.isUserAndPasswordValid(username, password);
+        boolean areCredentialsValid = userDao.isUserValid(username);
         
         
         if (areCredentialsValid) {

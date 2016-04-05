@@ -2,6 +2,8 @@ package www.purple.mixxy.models;
 
 /**
  * Created by Brian_Sabz on 4/5/16.
+ * 
+ * @author Brian_Sabz
  */
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
@@ -16,34 +18,36 @@ import java.util.List;
 @Index
 public class Comic {
 
-    @Id
-    public Long id;
+	@Id
+	public Long id;
 
-    // can refer to these Entities using the already fetched Comic, this solve performance problems
-    // See: https://github.com/objectify/objectify/wiki/Entities#load
-    //@Load Ref<User> author;
-    @Load Ref<Comic> parent;
+	// can refer to these Entities using the already fetched Comic, this solve
+	// performance problems
+	// See: https://github.com/objectify/objectify/wiki/Entities#load
+	@Load
+	public Ref<User> author;
+	@Load
+	public Ref<Comic> parent;
 
-    public User author;
-    public String title;
-    public String description;
-    public List<String> tags;
-    public int version;
+	@Index
+	public String title;
+	public String description;
+	public List<String> tags;
+	public int version;
 
-    public Date createdAt;
-    public Date updatedAt;
+	public Date createdAt;
+	public Date updatedAt;
 
-    public Comic() { /* needed by Objectify */ }
+	public Comic() {/* needed by Objectify */ }
 
-    public Comic(final User author, final String title, final String description, final List<String> tags, final int version) {
+	public Comic(final String title, final String description, final List<String> tags, final int version) {
 
-        this.author = author;
-        this.title = title;
-        this.description = description;
-        this.tags = tags;
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
-        this.version = version;
-    }
+		this.title = title;
+		this.description = description;
+		this.tags = tags;
+		this.createdAt = new Date();
+		this.updatedAt = new Date();
+		this.version = version;
+	}
 
 }
