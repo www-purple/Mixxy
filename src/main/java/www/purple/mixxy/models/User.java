@@ -13,11 +13,11 @@ import com.googlecode.objectify.annotation.Index;
 import java.util.Date;
 
 @Entity
-@Index
 public class User {
 
 	@Id
 	public Long id;
+	@Index
 	public String username;
 	public String firstname;
 	public String lastname;
@@ -27,6 +27,7 @@ public class User {
 	// public Map<OAuthService, String> authentications = new HashMap<>();
 
 	public Role role;
+	
 	public Date createdAt;
 	public Date updatedAt;
 	public Boolean isActive;
@@ -50,5 +51,5 @@ public class User {
 		this.isActive = true;
 
 	}
-
+	
 }

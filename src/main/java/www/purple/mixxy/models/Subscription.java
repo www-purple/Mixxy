@@ -8,9 +8,11 @@ package www.purple.mixxy.models;
 import java.util.Date;
 
 import com.googlecode.objectify.Ref;
+import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Load;
 
+@Entity
 public class Subscription {
 	@Id
 	public Long id;
