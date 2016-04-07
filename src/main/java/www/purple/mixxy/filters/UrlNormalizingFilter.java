@@ -1,6 +1,7 @@
 package www.purple.mixxy.filters;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.slf4j.Logger;
 
@@ -33,7 +34,14 @@ public class UrlNormalizingFilter implements Filter {
   @Override
   public Result filter(FilterChain filterChain, Context context) {
 
-    String originalPath = URI.create(context.getRequestPath()).normalize().toString();
+    String originalPath = context.getRequestPath();
+    try {
+      originalPath = new URI(originalPath).normalize().toString();
+      // Normalize the request URI, if it's valid
+    } catch (URISyntaxException e) {
+      logger.info("Request to URL with invalid syntax \"{}\" (index {})", e.getInput(), e.getIndex());
+    }
+
     String path = originalPath;
     boolean transformed = false;
 
