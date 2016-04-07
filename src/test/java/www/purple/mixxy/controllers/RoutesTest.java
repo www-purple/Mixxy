@@ -30,6 +30,14 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 
+/**
+ * This test class is <em>only</em> for anything involving the routes; for the
+ * server's reaction to actually navigating to these routes, see
+ * {@link NavigationTest}.
+ * 
+ * @author Jesse Talavera-Greenberg
+ * @see NavigationTest
+ */
 @Singleton
 public class RoutesTest extends NinjaTest {
 
