@@ -1,5 +1,9 @@
 package www.purple.mixxy.filters;
 
+import org.slf4j.Logger;
+
+import com.google.inject.Inject;
+
 import ninja.Context;
 import ninja.Filter;
 import ninja.FilterChain;
@@ -21,6 +25,8 @@ import ninja.Result;
  */
 @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
 public class UrlNormalizingFilter implements Filter {
+  @Inject
+  private Logger logger;
 
   @Override
   public Result filter(FilterChain filterChain, Context context) {
@@ -36,6 +42,7 @@ public class UrlNormalizingFilter implements Filter {
 
     if (transformed) {
       // If we normalized the URL at all...
+      logger.debug("Incoming request for \"{}\", normalizing to \"{}\"", originalPath, path);
       return filterChain.next(context).redirect(path).status(Result.SC_301_MOVED_PERMANENTLY);
     } else {
       return filterChain.next(context);
