@@ -59,5 +59,17 @@ public class ComicDao {
         
     }
     
+    public void saveComic(Long id, Comic comic){
+    	//TODO
+    }
+    
+    public Comic branchComic(Long id){
+    	//TODO
+    	return null;
+    }
+    
+    public void likeComic(Long id){
+    	//TODO
+    }
     
 }
