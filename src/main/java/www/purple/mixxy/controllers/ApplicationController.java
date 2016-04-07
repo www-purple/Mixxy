@@ -26,7 +26,7 @@ import com.google.inject.Singleton;
 import ninja.appengine.AppEngineFilter;
 
 @Singleton
-@FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
+@FilterWith({ AppEngineFilter.class })
 public class ApplicationController {
    
     /**
