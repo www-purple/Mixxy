@@ -17,6 +17,7 @@ h1 {
 }
 
 h2 {
+	size: 30px;
 	font-family:'Permanent Marker', cursive;
 }
 body {
@@ -55,5 +56,6 @@ footer li {
 }
 #copy{
 	text-decoration: none;
+	color: black;
 	float: right;
 }

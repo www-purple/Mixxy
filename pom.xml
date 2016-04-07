@@ -232,6 +232,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>slick</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.ninjaframework</groupId>
             <artifactId>ninja-appengine-module</artifactId>
             <version>${ninja-appengine.version}</version>
