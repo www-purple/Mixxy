@@ -1,5 +1,7 @@
 package www.purple.mixxy.models;
 
+import com.google.appengine.api.datastore.Key;
+
 /**
  * Modified by Brian_Sabz on 4/5/16.
  * 
@@ -18,6 +20,7 @@ public class User {
 	
 	@Id
 	public Long id;
+	
 	@Index
 	public String username;
 	public String firstname;
