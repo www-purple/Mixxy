@@ -9,6 +9,7 @@ package www.purple.mixxy.models;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.condition.IfNotDefault;
 
 import java.util.Date;
 
@@ -26,25 +27,8 @@ public class User {
 	// @Chris - TODO: how are we going to use this map?
 	// public Map<OAuthService, String> authentications = new HashMap<>();
 
-	
-	//TODO: Partial Indexing of MOD roles
-	// https://github.com/objectify/objectify/wiki/Queries#custom-conditions
-	
-//	static class IfMod extends ValueIf<User> {
-//	    public boolean matches(User user) {
-//	        return user.role == Role.MODERATOR;
-//	    }
-//
-//		@Override
-//		public boolean matchesValue(User arg0) {
-//			// TODO Auto-generated method stub
-//			return false;
-//		}
-//	}
-	
-	//TODO: Partial Indexing of MOD roles
-	//@Index(IfMod.class)
-	public Role role;
+	@Index(IfNotDefault.class)
+	public Role role = Role.USER;
 	
 	public Date createdAt;
 	public Date updatedAt;
