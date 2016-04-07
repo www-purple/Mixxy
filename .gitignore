@@ -116,6 +116,7 @@ local.properties
 .idea/dictionaries
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
+.idea/*
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -233,3 +234,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Project specific .iml files
+mixxy.iml
+
+# PMD ruleset added
+.pmd

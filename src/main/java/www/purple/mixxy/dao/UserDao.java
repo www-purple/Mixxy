@@ -11,14 +11,14 @@ public class UserDao {
     @Inject
     private Provider<Objectify> objectify;
     
-    public boolean isUserAndPasswordValid(String username, String password) {
+    public boolean isUserValid(String username) {
         
-        if (username != null && password != null) {
+        if (username != null) {
 
             User user = objectify.get().load().type(User.class)
                     .filter("username", username).first().now();
             
-            if (user != null && user.password.equals(password)) {
+            if (user != null) {
                 return true;              
             }
         }
