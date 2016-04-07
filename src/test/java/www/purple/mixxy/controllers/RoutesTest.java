@@ -137,6 +137,14 @@ public class RoutesTest extends NinjaTest {
   }
 
   @Test
+  public void testSameRouteForIndex() {
+    Route a = router.getRouteFor("GET", "");
+    Route b = router.getRouteFor("GET", "/");
+
+    assertSame(a, b);
+  }
+
+  @Test
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
   public void testAllRoutesEndWithOptionalSlash() {
     for (final Route r : router.getRoutes()) {
