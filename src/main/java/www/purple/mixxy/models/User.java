@@ -14,7 +14,7 @@ import java.util.Date;
 
 @Entity
 public class User {
-
+	
 	@Id
 	public Long id;
 	@Index
@@ -26,6 +26,24 @@ public class User {
 	// @Chris - TODO: how are we going to use this map?
 	// public Map<OAuthService, String> authentications = new HashMap<>();
 
+	
+	//TODO: Partial Indexing of MOD roles
+	// https://github.com/objectify/objectify/wiki/Queries#custom-conditions
+	
+//	static class IfMod extends ValueIf<User> {
+//	    public boolean matches(User user) {
+//	        return user.role == Role.MODERATOR;
+//	    }
+//
+//		@Override
+//		public boolean matchesValue(User arg0) {
+//			// TODO Auto-generated method stub
+//			return false;
+//		}
+//	}
+	
+	//TODO: Partial Indexing of MOD roles
+	//@Index(IfMod.class)
 	public Role role;
 	
 	public Date createdAt;
