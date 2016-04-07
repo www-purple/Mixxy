@@ -1,5 +1,7 @@
 package www.purple.mixxy.filters;
 
+import java.net.URI;
+
 import org.slf4j.Logger;
 
 import com.google.inject.Inject;
@@ -31,11 +33,12 @@ public class UrlNormalizingFilter implements Filter {
   @Override
   public Result filter(FilterChain filterChain, Context context) {
 
-    String path = context.getRequestPath();
+    String originalPath = URI.create(context.getRequestPath()).normalize().toString();
+    String path = originalPath;
     boolean transformed = false;
 
-    if (path.endsWith("/")) {
-      // If this URL has a trailing slash...
+    if (path.endsWith("/") && !"/".equals(path)) {
+      // If this URL has a trailing slash, but is not the root...
       transformed = true;
       path = path.substring(0, path.length() - 1);
     }
