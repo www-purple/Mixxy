@@ -40,6 +40,7 @@ public class UrlNormalizingFilter implements Filter {
       // Normalize the request URI, if it's valid
     } catch (URISyntaxException e) {
       logger.info("Request to URL with invalid syntax \"{}\" (index {})", e.getInput(), e.getIndex());
+      // TODO: Should strange-looking URIs just be an error?  Must do research
     }
 
     String path = originalPath;
