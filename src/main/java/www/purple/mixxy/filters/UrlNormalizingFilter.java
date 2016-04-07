@@ -37,11 +37,11 @@ public class UrlNormalizingFilter implements Filter {
     String path = originalPath;
     boolean transformed = false;
 
-    if (path.endsWith("/") && !"/".equals(path)) {
+    if (originalPath.endsWith("/") && !"/".equals(originalPath)) {
       // If this URL has a trailing slash, but is not the root...
-      // NOTE: This does not handle URLS/with?query=parameters&at=the end.
+      // NOTE: This does not handle /URLS/with?query=parameters&at=the end.
       transformed = true;
-      path = path.substring(0, path.length() - 1);
+      path = originalPath.substring(0, path.length() - 1);
     }
 
     if (transformed) {
