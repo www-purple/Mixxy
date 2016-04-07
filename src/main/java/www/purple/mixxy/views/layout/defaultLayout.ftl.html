@@ -12,7 +12,8 @@
     <!-- Le styles -->
     <link href="/assets/webjars/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="/assets/webjars/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+      <link rel="stylesheet" href="/assets/webjars/Semantic-UI/2.1.8/semantic.min.css">
+      <link rel="stylesheet" href="/assets/mixxy.css">
     
 
     <!-- Latest compiled and minified JavaScript -->
@@ -32,9 +33,7 @@
 
 
   <body>
-
     <div class="container">
-        
         <#include "header.ftl.html"/>
         
         <#if (flash.error)??>
@@ -52,11 +51,10 @@
         <#nested/>
 
         <#include "footer.ftl.html"/>
-        
-    </div> <!-- /container -->
-    
+    </div>
+
     <script type="text/javascript" src="/assets/webjars/tinymce-jquery/3.4.9/jscripts/tiny_mce/tiny_mce.js" ></script>
-    <script src="/assets/webjars/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="/assets/webjars/Semantic-UI/2.1.8/semantic.min.js"></script>
 </body>
 </html>
 </#macro>

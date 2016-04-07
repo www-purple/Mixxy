@@ -1,30 +1,32 @@
 <#import "../layout/defaultLayout.ftl.html" as layout> 
-<@layout.myLayout "Home page">    
+<@layout.myLayout "Mixxy - Make Art Great!">
 
-
-        
-<#if frontArticle??>
-
-    <div class="jumbotron">
-        <h1>
-            <a href="/article/${frontArticle.id}">${frontArticle.title}</a>    
-        </h1>  
-        <p>${frontArticle.postedAt?date}</p>  
-        <p><#noescape>${frontArticle.content}</#noescape></p>
+    <div class="ui container grey-box">
+        <div class="ui centered padded grid">
+            <div class="row">
+                <div class="eight wide column">
+                    <h1>Featured</h1>
+                    <div class="white-box">
+                        <!-- eventually needs to be a carosel -->
+                        <img src="/assets/images/harrypotter.jpg" alt="Bad Dumbledore">
+                    </div>
+                </div>
+                <div class="six wide column">
+                    <h1>Latest</h1>
+                    <div class="white-box">
+                        <!-- eventually needs to be a news feed of some sort -->
+                            <ul class="feed-item">
+                                <li><a href="/user">Such N. Such</a> posted a new comic</li>
+                                <li><img src="/assets/images/harrypotter.jpg"></li>
+                            </ul>
+                                <ul class="feed-item">
+                                    <li><a href="/user">Such N. Such</a> posted a new comic</li>
+                                    <li><img src="/assets/images/harrypotter.jpg"></li>
+                                </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</#if>
-
-<hr/>
-
-<#if olderArticles??>
-    
-    <#list olderArticles as article>
-        <h3>
-            <a href="/article/${article.id}">${article.title}</a>    
-        </h3>  
-        <p>${article.postedAt?date}</p>  
-    </#list>
-    
-</#if>
 
 </@layout.myLayout>
