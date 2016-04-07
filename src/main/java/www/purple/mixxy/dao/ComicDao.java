@@ -1,7 +1,5 @@
 package www.purple.mixxy.dao;
 
-import java.util.List;
-
 /**
  * Created by Brian_Sabz on 4/7/16.
  * 
@@ -33,10 +31,7 @@ public class ComicDao {
     
     
     public Comic getComicById(Long id) {
-        
-    	Comic comic = objectify.get().load().type(Comic.class).id(id).now();
-        return comic;
-        
+    	return objectify.get().load().type(Comic.class).id(id).now();
     }
     
     /**

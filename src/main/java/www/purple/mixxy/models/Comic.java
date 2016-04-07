@@ -1,6 +1,5 @@
 package www.purple.mixxy.models;
 
-import com.google.appengine.api.datastore.Key;
 /**
  * Created by Brian_Sabz on 4/5/16.
  * 
