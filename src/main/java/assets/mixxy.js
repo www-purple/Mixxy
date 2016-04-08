@@ -3,6 +3,6 @@
  */
 $(document).ready(function(){
     $('.featured-comics').slick({
-        infinite: true
+        //adaptiveHeight: true,
     });
 });
