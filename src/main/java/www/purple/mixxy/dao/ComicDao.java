@@ -1,5 +1,8 @@
 package www.purple.mixxy.dao;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by Brian_Sabz on 4/7/16.
  * 
@@ -29,9 +32,40 @@ public class ComicDao {
         
     }
     
+    public List<Comic> getComics(User author) {
+      return objectify.get().load().type(Comic.class).filter("author", author).list();
+    }
     
-    public Comic getComicById(Long id) {
+    public List<Comic> getComics(String author) {
+      return Collections.EMPTY_LIST;
+    }
+    
+    public List<Comic> getComics(long author) {
+      return Collections.EMPTY_LIST;
+    }
+    
+    public Comic getComic(long id) {
     	return objectify.get().load().type(Comic.class).id(id).now();
+    }
+    
+    public Comic getComic(User user, String slug) {
+      return null;
+    }
+    
+    public List<Comic> getRemixes(Comic comic) {
+      return Collections.EMPTY_LIST;
+    }
+    
+    public List<Comic> getRemixes(long id) {
+      return Collections.EMPTY_LIST;
+    }
+    
+    public List<Comic> getAncestors(Comic comic) {
+      return Collections.EMPTY_LIST;
+    }
+    
+    public List<Comic> getAncestors(long id) {
+      return Collections.EMPTY_LIST;
     }
     
     /**
