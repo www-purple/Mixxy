@@ -30,6 +30,14 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 
+/**
+ * This test class is <em>only</em> for anything involving the routes; for the
+ * server's reaction to actually navigating to these routes, see
+ * {@link NavigationTest}.
+ * 
+ * @author Jesse Talavera-Greenberg
+ * @see NavigationTest
+ */
 @Singleton
 public class RoutesTest extends NinjaTest {
 
@@ -124,6 +132,14 @@ public class RoutesTest extends NinjaTest {
   public void testTrailingSlashResultsInSameRoute() {
     Route a = router.getRouteFor("GET", "/api/");
     Route b = router.getRouteFor("GET", "/api");
+
+    assertSame(a, b);
+  }
+
+  @Test
+  public void testSameRouteForIndex() {
+    Route a = router.getRouteFor("GET", "");
+    Route b = router.getRouteFor("GET", "/");
 
     assertSame(a, b);
   }
