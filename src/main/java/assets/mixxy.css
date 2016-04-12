@@ -5,7 +5,7 @@ body {
 }
 
 header {
-	margin: 0px 50px 50px 50px;
+	margin: 0px 50px 10px 50px;
 }
 header a{
 	color: black;
@@ -14,6 +14,10 @@ header a{
 h1 {
 	font-size: 48px;
 	font-family: 'Bangers', cursive;
+}
+
+h2 {
+	font-family:'Permanent Marker', cursive;
 }
 body {
 	font-family:'Acme', sans-serif;
@@ -50,5 +54,6 @@ footer li {
 	padding: 10px;
 }
 #copy{
+	text-decoration: none;
 	float: right;
 }
