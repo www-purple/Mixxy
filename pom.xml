@@ -10,7 +10,7 @@
     <artifactId>mixxy</artifactId>
     <packaging>war</packaging>
     <groupId>www.purple.mixxy</groupId>
-    <version>0.1</version>
+    <version>1</version>
     
 
     <properties>
