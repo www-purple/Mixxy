@@ -15,9 +15,11 @@ import java.util.Date;
 
 @Entity
 public class User {
+	public static final String USERNAME = "username";
 	
 	@Id
 	public Long id;
+	
 	@Index
 	public String username;
 	public String firstname;

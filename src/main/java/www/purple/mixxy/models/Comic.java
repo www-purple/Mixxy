@@ -11,6 +11,7 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,28 +26,27 @@ public class Comic {
 	// See: https://github.com/objectify/objectify/wiki/Entities#load
 	@Load
 	public Ref<User> author;
+	
 	@Load
-	public Ref<Comic> parent;
+	public List<Ref<Comic>> ancestorComics = new ArrayList<Ref<Comic>>();
 
 	@Index
 	public String title;
 	public String description;
 	public List<String> tags;
-	public int version;
 
 	public Date createdAt;
 	public Date updatedAt;
 
 	public Comic() {/* needed by Objectify */ }
 
-	public Comic(final String title, final String description, final List<String> tags, final int version) {
+	public Comic(final String title, final String description, final List<String> tags) {
 
 		this.title = title;
 		this.description = description;
 		this.tags = tags;
 		this.createdAt = new Date();
 		this.updatedAt = new Date();
-		this.version = version;
 	}
 
 }
