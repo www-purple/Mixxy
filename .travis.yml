@@ -11,7 +11,7 @@ install:
   - yes | ./google-cloud-sdk/bin/gcloud components install app-engine-java
 
 before_deploy:
-  - gcloud auth activate-service-account "$SERVICE_EMAIL" --key-file mixxy-secret.json --project "$PROJECT_ID"
+  - ./google-cloud-sdk/bin/gcloud auth activate-service-account "$SERVICE_EMAIL" --key-file mixxy-secret.json --project "$PROJECT_ID"
   - mvn appengine:update
 
 deploy:
