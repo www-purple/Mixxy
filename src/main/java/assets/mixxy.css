@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    margin: -50px 50px 10px 50px;
+    margin: 50px 50px 10px 50px;
 }
 
 header a {
@@ -13,18 +13,17 @@ header a {
 }
 
 h1 {
-    font-size: 60px;
+    font-size: 3.75em;
     font-family: 'Bangers', cursive;
 }
 
 h2 {
-    font-size: 40px;
+    font-size: 3em;
     font-family: 'Permanent Marker', cursive;
 }
 
 body {
     font-family: 'Acme', sans-serif;
-    font-size: 16px;
 }
 
 .grey-box {
@@ -70,6 +69,6 @@ footer li {
     color: black;
 }
 
-.featured-comics {
+#featured-comics {
     text-align: center;
 }
