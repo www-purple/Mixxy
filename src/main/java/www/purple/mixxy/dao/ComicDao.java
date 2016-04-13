@@ -33,15 +33,11 @@ public class ComicDao {
     }
     
     public List<Comic> getComics(User author) {
-      return objectify.get().load().type(Comic.class).filter("author", author).list();
+    	return objectify.get().load().type(Comic.class).filter("author", author).list();
     }
     
-    public List<Comic> getComics(String author) {
-      return Collections.EMPTY_LIST;
-    }
-    
-    public List<Comic> getComics(long author) {
-      return Collections.EMPTY_LIST;
+    public List<Comic> getComics(String userName) {
+    	return objectify.get().load().type(Comic.class).filter("username", userName).list();
     }
     
     public Comic getComic(long id) {
