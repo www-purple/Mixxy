@@ -84,6 +84,7 @@ public class Routes implements ApplicationRoutes {
     router.GET().route("/logout/?").with(LoginLogoutController.class, "logout");
     router.GET().route("/signup/?").with(LoginLogoutController.class, "signup");
     router.POST().route("/signup/?").with(LoginLogoutController.class, "signupPost");
+    router.GET().route("/validate/?").with(LoginLogoutController.class, "validate");
 
     // Get information about the API (version) and Mixxy in general
     router.GET().route("/api/?").with(ApiController.class, "api");
