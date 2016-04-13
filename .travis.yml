@@ -1,5 +1,10 @@
 language: java
 sudo: false
+addons:
+  apt:
+    packages:
+    - python3-openssl
+    - google-cloud-sdk
 jdk:
   - openjdk7
   - oraclejdk7
