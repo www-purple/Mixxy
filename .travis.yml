@@ -7,7 +7,7 @@ jdk:
 install:
   - wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-105.0.0-linux-x86_64.tar.gz
   - tar -xvf google-cloud-sdk-105.0.0-linux-x86_64.tar.gz
-  - ./google-cloud-sdk/install.sh
+  - yes | ./google-cloud-sdk/install.sh
   - gcloud init
 
 before_deploy:
