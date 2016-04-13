@@ -8,7 +8,7 @@ install:
   - wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-105.0.0-linux-x86_64.tar.gz
   - tar -xvf google-cloud-sdk-105.0.0-linux-x86_64.tar.gz
   - yes | ./google-cloud-sdk/install.sh
-  - ./google-cloud-sdk/bin/gcloud components install app-engine-java
+  - yes | ./google-cloud-sdk/bin/gcloud components install app-engine-java
 
 before_deploy:
   - gcloud auth activate-service-account "$SERVICE_EMAIL" --key-file mixxy-secret.json --project "$PROJECT_ID"
