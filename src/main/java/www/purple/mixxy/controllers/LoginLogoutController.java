@@ -25,9 +25,13 @@ import ninja.params.Param;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 import www.purple.mixxy.helpers.GoogleAuthHelper;
+import www.purple.mixxy.helpers.GoogleAuthResponse;
 
 import java.io.IOException;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -104,7 +108,19 @@ public class LoginLogoutController {
 			e.printStackTrace();
 		}
     	
-    	System.out.println(data);
+    	ObjectMapper mapper = new ObjectMapper();
+		try {
+
+			// Convert JSON string to Object
+			GoogleAuthResponse userdata = mapper.readValue(data, GoogleAuthResponse.class);
+
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     	
     	return Results.redirect("/");
     }
