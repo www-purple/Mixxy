@@ -24,6 +24,9 @@ import ninja.appengine.AppEngineFilter;
 import ninja.params.Param;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
+import www.purple.mixxy.helpers.GoogleAuthHelper;
+
+import java.io.IOException;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -83,7 +86,27 @@ public class LoginLogoutController {
     }
 
     public Result signup() {
-      return Results.TODO();
+    	GoogleAuthHelper helper = new GoogleAuthHelper();
+    	return Results.redirect(helper.buildLoginUrl());
+    }
+    
+    public Result validate(
+    		@Param("state") String state,
+    		@Param("code") String code) {
+    	
+    	GoogleAuthHelper helper = new GoogleAuthHelper();
+    	String data = "empty";
+    	
+    	try {
+			data = helper.getUserInfoJson(code);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	System.out.println(data);
+    	
+    	return Results.redirect("/");
     }
     
     public Result signupPost() {
