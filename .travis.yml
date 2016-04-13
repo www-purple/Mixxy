@@ -1,15 +1,16 @@
 language: java
 sudo: false
-addons:
-  apt:
-    packages:
-    - python3-openssl
-    - google-cloud-sdk
 jdk:
   - openjdk7
   - oraclejdk7
 
+install:
+  - wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-105.0.0-linux-x86_64.tar.gz
+  - tar -xvf google-cloud-sdk-105.0.0-linux-x86_64.tar.gz
+  - ./google-cloud-sdk/bin/gcloud init
+
 before_deploy:
+  - ./google-cloud-sdk/bin/gcloud auth activate-service-account "$SERVICE_EMAIL" --key-file mixxy-secret.json --project "$PROJECT_ID"
   - mvn appengine:update
 
 deploy:
@@ -27,4 +28,3 @@ cache:
 before_install:
   - openssl aes-256-cbc -K $encrypted_acb534f64c3b_key -iv $encrypted_acb534f64c3b_iv
     -in mixxy-secret.json.enc -out mixxy-secret.json -d
-  - gcloud auth activate-service-account "$SERVICE_EMAIL" --key-file mixxy-secret.json --project "$PROJECT_ID"
