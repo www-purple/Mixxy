@@ -16,30 +16,30 @@ public class ApiKeyLoadingTest  extends NinjaAppengineBackendTest {
   private ApiKeys apiKeys;
   
   @Test
-  void testApiKeysLoaded() {
+  public void testApiKeysLoaded() {
     assertNotNull(apiKeys);
   }
   
   @Test
-  void testGoogleIdLoaded() {
+  public void testGoogleIdLoaded() {
     assertNotNull(apiKeys.getGoogleId());
     assertFalse(apiKeys.getGoogleId().isEmpty());
   }
   
   @Test
-  void testGoogleSecretLoaded() {
+  public void testGoogleSecretLoaded() {
     assertNotNull(apiKeys.getGoogleSecret());
     assertFalse(apiKeys.getGoogleSecret().isEmpty());
   }
   
   @Test
-  void testFacebookIdLoaded() {
+  public void testFacebookIdLoaded() {
     assertNotNull(apiKeys.getFacebookId());
     assertFalse(apiKeys.getFacebookId().isEmpty());
   }
   
   @Test
-  void testFacebookSecretLoaded() {
+  public void testFacebookSecretLoaded() {
     assertNotNull(apiKeys.getFacebookSecret());
     assertFalse(apiKeys.getFacebookSecret().isEmpty());
   }
