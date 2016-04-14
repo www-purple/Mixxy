@@ -25,11 +25,16 @@ import ninja.params.Param;
 import www.purple.mixxy.conf.ObjectifyProvider;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
+import www.purple.mixxy.helpers.FacebookAuthHelper;
+import www.purple.mixxy.helpers.FacebookAuthResponse;
+import www.purple.mixxy.helpers.FacebookGraph;
 import www.purple.mixxy.helpers.GoogleAuthHelper;
 import www.purple.mixxy.helpers.GoogleAuthResponse;
+import www.purple.mixxy.helpers.OAuthProviders;
 import www.purple.mixxy.models.User;
 
 import java.io.IOException;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -61,9 +66,16 @@ public class LoginLogoutController {
 	///////////////////////////////////////////////////////////////////////////
 	// Login
 	///////////////////////////////////////////////////////////////////////////
-    public Result login() {
-    	GoogleAuthHelper helper = new GoogleAuthHelper();
-    	return Results.redirect(helper.buildLoginUrl());
+    public Result login(@Param("provider") String provider) {
+    	
+    	if(provider.equals(OAuthProviders.GOOGLE)) {
+			GoogleAuthHelper gglHelper = new GoogleAuthHelper();
+	    	return Results.redirect(gglHelper.buildLoginUrl());
+    	} else {
+			FacebookAuthHelper fbHelper = new FacebookAuthHelper();
+	    	return Results.redirect(fbHelper.getFBAuthUrl());
+    	}
+    	
     }
     
     public Result validate(
@@ -71,9 +83,30 @@ public class LoginLogoutController {
     		@Param("code") String code,
     		Context context) {
     	
+    	if(state == null)
+    		return validateFacebookAuth("facebook", code, context);
+    	else
+    		return validateGoogleAuth("google", code, context);
+    }
+    
+    private Result validateFacebookAuth(String provider, String code, Context context) {
+		if (code == null || code.equals("")) {
+			throw new RuntimeException(
+					"ERROR: Didn't get code parameter in callback.");
+		}
+		
+		FacebookAuthHelper fbhelper = new FacebookAuthHelper();
+		String accessToken = fbhelper.getAccessToken(code);
+
+		FacebookGraph fbGraph = new FacebookGraph(accessToken);
+		FacebookAuthResponse far = fbGraph.getFBGraph();
+		
+		return Results.json().render(far);
+	}
+
+	public Result validateGoogleAuth(String provider, String code, Context context) {
     	GoogleAuthHelper helper = new GoogleAuthHelper();
     	String data = "empty";
-    	String provider = state.substring(0, state.indexOf(';'));
     	
     	try {
 			data = helper.getUserInfoJson(code);
@@ -120,7 +153,7 @@ public class LoginLogoutController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	
-    	return Results.redirect("/");
+		
+		return Results.redirect("/");
     }
 }

@@ -6,8 +6,8 @@
 			<li><a href="#">${session.username}</a></li>
 			<li><a href="/logout">${i18n("header.logout")}</a></li>
 			<#else>
-				<li><a href="/login" id="login">${i18n("header.login")}</a></li>
-				<li><a href="/signup" id="signup">${i18n("header.signup")}</a></li>
+				<li><a href="/login?provider=facebook" id="facebook">${i18n("header.facebook")}</a></li>
+				<li><a href="/login?provider=google" id="google">${i18n("header.google")}</a></li>
 		</#if>
 
 	</ul>
