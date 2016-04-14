@@ -3,7 +3,7 @@ package www.purple.mixxy.helpers;
 public class GoogleAuthResponse {
 	private String id;
 	private String email;
-	private Boolean verified_email;
+	private boolean verified_email;
 	private String name;
 	private String given_name;
 	private String family_name;
@@ -51,7 +51,7 @@ public class GoogleAuthResponse {
 	public Boolean getVerified_email() {
 		return verified_email;
 	}
-	public void setVerified_email(Boolean verified_email) {
+	public void setVerified_email(boolean verified_email) {
 		this.verified_email = verified_email;
 	}
 	public String getEmail() {
