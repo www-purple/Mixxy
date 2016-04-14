@@ -21,7 +21,7 @@ public class PostTest extends NinjaAppengineBackendTest {
         Objectify ofy = objectifyProvider.get();
         
         // Create a new user and save it
-        User anotherBob = new User("BobTheBuilderFriend", "Bob", "Doe", "anotherbob@gmail.com");
+        User anotherBob = new User("BobTheBuilderFriend", "Bob", "Doe", "anotherbob@gmail.com", "url", "en", "google", "123");
         ofy.save().entity(anotherBob).now();
         
         // Create a new post

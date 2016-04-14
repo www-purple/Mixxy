@@ -10,6 +10,7 @@ public class GoogleAuthResponse {
 	private String link;
 	private String picture;
 	private String locale;
+	private String hd;
 	
 	public String getPicture() {
 		return picture;
@@ -64,5 +65,11 @@ public class GoogleAuthResponse {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getHd() {
+		return hd;
+	}
+	public void setHd(String hd) {
+		this.hd = hd;
 	}
 }
