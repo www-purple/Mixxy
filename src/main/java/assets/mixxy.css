@@ -1,10 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Molengo|Bangers|Acme|Permanent+Marker);
 
 body {
-    background-image: url("images/bg.png");
+	background-image: url("images/bg.png");
 }
 
 header {
+<<<<<<< HEAD
     margin: 50px 50px 10px 50px;
 }
 
@@ -24,6 +25,28 @@ h2 {
 
 body {
     font-family: 'Acme', sans-serif;
+=======
+	margin: -50px 50px 10px 50px;
+}
+
+header a {
+	color: black;
+}
+
+h1 {
+	font-size: 60px;
+	font-family: 'Bangers', cursive;
+}
+
+h2 {
+	font-size: 40px;
+	font-family: 'Permanent Marker', cursive;
+}
+
+body {
+	font-family: 'Acme', sans-serif;
+	font-size: 16px;
+>>>>>>> master
 }
 
 .grey-box {
@@ -37,6 +60,7 @@ body {
 }
 
 .white-box img {
+<<<<<<< HEAD
     width: auto;
     height: auto;
     display: block;
@@ -49,6 +73,25 @@ body {
 .feed-item img {
     width: 50px;
     height: 50px;
+=======
+	width: auto;
+	height: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-height: 500px;
+	max-width: 500px;
+}
+
+.rounded {
+	border-radius: 25px;
+	margin: 10px;
+	padding: 20px;
+}
+.feed-item img {
+	width: 50px;
+	height: 50px;
+>>>>>>> master
 }
 
 ul {
@@ -61,6 +104,7 @@ footer li {
 }
 
 #copy {
+<<<<<<< HEAD
     float: right;
 }
 
@@ -71,4 +115,32 @@ footer li {
 
 #featured-comics {
     text-align: center;
+=======
+	float: right;
+}
+
+#copy a {
+	text-decoration: none;
+	color: black;
+}
+
+#featured-comics {
+	text-align: center;
+}
+
+a {
+	color: firebrick;
+}
+
+footer a {
+	color: black;
+}
+
+.boring h1, .boring h2, .boring h3, .boring p, .boring li{
+	font-family: "Times New Roman", Times, serif;
+}
+
+.boring h1 {
+	text-align: center;
+>>>>>>> master
 }
