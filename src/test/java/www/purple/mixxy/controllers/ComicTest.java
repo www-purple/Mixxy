@@ -23,7 +23,7 @@ public class ComicTest extends NinjaAppengineBackendTest {
 		Objectify ofy = objectifyProvider.get();
 
 		// Create a new user and save it
-		User yetAnotherBob = new User("BobTheBuilderFriend2", "Bob", "King", "clonedbob@gmail.com");
+		User yetAnotherBob = new User("BobTheBuilderFriend2", "Bob", "King", "clonedbob@gmail.com", null, null, null, null);
 		ofy.save().entity(yetAnotherBob).now();
 
 		// Create a new comic
