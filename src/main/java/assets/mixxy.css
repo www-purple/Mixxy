@@ -5,21 +5,21 @@ body {
 }
 
 header {
-	margin: -50px 50px 10px 50px;
+    margin: 50px 50px 10px 50px;
 }
 
 header a {
-	color: black;
+    color: black;
 }
 
 h1 {
-	font-size: 60px;
-	font-family: 'Bangers', cursive;
+    font-size: 3.75em;
+    font-family: 'Bangers', cursive;
 }
 
 h2 {
-	font-size: 40px;
-	font-family: 'Permanent Marker', cursive;
+    font-size: 3em;
+    font-family: 'Permanent Marker', cursive;
 }
 
 body {
@@ -38,23 +38,24 @@ body {
 }
 
 .white-box img {
-	width: auto;
-	height: auto;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	max-height: 500px;
-	max-width: 500px;
+    width: auto;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 500px;
+    max-width: 500px;
+}
+
+.feed-item img {
+    width: 50px;
+    height: 50px;
 }
 
 .rounded {
 	border-radius: 25px;
 	margin: 10px;
 	padding: 20px;
-}
-.feed-item img {
-	width: 50px;
-	height: 50px;
 }
 
 ul {
@@ -67,12 +68,12 @@ footer li {
 }
 
 #copy {
-	float: right;
+    float: right;
 }
 
 #copy a {
-	text-decoration: none;
-	color: black;
+    text-decoration: none;
+    color: black;
 }
 
 #featured-comics {
