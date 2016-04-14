@@ -79,9 +79,9 @@ public class ComicDao {
 			return false;
 		}
 
-		Comic comic = new Comic(comicDto.title, comicDto.description, comicDto.tags);
+		Comic comic = new Comic(user, comicDto.title, comicDto.description, comicDto.tags);
 
-		comic.author = Ref.create(user);
+//		comic.author = Ref.create(user);
 
 		// lowest index is the root Parent comic (index 0 is the first comic
 		// iteration)

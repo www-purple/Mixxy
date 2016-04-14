@@ -73,6 +73,9 @@ public class ObjectifyProvider implements Provider<Objectify> {
             // Create a new post
             Article bobPost1 = new Article(bob, POST1_TITLE, POST1_CONTENT);
             ofy.save().entity(bobPost1).now();
+            
+            Comic bobComic = new Comic(bob, "cool title", "interesting description", null);
+            ofy.save().entities(bobComic).now();
         }
 
     }
