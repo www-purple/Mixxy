@@ -24,13 +24,16 @@ public class UserTest extends NinjaAppengineBackendTest {
         Objectify ofy = objectifyProvider.get();
         
         
-        // Create a new user and save it
-        User user = new User(USER_USERNAME, USER_FIRSTNAME, USER_LASTNAME, USER_EMAIL, "url", "en", "google", "123");
-        ofy.save().entity(user).now();
-        
-
         // Retrieve the user with e-mail address bob@gmail.com
         User bob = ofy.load().type(User.class).filter("username", USER_USERNAME).first().now();
+        
+        //	Check if the User already exists in the Datastore
+        //	if not, create that user, otherwise use the User instance
+        if(bob.username != USER_USERNAME){
+        	// Create a new user and save it
+            User user = new User(USER_USERNAME, USER_FIRSTNAME, USER_LASTNAME, USER_EMAIL, "url", "en", "google", "123");
+            ofy.save().entity(user).now();
+        }
         
         // Test
         assertNotNull(bob);
