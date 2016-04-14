@@ -44,40 +44,6 @@ public class LoginLogoutController {
     
     @Inject
     private UserDao userDao;
-    
-    
-    ///////////////////////////////////////////////////////////////////////////
-    // Login
-    ///////////////////////////////////////////////////////////////////////////
-    public Result login(@SuppressWarnings("unused") Context context) {
-
-        return Results.html();
-
-    }
-
-    public Result loginPost(@Param("username") String username,
-                            Context context) {
-
-        boolean areCredentialsValid = userDao.isUserValid(username);
-        
-        
-        if (areCredentialsValid) {
-            context.getSession().put("username", username);
-            context.getFlashScope().success("login.loginSuccessful");
-            
-            return Results.redirect("/");
-            
-        } else {
-            
-            // something is wrong with the input or password not found.
-            context.getFlashScope().put("username", username);
-            context.getFlashScope().error("login.errorLogin");
-
-            return Results.redirect("/login");
-            
-        }
-        
-    }
 
     ///////////////////////////////////////////////////////////////////////////
     // Logout
@@ -92,7 +58,10 @@ public class LoginLogoutController {
 
     }
 
-    public Result signup() {
+	///////////////////////////////////////////////////////////////////////////
+	// Login
+	///////////////////////////////////////////////////////////////////////////
+    public Result login() {
     	GoogleAuthHelper helper = new GoogleAuthHelper();
     	return Results.redirect(helper.buildLoginUrl());
     }
@@ -120,7 +89,9 @@ public class LoginLogoutController {
 			GoogleAuthResponse userdata = mapper.readValue(data, GoogleAuthResponse.class);
 			
 			// At this point we can login or signup user
-			boolean areCredentialsValid = userDao.isUserValid(userdata.getEmail());
+			String email = userdata.getEmail();
+			String username = email.substring(0, email.indexOf('@'));
+			boolean areCredentialsValid = userDao.isUserValid(username);
 			
 			if(areCredentialsValid) {
 				context.getSession().put("username", userdata.getEmail());
@@ -152,10 +123,4 @@ public class LoginLogoutController {
     	
     	return Results.redirect("/");
     }
-    
-    public Result signupPost() {
-      return Results.TODO();
-    }
-    
-    
 }
