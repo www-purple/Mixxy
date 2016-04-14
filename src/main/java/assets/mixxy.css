@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Molengo|Bangers|Acme|Permanent+Marker);
+@import url(https://fonts.googleapis.com/css?family=Molengo|Bangers|Acme|Permanent+Marker|PT+Serif|PT+Sans);
 
 body {
 	background-image: url("images/bg.png");
@@ -58,7 +58,7 @@ body {
 	padding: 20px;
 }
 
-ul {
+.feed-item li{
 	list-style-type: none;
 }
 
@@ -88,8 +88,12 @@ footer a {
 	color: black;
 }
 
-.boring h1, .boring h2, .boring h3, .boring p, .boring li{
-	font-family: "Times New Roman", Times, serif;
+.boring h1, .boring h2, .boring h3{
+	font-family: "PT Serif", serif;
+}
+
+.boring p, .boring li{
+	font-family: "PT Sans", Helvetica, sans-serif;
 }
 
 .boring h1 {
