@@ -12,15 +12,15 @@ import com.google.appengine.api.images.Image;
 public class ComicDto {
 
 	@Size(min = 5)
-    public String title;
-	
+	public String title;
+
 	@Size(min = 5)
-    public String description;
-    
-    public List<Image> images;
-    
-    public List<String> tags;
-    
-    public int likes;
-    
+	public String description;
+
+	public List<Image> images;
+
+	public List<String> tags;
+
+	public int likes;
+
 }
