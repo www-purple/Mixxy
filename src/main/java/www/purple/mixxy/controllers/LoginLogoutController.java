@@ -36,6 +36,8 @@ import www.purple.mixxy.models.User;
 import java.io.IOException;
 import java.util.Map;
 
+import org.slf4j.Logger;
+
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,6 +48,9 @@ import com.googlecode.objectify.Objectify;
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class LoginLogoutController {
+    
+    @Inject
+    private Logger logger;
     
     @Inject
     private UserDao userDao;
@@ -92,7 +97,7 @@ public class LoginLogoutController {
     private Result validateFacebookAuth(String provider, String code, Context context) {
 		if (code == null || code.equals("")) {
 			throw new RuntimeException(
-					"ERROR: Didn't get code parameter in callback.");
+					"ERROR: Didn't get code parameter in callback (got null or empty string)");
 		}
 		
 		FacebookAuthHelper fbhelper = new FacebookAuthHelper();
@@ -111,8 +116,7 @@ public class LoginLogoutController {
     	try {
 			data = helper.getUserInfoJson(code);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Cannot get Google authN info", e);
 		}
     	
     	ObjectMapper mapper = new ObjectMapper();
@@ -127,7 +131,7 @@ public class LoginLogoutController {
 			boolean areCredentialsValid = userDao.isUserValid(username);
 			
 			if(areCredentialsValid) {
-				context.getSession().put("username", userdata.getEmail());
+				context.getSession().put(User.USERNAME, userdata.getEmail());
 				context.getFlashScope().success("login.loginSuccessful");
 			} else {
 				// Create new user
@@ -145,14 +149,14 @@ public class LoginLogoutController {
 		        // Redirect to profile
 				return Results.redirect("/privacy");
 			}
-
 		} catch (JsonGenerationException e) {
-			e.printStackTrace();
+            logger.error("Invalid JSON response from Google", e);
 		} catch (JsonMappingException e) {
-			e.printStackTrace();
+            logger.error("Cannot map JSON", e);
 		} catch (IOException e) {
-			e.printStackTrace();
+            logger.error("IO Error", e);
 		}
+		// TODO: Handle these errors
 		
 		return Results.redirect("/");
     }
