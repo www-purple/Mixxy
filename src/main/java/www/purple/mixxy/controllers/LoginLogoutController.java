@@ -25,6 +25,7 @@ import ninja.params.Param;
 import www.purple.mixxy.conf.ObjectifyProvider;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
+import www.purple.mixxy.helpers.ApiKeys;
 import www.purple.mixxy.helpers.FacebookAuthHelper;
 import www.purple.mixxy.helpers.FacebookAuthResponse;
 import www.purple.mixxy.helpers.FacebookGraph;
@@ -54,6 +55,9 @@ public class LoginLogoutController {
     
     @Inject
     private UserDao userDao;
+    
+    @Inject
+    private ApiKeys apiKeys;
 
     ///////////////////////////////////////////////////////////////////////////
     // Logout
@@ -74,10 +78,10 @@ public class LoginLogoutController {
     public Result login(@Param("provider") String provider) {
     	
     	if(provider.equals(OAuthProviders.GOOGLE)) {
-			GoogleAuthHelper gglHelper = new GoogleAuthHelper();
+			GoogleAuthHelper gglHelper = new GoogleAuthHelper(apiKeys.getGoogleId(), apiKeys.getGoogleSecret());
 	    	return Results.redirect(gglHelper.buildLoginUrl());
     	} else {
-			FacebookAuthHelper fbHelper = new FacebookAuthHelper();
+			FacebookAuthHelper fbHelper = new FacebookAuthHelper(apiKeys.getFacebookId(), apiKeys.getFacebookSecret());
 	    	return Results.redirect(fbHelper.getFBAuthUrl());
     	}
     	
@@ -100,7 +104,7 @@ public class LoginLogoutController {
 					"ERROR: Didn't get code parameter in callback (got null or empty string)");
 		}
 		
-		FacebookAuthHelper fbhelper = new FacebookAuthHelper();
+		FacebookAuthHelper fbhelper = new FacebookAuthHelper(apiKeys.getFacebookId(), apiKeys.getFacebookSecret());
 		String accessToken = fbhelper.getAccessToken(code);
 
 		FacebookGraph fbGraph = new FacebookGraph(accessToken);
@@ -110,7 +114,7 @@ public class LoginLogoutController {
 	}
 
 	public Result validateGoogleAuth(String provider, String code, Context context) {
-    	GoogleAuthHelper helper = new GoogleAuthHelper();
+    	GoogleAuthHelper helper = new GoogleAuthHelper(apiKeys.getGoogleId(), apiKeys.getGoogleSecret());
     	String data = "empty";
     	
     	try {
