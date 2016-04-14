@@ -138,11 +138,20 @@ public class LoginLogoutController {
 				ObjectifyProvider objectifyProvider = new ObjectifyProvider();
 		        Objectify ofy = objectifyProvider.get();
 		        
-		        // Create a new user and save it
-		        User user = new User(userdata.getEmail(), userdata.getGiven_name(), userdata.getFamily_name(), userdata.getEmail(),
-		        		userdata.getPicture(), userdata.getLocale(), provider, userdata.getId());
-		        ofy.save().entity(user).now();
+		        // Retrieve the user with e-mail address
+		        User user = ofy.load().type(User.class).filter("username", userdata.getEmail()).first().now();
 		        
+		        //	Check if the User already exists in the Datastore
+		        //	if not, create that user, otherwise use the User instance
+		        if(user == null) {
+		        	
+		        	// Create a new user and save it
+			        user = new User(userdata.getEmail(), userdata.getGiven_name(), userdata.getFamily_name(), userdata.getEmail(),
+			        		userdata.getPicture(), userdata.getLocale(), provider, userdata.getId());
+			        ofy.save().entity(user).now();
+			        
+		        }
+		             
 		        context.getSession().put("username", userdata.getEmail());
 				context.getFlashScope().success("login.loginSuccessful");
 				
