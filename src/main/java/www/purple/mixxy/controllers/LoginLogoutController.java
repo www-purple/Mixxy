@@ -22,10 +22,12 @@ import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.Param;
+import www.purple.mixxy.conf.ObjectifyProvider;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 import www.purple.mixxy.helpers.GoogleAuthHelper;
 import www.purple.mixxy.helpers.GoogleAuthResponse;
+import www.purple.mixxy.models.User;
 
 import java.io.IOException;
 
@@ -34,6 +36,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.googlecode.objectify.Objectify;
 
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
@@ -96,10 +99,12 @@ public class LoginLogoutController {
     
     public Result validate(
     		@Param("state") String state,
-    		@Param("code") String code) {
+    		@Param("code") String code,
+    		Context context) {
     	
     	GoogleAuthHelper helper = new GoogleAuthHelper();
     	String data = "empty";
+    	String provider = state.substring(0, state.indexOf(';'));
     	
     	try {
 			data = helper.getUserInfoJson(code);
@@ -113,6 +118,29 @@ public class LoginLogoutController {
 
 			// Convert JSON string to Object
 			GoogleAuthResponse userdata = mapper.readValue(data, GoogleAuthResponse.class);
+			
+			// At this point we can login or signup user
+			boolean areCredentialsValid = userDao.isUserValid(userdata.getEmail());
+			
+			if(areCredentialsValid) {
+				context.getSession().put("username", userdata.getEmail());
+				context.getFlashScope().success("login.loginSuccessful");
+			} else {
+				// Create new user
+				ObjectifyProvider objectifyProvider = new ObjectifyProvider();
+		        Objectify ofy = objectifyProvider.get();
+		        
+		        // Create a new user and save it
+		        User user = new User(userdata.getEmail(), userdata.getGiven_name(), userdata.getFamily_name(), userdata.getEmail(),
+		        		userdata.getPicture(), userdata.getLocale(), provider, userdata.getId());
+		        ofy.save().entity(user).now();
+		        
+		        context.getSession().put("username", userdata.getEmail());
+				context.getFlashScope().success("login.loginSuccessful");
+				
+		        // Redirect to profile
+				return Results.redirect("/privacy");
+			}
 
 		} catch (JsonGenerationException e) {
 			e.printStackTrace();

@@ -12,6 +12,8 @@ import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.condition.IfNotDefault;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 public class User {
@@ -25,9 +27,10 @@ public class User {
 	public String firstname;
 	public String lastname;
 	public String email;
+	public String pictureUrl;
+	public String locale;
 
-	// @Chris - TODO: how are we going to use this map?
-	// public Map<OAuthService, String> authentications = new HashMap<>();
+	public Map<String, String> authentications = new HashMap<>();
 
 	@Index(IfNotDefault.class)
 	public Role role = Role.USER;
@@ -39,21 +42,22 @@ public class User {
 	public User() {/* Needed by Objectify */ }
 
 	public User(final String username, final String firstname, final String lastname,
-			final String email) {
+			final String email, final String pictureUrl, String locale, final String provider, final String providerId) {
 
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
+		
+		this.pictureUrl = pictureUrl;
+		this.locale = locale;
 
-		// @Chris - TODO: how are we going to use this map?
-		// this.authentications =
+		this.authentications.put(provider, providerId);
 
 		this.role = Role.USER;
 		this.createdAt = new Date();
 		this.updatedAt = new Date();
 		this.isActive = true;
-
 	}
 	
 }

@@ -25,7 +25,7 @@ public class UserTest extends NinjaAppengineBackendTest {
         
         
         // Create a new user and save it
-        User user = new User(USER_USERNAME, USER_FIRSTNAME, USER_LASTNAME, USER_EMAIL);
+        User user = new User(USER_USERNAME, USER_FIRSTNAME, USER_LASTNAME, USER_EMAIL, "url", "en", "google", "123");
         ofy.save().entity(user).now();
         
 
