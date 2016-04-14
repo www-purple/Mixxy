@@ -34,7 +34,8 @@ public final class GoogleAuthHelper {
 	private static final String CALLBACK_URI = "http://localhost:8080/validate";
 	
 	// start google authentication constants
-	private static final Collection<String> SCOPE = Arrays.asList("https://www.googleapis.com/auth/userinfo.profile;https://www.googleapis.com/auth/userinfo.email".split(";"));
+	private static final Collection<String> SCOPE =
+	    Arrays.asList("https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email");
 	private static final String USER_INFO_URL = "https://www.googleapis.com/oauth2/v1/userinfo";
 	private static final JsonFactory JSON_FACTORY = new JacksonFactory();
 	private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
