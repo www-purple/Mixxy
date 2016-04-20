@@ -17,7 +17,7 @@ public final class ApiKeys {
   private String facebookSecret;
 
   public ApiKeys() {
-    properties = SwissKnife.loadConfigurationInUtf8("classpath:www/purple/mixxy/helpers/auth.properties");
+    properties = SwissKnife.loadConfigurationInUtf8("www/purple/mixxy/helpers/auth.properties");
 
     googleId = properties.getString("google.id");
     googleSecret = properties.getString("google.secret");
