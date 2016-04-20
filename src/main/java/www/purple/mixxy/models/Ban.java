@@ -7,10 +7,8 @@ package www.purple.mixxy.models;
  */
 import java.util.Date;
 
-import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Load;
 
 @SuppressWarnings("PMD.ShortClassName")
 @Entity
@@ -21,12 +19,9 @@ public class Ban {
 	// can refer to these Entities using the already fetched Comic, this solve
 	// performance problems
 	// See: https://github.com/objectify/objectify/wiki/Entities#load
-	@Load
-	public Ref<User> offender;
-	@Load
-	public Ref<User> victim;
-	@Load
-	public Ref<User> mod;
+	public Long offenderId;
+	public Long victimId;
+	public Long modId;
 	
 	public String reason;
 
@@ -35,8 +30,11 @@ public class Ban {
 	
 	public Ban() {/* Needed by Objectify */}
 
-	public Ban(final String reason, final Date banExpiration) {
+	public Ban(final User offender, final User victim, final User mod, final String reason, final Date banExpiration) {
 		/* Needed by Objectify */
+		this.offenderId = offender.id;
+		this.victimId = victim.id;
+		this.modId = mod.id;
 		this.reason = reason;
 		this.bannedOn = new Date();
 		this.expires = banExpiration;

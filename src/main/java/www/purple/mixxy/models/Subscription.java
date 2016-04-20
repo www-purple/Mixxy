@@ -7,10 +7,8 @@ package www.purple.mixxy.models;
  */
 import java.util.Date;
 
-import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Load;
 
 @Entity
 public class Subscription {
@@ -20,15 +18,16 @@ public class Subscription {
 	// can refer to these Entities using the already fetched Comic, this solve
 	// performance problems
 	// See: https://github.com/objectify/objectify/wiki/Entities#load
-	@Load
-	public Ref<User> subscriber;
-	@Load
-	public Ref<User> publisher;
+	public Long subscriberId;
+	public Long publisherId;
 
 	public Date createdAt;
+	
+	public Subscription(){ /* Needed by Objectify */ }
 
-	public Subscription() {
-		/* Needed by Objectify */
+	public Subscription(final User subscriber, final User publisher) {
+		this.subscriberId = subscriber.id;
+		this.publisherId = publisher.id;
 		this.createdAt = new Date();
 	}
 }

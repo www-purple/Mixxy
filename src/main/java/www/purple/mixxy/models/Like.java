@@ -7,10 +7,8 @@ package www.purple.mixxy.models;
  */
 import java.util.Date;
 
-import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Load;
 
 @Entity
 public class Like {
@@ -20,15 +18,16 @@ public class Like {
 	// can refer to these Entities using the already fetched Comic, this solve
 	// performance problems
 	// See: https://github.com/objectify/objectify/wiki/Entities#load
-	@Load
-	public Ref<Comic> comic;
-	@Load
-	public Ref<User> user;
+	public Long comicId;
+	public Long userId;
 
 	public Date createdAt;
+	
+	public Like() { /* Needed by Objectify */ }
 
-	public Like() {
-		/* Needed by Objectify */
+	public Like(final Comic comic, final User user) {
+		this.comicId = comic.id;
+		this.userId = user.id;
 		this.createdAt = new Date();
 	}
 }
