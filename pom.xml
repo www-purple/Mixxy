@@ -14,9 +14,9 @@
     
 
     <properties>
-        <ninja.version>5.3.1</ninja.version>
-        <ninja-appengine.version>1.9.31</ninja-appengine.version>
-        <appengine.version>1.9.31</appengine.version>
+        <ninja.version>5.5.0</ninja.version>
+        <ninja-appengine.version>1.9.34</ninja-appengine.version>
+        <appengine.version>1.9.34</appengine.version>
         <appengine.generated.dir>target/${project.artifactId}-${project.version}/WEB-INF/appengine-generated</appengine.generated.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
