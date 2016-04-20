@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 
 @SuppressWarnings("PMD.JUnitTestContainsTooManyAsserts")
-public class UserTest extends NinjaTest {
+public class UserTest extends NinjaAppengineBackendTest {
     
     private static final String USER_EMAIL = "bob@gmail.com";
     private static final String USER_FIRSTNAME = "Bob";

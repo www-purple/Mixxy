@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @SuppressWarnings("PMD.JUnitTestContainsTooManyAsserts")
-public class ComicTest extends NinjaTest {
+public class ComicTest extends NinjaAppengineBackendTest {
 
 	@Test
 	public void testCreateComic() {
