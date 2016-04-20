@@ -29,7 +29,7 @@ public class ComicTest extends NinjaTest {
 		ofy.save().entity(yetAnotherBob).now();
 
 		// Create a new comic
-		Comic comic = new Comic(yetAnotherBob, "cool title", "interesting description", null);
+		Comic comic = new Comic(null, yetAnotherBob, "cool title", "interesting description", null);
 		//comic.author = Ref.create(yetAnotherBob);
 		ofy.save().entity(comic).now();
 

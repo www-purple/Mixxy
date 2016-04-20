@@ -7,9 +7,6 @@ import com.google.inject.Singleton;
 import com.googlecode.objectify.Objectify;
 
 import www.purple.mixxy.helpers.ApiKeys;
-import www.purple.mixxy.helpers.FacebookAuthHelper;
-import www.purple.mixxy.helpers.FacebookGraph;
-import www.purple.mixxy.helpers.GoogleAuthHelper;
 
 @Singleton
 public class Module extends AbstractModule {

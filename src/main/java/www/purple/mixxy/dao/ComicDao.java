@@ -11,7 +11,6 @@ import java.util.List;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.Ref;
 
 import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.ComicDto;
@@ -79,13 +78,13 @@ public class ComicDao {
 			return false;
 		}
 
-		Comic comic = new Comic(user, comicDto.title, comicDto.description, comicDto.tags);
+		Comic comic = new Comic(null, user, comicDto.title, comicDto.description, comicDto.tags);
 
 //		comic.author = Ref.create(user);
 
 		// lowest index is the root Parent comic (index 0 is the first comic
 		// iteration)
-		comic.ancestorComics.add(Ref.create(comic));
+		//comic.ancestorComics.add(Ref.create(comic));
 		objectify.get().save().entity(comic);
 
 		return true;

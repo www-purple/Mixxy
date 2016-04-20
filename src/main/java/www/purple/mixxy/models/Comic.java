@@ -6,14 +6,11 @@ import com.google.common.collect.Lists;
  * 
  * @author Brian_Sabz
  */
-import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
-import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.annotation.Unindex;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,8 +27,7 @@ public class Comic {
 	//@Load
 	//public Ref<User> author;
 	
-	@Load
-	public List<Ref<Comic>> ancestorComics = new ArrayList<Ref<Comic>>();
+	public List<Long> ancestorComicId;
 
 	public String title;
 	
@@ -46,7 +42,14 @@ public class Comic {
 
 	public Comic() {/* needed by Objectify */ }
 
-	public Comic(final User author, final String title, final String description, final List<String> tags) {
+	public Comic(final Comic ancestorComic, final User author, final String title, final String description, final List<String> tags) {
+		
+		if (ancestorComic == null){
+			this.ancestorComicId = Lists.newArrayList();
+		} 
+		else {
+			this.ancestorComicId = ancestorComic.ancestorComicId;
+		}
 		this.authorIds = Lists.newArrayList(author.id);
 		this.title = title;
 		this.description = description;
