@@ -1,20 +1,28 @@
 package www.purple.mixxy.controllers;
 
-import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.Singleton;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 
+import ninja.NinjaTest;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import www.purple.mixxy.helpers.ApiKeys;
 
 @Singleton
-public class ApiKeyLoadingTest  extends NinjaAppengineBackendTest {
-  
-  @Inject
+public class ApiKeyLoadingTest extends NinjaTest {
+
   private ApiKeys apiKeys;
   
+  @Before
+  public void injectApiKeys() {
+    Injector injector = getInjector();
+    apiKeys = injector.getInstance(ApiKeys.class);
+  }
+
   @Test
   public void testApiKeysLoaded() {
     assertNotNull(apiKeys);

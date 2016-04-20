@@ -3,6 +3,8 @@ package www.purple.mixxy.controllers;
 import com.googlecode.objectify.Objectify;
 //import com.googlecode.objectify.Ref;
 
+import ninja.NinjaTest;
+
 import org.junit.Test;
 import www.purple.mixxy.conf.ObjectifyProvider;
 import www.purple.mixxy.models.Comic;
@@ -14,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @SuppressWarnings("PMD.JUnitTestContainsTooManyAsserts")
-public class ComicTest extends NinjaAppengineBackendTest {
+public class ComicTest extends NinjaTest {
 
 	@Test
 	public void testCreateComic() {
