@@ -18,9 +18,6 @@ public class Module extends AbstractModule {
     protected void configure() {
         bind(ApiKeys.class);
         bind(StartupActions.class);
-        bind(GoogleAuthHelper.class);
-        bind(FacebookAuthHelper.class);
-        bind(FacebookGraph.class);
         bind(Objectify.class).toProvider(ObjectifyProvider.class);
         install(new AppEngineModule());        
         
