@@ -71,6 +71,12 @@ public class Routes implements ApplicationRoutes {
 
     router.GET().route("/settings/?").with(UserController.class, "settings");
 
+      /**
+       * This needs to be put somewhere else probably
+        */
+      router.GET().route("/comic/?").with(Results.html().template(VIEWS + "ComicController/comic.ftl.html"));
+    router.GET().route("/user/?").with(Results.html().template(VIEWS + "UserController/user.ftl.html"));
+
     ///////////////////////////////////////////////////////////////////////////
     // Search
     ///////////////////////////////////////////////////////////////////////////
