@@ -37,6 +37,11 @@ body {
 	border: 1px black solid;
 }
 
+.ui .form {
+	padding: 20px 50px;
+	font-size: 1em;
+}
+
 .white-box img {
     width: auto;
     height: auto;
