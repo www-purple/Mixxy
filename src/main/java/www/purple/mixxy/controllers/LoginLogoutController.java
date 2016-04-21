@@ -24,7 +24,6 @@ import ninja.appengine.AppEngineFilter;
 import ninja.params.Param;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
-import www.purple.mixxy.helpers.ApiKeys;
 import www.purple.mixxy.helpers.FacebookAuthHelper;
 import www.purple.mixxy.helpers.FacebookAuthResponse;
 import www.purple.mixxy.helpers.FacebookGraph;
