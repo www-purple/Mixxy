@@ -22,29 +22,21 @@ import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.Param;
-import www.purple.mixxy.conf.ObjectifyProvider;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 import www.purple.mixxy.helpers.FacebookAuthHelper;
 import www.purple.mixxy.helpers.FacebookAuthResponse;
 import www.purple.mixxy.helpers.FacebookGraph;
 import www.purple.mixxy.helpers.GoogleAuthHelper;
-import www.purple.mixxy.helpers.GoogleAuthResponse;
 import www.purple.mixxy.helpers.GoogleUser;
 import www.purple.mixxy.helpers.OAuthProviders;
-import www.purple.mixxy.models.User;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.googlecode.objectify.Objectify;
 
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
@@ -59,6 +51,7 @@ public class LoginLogoutController {
     public Result logout(Context context) {
 
         // remove any user dependent information
+    	context.getCookies().clear();
         context.getSession().clear();
         context.getFlashScope().success("login.logoutSuccessful");
 
