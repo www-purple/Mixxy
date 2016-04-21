@@ -34,6 +34,10 @@ import www.purple.mixxy.helpers.OAuthProviders;
 import java.io.IOException;
 import java.util.Map;
 
+import org.slf4j.Logger;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -44,6 +48,9 @@ public class LoginLogoutController {
     
     @Inject
     private UserDao userDao;
+    
+    @Inject
+    private Logger logger;
 
     ///////////////////////////////////////////////////////////////////////////
     // Logout
@@ -105,6 +112,7 @@ public class LoginLogoutController {
     		
     		System.out.println(data);
     	} catch (IOException e) {
+    		logger.error("Cannot get Google User Info", e);
     		return loginError(context);
     	}
     	
@@ -141,7 +149,14 @@ public class LoginLogoutController {
 				return Results.redirect("/privacy");
         	}
     		
+		} catch (JsonGenerationException e) {
+            logger.error("Invalid JSON response from Google", e);
+            return loginError(context);
+		} catch (JsonMappingException e) {
+            logger.error("Cannot map JSON", e);
+            return loginError(context);
 		} catch (IOException e) {
+			logger.error("IO Error", e);
 			return loginError(context);
 		}
 
