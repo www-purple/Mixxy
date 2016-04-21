@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public final class GoogleAuthHelper {
-
 	/**
 	 * Please provide a value for the CLIENT_ID constant before proceeding, set this up at https://code.google.com/apis/console/
 	 */

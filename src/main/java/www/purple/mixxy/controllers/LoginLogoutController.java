@@ -22,8 +22,10 @@ import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.Param;
+import www.purple.mixxy.conf.ObjectifyProvider;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
+import www.purple.mixxy.helpers.ApiKeys;
 import www.purple.mixxy.helpers.DeviantArtAuthHelper;
 import www.purple.mixxy.helpers.FacebookAuthHelper;
 import www.purple.mixxy.helpers.FacebookUser;
@@ -41,16 +43,20 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.googlecode.objectify.Objectify;
 
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class LoginLogoutController {
     
     @Inject
-    private UserDao userDao;
+    private Logger logger;
     
     @Inject
-    private Logger logger;
+    private UserDao userDao;
+    
+    //@Inject
+    //private ApiKeys apiKeys;
 
     ///////////////////////////////////////////////////////////////////////////
     // Logout

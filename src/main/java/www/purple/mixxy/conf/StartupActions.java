@@ -1,11 +1,10 @@
 package www.purple.mixxy.conf;
 
-import javax.inject.Singleton;
-
 import ninja.lifecycle.Start;
 import ninja.utils.NinjaProperties;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.googlecode.objectify.ObjectifyService;
 import java.io.Closeable;
 import java.io.IOException;

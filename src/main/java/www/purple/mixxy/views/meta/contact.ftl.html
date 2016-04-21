@@ -1,8 +1,32 @@
-<#import "../layout/defaultLayout.ftl.html" as layout> <@layout.myLayout "Home page">
-
-<div>
-Talk to us
-</div>
+<#import "../layout/defaultLayout.ftl.html" as layout>
+    <@layout.myLayout "Contact">
+    <!-- @toDo needs functionality -->
+    <div class="ui container grey-box">
+        <div class="ui centered padded grid">
+            <div class="row">
+                <div class="ten wide column">
+                    <h2>Talk to us</h2>
+                    <div class="white-box">
+                        <form class="ui form">
+                            <div class="inline field">
+                                <label>Name</label>
+                                <input name="name" placeholder="Bob Durst" type="text">
+                            </div>
+                            <div class="inline field">
+                                <label>E-mail</label>
+                                <input name="email" placeholder="bob.durst@durstmail.com" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Message</label>
+                                <textarea rows="2"></textarea>
+                            </div>
+                            <button class="ui button" type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </@layout.myLayout>
