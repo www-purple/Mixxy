@@ -1,10 +1,6 @@
 package www.purple.mixxy.controllers;
 
-import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.googlecode.objectify.Objectify;
-
-import ninja.NinjaTest;
 
 import org.junit.Test;
 import www.purple.mixxy.conf.ObjectifyProvider;
