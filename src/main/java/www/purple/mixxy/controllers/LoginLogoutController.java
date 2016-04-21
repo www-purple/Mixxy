@@ -93,6 +93,8 @@ public class LoginLogoutController {
     		@Param("code") String code,
     		Context context) {
     	
+    	System.out.println("State: " + state + " Code: " + code);
+    	
     	if(state.contains(OAuthProviders.FACEBOOK))
     		return validateFacebookResponse(OAuthProviders.FACEBOOK, code, context);
     	else if(state.contains(OAuthProviders.GOOGLE))
@@ -197,7 +199,8 @@ public class LoginLogoutController {
         	{
         		@SuppressWarnings("unchecked")
 	    		Map<String,Object> picture = (Map<String, Object>) user.get("picture");
-			    Map<String,Object> pictureUrl = (Map<String, Object>) picture.get("data");
+			    @SuppressWarnings("unchecked")
+				Map<String,Object> pictureUrl = (Map<String, Object>) picture.get("data");
 			    
         		// Create new user
 				userDao.createUser(
@@ -240,9 +243,9 @@ public class LoginLogoutController {
     	
     	// Exchange code for an access token
     	DeviantArtAuthHelper helper = new DeviantArtAuthHelper();
-    	String data = helper.getUserInfoJson(code);
+    	String data = helper.getAccessToken(code);
     	
-    	System.out.println(data);
+    	System.out.println(code);
 
     	return Results.redirect("/terms");
 	}

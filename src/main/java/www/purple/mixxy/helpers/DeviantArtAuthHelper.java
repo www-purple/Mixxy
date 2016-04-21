@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.HttpURLConnection;	
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.Map;
@@ -15,6 +16,12 @@ import org.apache.commons.lang.StringEscapeUtils;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.appengine.api.urlfetch.FetchOptions;
+import com.google.appengine.api.urlfetch.HTTPMethod;
+import com.google.appengine.api.urlfetch.HTTPRequest;
+import com.google.appengine.api.urlfetch.HTTPResponse;
+import com.google.appengine.api.urlfetch.URLFetchService;
+import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
 
 public class DeviantArtAuthHelper {
 
@@ -58,15 +65,16 @@ public class DeviantArtAuthHelper {
 			url = "https://www.deviantart.com/oauth2/token?" +
 				"client_id=" + CLIENT_ID +  "&client_secret=" + CLIENT_SECRET +
 				"&grant_type=authorization_code" +
-				"&code=" + code +
-				"&redirect_uri=" + URLEncoder.encode(CALLBACK_URI, "UTF-8");
+				"&redirect_uri=" + URLEncoder.encode(CALLBACK_URI, "UTF-8") +
+				"&code=" + code;
 		} catch(UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		return url;
 	}
 	
-	private String getAccessToken(final String code) {
+	public String getAccessToken(final String code) {
+
 		String accessToken = null;
 		String strTemp = "";
 		String response = "";
@@ -81,8 +89,6 @@ public class DeviantArtAuthHelper {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
-		System.out.println(response);
 
 /*    	ObjectMapper mapper = new ObjectMapper();
     	try {
@@ -98,7 +104,7 @@ public class DeviantArtAuthHelper {
 			e.printStackTrace();
 		}*/
 		
-	    return accessToken;
+	    return response;
 	}
 	
 	public String getUserInfoJson(final String code) {
