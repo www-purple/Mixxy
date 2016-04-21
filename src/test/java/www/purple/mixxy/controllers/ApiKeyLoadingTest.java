@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import www.purple.mixxy.helpers.ApiKeys;
 
-@Singleton
 public class ApiKeyLoadingTest extends NinjaTest {
 
   private ApiKeys apiKeys;
