@@ -3,14 +3,11 @@ package www.purple.mixxy.controllers;
 import com.googlecode.objectify.Objectify;
 //import com.googlecode.objectify.Ref;
 
-import ninja.NinjaTest;
-
 import org.junit.Test;
 import www.purple.mixxy.conf.ObjectifyProvider;
 import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.User;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -26,11 +23,12 @@ public class ComicTest extends NinjaAppengineBackendTest {
 		Objectify ofy = objectifyProvider.get();
 
 		// Create a new user and save it
-		User yetAnotherBob = new User("BobTheBuilderFriend2", "Bob", "King", "clonedbob@gmail.com", "", "", "", "");
+		User yetAnotherBob = new User("BobTheBuilderFriend2", "Bob", "King", "clonedbob@gmail.com", "", "", "", "", "");
 		ofy.save().entity(yetAnotherBob).now();
 
 		// Create a new comic
-		Comic comic = new Comic(yetAnotherBob, "cool title", "interesting description", Collections.EMPTY_LIST);
+		Comic comic = new Comic(null, yetAnotherBob, "cool title", "interesting description", null);
+
 		//comic.author = Ref.create(yetAnotherBob);
 		ofy.save().entity(comic).now();
 

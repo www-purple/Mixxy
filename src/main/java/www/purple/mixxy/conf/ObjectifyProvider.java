@@ -59,7 +59,7 @@ public class ObjectifyProvider implements Provider<Objectify> {
         if (user == null) {
 
             // Create a new user and save it
-            User bob = new User("BobTheBuilder", "Bob", "Smith", "bob@gmail.com", "url", "en", "google", "123");
+            User bob = new User("BobTheBuilder", "Bob", "Smith", "male", "bob@gmail.com", "url", "en", "123", "google");
             ofy.save().entity(bob).now();
 
             // Create a new post
@@ -74,8 +74,18 @@ public class ObjectifyProvider implements Provider<Objectify> {
             Article bobPost1 = new Article(bob, POST1_TITLE, POST1_CONTENT);
             ofy.save().entity(bobPost1).now();
             
-            Comic bobComic = new Comic(bob, "cool title", "interesting description", null);
+            
+            // Comic ancestry working
+            Comic bobComic = new Comic(null, bob, "cool title", "interesting description", null);
             ofy.save().entities(bobComic).now();
+            bobComic.ancestorComicId.add(bobComic.id);
+            ofy.save().entities(bobComic).now();
+            
+            Comic bobComic2 = new Comic(bobComic, bob, "cool title222", "interesting description222", null);
+            ofy.save().entities(bobComic2).now();
+            bobComic2.ancestorComicId.add(bobComic2.id);
+            ofy.save().entities(bobComic2).now();
+            
         }
 
     }

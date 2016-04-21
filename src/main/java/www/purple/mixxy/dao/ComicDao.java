@@ -11,7 +11,6 @@ import java.util.List;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.Ref;
 
 import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.ComicDto;
@@ -44,16 +43,16 @@ public class ComicDao {
 		return objectify.get().load().type(Comic.class).id(id).now();
 	}
 
-	public Comic getComic(User user, String slug) {
-		return null;
+	public Comic getComic(User user) {
+		return objectify.get().load().type(Comic.class).filter("authorIds", user.id).first().now();
 	}
 
 	public List<Comic> getRemixes(Comic comic) {
-		return Collections.EMPTY_LIST;
+		return objectify.get().load().type(Comic.class).filter("ancestorComicId", comic.id).list();
 	}
 
 	public List<Comic> getRemixes(long id) {
-		return Collections.EMPTY_LIST;
+		return objectify.get().load().type(Comic.class).filter("ancestorComicId", id).list();
 	}
 
 	public List<Comic> getAncestors(Comic comic) {
@@ -79,14 +78,16 @@ public class ComicDao {
 			return false;
 		}
 
-		Comic comic = new Comic(user, comicDto.title, comicDto.description, comicDto.tags);
-
+		Comic comic = new Comic(null, user, comicDto.title, comicDto.description, comicDto.tags);
+       
 //		comic.author = Ref.create(user);
 
 		// lowest index is the root Parent comic (index 0 is the first comic
 		// iteration)
-		comic.ancestorComics.add(Ref.create(comic));
-		objectify.get().save().entity(comic);
+		//comic.ancestorComics.add(Ref.create(comic));
+		objectify.get().save().entity(comic).now();
+		comic.ancestorComicId.add(comic.id);
+		objectify.get().save().entity(comic).now();
 
 		return true;
 
@@ -96,9 +97,19 @@ public class ComicDao {
 		// TODO
 	}
 
-	public Comic branchComic(Long id) {
-		// TODO
-		return null;
+	public Comic branchComic(String username, Long id) {
+		
+		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+		
+		Comic parentComic = objectify.get().load().type(Comic.class).id(id).now();
+		
+		Comic remixedComic = new Comic(parentComic, user, parentComic.title, parentComic.description, parentComic.tags);
+		
+		objectify.get().save().entity(remixedComic).now();
+		remixedComic.ancestorComicId.add(remixedComic.id);
+		objectify.get().save().entity(remixedComic).now();
+		
+		return remixedComic;
 	}
 
 	public void likeComic(Long id) {

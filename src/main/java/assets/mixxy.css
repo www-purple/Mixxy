@@ -39,6 +39,11 @@ body {
     padding: 20px 50px;
 }
 
+.ui .form {
+	padding: 20px 50px;
+	font-size: 1em;
+}
+
 .white-box img {
     max-width: 95%;
 }
