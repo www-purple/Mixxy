@@ -35,7 +35,6 @@ import www.purple.mixxy.helpers.OAuthProviders;
 import www.purple.mixxy.models.User;
 
 import java.io.IOException;
-import java.util.Map;
 
 import org.slf4j.Logger;
 
