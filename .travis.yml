@@ -34,4 +34,9 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_acb534f64c3b_key -iv $encrypted_acb534f64c3b_iv -in secrets.tar.gz.enc -out secrets.tar.gz -d
   - tar -axf secrets.tar.gz 2> /dev/null
   - gpg --import "$MIXXY_PRIVATE_KEY_NAME"
-  - git crypt unlock
+  - git clone https://github.com/AGWA/git-crypt ~/git-crypt
+  - cd ~/git-crypt
+  - make
+  - cd -
+  - ~/git-crypt/git-crypt unlock
+  # Temporary, until git-crypt package is whitelisted
