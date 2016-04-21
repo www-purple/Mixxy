@@ -25,13 +25,13 @@ import ninja.params.Param;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 import www.purple.mixxy.helpers.FacebookAuthHelper;
-import www.purple.mixxy.helpers.FacebookAuthResponse;
-import www.purple.mixxy.helpers.FacebookGraph;
+import www.purple.mixxy.helpers.FacebookUser;
 import www.purple.mixxy.helpers.GoogleAuthHelper;
 import www.purple.mixxy.helpers.GoogleUser;
 import www.purple.mixxy.helpers.OAuthProviders;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -78,7 +78,7 @@ public class LoginLogoutController {
 		    	return Results.redirect(gglHelper.buildLoginUrl());
 	    	case OAuthProviders.FACEBOOK:
 	    		FacebookAuthHelper fbHelper = new FacebookAuthHelper();
-		    	return Results.redirect(fbHelper.getFBAuthUrl());
+		    	return Results.redirect(fbHelper.buildLoginUrl());
 	    	case OAuthProviders.DEVIANTART:
 	    		return Results.TODO();
 	    	default:
@@ -92,11 +92,14 @@ public class LoginLogoutController {
     		@Param("code") String code,
     		Context context) {
     	
-    	// TODO: find a way to pass and get facebook state
-    	if(state == null)
-    		return validateFacebookResponse("facebook", code, context);
+    	if(state.contains(OAuthProviders.FACEBOOK))
+    		return validateFacebookResponse(OAuthProviders.FACEBOOK, code, context);
+    	else if(state.contains(OAuthProviders.GOOGLE))
+    		return validateGoogleResponse(OAuthProviders.GOOGLE, code, context);
+    	else if(state.contains(OAuthProviders.DEVIANTART))
+    		return validateDeviantartResponse(OAuthProviders.DEVIANTART, code, context);
     	else
-    		return validateGoogleResponse("google", code, context);
+    		return Results.redirect("/terms");
     }
     
     public Result validateGoogleResponse(String provider, String code, Context context) {
@@ -167,18 +170,68 @@ public class LoginLogoutController {
     }
     
     private Result validateFacebookResponse(String provider, String code, Context context) {
-		if (code == null || code.equals("")) {
-			throw new RuntimeException(
-					"ERROR: Didn't get code parameter in callback.");
+		
+    	if (code == null || code.equals("")) {
+    		logger.error("User cancelled google auth or no code returned");
+			return loginError(context);
+		}
+    	
+    	// Exchange code for an access token
+    	FacebookAuthHelper helper = new FacebookAuthHelper();
+    	String data = helper.getUserInfoJson(code);
+    	
+    	// Parse json response
+    	ObjectMapper mapper = new ObjectMapper();
+    	try {
+    		@SuppressWarnings("unchecked")
+    		Map<String,Object> user = mapper.readValue(data, Map.class);
+    		
+    		// Validate user
+        	if(userDao.isUserValid((String)user.get(GoogleUser.EMAIL))) {
+        		// If user exists
+        		// Start session
+			    newSession((String)user.get(GoogleUser.EMAIL), context);
+        	}
+        	else
+        	{
+        		@SuppressWarnings("unchecked")
+	    		Map<String,Object> picture = (Map<String, Object>) user.get("picture");
+			    Map<String,Object> pictureUrl = (Map<String, Object>) picture.get("data");
+			    
+        		// Create new user
+				userDao.createUser(
+						(String)user.get(FacebookUser.EMAIL),
+						(String)user.get(FacebookUser.FIRST_NAME),
+						(String)user.get(FacebookUser.LAST_NAME),
+						(String)user.get(FacebookUser.GENDER),
+						(String)user.get(FacebookUser.EMAIL),
+						(String)pictureUrl.get(FacebookUser.PICTURE_URL),
+						(String)user.get(FacebookUser.LOCALE),
+						(String)user.get(FacebookUser.ID),
+						provider);
+				
+				// Start session
+				newSession((String)user.get(GoogleUser.EMAIL), context);
+				
+		        // TODO: Redirect to profile
+				return Results.redirect("/privacy");
+        	}
+    	} catch (JsonGenerationException e) {
+            logger.error("Invalid JSON response from Google", e);
+            return loginError(context);
+		} catch (JsonMappingException e) {
+            logger.error("Cannot map JSON", e);
+            return loginError(context);
+		} catch (IOException e) {
+			logger.error("IO Error", e);
+			return loginError(context);
 		}
 		
-		FacebookAuthHelper fbhelper = new FacebookAuthHelper();
-		String accessToken = fbhelper.getAccessToken(code);
-
-		FacebookGraph fbGraph = new FacebookGraph(accessToken);
-		FacebookAuthResponse far = fbGraph.getFBGraph();
-		
-		return Results.json().render(far);
+		return Results.redirect("/");
+	}
+    
+    private Result validateDeviantartResponse(String provider, String code, Context context) {
+		return Results.TODO();
 	}
 	
 	public void newSession(String username, Context context) {

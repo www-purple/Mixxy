@@ -4,82 +4,123 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import java.security.SecureRandom;
+import java.util.Map;
 
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
+import org.apache.commons.lang.StringEscapeUtils;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class FacebookAuthHelper {
-	public static final String FB_APP_ID = "1525243031118871";
-	public static final String FB_APP_SECRET = "33448c710b2ba227461752c3abe7dc06";
-	public static final String REDIRECT_URI = "http://localhost:8080/validate";
+	public static final String APP_ID = "1525243031118871";
+	public static final String APP_SECRET = "33448c710b2ba227461752c3abe7dc06";
+	public static final String CALLBACK_URI = "http://localhost:8080/validate";
+
+	private String stateToken;
 	
-	private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
-
-	static String accessToken = "";
-
-	public String getFBAuthUrl() {
-		String fbLoginUrl = "";
+	public FacebookAuthHelper() {
+		generateStateToken();
+	}
+	
+	/**
+	 * Builds a login URL based on app ID, secret, callback URI, and scope
+	 */
+	public String buildLoginUrl() {
+		String url = "";
 		try {
-			fbLoginUrl = "http://www.facebook.com/dialog/oauth?" + "client_id="
-					+ FacebookAuthHelper.FB_APP_ID + "&redirect_uri="
-					+ URLEncoder.encode(FacebookAuthHelper.REDIRECT_URI, "UTF-8")
-					+ "&scope=email";
-		} catch (UnsupportedEncodingException e) {
+			url = "http://www.facebook.com/dialog/oauth?" + 
+				"client_id=" + APP_ID + "&redirect_uri=" + URLEncoder.encode(CALLBACK_URI, "UTF-8") +
+				"&state=" + stateToken + "&scope=public_profile";
+		} catch(UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		return fbLoginUrl;
+		return url;
 	}
-
-	public String getFBGraphUrl(String code) {
-		String fbGraphUrl = "";
+	
+	/**
+	 * Generates a secure state token 
+	 */
+	private void generateStateToken(){
+		SecureRandom sr1 = new SecureRandom();
+		stateToken = "facebook;" + sr1.nextInt();
+	}
+	
+	private String getFacebookGraphUrl(String code) {
+		String url = "";
 		try {
-			fbGraphUrl = "https://graph.facebook.com/oauth/access_token?"
-					+ "client_id=" + FacebookAuthHelper.FB_APP_ID + "&redirect_uri="
-					+ URLEncoder.encode(FacebookAuthHelper.REDIRECT_URI, "UTF-8")
-					+ "&client_secret=" + FB_APP_SECRET + "&code=" + code;
-		} catch (UnsupportedEncodingException e) {
+			url = "https://graph.facebook.com/v2.4/oauth/access_token?" +
+				"client_id=" + APP_ID + "&redirect_uri=" + URLEncoder.encode(CALLBACK_URI, "UTF-8") +
+				"&client_secret=" + APP_SECRET + "&code=" + code;
+		} catch(UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		return fbGraphUrl;
+		return url;
 	}
-
-	public String getAccessToken(String code) {
-		if ("".equals(accessToken)) {
-			URL fbGraphURL;
-			try {
-				fbGraphURL = new URL(getFBGraphUrl(code));
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-				throw new RuntimeException("Invalid code received " + e);
+	
+	private String getAccessToken(String code) {
+		String accessToken = null;
+		String strTemp = "";
+		String response = "";
+		
+		try {
+			URL url = new URL(getFacebookGraphUrl(code));
+			BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
+			
+			while (null != (strTemp = br.readLine())) {
+				response += strTemp;
 			}
-			URLConnection fbConnection;
-			StringBuffer b = null;
-			try {
-				fbConnection = fbGraphURL.openConnection();
-				BufferedReader in;
-				in = new BufferedReader(new InputStreamReader(
-						fbConnection.getInputStream()));
-				String inputLine;
-				b = new StringBuffer();
-				while ((inputLine = in.readLine()) != null)
-					b.append(inputLine + "\n");
-				in.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-				throw new RuntimeException("Unable to connect with Facebook "
-						+ e);
-			}
-
-			accessToken = b.toString();
-			if (accessToken.startsWith("{")) {
-				throw new RuntimeException("ERROR: Access Token Invalid: "
-						+ accessToken);
-			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-		return accessToken;
+
+    	ObjectMapper mapper = new ObjectMapper();
+    	try {
+    		@SuppressWarnings("unchecked")
+    		Map<String,Object> user = mapper.readValue(response, Map.class);
+    		
+    		accessToken = (String) user.get("access_token");
+    	} catch (JsonGenerationException e) {
+            e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	    return accessToken;
+	}
+	
+	public String getUserInfoJson(final String code) {
+		String accessToken = getAccessToken(code);
+		String line = "";
+		String json = "";
+		
+		try {
+			URL url = new URL("https://graph.facebook.com/me?"
+					+ "fields=first_name,last_name,picture,email,birthday,gender,locale"
+					+ "&access_token=" + accessToken);
+			
+			BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
+			
+			while (null != (line = br.readLine())) {
+				json += line;
+			}
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	    String userJson = StringEscapeUtils.unescapeJava(json);
+
+		return userJson;
 	}
 }
