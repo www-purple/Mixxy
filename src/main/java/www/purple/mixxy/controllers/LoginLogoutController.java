@@ -30,13 +30,16 @@ import www.purple.mixxy.helpers.FacebookAuthResponse;
 import www.purple.mixxy.helpers.FacebookGraph;
 import www.purple.mixxy.helpers.GoogleAuthHelper;
 import www.purple.mixxy.helpers.GoogleAuthResponse;
+import www.purple.mixxy.helpers.GoogleUser;
 import www.purple.mixxy.helpers.OAuthProviders;
 import www.purple.mixxy.models.User;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
@@ -66,16 +69,20 @@ public class LoginLogoutController {
 	///////////////////////////////////////////////////////////////////////////
 	// Login
 	///////////////////////////////////////////////////////////////////////////
-    public Result login(@Param("provider") String provider) {
-    	
-    	if(provider.equals(OAuthProviders.GOOGLE)) {
-			GoogleAuthHelper gglHelper = new GoogleAuthHelper();
-	    	return Results.redirect(gglHelper.buildLoginUrl());
-    	} else {
-			FacebookAuthHelper fbHelper = new FacebookAuthHelper();
-	    	return Results.redirect(fbHelper.getFBAuthUrl());
+    public Result login(@Param("provider") String provider) {   	
+    	switch(provider)
+    	{
+	    	case OAuthProviders.GOOGLE:
+	    		GoogleAuthHelper gglHelper = new GoogleAuthHelper();
+		    	return Results.redirect(gglHelper.buildLoginUrl());
+	    	case OAuthProviders.FACEBOOK:
+	    		FacebookAuthHelper fbHelper = new FacebookAuthHelper();
+		    	return Results.redirect(fbHelper.getFBAuthUrl());
+	    	case OAuthProviders.DEVIANTART:
+	    		return Results.TODO();
+	    	default:
+	    		return Results.redirect("/");
     	}
-    	
     }
     
     public Result validate(
@@ -83,13 +90,72 @@ public class LoginLogoutController {
     		@Param("code") String code,
     		Context context) {
     	
+    	// TODO: find a way to pass and get facebook state
     	if(state == null)
-    		return validateFacebookAuth("facebook", code, context);
+    		return validateFacebookResponse("facebook", code, context);
     	else
-    		return validateGoogleAuth("google", code, context);
+    		return validateGoogleResponse("google", code, context);
     }
     
-    private Result validateFacebookAuth(String provider, String code, Context context) {
+    public Result validateGoogleResponse(String provider, String code, Context context) {
+    	
+    	if (code == null || code.equals("")) {
+			return loginError(context);
+		}
+    	
+    	GoogleAuthHelper helper = new GoogleAuthHelper();
+    	String data;
+    	
+    	// Get json response
+    	try {
+    		data = helper.getUserInfoJson(code);
+    		
+    		System.out.println(data);
+    	} catch (IOException e) {
+    		return loginError(context);
+    	}
+    	
+    	// Parse json response
+    	ObjectMapper mapper = new ObjectMapper();
+    	try {
+    		@SuppressWarnings("unchecked")
+    		Map<String,Object> user = mapper.readValue(data, Map.class);
+    		
+    		// Validate user
+        	if(userDao.isUserValid((String)user.get(GoogleUser.EMAIL))) {
+        		// If user exists
+        		// Start session
+			    newSession((String)user.get(GoogleUser.EMAIL), context);
+        	}
+        	else
+        	{
+        		// Create new user
+				userDao.createUser(
+						(String)user.get(GoogleUser.EMAIL),
+						(String)user.get(GoogleUser.FIRST_NAME),
+						(String)user.get(GoogleUser.LAST_NAME),
+						(String)user.get(GoogleUser.GENDER),
+						(String)user.get(GoogleUser.EMAIL),
+						(String)user.get(GoogleUser.PICTURE_URL),
+						(String)user.get(GoogleUser.LOCALE),
+						(String)user.get(GoogleUser.ID),
+						provider);
+				
+				// Start session
+				newSession((String)user.get(GoogleUser.EMAIL), context);
+				
+		        // TODO: Redirect to profile
+				return Results.redirect("/privacy");
+        	}
+    		
+		} catch (IOException e) {
+			return loginError(context);
+		}
+
+    	return Results.redirect("/");
+    }
+    
+    private Result validateFacebookResponse(String provider, String code, Context context) {
 		if (code == null || code.equals("")) {
 			throw new RuntimeException(
 					"ERROR: Didn't get code parameter in callback.");
@@ -103,66 +169,14 @@ public class LoginLogoutController {
 		
 		return Results.json().render(far);
 	}
-
-	public Result validateGoogleAuth(String provider, String code, Context context) {
-    	GoogleAuthHelper helper = new GoogleAuthHelper();
-    	String data = "empty";
-    	
-    	try {
-			data = helper.getUserInfoJson(code);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	ObjectMapper mapper = new ObjectMapper();
-		try {
-
-			// Convert JSON string to Object
-			GoogleAuthResponse userdata = mapper.readValue(data, GoogleAuthResponse.class);
-			
-			// At this point we can login or signup user
-			String email = userdata.getEmail();
-			String username = email.substring(0, email.indexOf('@'));
-			boolean areCredentialsValid = userDao.isUserValid(username);
-			
-			if(areCredentialsValid) {
-				context.getSession().put("username", userdata.getEmail());
-				context.getFlashScope().success("login.loginSuccessful");
-			} else {
-				// Create new user
-				ObjectifyProvider objectifyProvider = new ObjectifyProvider();
-		        Objectify ofy = objectifyProvider.get();
-		        
-		        // Retrieve the user with e-mail address
-		        User user = ofy.load().type(User.class).filter("username", userdata.getEmail()).first().now();
-		        
-		        //	Check if the User already exists in the Datastore
-		        //	if not, create that user, otherwise use the User instance
-		        if(user == null) {
-		        	
-		        	// Create a new user and save it
-			        user = new User(userdata.getEmail(), userdata.getGiven_name(), userdata.getFamily_name(), userdata.getEmail(),
-			        		userdata.getPicture(), userdata.getLocale(), provider, userdata.getId());
-			        ofy.save().entity(user).now();
-			        
-		        }
-		             
-		        context.getSession().put("username", userdata.getEmail());
-				context.getFlashScope().success("login.loginSuccessful");
-				
-		        // Redirect to profile
-				return Results.redirect("/privacy");
-			}
-
-		} catch (JsonGenerationException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+	
+	public void newSession(String username, Context context) {
+		context.getSession().put("username", username);
+		context.getFlashScope().success("login.loginSuccessful");
+	}
+	
+	public Result loginError(Context context) {
+		context.getFlashScope().error("login.adminError");
 		return Results.redirect("/");
-    }
+	}
 }

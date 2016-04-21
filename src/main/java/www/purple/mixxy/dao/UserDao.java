@@ -52,6 +52,14 @@ public class UserDao {
 
     return user;
   }
+  
+  public void createUser(String username, String firstName, String lastName, String gender,
+		  String email, String pictureUrl, String locale, String providerId, String provider) {
+	  
+	  User user = new User(username, firstName, lastName, gender, email, 
+			  pictureUrl, locale, providerId, provider);
+	  objectify.get().save().entity(user).now();
+  }
 
   /**
    * Given a user ID, get the underlying {@link User}.

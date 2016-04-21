@@ -26,6 +26,7 @@ public class User {
 	public String username;
 	public String firstname;
 	public String lastname;
+	public String gender;
 	public String email;
 	public String pictureUrl;
 	public String locale;
@@ -41,12 +42,13 @@ public class User {
 
 	public User() {/* Needed by Objectify */ }
 
-	public User(final String username, final String firstname, final String lastname,
-			final String email, final String pictureUrl, String locale, final String provider, final String providerId) {
+	public User(final String username, final String firstname, final String lastname, final String gender,
+			final String email, final String pictureUrl, String locale, final String providerId, final String provider) {
 
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.gender = gender;
 		this.email = email;
 		
 		this.pictureUrl = pictureUrl;

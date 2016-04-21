@@ -49,7 +49,7 @@ public class ObjectifyProvider implements Provider<Objectify> {
         if (user == null) {
 
             // Create a new user and save it
-            User bob = new User("BobTheBuilder", "Bob", "Smith", "bob@gmail.com", "url", "en", "google", "123");
+            User bob = new User("BobTheBuilder", "Bob", "Smith", "male", "bob@gmail.com", "url", "en", "123", "google");
             ofy.save().entity(bob).now();
 
             // Create a new post
