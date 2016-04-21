@@ -1,7 +1,7 @@
 package www.purple.mixxy.helpers;
 
-public enum OAuthProviders {
-    GOOGLE,
-    FACEBOOK,
-    DEVIANTART;
+public class OAuthProviders {
+	public static final String GOOGLE = "google";
+	public static final String FACEBOOK = "facebook";
+	public static final String DEVIANTART = "deviantart";
 }

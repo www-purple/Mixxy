@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.net.HttpURLConnection;	
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.Map;
@@ -16,15 +16,22 @@ import org.apache.commons.lang.StringEscapeUtils;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.appengine.api.urlfetch.FetchOptions;
+import com.google.appengine.api.urlfetch.HTTPMethod;
+import com.google.appengine.api.urlfetch.HTTPRequest;
+import com.google.appengine.api.urlfetch.HTTPResponse;
+import com.google.appengine.api.urlfetch.URLFetchService;
+import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
 
-public class FacebookAuthHelper {
-	public static final String APP_ID = "1525243031118871";
-	public static final String APP_SECRET = "33448c710b2ba227461752c3abe7dc06";
-	public static final String CALLBACK_URI = "http://localhost:8080/validate";
+public class DeviantArtAuthHelper {
 
+	private static final String CLIENT_ID = "4606";
+	private static final String CLIENT_SECRET = "f61c2bd48549550afb55e9c3bbd5feef";
+	private static final String CALLBACK_URI = "http://localhost:8080/validate";
+	
 	private String stateToken;
 	
-	public FacebookAuthHelper() {
+	public DeviantArtAuthHelper() {
 		generateStateToken();
 	}
 	
@@ -34,9 +41,10 @@ public class FacebookAuthHelper {
 	public String buildLoginUrl() {
 		String url = "";
 		try {
-			url = "http://www.facebook.com/dialog/oauth?" + 
-				"client_id=" + APP_ID + "&redirect_uri=" + URLEncoder.encode(CALLBACK_URI, "UTF-8") +
-				"&state=" + stateToken + "&scope=public_profile";
+			url = "https://www.deviantart.com/oauth2/authorize?" +
+				"response_type=code" + "&client_id=" + CLIENT_ID + 
+				"&redirect_uri=" + URLEncoder.encode(CALLBACK_URI, "UTF-8") +
+				"&state=" + stateToken + "&scope=basic";
 		} catch(UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -48,28 +56,31 @@ public class FacebookAuthHelper {
 	 */
 	private void generateStateToken(){
 		SecureRandom sr1 = new SecureRandom();
-		stateToken = "facebook;" + sr1.nextInt();
+		stateToken = "deviantart;" + sr1.nextInt();
 	}
 	
-	private String getFacebookGraphUrl(String code) {
+	private String getAccessTokenUrl(final String code) {
 		String url = "";
 		try {
-			url = "https://graph.facebook.com/v2.4/oauth/access_token?" +
-				"client_id=" + APP_ID + "&redirect_uri=" + URLEncoder.encode(CALLBACK_URI, "UTF-8") +
-				"&client_secret=" + APP_SECRET + "&code=" + code;
+			url = "https://www.deviantart.com/oauth2/token?" +
+				"client_id=" + CLIENT_ID +  "&client_secret=" + CLIENT_SECRET +
+				"&grant_type=authorization_code" +
+				"&redirect_uri=" + URLEncoder.encode(CALLBACK_URI, "UTF-8") +
+				"&code=" + code;
 		} catch(UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		return url;
 	}
 	
-	private String getAccessToken(String code) {
+	public String getAccessToken(final String code) {
+
 		String accessToken = null;
 		String strTemp = "";
 		String response = "";
 		
 		try {
-			URL url = new URL(getFacebookGraphUrl(code));
+			URL url = new URL(getAccessTokenUrl(code));
 			BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
 			
 			while (null != (strTemp = br.readLine())) {
@@ -79,7 +90,7 @@ public class FacebookAuthHelper {
 			ex.printStackTrace();
 		}
 
-    	ObjectMapper mapper = new ObjectMapper();
+/*    	ObjectMapper mapper = new ObjectMapper();
     	try {
     		@SuppressWarnings("unchecked")
     		Map<String,Object> user = mapper.readValue(response, Map.class);
@@ -91,20 +102,19 @@ public class FacebookAuthHelper {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
-	    return accessToken;
+	    return response;
 	}
 	
 	public String getUserInfoJson(final String code) {
 		String accessToken = getAccessToken(code);
-		String line = "";
+		/*String line = "";
 		String json = "";
 		
 		try {
-			URL url = new URL("https://graph.facebook.com/me?"
-					+ "fields=first_name,last_name,picture,email,birthday,gender,locale"
-					+ "&access_token=" + accessToken);
+			URL url = new URL("https://www.deviantart.com/api/v1/oauth2/user/whoami?"
+					+ "access_token=" + accessToken);
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
 			
@@ -117,8 +127,9 @@ public class FacebookAuthHelper {
 			e.printStackTrace();
 		}
 		
-	    String userJson = StringEscapeUtils.unescapeJava(json);
+	    String userJson = StringEscapeUtils.unescapeJava(json);*/
 
-		return userJson;
+		return accessToken;
 	}
+
 }
