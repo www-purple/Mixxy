@@ -3,14 +3,11 @@ package www.purple.mixxy.controllers;
 import com.googlecode.objectify.Objectify;
 //import com.googlecode.objectify.Ref;
 
-import ninja.NinjaTest;
-
 import org.junit.Test;
 import www.purple.mixxy.conf.ObjectifyProvider;
 import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.User;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
