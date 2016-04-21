@@ -24,6 +24,7 @@ import ninja.appengine.AppEngineFilter;
 import ninja.params.Param;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
+import www.purple.mixxy.helpers.DeviantArtAuthHelper;
 import www.purple.mixxy.helpers.FacebookAuthHelper;
 import www.purple.mixxy.helpers.FacebookUser;
 import www.purple.mixxy.helpers.GoogleAuthHelper;
@@ -31,7 +32,6 @@ import www.purple.mixxy.helpers.GoogleUser;
 import www.purple.mixxy.helpers.OAuthProviders;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -69,7 +69,7 @@ public class LoginLogoutController {
 	///////////////////////////////////////////////////////////////////////////
 	// Login
 	///////////////////////////////////////////////////////////////////////////
-    public Result login(@Param("provider") String provider) {   
+    public Result login(@Param("provider") String provider) {  
 
     	switch(provider)
     	{
@@ -80,7 +80,8 @@ public class LoginLogoutController {
 	    		FacebookAuthHelper fbHelper = new FacebookAuthHelper();
 		    	return Results.redirect(fbHelper.buildLoginUrl());
 	    	case OAuthProviders.DEVIANTART:
-	    		return Results.TODO();
+	    		DeviantArtAuthHelper daHelper = new DeviantArtAuthHelper();
+	    		return Results.redirect(daHelper.buildLoginUrl());
 	    	default:
 	    		return Results.redirect("/");
     	}
@@ -172,7 +173,7 @@ public class LoginLogoutController {
     private Result validateFacebookResponse(String provider, String code, Context context) {
 		
     	if (code == null || code.equals("")) {
-    		logger.error("User cancelled google auth or no code returned");
+    		logger.error("User cancelled facebook auth or no code returned");
 			return loginError(context);
 		}
     	
@@ -231,7 +232,19 @@ public class LoginLogoutController {
 	}
     
     private Result validateDeviantartResponse(String provider, String code, Context context) {
-		return Results.TODO();
+		
+    	if (code == null || code.equals("")) {
+    		logger.error("User cancelled deviantart auth or no code returned");
+			return loginError(context);
+		}
+    	
+    	// Exchange code for an access token
+    	DeviantArtAuthHelper helper = new DeviantArtAuthHelper();
+    	String data = helper.getUserInfoJson(code);
+    	
+    	System.out.println(data);
+
+    	return Results.redirect("/terms");
 	}
 	
 	public void newSession(String username, Context context) {
