@@ -1,15 +1,45 @@
 <header>
-	<a href="/"><img src="/assets/images/logo.png" alt="Mixxy - Make Art Great!" width=200 height=auto></a>
-	Make Art Great!
-	<ul class="navbar-right nav navbar-nav">
-		<#if (session.username)??>
-			<li><a href="#">${session.username}</a></li>
-			<li><a href="/logout">${i18n("header.logout")}</a></li>
-			<#else>
-				<li><a href="/login?provider=facebook" id="facebook">${i18n("header.facebook")}</a></li>
-				<li><a href="/login?provider=google" id="google">${i18n("header.google")}</a></li>
-				<li><a href="/login?provider=deviantart" id="deviantart">${i18n("header.deviantart")}</a></li>
-		</#if>
-
-	</ul>
+    <div class="ui container">
+        <div class="ui centered padded stackable grid">
+            <div class="row">
+                <div class="six wide left floated column">
+                    <a href="/" class="ui medium image"><img src="/assets/images/logo.png"
+                                                             alt="Mixxy - Make Art Great!"></a>
+                    Make Art Great!
+                </div>
+                <div class="eight wide right floated column">
+                    <div class="row">
+                        <div class="ui text menu">
+                            <div class="ui right dropdown item">
+                                <#if (session.username)??>
+                                    <p>Hi, <a class="item" href="#">${session.username}</a>
+                                        <i class="dropdown icon"></i></p>
+                                    <div class="menu">
+                                        <a class="item">Subscriptions</a>
+                                        <a class="item">Profile</a>
+                                        <a class="item" href="/logout">${i18n("header.logout")}</a>
+                                    </div>
+                                    <#else>
+                                        <p>Sign In
+                                            <i class="dropdown icon"></i></p>
+                                        <div class="menu">
+                                            <a class="item" href="/login?provider=facebook"
+                                               id="facebook">Facebook</a>
+                                            <a class="item" href="/login?provider=google" id="google">Google</a>
+                                            <a class="item">Deviant Art</a>
+                                        </div>
+                                </#if>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div  id="nav" class="ui relaxed massive horizontal link list">
+                            <a class="item"><h2>Draw</h2></a>
+                            <a class="item"><h2>Discover</h2></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
