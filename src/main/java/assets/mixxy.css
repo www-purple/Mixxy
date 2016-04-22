@@ -4,88 +4,73 @@ body {
 	background-image: url("images/bg.png");
 }
 
-header {
-    margin: 50px 50px 10px 50px;
+a {
+    color: firebrick;
+}
+#footer-nav a {
+    color: rgba(0, 0, 0, 0.8);
 }
 
-header a {
-    color: black;
+#footer-nav a:hover, #footer-nav a:active {
+    color: rgba(255, 255, 255, 0.9);
 }
 
-h1 {
-    font-size: 3.75em;
+h1.ui.header{
+    font-size: 3.75rem;
     font-family: 'Bangers', cursive;
 }
 
-h2 {
-    font-size: 3em;
+
+#nav h2, h2.ui.header, h2{
+    font-size: 3rem;
     font-family: 'Permanent Marker', cursive;
 }
 
-body {
+#nav a.item:link, #nav a.item:visited, #nav a {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 2px 1px 0px rgba(0,0,0,0.5);
+    text-decoration: none;
+}
+#nav a.item:hover, #nav a.item:active {
+    color: gold;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+    text-decoration: none;
+}
+
+p, .item, body{
 	font-family: 'Acme', sans-serif;
-	font-size: 16px;
+	font-size: 1rem;
 }
 
 .grey-box {
 	background-color: lightgrey;
 	border: 2px black solid;
+    margin-bottom: 20px;
 }
 
 .white-box {
+    margin-bottom: 10px;
 	background-color: white;
 	border: 1px black solid;
-}
-
-.white-box img {
-    width: auto;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-height: 500px;
-    max-width: 500px;
-}
-
-.feed-item img {
-    width: 50px;
-    height: 50px;
+    padding: 10px 10px;
 }
 
 .rounded {
 	border-radius: 25px;
-	margin: 10px;
-	padding: 20px;
-}
-
-.feed-item li{
-	list-style-type: none;
-}
-
-footer li {
-	display: inline;
-	padding: 10px;
-}
-
-#copy {
-    float: right;
-}
-
-#copy a {
-    text-decoration: none;
-    color: black;
+	/*margin: 10px;*/
+	/*padding: 20px;*/
 }
 
 #featured-comics {
 	text-align: center;
 }
 
-a {
-	color: firebrick;
-}
-
-footer a {
-	color: black;
+#featured-comics a{
+    color: black;
 }
 
 .boring h1, .boring h2, .boring h3{
@@ -94,8 +79,13 @@ footer a {
 
 .boring p, .boring li{
 	font-family: "PT Sans", Helvetica, sans-serif;
+    list-style-type: circle;
 }
 
 .boring h1 {
 	text-align: center;
+}
+
+.comic h1, .comic h2 {
+	display: inline;
 }
