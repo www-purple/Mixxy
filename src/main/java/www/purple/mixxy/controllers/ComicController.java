@@ -15,6 +15,8 @@ import www.purple.mixxy.filters.UrlNormalizingFilter;
 import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.ComicDto;
 
+import java.util.List;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -27,16 +29,16 @@ public class ComicController {
 
 	@SuppressWarnings("PMD.DataflowAnomalyAnalysis")
 	@FilterWith(JsonEndpoint.class)
-	public Result remixShow(@PathParam("id") Long id) {
-		Comic remix = null;
+	public Result remixesShow(@PathParam("id") Long id) {
+		List <Comic> remixes = null;
 
 		if (id != null) {
 
-			remix = comicDao.getRemix(id);
+			remixes = comicDao.getRemixes(id);
 
 		}
 
-		return Results.html().render("remix", remix);
+		return Results.html().render("remix", remixes);
 
 	}
 	
