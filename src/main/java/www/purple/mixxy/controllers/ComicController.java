@@ -14,7 +14,6 @@ import www.purple.mixxy.filters.JsonEndpoint;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.ComicDto;
-import www.purple.mixxy.models.User;
 
 import java.util.List;
 
@@ -28,7 +27,6 @@ public class ComicController {
 	@Inject
 	private ComicDao comicDao;
 
-	@SuppressWarnings("PMD.DataflowAnomalyAnalysis")
 	@FilterWith(JsonEndpoint.class)
 	public Result remixesShow(@PathParam("user") String user, @PathParam("work") String slug) {
 		
