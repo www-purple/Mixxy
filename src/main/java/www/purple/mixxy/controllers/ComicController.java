@@ -26,6 +26,7 @@ public class ComicController {
 	private ComicDao comicDao;
 
 	@SuppressWarnings("PMD.DataflowAnomalyAnalysis")
+	@FilterWith(JsonEndpoint.class)
 	public Result remixShow(@PathParam("id") Long id) {
 		Comic remix = null;
 
@@ -38,7 +39,22 @@ public class ComicController {
 		return Results.html().render("remix", remix);
 
 	}
-
+	
+	/**
+	 * This method creates a new remix for a specific comic.
+	 * 
+	 * Pass in the id of the parent comic to remix on along with the current user, context and data model information.
+	 * 
+	 * @param id Identifier of the Parent comic
+	 * @param username Current user's username
+	 * @param context html context
+	 * @param comicDto Data model for the comic object
+	 * @param validation Checks for various violations such as:  field violations (on controller method fields), 
+	 * bean violations (on an injected beans field) or general violations (deprecated)
+	 * 
+	 * @return resulting route to redirect with content
+	 */
+	@FilterWith(JsonEndpoint.class)
 	public Result newRemix(@PathParam("id") Long id, @LoggedInUser String username, Context context,
 			@JSR303Validation ComicDto comicDto, Validation validation) {
 
@@ -64,7 +80,8 @@ public class ComicController {
 		}
 
 	}
-
+	
+	@FilterWith(JsonEndpoint.class)
 	public Result comicShow(@PathParam("id") Long id) {
 
 		Comic comic = null;
@@ -79,6 +96,19 @@ public class ComicController {
 
 	}
 
+	/**
+	 * This method creates a new comic.
+	 * 
+	 * Pass in the current user, context and data model information.
+	 * 
+	 * @param username Current user's username
+	 * @param context html context
+	 * @param comicDto Data model for the comic object
+	 * @param validation Checks for various violations such as:  field violations (on controller method fields), 
+	 * bean violations (on an injected beans field) or general violations (deprecated)
+	 * 
+	 * @return resulting route to redirect with content
+	 */
 	@FilterWith(JsonEndpoint.class)
 	public Result newWork(@LoggedInUser String username, Context context, @JSR303Validation ComicDto comicDto,
 			Validation validation) {
