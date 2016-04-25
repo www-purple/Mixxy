@@ -15,6 +15,7 @@ import com.googlecode.objectify.Objectify;
 import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.ComicDto;
 import www.purple.mixxy.models.ComicsDto;
+import www.purple.mixxy.models.Like;
 import www.purple.mixxy.models.User;
 
 public class ComicDao {
@@ -122,8 +123,21 @@ public class ComicDao {
 		return remixedComic;
 	}
 
-	public void likeComic(Long id) {
-		// TODO
+	public boolean likeComic(String username, Long comicId) {
+		
+		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+		
+		if (user == null){
+			return false;
+		}
+		
+		Comic likedComic = objectify.get().load().type(Comic.class).id(comicId).now();
+		
+		Like like = new Like(likedComic, user);
+		
+		objectify.get().save().entity(like).now();
+		
+		return true;
 	}
 
 }
