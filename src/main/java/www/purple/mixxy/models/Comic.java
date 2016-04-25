@@ -1,5 +1,6 @@
 package www.purple.mixxy.models;
 
+import com.github.slugify.Slugify;
 import com.google.common.collect.Lists;
 /**
  * Created by Brian_Sabz on 4/5/16.
@@ -11,6 +12,7 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Unindex;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class Comic {
 	public List<Long> ancestorComicId;
 
 	public String title;
+	public String sluggedTitle; 
 	
 	@Unindex
 	public String description;
@@ -38,7 +41,7 @@ public class Comic {
 	public Date createdAt;
 	public Date updatedAt;
 	
-	public List<Long> authorIds;
+	public Long authorId;
 
 	public Comic() {/* needed by Objectify */ }
 
@@ -50,7 +53,16 @@ public class Comic {
 		else {
 			this.ancestorComicId = ancestorComic.ancestorComicId;
 		}
-		this.authorIds = Lists.newArrayList(author.id);
+		this.authorId = author.id;
+		
+		Slugify slg;
+		try {
+			slg = new Slugify();
+			this.sluggedTitle = slg.slugify(title); 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		this.title = title;
 		this.description = description;
 		this.tags = tags;

@@ -14,6 +14,7 @@ import www.purple.mixxy.filters.JsonEndpoint;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.ComicDto;
+import www.purple.mixxy.models.User;
 
 import java.util.List;
 
@@ -29,12 +30,21 @@ public class ComicController {
 
 	@SuppressWarnings("PMD.DataflowAnomalyAnalysis")
 	@FilterWith(JsonEndpoint.class)
-	public Result remixesShow(@PathParam("id") Long id) {
+	public Result remixesShow(@PathParam("user") String user, @PathParam("work") String slug) {
+		
+		Comic comic = null;
+
+		if (slug != null) {
+
+			comic = comicDao.getComic(user, slug);
+
+		}
+		
 		List <Comic> remixes = null;
 
-		if (id != null) {
+		if (comic.id != null) {
 
-			remixes = comicDao.getRemixes(id);
+			remixes = comicDao.getRemixes(comic.id);
 
 		}
 
@@ -57,7 +67,7 @@ public class ComicController {
 	 * @return resulting route to redirect with content
 	 */
 	@FilterWith(JsonEndpoint.class)
-	public Result newRemix(@PathParam("id") Long id, @LoggedInUser String username, Context context,
+	public Result newRemix(@PathParam("user") String user, @PathParam("work") String slug, @LoggedInUser String username, Context context,
 			@JSR303Validation ComicDto comicDto, Validation validation) {
 
 		if (validation.hasViolations()) {
@@ -73,7 +83,15 @@ public class ComicController {
 
 		} else {
 
-			comicDao.branchComic(username, id);
+			Comic comic = null;
+
+			if (slug != null) {
+
+				comic = comicDao.getComic(username, slug);
+
+			}
+			
+			comicDao.branchComic(username, comic.id);
 
 			context.getFlashScope().success("New remix created.");
 
@@ -84,13 +102,13 @@ public class ComicController {
 	}
 	
 	@FilterWith(JsonEndpoint.class)
-	public Result comicShow(@PathParam("id") Long id) {
+	public Result comicShow(@PathParam("user") String username, @PathParam("comic-slug") String slug) {
 
 		Comic comic = null;
 
-		if (id != null) {
+		if (slug != null) {
 
-			comic = comicDao.getComic(id);
+			comic = comicDao.getComic(username, slug);
 
 		}
 

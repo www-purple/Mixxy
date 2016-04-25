@@ -32,19 +32,24 @@ public class ComicDao {
 	}
 
 	public List<Comic> getComics(User author) {
-		return objectify.get().load().type(Comic.class).filter("author", author).list();
+		return objectify.get().load().type(Comic.class).filter("authorIds", author.id).list();
 	}
 
-	public List<Comic> getComics(String userName) {
-		return objectify.get().load().type(Comic.class).filter("username", userName).list();
+	public List<Comic> getComics(String username) {
+		
+		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+		
+		return objectify.get().load().type(Comic.class).filter("authorId", user.id).list();
 	}
 
 	public Comic getComic(long id) {
 		return objectify.get().load().type(Comic.class).id(id).now();
 	}
-
-	public Comic getComic(User user) {
-		return objectify.get().load().type(Comic.class).filter("authorIds", user.id).first().now();
+	
+	public Comic getComic(String username, String slug) {
+		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+		
+ 		return objectify.get().load().type(Comic.class).filter("authorId", user.id).filter("sluggedTitle", slug).first().now();
 	}
 	
 	public Comic getRemix(long id) {
@@ -91,6 +96,7 @@ public class ComicDao {
 		//comic.ancestorComics.add(Ref.create(comic));
 		objectify.get().save().entity(comic).now();
 		comic.ancestorComicId.add(comic.id);
+		comic.sluggedTitle = comic.sluggedTitle + Long.toString(comic.id);
 		objectify.get().save().entity(comic).now();
 
 		return true;
