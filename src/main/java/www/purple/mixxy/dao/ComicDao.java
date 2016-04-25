@@ -46,6 +46,10 @@ public class ComicDao {
 	public Comic getComic(User user) {
 		return objectify.get().load().type(Comic.class).filter("authorIds", user.id).first().now();
 	}
+	
+	public Comic getRemix(long id) {
+		return objectify.get().load().type(Comic.class).filter("ancestorComicId", id).first().now();
+	}
 
 	public List<Comic> getRemixes(Comic comic) {
 		return objectify.get().load().type(Comic.class).filter("ancestorComicId", comic.id).list();

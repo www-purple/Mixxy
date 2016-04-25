@@ -26,12 +26,43 @@ public class ComicController {
 	private ComicDao comicDao;
 
 	@SuppressWarnings("PMD.DataflowAnomalyAnalysis")
-	public Result remix() {
-		return Results.TODO();
+	public Result remixShow(@PathParam("id") Long id) {
+		Comic remix = null;
+
+		if (id != null) {
+
+			remix = comicDao.getRemix(id);
+
+		}
+
+		return Results.html().render("remix", remix);
+
 	}
 
-	public Result edit() {
-		return Results.TODO();
+	public Result newRemix(@PathParam("id") Long id, @LoggedInUser String username, Context context,
+			@JSR303Validation ComicDto comicDto, Validation validation) {
+
+		if (validation.hasViolations()) {
+
+			context.getFlashScope().error("Please correct field.");
+			context.getFlashScope().put("title", comicDto.title);
+			context.getFlashScope().put("description", comicDto.description);
+			context.getFlashScope().put("images", comicDto.images);
+			context.getFlashScope().put("likes", comicDto.likes);
+			context.getFlashScope().put("tags", comicDto.tags);
+
+			return Results.redirect("/remix/");
+
+		} else {
+
+			comicDao.branchComic(username, id);
+
+			context.getFlashScope().success("New remix created.");
+
+			return Results.redirect("/");
+
+		}
+
 	}
 
 	public Result comicShow(@PathParam("id") Long id) {
@@ -67,7 +98,7 @@ public class ComicController {
 
 			comicDao.newComic(username, comicDto);
 
-			context.getFlashScope().success("New article created.");
+			context.getFlashScope().success("New comic created.");
 
 			return Results.redirect("/");
 
