@@ -37,27 +37,39 @@ public class ComicDao {
 	}
 
 	public List<Comic> getComics(String username) {
-		
+
 		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
-		
+
 		return objectify.get().load().type(Comic.class).filter("authorId", user.id).list();
+	}
+	
+	public List<Like> getLikes(String username, String slug){
+		
+		Comic comic = getComic(username, slug);
+		
+		return objectify.get().load().type(Like.class).filter("comicId", comic.id).list();
+		
 	}
 
 	public Comic getComic(long id) {
 		return objectify.get().load().type(Comic.class).id(id).now();
 	}
-	
+
 	public Comic getComic(String username, String slug) {
 		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
-		
- 		return objectify.get().load().type(Comic.class).filter("authorId", user.id).filter("sluggedTitle", slug).first().now();
+
+		return objectify.get().load().type(Comic.class).filter("authorId", user.id).filter("sluggedTitle", slug).first()
+				.now();
 	}
-	
+
 	public Comic getRemix(long id) {
 		return objectify.get().load().type(Comic.class).filter("ancestorComicId", id).first().now();
 	}
 
-	public List<Comic> getRemixes(Comic comic) {
+	public List<Comic> getRemixes(String username, String slug) {
+		
+		Comic comic = getComic(username, slug);
+		
 		return objectify.get().load().type(Comic.class).filter("ancestorComicId", comic.id).list();
 	}
 
@@ -89,12 +101,12 @@ public class ComicDao {
 		}
 
 		Comic comic = new Comic(null, user, comicDto.title, comicDto.description, comicDto.tags);
-       
-//		comic.author = Ref.create(user);
+
+		// comic.author = Ref.create(user);
 
 		// lowest index is the root Parent comic (index 0 is the first comic
 		// iteration)
-		//comic.ancestorComics.add(Ref.create(comic));
+		// comic.ancestorComics.add(Ref.create(comic));
 		objectify.get().save().entity(comic).now();
 		comic.ancestorComicId.add(comic.id);
 		comic.sluggedTitle = comic.sluggedTitle + Long.toString(comic.id);
@@ -104,39 +116,61 @@ public class ComicDao {
 
 	}
 
-	public void saveComic(Long id, Comic comic) {
-		// TODO
+	public boolean saveComic(String username, String slug) {
+
+		Comic comic = getComic(username, slug);
+		
+		if (comic == null) {
+			return false;
+		}
+
+		objectify.get().save().entity(comic).now();
+
+		return true;
+	}
+
+	public boolean deleteComic(String username, String slug) {
+		
+		Comic comic = getComic(username, slug);
+
+		if (comic == null) {
+			return false;
+		}
+
+		objectify.get().delete().type(Comic.class).id(comic.id);
+
+		return true;
 	}
 
 	public Comic branchComic(String username, Long id) {
-		
+
 		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
-		
+
 		Comic parentComic = objectify.get().load().type(Comic.class).id(id).now();
-		
+
 		Comic remixedComic = new Comic(parentComic, user, parentComic.title, parentComic.description, parentComic.tags);
-		
+
 		objectify.get().save().entity(remixedComic).now();
 		remixedComic.ancestorComicId.add(remixedComic.id);
 		objectify.get().save().entity(remixedComic).now();
-		
+
 		return remixedComic;
 	}
 
 	public boolean likeComic(String username, Long comicId) {
-		
+
 		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
-		
-		if (user == null){
+
+		if (user == null) {
 			return false;
 		}
-		
+
 		Comic likedComic = objectify.get().load().type(Comic.class).id(comicId).now();
-		
+
 		Like like = new Like(likedComic, user);
-		
+
 		objectify.get().save().entity(like).now();
-		
+
 		return true;
 	}
 

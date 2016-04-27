@@ -14,6 +14,7 @@ import www.purple.mixxy.filters.JsonEndpoint;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.ComicDto;
+import www.purple.mixxy.models.Like;
 
 import java.util.List;
 
@@ -155,13 +156,29 @@ public class ComicController {
 	}
 
 	@FilterWith(JsonEndpoint.class)
-	public Result likes() {
-		return Results.TODO();
+	public Result likes(@LoggedInUser String username, @PathParam("work") String slug) {
+		List<Like> likes = null;
+
+		if (slug != null) {
+
+			likes = comicDao.getLikes(username, slug);
+
+		}
+
+		return Results.html().render("likes", likes);
 	}
 
 	@FilterWith(JsonEndpoint.class)
-	public Result remixes() {
-		return Results.TODO();
+	public Result remixes(@LoggedInUser String username, @PathParam("work") String slug) {
+		List<Comic> comics = null;
+
+		if (slug != null) {
+
+			comics = comicDao.getRemixes(username, slug);
+
+		}
+
+		return Results.html().render("comics", comics);
 	}
 
 	@FilterWith(JsonEndpoint.class)
@@ -175,12 +192,21 @@ public class ComicController {
 	}
 
 	@FilterWith(JsonEndpoint.class)
-	public Result delete() {
-		return Results.TODO();
+	public Result delete(@LoggedInUser String username, @PathParam("work") String slug, Context context) {
+
+		comicDao.deleteComic(username, slug);
+
+		context.getFlashScope().success("Deleted comic.");
+
+		return Results.redirect("/");
 	}
 
 	@FilterWith(JsonEndpoint.class)
-	public Result update() {
-		return Results.TODO();
+	public Result update(@LoggedInUser String username, @PathParam("work") String slug, Context context) {
+		comicDao.saveComic(username, slug);
+
+		context.getFlashScope().success("Saved comic.");
+
+		return Results.redirect("/");
 	}
 }
