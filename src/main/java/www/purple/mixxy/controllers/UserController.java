@@ -10,7 +10,6 @@ import www.purple.mixxy.filters.JsonEndpoint;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 
 import com.google.inject.Singleton;
-
 /**
  * 
  * @author Jesse Talavera-Greenberg
@@ -67,16 +66,11 @@ public class UserController {
   
   @FilterWith(JsonEndpoint.class)
   public Result works() {
-    return Results.TODO();
+    return Results.ok().html();
   }
   
   @FilterWith(JsonEndpoint.class)
   public Result work() {
     return Results.TODO();
-  }
-
-  @FilterWith(JsonEndpoint.class)
-  public Result newWork() {
-    return Results.ok().html();
   }
 }
