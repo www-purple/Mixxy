@@ -190,28 +190,29 @@ public class Routes implements ApplicationRoutes {
     router.POST().route("/create/?").with(ComicController.class, "newWork");
 
     // User profile page
-    router.GET().route("(/users)?/{user}/?").with(UserController.class, "user");
+    router.GET().route("(?:/users)?/{user}/?").with(UserController.class, "user");
 
     // Page that lists a user's subscribers
-    router.GET().route("(/users)?/{user}/subscribers/?").with(UserController.class, "subscribers");
+    router.GET().route("(?:/users)?/{user}/subscribers/?").with(UserController.class, "subscribers");
 
     // Page that lists everyone a user is subscribed to
-    router.GET().route("(/users)?/{user}/subscribed/?").with(UserController.class, "subscribed");
+    router.GET().route("(?:/users)?/{user}/subscribed/?").with(UserController.class, "subscribed");
 
     // Page that lists all of a user's likes
-    router.GET().route("(/users)?/{user}/likes/?").with(UserController.class, "likes");
+    router.GET().route("(?:/users)?/{user}/likes/?").with(UserController.class, "likes");
 
     // Get a given work from any user
-    router.GET().route("(/users)?/{user}/works/?").with(UserController.class, "works");
+    router.GET().route("(?:/users)?/{user}/works/?").with(UserController.class, "works");
 
     // Get a specific work from any user
-    router.GET().route("(/users)?/{user}(/works)?/{work}/?").with(UserController.class, "work");
+    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/?").with(UserController.class, "work");
 
     // Load the remixing page
-    router.GET().route("(/users)?/{user}(/works)?/{work}/remix/?").with(ComicController.class, "newRemix");
+    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/remix/?").with(ComicController.class, "newRemix");
 
     // Submit the remixed work
-    router.POST().route("(/users)?/{user}(/works)?/{work}/remix/?").with(ComicController.class, "newRemix");
+    router.POST().route("(?:/users)?/{user}(?:/works)?/{work}/remix/?").with(ComicController.class, "newRemix");
+
   }
 
 }
