@@ -74,4 +74,9 @@ public class UserController {
   public Result work() {
     return Results.TODO();
   }
+
+  @FilterWith(JsonEndpoint.class)
+  public Result newWork() {
+    return Results.ok().html();
+  }
 }
