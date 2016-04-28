@@ -22,11 +22,8 @@ import ninja.Result;
 import ninja.Results;
 import ninja.SecureFilter;
 import ninja.appengine.AppEngineFilter;
-import www.purple.mixxy.dao.ArticleDao;
 import www.purple.mixxy.etc.LoggedInUser;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
-import www.purple.mixxy.models.ArticleDto;
-import www.purple.mixxy.models.ArticlesDto;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -34,53 +31,6 @@ import com.google.inject.Singleton;
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class ApiController {
-
-  @Inject
-  @SuppressWarnings("PMD.DefaultPackage")
-  ArticleDao articleDao;
-
-  public Result getArticlesJson() {
-
-    ArticlesDto articlesDto = articleDao.getAllArticles();
-
-    return Results.json().render(articlesDto);
-  }
-
-  public Result getArticlesXml() {
-
-    ArticlesDto articlesDto = articleDao.getAllArticles();
-
-    return Results.xml().render(articlesDto);
-
-  }
-
-  @FilterWith(SecureFilter.class)
-  public Result postArticleJson(@LoggedInUser String username,
-      ArticleDto articleDto) {
-
-    boolean succeeded = articleDao.postArticle(username, articleDto);
-
-    if (succeeded) {
-      return Results.json();
-    } else {
-      return Results.notFound();
-    }
-
-  }
-
-  @FilterWith(SecureFilter.class)
-  public Result postArticleXml(@LoggedInUser String username,
-      ArticleDto articleDto) {
-
-    boolean succeeded = articleDao.postArticle(username, articleDto);
-
-    if (succeeded) {
-      return Results.xml();
-    } else {
-      return Results.notFound();
-    }
-
-  }
 
   public Result api(Context context) {
     return Results.TODO();
