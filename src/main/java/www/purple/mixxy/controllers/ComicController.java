@@ -222,7 +222,7 @@ public class ComicController {
 	// what to do about this yet, as this method will actually return binary data,
 	// not text
 	//@FilterWith(JsonEndpoint.class)
-	public Result image() {
+	public Result image(@PathParam("user") String username, @PathParam("work") String slug) {
 	  return Results.redirectTemporary("https://www.cs.stonybrook.edu/sites/default/files/wwwfiles/mckenna_0.jpg")
 	      .supportedContentTypes("image/gif", "image/png", "image/jpeg");
 	}
