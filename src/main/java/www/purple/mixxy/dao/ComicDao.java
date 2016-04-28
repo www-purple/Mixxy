@@ -151,7 +151,7 @@ public class ComicDao {
 			return false;
 		}
 
-		objectify.get().delete().type(Comic.class).id(comic.id);
+		objectify.get().delete().entity(comic);
 
 		return true;
 	}

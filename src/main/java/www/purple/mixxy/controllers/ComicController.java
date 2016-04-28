@@ -268,4 +268,8 @@ public class ComicController {
     public Result muro() {
         return Results.ok().html();
     }
+
+    public Result upload() {
+        return Results.ok().html();
+    }
 }
