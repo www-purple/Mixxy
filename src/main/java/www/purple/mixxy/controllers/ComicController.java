@@ -108,7 +108,7 @@ public class ComicController {
 		System.out.println(comic);
 
 		if (author == null || comic == null) {
-			return Results.notFound().html();
+		  return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
 		}
 
 		return Results.ok().render("comic", comic).render("author", author).html();
