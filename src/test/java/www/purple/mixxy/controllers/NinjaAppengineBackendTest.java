@@ -7,11 +7,12 @@ import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestC
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.googlecode.objectify.ObjectifyService;
 
+import ninja.NinjaTest;
 import www.purple.mixxy.conf.ObjectifyProvider;
 
 import java.io.Closeable;
 
-public class NinjaAppengineBackendTest {
+public class NinjaAppengineBackendTest extends NinjaTest {
 
     private final LocalServiceTestHelper helper = new LocalServiceTestHelper(
             new LocalDatastoreServiceTestConfig());
