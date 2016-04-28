@@ -5,7 +5,7 @@ body {
 }
 
 a {
-    color: firebrick;
+    color: #b10600;
 }
 #footer-nav a {
     color: rgba(0, 0, 0, 0.8);
@@ -15,7 +15,7 @@ a {
     color: rgba(255, 255, 255, 0.9);
 }
 
-h1.ui.header{
+h1.ui.header, h1{
     font-size: 3.75rem;
     font-family: 'Bangers', cursive;
 }
@@ -27,11 +27,21 @@ h1.ui.header{
 }
 
 #nav a.item:link, #nav a.item:visited, #nav a {
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 2px 1px 0px rgba(0,0,0,0.5);
+    color: white;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
     text-decoration: none;
 }
-#nav a.item:hover, #nav a.item:active {
+
+#create {
+    text-align: center;
+    text-decoration: none;
+}
+
+#nav a.item:hover, #nav a.item:active, #create a.item:link, #create a.item:visited, #create a {
     color: gold;
     text-shadow:
             -1px -1px 0 #000,
@@ -39,6 +49,15 @@ h1.ui.header{
             -1px 1px 0 #000,
             1px 1px 0 #000;
     text-decoration: none;
+}
+
+#create a.item:hover, #create a.item:active{
+    color: #b10600;
+    text-shadow:
+            -1px -1px 0 black,
+            1px -1px 0 black,
+            -1px 1px 0 black,
+            1px 1px 0 black;
 }
 
 p, .item, body{

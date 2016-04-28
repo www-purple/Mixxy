@@ -27,10 +27,13 @@ public class ComicController {
     return Results.TODO();
   }
 
-  @FilterWith(JsonEndpoint.class)
   public Result newWork() {
-    return Results.TODO();
+    return Results.ok().html();
   }
+
+    public Result muro() {
+        return Results.ok().html();
+    }
 
   @FilterWith(JsonEndpoint.class)
   public Result likes() {
