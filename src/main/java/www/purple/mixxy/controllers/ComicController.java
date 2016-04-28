@@ -89,7 +89,7 @@ public class ComicController {
 	}
 
 	@FilterWith(JsonEndpoint.class)
-	public Result comicShow(@PathParam("user") String username, @PathParam("work") String slug) {
+	public Result comic(@PathParam("user") String user, @PathParam("work") String work) {
 
 		Comic comic = null;
 
