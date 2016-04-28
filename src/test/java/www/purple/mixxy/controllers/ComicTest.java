@@ -37,13 +37,13 @@ public class ComicTest extends NinjaAppengineBackendTest {
 
 		// Retrieve all posts created by Bob
 		List<Comic> bobPosts = ofy.load().type(Comic.class)
-				.filter("authorIds", yetAnotherBob.id).list();
+				.filter("authorId", yetAnotherBob.id).list();
 
 		// Tests
 		assertEquals(1, bobPosts.size());
 		Comic firstPost = bobPosts.get(0);
 		assertNotNull(firstPost);
-		assertEquals(yetAnotherBob.id, firstPost.authorIds.get(0));
+		assertEquals(yetAnotherBob.id, firstPost.authorId);
 		assertEquals("cool title", firstPost.title);
 		assertEquals("interesting description", firstPost.description);
 		assertNotNull(firstPost.createdAt);

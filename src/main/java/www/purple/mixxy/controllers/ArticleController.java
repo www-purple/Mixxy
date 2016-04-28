@@ -28,7 +28,6 @@ public class ArticleController {
     ///////////////////////////////////////////////////////////////////////////
     // Show article
     ///////////////////////////////////////////////////////////////////////////
-    @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
     public Result articleShow(@PathParam("id") Long id) {
 
         Article article = null;
