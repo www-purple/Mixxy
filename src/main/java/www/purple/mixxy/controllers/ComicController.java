@@ -218,10 +218,18 @@ public class ComicController {
 		return Results.redirect("/");
 	}
 
-	// Intentionally not filtered with JsonEndpoint; I haven't figured out
-	// what to do about this yet, as this method will actually return binary data,
-	// not text
-	//@FilterWith(JsonEndpoint.class)
+	/**
+	 * Returns the {@link Result} containing the actual image data for a {@link Comic}.
+	 * May be accessed through the {@code /api/} prefix for consistency, but the
+	 * behavior for this case is identical, unlike that of the other routes.
+	 * An image can be accessed with a plain old HTTP request, and will be returned
+	 * to the client as its constituent bytes (as opposed to some encoding like base64).
+	 *
+	 * Whether this image comes from DeviantArt or from Mixxy should be irrelevant
+	 * to the user of this route.
+	 *
+	 * @return A {@link Result} containing the relevant {@link Comic}'s image data.
+	 */
 	public Result image(@PathParam("user") String username, @PathParam("work") String slug) {
 	  return Results.redirectTemporary("https://www.cs.stonybrook.edu/sites/default/files/wwwfiles/mckenna_0.jpg")
 	      .supportedContentTypes("image/gif", "image/png", "image/jpeg");
