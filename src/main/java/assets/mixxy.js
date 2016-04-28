@@ -13,4 +13,8 @@ $(document).ready(function(){
     $('.ui.dropdown')
         .dropdown()
     ;
+    $('#muro').damuro({
+        sandbox: 'deviantart_muro_sandbox.html',
+        background: '/assets/images/rubbellslsss.jpg' 
+    });
 });
