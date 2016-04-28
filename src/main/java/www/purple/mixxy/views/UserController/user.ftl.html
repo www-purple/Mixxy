@@ -1,9 +1,9 @@
 <#import "../layout/defaultLayout.ftl.html" as layout>
-    <@layout.myLayout "{User}">
+    <@layout.myLayout "${user}">
 
     <div class="ui container grey-box">
         <div class="ui centered padded grid">
-            <h1>Some Guy</h1>
+            <h1>${user}</h1>
             <div class="row">
                 <div class="sixteen wide column comic">
                     <div class="slim white-box">

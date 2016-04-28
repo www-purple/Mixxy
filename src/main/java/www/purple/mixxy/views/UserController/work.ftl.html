@@ -1,11 +1,10 @@
 <#import "../layout/defaultLayout.ftl.html" as layout>
-    <@layout.myLayout "Bad Hagrid">
-    <!-- @toDo needs non hardcoded data pulled from ds -->
+    <@layout.myLayout "${work}">
 
     <div class="ui container grey-box">
         <div class="ui centered padded stackable grid">
-                    <h1 class="ui header">Bad Hagrid</h1>
-                    <h3 class="ui header"> by <a href="/user">Some Guy</a></h3>
+            <h1 class="ui header">${work}</h1>
+            <h3 class="ui header"> by <a href="/${user}">${user}</a></h3>
             <div class="row">
                 <div class="ten wide column comic">
                     <div class="ui white-box">
@@ -23,15 +22,15 @@
                 <div class="ui four wide column">
                     <div class="white-box">
                         <!-- eventually needs to be a news feed of some sort -->
-                            <p><strong>Hagrid is a bad teacher</strong></p>
-                            <a href="/series">Harry Potter</a><br/>
-                            <br/>
-                            <br/>
-                            Remix<br/>
-                            Subscribe<br/>
-                            <br />
-                            <br />
-                            <a href="/report">Report</a>
+                        <p><strong>Hagrid is a bad teacher</strong></p>
+                        <a href="/series">Harry Potter</a><br/>
+                        <br/>
+                        <br/>
+                        Remix<br/>
+                        Subscribe<br/>
+                        <br />
+                        <br />
+                        <a href="/report">Report</a>
                     </div>
                 </div>
             </div>
