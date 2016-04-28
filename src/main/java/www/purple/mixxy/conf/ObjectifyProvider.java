@@ -1,5 +1,7 @@
 package www.purple.mixxy.conf;
 
+import java.util.Arrays;
+
 import com.google.inject.Provider;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
@@ -56,11 +58,22 @@ public class ObjectifyProvider implements Provider<Objectify> {
         Objectify ofy = ObjectifyService.ofy();
         User user = ofy.load().type(User.class).first().now();
 
+        User bob = new User("BobTheBuilder", "Bob", "Smith", "male", "bob@gmail.com", "url", "en", "123", "google");
+        bob.id = (long) -32;
+
+        Comic bobComic = new Comic(null, bob, "cool title", "interesting description", Arrays.asList("18+", "sci-fi", "sexy"));
+        bobComic.id = (long) -1;
+
+        Comic bobComic2 = new Comic(bobComic, bob, "cool title222", "interesting description222", Arrays.asList("parody", "derp"));
+        bobComic2.id = (long) -2;
+
+        bobComic2.ancestorComicId.add(bobComic.id);
         if (user == null) {
 
             // Create a new user and save it
-            User bob = new User("BobTheBuilder", "Bob", "Smith", "male", "bob@gmail.com", "url", "en", "123", "google");
-            ofy.save().entity(bob).now();
+            if (ofy.load().entity(bob).now() == null) {
+              ofy.save().entity(bob).now();
+            }
 
             // Create a new post
             Article bobPost3 = new Article(bob, "My third post", LIPSUM);
@@ -73,19 +86,11 @@ public class ObjectifyProvider implements Provider<Objectify> {
             // Create a new post
             Article bobPost1 = new Article(bob, POST1_TITLE, POST1_CONTENT);
             ofy.save().entity(bobPost1).now();
-            
-            
-            // Comic ancestry working
-            Comic bobComic = new Comic(null, bob, "cool title", "interesting description", null);
-            ofy.save().entities(bobComic).now();
-            bobComic.ancestorComicId.add(bobComic.id);
-            ofy.save().entities(bobComic).now();
-            
-            Comic bobComic2 = new Comic(bobComic, bob, "cool title222", "interesting description222", null);
-            ofy.save().entities(bobComic2).now();
-            bobComic2.ancestorComicId.add(bobComic2.id);
-            ofy.save().entities(bobComic2).now();
-            
+        }
+
+        // Comic ancestry working
+        if (ofy.load().type(Comic.class).first().now() == null) {
+            ofy.save().entities(bobComic, bobComic2).now();
         }
 
     }
