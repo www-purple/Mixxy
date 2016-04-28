@@ -1,6 +1,12 @@
 <#import "../layout/defaultLayout.ftl.html" as layout>
     <@layout.myLayout "${work}">
-
+    <div class="ui large breadcrumb">
+        <a class="section" href="/">Home</a>
+        <i class="right angle icon divider"></i>
+        <a class="section" href="/${user}">${user}</a>
+        <i class="right angle icon divider"></i>
+        <div class="active section">${work}</div>
+    </div>
     <div class="ui container grey-box">
         <div class="ui centered padded stackable grid">
             <h1 class="ui header">${work}</h1>
@@ -8,7 +14,7 @@
             <div class="row">
                 <div class="ten wide column comic">
                     <div class="ui white-box">
-                        <img class="ui centered large image" src="/assets/images/harrypotter.jpg" alt="Bad Hagrid">
+                        <img class="ui centered large image" src="/assets/images/harrypotter.jpg" alt="${work}">
                     </div>
                     <div class="ui white-box">
                         <p>Tags:</p>
