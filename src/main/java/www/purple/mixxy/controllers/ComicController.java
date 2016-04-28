@@ -28,45 +28,29 @@ public class ComicController {
 	@Inject
 	private ComicDao comicDao;
 
-	@FilterWith(JsonEndpoint.class)
-	public Result remixesShow(@PathParam("user") String user, @PathParam("work") String slug) {
-		
-		Comic comic = null;
-
-		if (slug != null) {
-
-			comic = comicDao.getComic(user, slug);
-
-		}
-		
-		List <Comic> remixes = null;
-
-		if (comic.id != null) {
-
-			remixes = comicDao.getRemixes(comic.id);
-
-		}
-
-		return Results.html().render("remix", remixes);
-
-	}
-	
 	/**
 	 * This method creates a new remix for a specific comic.
 	 * 
-	 * Pass in the id of the parent comic to remix on along with the current user, context and data model information.
+	 * Pass in the id of the parent comic to remix on along with the current
+	 * user, context and data model information.
 	 * 
-	 * @param id Identifier of the Parent comic
-	 * @param username Current user's username
-	 * @param context html context
-	 * @param comicDto Data model for the comic object
-	 * @param validation Checks for various violations such as:  field violations (on controller method fields), 
-	 * bean violations (on an injected beans field) or general violations (deprecated)
+	 * @param id
+	 *            Identifier of the Parent comic
+	 * @param username
+	 *            Current user's username
+	 * @param context
+	 *            html context
+	 * @param comicDto
+	 *            Data model for the comic object
+	 * @param validation
+	 *            Checks for various violations such as: field violations (on
+	 *            controller method fields), bean violations (on an injected
+	 *            beans field) or general violations (deprecated)
 	 * 
 	 * @return resulting route to redirect with content
 	 */
 	@FilterWith(JsonEndpoint.class)
-	public Result newRemix(@PathParam("user") String user, @PathParam("work") String slug, @LoggedInUser String username, Context context,
+	public Result newRemix(@PathParam("user") String user, @PathParam("work") String slug, Context context,
 			@JSR303Validation ComicDto comicDto, Validation validation) {
 
 		if (validation.hasViolations()) {
@@ -86,11 +70,15 @@ public class ComicController {
 
 			if (slug != null) {
 
-				comic = comicDao.getComic(username, slug);
+				comic = comicDao.getComic(user, slug);
 
 			}
 			
-			comicDao.branchComic(username, comic.id);
+			if (comic == null) {
+				return Results.notFound();
+			}
+
+			comicDao.branchComic(user, comic.id);
 
 			context.getFlashScope().success("New remix created.");
 
@@ -99,16 +87,18 @@ public class ComicController {
 		}
 
 	}
-	
+
 	@FilterWith(JsonEndpoint.class)
-	public Result comicShow(@PathParam("user") String username, @PathParam("comic-slug") String slug) {
+	public Result comicShow(@PathParam("user") String username, @PathParam("work") String slug) {
 
 		Comic comic = null;
 
 		if (slug != null) {
-
 			comic = comicDao.getComic(username, slug);
-
+		}
+		
+		if (comic == null) {
+			return Results.notFound();
 		}
 
 		return Results.html().render("comic", comic);
@@ -120,11 +110,16 @@ public class ComicController {
 	 * 
 	 * Pass in the current user, context and data model information.
 	 * 
-	 * @param username Current user's username
-	 * @param context html context
-	 * @param comicDto Data model for the comic object
-	 * @param validation Checks for various violations such as:  field violations (on controller method fields), 
-	 * bean violations (on an injected beans field) or general violations (deprecated)
+	 * @param username
+	 *            Current user's username
+	 * @param context
+	 *            html context
+	 * @param comicDto
+	 *            Data model for the comic object
+	 * @param validation
+	 *            Checks for various violations such as: field violations (on
+	 *            controller method fields), bean violations (on an injected
+	 *            beans field) or general violations (deprecated)
 	 * 
 	 * @return resulting route to redirect with content
 	 */
@@ -144,8 +139,14 @@ public class ComicController {
 			return Results.redirect("/create/");
 
 		} else {
+			
+			boolean didCreateComic = false;
 
-			comicDao.newComic(username, comicDto);
+			didCreateComic = comicDao.newComic(username, comicDto);
+			
+			if (didCreateComic == false){
+				return Results.notFound();
+			}
 
 			context.getFlashScope().success("New comic created.");
 
@@ -156,29 +157,65 @@ public class ComicController {
 	}
 
 	@FilterWith(JsonEndpoint.class)
-	public Result likes(@LoggedInUser String username, @PathParam("work") String slug) {
+	public Result likes(@PathParam("user") String username, @PathParam("work") String slug) {
 		List<Like> likes = null;
 
 		if (slug != null) {
 
 			likes = comicDao.getLikes(username, slug);
-
+			
 		}
 
+		if (likes == null) {
+			return Results.notFound();
+		}
+		
 		return Results.html().render("likes", likes);
 	}
 
 	@FilterWith(JsonEndpoint.class)
-	public Result remixes(@LoggedInUser String username, @PathParam("work") String slug) {
+	public Result remixes(@PathParam("user") String username, @PathParam("work") String slug) {
 		List<Comic> comics = null;
 
 		if (slug != null) {
-
 			comics = comicDao.getRemixes(username, slug);
-
 		}
 
+		if (comics == null) {
+			return Results.notFound();
+		}
+		
 		return Results.html().render("comics", comics);
+	}
+
+	@FilterWith(JsonEndpoint.class)
+	public Result delete(@PathParam("user") String username, @PathParam("work") String slug, Context context) {
+
+		boolean didDeleteComic = false;
+		didDeleteComic = comicDao.deleteComic(username, slug);
+		
+		if (didDeleteComic == false){
+			return Results.notFound();
+		}
+
+		context.getFlashScope().success("Deleted comic.");
+
+		return Results.redirect("/");
+	}
+
+	@FilterWith(JsonEndpoint.class)
+	public Result update(@PathParam("user") String username, @PathParam("work") String slug, Context context) {
+		
+		boolean didSaveComic = false;
+		didSaveComic = comicDao.saveComic(username, slug);
+
+		if (didSaveComic == false){
+			return Results.notFound();
+		}
+		
+		context.getFlashScope().success("Saved comic.");
+
+		return Results.redirect("/");
 	}
 
 	@FilterWith(JsonEndpoint.class)
@@ -189,24 +226,5 @@ public class ComicController {
 	@FilterWith(JsonEndpoint.class)
 	public Result parent() {
 		return Results.TODO();
-	}
-
-	@FilterWith(JsonEndpoint.class)
-	public Result delete(@LoggedInUser String username, @PathParam("work") String slug, Context context) {
-
-		comicDao.deleteComic(username, slug);
-
-		context.getFlashScope().success("Deleted comic.");
-
-		return Results.redirect("/");
-	}
-
-	@FilterWith(JsonEndpoint.class)
-	public Result update(@LoggedInUser String username, @PathParam("work") String slug, Context context) {
-		comicDao.saveComic(username, slug);
-
-		context.getFlashScope().success("Saved comic.");
-
-		return Results.redirect("/");
 	}
 }
