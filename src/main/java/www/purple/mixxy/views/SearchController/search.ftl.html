@@ -1,0 +1,43 @@
+<#import "../layout/defaultLayout.ftl.html" as layout>
+    <@layout.myLayout "Discover">
+    <div class="ui large breadcrumb">
+        <a class="section" href="/">Home</a>
+        <i class="right angle icon divider"></i>
+        <div class="active section">Search</div>
+    </div>
+    <div class="ui container grey-box">
+        <div class="ui centered padded stackable grid">
+            <div class="row">
+                <div class="ui sixteen wide column comic">
+                    <h1 class="ui header">Find Your Next Favorite!</h1>
+                    <div class="ui white-box">
+                        <div class="ui search">
+                            <div class="ui icon input">
+                                <input class="prompt" placeholder="Search!" type="text">
+                                <i class="search icon"></i>
+                            </div>
+                            <div class="results"></div>
+                        </div>
+                    </div>
+                        <div class="ui white-box">
+                            <h2>Fresh Comics</h2>
+                            <div class="ui small images">
+                                <a href="/comic">
+                                    <img class="ui image" src="/assets/images/harrypotter.jpg" alt="Bad Hagrid">
+                                </a>
+                                <img class="ui image" src="/assets/images/potter2.jpg" alt="Bad Dumbledore">
+                                <img class="ui image" src="/assets/images/potter3.jpg" alt="Badder Dumbledore">
+                            </div>
+                        </div>
+                        <div class="slim white-box">
+                            <h2>Popular Series</h2>
+                        </div>
+                        <div class="slim white-box">
+                            <h2>New Remixes</h2>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</@layout.myLayout>

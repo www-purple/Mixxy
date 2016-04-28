@@ -183,6 +183,7 @@ public class Routes implements ApplicationRoutes {
 
     // Page to create or upload a new work
     router.GET().route("/create/muro/?").with(ComicController.class, "muro");
+      router.GET().route("/create/upload/?").with(ComicController.class, "upload");
 
     // Page to actually submit a work
     router.POST().route("/create/?").with(ComicController.class, "newWork");
@@ -219,8 +220,6 @@ public class Routes implements ApplicationRoutes {
     
     // Load the comic page
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/comic/?").with(ComicController.class, "comicShow");
-
-
   }
 
 }

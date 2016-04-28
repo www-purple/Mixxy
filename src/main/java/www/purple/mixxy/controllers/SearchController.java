@@ -15,6 +15,10 @@ import com.google.inject.Singleton;
 public class SearchController {
 
   public Result search(@PathParam("id") Long id, Context context) {
-    return Results.TODO();
+    return Results.ok().html();
+  }
+
+  public Result upload() {
+    return Results.ok().html();
   }
 }
