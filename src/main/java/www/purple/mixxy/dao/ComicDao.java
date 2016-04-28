@@ -40,7 +40,13 @@ public class ComicDao {
 
 		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
 
-		return objectify.get().load().type(Comic.class).filter("authorId", user.id).list();
+		if (user != null) {
+		  // If the requested user exists...
+		  return objectify.get().load().type(Comic.class).filter("authorId", user.id).list();
+		}
+		else {
+		  return null;
+		}
 	}
 	
 	public List<Like> getLikes(String username, String slug){
