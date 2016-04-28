@@ -71,11 +71,6 @@ public class Routes implements ApplicationRoutes {
 
     router.GET().route("/settings/?").with(UserController.class, "settings");
 
-    // This needs to be put somewhere else probably
-    router.GET().route("/comic/?").with(Results.html().template(VIEWS + "ComicController/comic.ftl.html"));
-    router.GET().route("/user/?").with(Results.html().template(VIEWS + "UserController/user.ftl.html"));
-
-
     ///////////////////////////////////////////////////////////////////////////
     // Search
     ///////////////////////////////////////////////////////////////////////////
@@ -185,6 +180,9 @@ public class Routes implements ApplicationRoutes {
 
     // Page to create or upload a new work
     router.GET().route("/create/?").with(ComicController.class, "newWork");
+
+    // Page to create or upload a new work
+    router.GET().route("/create/muro/?").with(ComicController.class, "muro");
 
     // Page to actually submit a work
     router.POST().route("/create/?").with(ComicController.class, "newWork");

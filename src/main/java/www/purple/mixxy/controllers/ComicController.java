@@ -227,4 +227,8 @@ public class ComicController {
 	public Result parent() {
 		return Results.TODO();
 	}
+
+    public Result muro() {
+        return Results.ok().html();
+    }
 }
