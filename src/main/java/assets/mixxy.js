@@ -13,8 +13,15 @@ $(document).ready(function(){
     $('.ui.dropdown')
         .dropdown()
     ;
+
+    $('.ui.checkbox')
+        .checkbox()
+    ;
+    
     $('#muro').damuro({
         sandbox: 'deviantart_muro_sandbox.html',
         background: '/assets/images/rubbellslsss.jpg' 
     });
+
+
 });

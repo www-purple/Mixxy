@@ -1,6 +1,10 @@
 <#import "../layout/defaultLayout.ftl.html" as layout>
     <@layout.myLayout "${user}">
-
+    <div class="ui large breadcrumb">
+        <a class="section" href="/">Home</a>
+        <i class="right angle icon divider"></i>
+        <div class="active section">${user}</div>
+    </div>
     <div class="ui container grey-box">
         <div class="ui centered padded grid">
             <h1>${user}</h1>

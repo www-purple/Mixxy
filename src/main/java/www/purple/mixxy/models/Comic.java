@@ -60,6 +60,9 @@ public class Comic {
 			slg = new Slugify();
 			this.sluggedTitle = slg.slugify(title); 
 		} catch (IOException e) {
+		    // NOTE: Unlikely to occur; if it does, there's likely a bigger problem.
+		    // Slugify reads from a .properties file that is included in its own resources,
+		    // and you can't override it (so no chance of misuse).
 			e.printStackTrace();
 		}
 		

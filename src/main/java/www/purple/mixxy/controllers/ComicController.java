@@ -2,24 +2,31 @@ package www.purple.mixxy.controllers;
 
 import ninja.Context;
 import ninja.FilterWith;
+import ninja.Ninja;
 import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.PathParam;
+import ninja.utils.NinjaConstant;
 import ninja.validation.JSR303Validation;
 import ninja.validation.Validation;
 import www.purple.mixxy.dao.ComicDao;
+import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.etc.LoggedInUser;
+import www.purple.mixxy.etc.UserParameter;
 import www.purple.mixxy.filters.JsonEndpoint;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.ComicDto;
 import www.purple.mixxy.models.Like;
+import www.purple.mixxy.models.User;
 
 import java.util.List;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+
+import com.google.appengine.api.images.Image;
 
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
@@ -27,6 +34,9 @@ public class ComicController {
 
 	@Inject
 	private ComicDao comicDao;
+
+	@Inject
+	private UserDao userDao;
 
 	/**
 	 * This method creates a new remix for a specific comic.
@@ -88,20 +98,20 @@ public class ComicController {
 
 	}
 
+	// TODO: Move image-loading logic to here
 	@FilterWith(JsonEndpoint.class)
-	public Result comicShow(@PathParam("user") String username, @PathParam("work") String slug) {
+	public Result comic(@PathParam("user") String user, @PathParam("work") String work) {
 
-		Comic comic = null;
+	    User author = userDao.getUser(user);
+		Comic comic = comicDao.getComic(author, work);
 
-		if (slug != null) {
-			comic = comicDao.getComic(username, slug);
+		System.out.println(comic);
+
+		if (author == null || comic == null) {
+		  return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
 		}
-		
-		if (comic == null) {
-			return Results.notFound();
-		}
 
-		return Results.html().render("comic", comic);
+		return Results.ok().render("comic", comic).render("author", author).html();
 
 	}
 
@@ -218,6 +228,33 @@ public class ComicController {
 		return Results.redirect("/");
 	}
 
+	/**
+	 * Returns the {@link Result} containing the actual image data for a {@link Comic}.
+	 * May be accessed through the {@code /api/} prefix for consistency, but the
+	 * behavior for this case is identical, unlike that of the other routes.
+	 * An image can be accessed with a plain old HTTP request, and will be returned
+	 * to the client as its constituent bytes (as opposed to some encoding like base64).
+	 *
+	 * Whether this image comes from DeviantArt or from Mixxy should be irrelevant
+	 * to the user of this route.
+	 *
+	 * @return A {@link Result} containing the relevant {@link Comic}'s image data.
+	 */
+	public Result image(@PathParam("user") String user, @PathParam("work") String slug) {
+
+      User author = userDao.getUser(user);
+	  Comic comic = comicDao.getComic(author, slug);
+
+	  if (comic != null) {
+	    // If this Comic actually exists...
+  	    return Results.redirectTemporary("https://www.cs.stonybrook.edu/sites/default/files/wwwfiles/mckenna_0.jpg")
+  	      .supportedContentTypes("image/gif", "image/png", "image/jpeg");
+	  }
+	  else {
+	    return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
+	  }
+	}
+
 	@FilterWith(JsonEndpoint.class)
 	public Result root() {
 		return Results.TODO();
@@ -229,6 +266,10 @@ public class ComicController {
 	}
 
     public Result muro() {
+        return Results.ok().html();
+    }
+
+    public Result upload() {
         return Results.ok().html();
     }
 }

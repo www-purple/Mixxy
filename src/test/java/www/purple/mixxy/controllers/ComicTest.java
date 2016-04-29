@@ -34,18 +34,32 @@ public class ComicTest extends NinjaAppengineBackendTest {
 
 		// Test that the post has been created
 		assertNotNull(ofy.load().type(Comic.class).first().now());
+		
+		// Received comic using multiple filters with UserName and SluggedTitle
+		User user = ofy.load().type(User.class).filter("username", yetAnotherBob.username).first().now();
+		Comic recievedComic = ofy.load().type(Comic.class).filter("authorId", user.id).filter("sluggedTitle", comic.sluggedTitle).first().now();
+		assertNotNull(recievedComic);
+		assertEquals(recievedComic, comic);
+		
+		// Check if saved work done on comic
+		recievedComic.description = "sickness";
+		ofy.save().entity(recievedComic).now();
+		Comic newComic = ofy.load().type(Comic.class).id(recievedComic.id).now();
 
+		assertEquals("sickness", newComic.description);
+		
 		// Retrieve all posts created by Bob
 		List<Comic> bobPosts = ofy.load().type(Comic.class)
 				.filter("authorId", yetAnotherBob.id).list();
-
-		// Tests
+		
+		
+		// Basic Comic Tests
 		assertEquals(1, bobPosts.size());
 		Comic firstPost = bobPosts.get(0);
 		assertNotNull(firstPost);
 		assertEquals(yetAnotherBob.id, firstPost.authorId);
 		assertEquals("cool title", firstPost.title);
-		assertEquals("interesting description", firstPost.description);
+		assertEquals("sickness", firstPost.description);
 		assertNotNull(firstPost.createdAt);
 	}
 

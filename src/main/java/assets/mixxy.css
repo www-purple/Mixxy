@@ -16,8 +16,16 @@ a {
 }
 
 h1.ui.header, h1{
+    text-align: center; !important;
     font-size: 3.75rem;
     font-family: 'Bangers', cursive;
+    color: gold;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+    text-decoration: none;
 }
 
 
@@ -36,12 +44,7 @@ h1.ui.header, h1{
     text-decoration: none;
 }
 
-#create {
-    text-align: center;
-    text-decoration: none;
-}
-
-#nav a.item:hover, #nav a.item:active, #create a.item:link, #create a.item:visited, #create a {
+#nav a.item:hover, #nav a.item:active, .ui.link.list .item a.create:link, .ui.link.list .item a.create:visited {
     color: gold;
     text-shadow:
             -1px -1px 0 #000,
@@ -51,13 +54,18 @@ h1.ui.header, h1{
     text-decoration: none;
 }
 
-#create a.item:hover, #create a.item:active{
+.ui.link.list .item a.create:hover, .ui.link.list .item a.create:active{
     color: #b10600;
+    transition-duration: 0.5s;
     text-shadow:
             -1px -1px 0 black,
             1px -1px 0 black,
             -1px 1px 0 black,
             1px 1px 0 black;
+}
+
+.ui.massive.list {
+    text-align: center;
 }
 
 p, .item, body{
@@ -92,15 +100,12 @@ p, .item, body{
 
 .boring h1, .boring h2, .boring h3{
 	font-family: "PT Serif", serif;
+    color: black; !important
 }
 
 .boring p, .boring li{
 	font-family: "PT Sans", Helvetica, sans-serif;
     list-style-type: circle;
-}
-
-.boring h1 {
-	text-align: center;
 }
 
 .comic h1, .comic h2 {
@@ -113,4 +118,39 @@ p, .item, body{
     height: 600px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.ui.breadcrumb {
+    background: none;
+}
+
+.ui.breadcrumb a.section{
+    color: black;
+}
+
+.ui.breadcrumb .active.section{
+    color: white;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+}
+
+.ui.dropdown#login {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+#navbox {
+    margin-top: 20px;
+    margin-right: 10px;
+}
+.ui.medium.image#logo {
+    float: left;
+    margin-bottom: 10px;
+}
+
+#tagline {
+    margin-top: 30px;
 }

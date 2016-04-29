@@ -115,7 +115,7 @@ public class Routes implements ApplicationRoutes {
         // one (possibly with a URL with another work to remix)
 
         {
-          router.GET().route("/api/user/works/{work}/?").with(UserController.class, "work");
+          router.GET().route("/api/user/works/{work}/?").with(ComicController.class, "comic");
           router.METHOD(PATCH).route("/api/user/works/{work}/?").with(ComicController.class, "update");
           router.DELETE().route("/api/user/works/{work}/?").with(ComicController.class, "delete");
           // Gets, updates, or delete's a user's own work
@@ -157,10 +157,12 @@ public class Routes implements ApplicationRoutes {
         // Get a list of any user's works
 
         {
-          router.GET().route("/api/users/{user}/works/{work}/?").with(UserController.class, "work");
+          router.GET().route("/api/users/{user}/works/{work}/?").with(ComicController.class, "comic");
           // Get a specific work from any user
 
           {
+            router.GET().route("/api/users/{user}/works/{work}/image/?").with(ComicController.class, "image");
+
             router.GET().route("/api/users/{user}/works/{work}/remixes/?").with(ComicController.class, "remixes");
             // Get the remixes of any work
 
@@ -183,6 +185,7 @@ public class Routes implements ApplicationRoutes {
 
     // Page to create or upload a new work
     router.GET().route("/create/muro/?").with(ComicController.class, "muro");
+      router.GET().route("/create/upload/?").with(ComicController.class, "upload");
 
     // Page to actually submit a work
     router.POST().route("/create/?").with(ComicController.class, "newWork");
@@ -203,24 +206,19 @@ public class Routes implements ApplicationRoutes {
     router.GET().route("(?:/users)?/{user}/works/?").with(UserController.class, "works");
 
     // Get a specific work from any user
-    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/?").with(UserController.class, "work");
+    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/?").with(ComicController.class, "comic");
+
+    // Get the actual image from a given work
+    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/image/?").with(ComicController.class, "image");
 
     // Load the new remixing page
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/remix/?").with(ComicController.class, "newRemix");
 
     // Submit the remixed work
     router.POST().route("(?:/users)?/{user}(?:/works)?/{work}/remix/?").with(ComicController.class, "newRemix");
-    
+
     // Load the remixes page
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/remixes/?").with(ComicController.class, "remixes");
-    
-    // Load the comic page
-    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/comic/?").with(ComicController.class, "comicShow");
-    
-    // Load the comic page
-    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/comic/?").with(ComicController.class, "comicShow");
-
-
   }
 
 }
