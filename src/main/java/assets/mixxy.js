@@ -19,9 +19,16 @@ $(document).ready(function(){
     ;
     
     $('#muro').damuro({
-        sandbox: 'deviantart_muro_sandbox.html',
-        background: '/assets/images/rubbellslsss.jpg' 
-    });
+        loadingText: 'This is a customized loading message...',
+        sandbox:     '/assets/deviantart_muro_sandbox.html',
+        autoload: false,
+        background: "rgba(255, 255, 255, 1.0)",
+        splashCss: {
+            color: '#33a'
+        }
+    })
+    .one('click', function () { $(this).damuro().open(); })
+    .damuro();
 
 
 });
