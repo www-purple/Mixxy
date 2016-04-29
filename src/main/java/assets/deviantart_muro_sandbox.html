@@ -45,7 +45,7 @@ window.muroOptions = options;
 var document = window.document,
     el = document.createElement("script"),
     buster = Math.round(new Date().getTime() / (options.vm ? 1 : 3600000));
-el.src = "http://st.deviantart." + (options.vm ? "lan" : "com") + "/css/muro_embed" + (options.vm ? "" : "_jc") + ".js?" + buster;
+el.src = document.location.protocol + "//st.deviantart." + (options.vm ? "lan" : "com") + "/css/muro_embed" + (options.vm ? "" : "_jc") + ".js?" + buster;
 document.getElementsByTagName("body")[0].appendChild(el);
 })(window);
 </script>
