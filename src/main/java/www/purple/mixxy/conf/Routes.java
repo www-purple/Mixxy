@@ -23,6 +23,7 @@ import ninja.Results;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
 import ninja.utils.NinjaProperties;
+
 import www.purple.mixxy.controllers.ApiController;
 import www.purple.mixxy.controllers.ApplicationController;
 import www.purple.mixxy.controllers.ComicController;
@@ -40,6 +41,8 @@ public class Routes implements ApplicationRoutes {
   private NinjaProperties ninjaProperties;
 
   /**
+   * Initializes all Mixxy routes, used to decide which URLs should map to which controllers.
+   *
    * @param router
    *          The default router of this application
    */
@@ -161,14 +164,18 @@ public class Routes implements ApplicationRoutes {
           // Get a specific work from any user
 
           {
-            router.GET().route("/api/users/{user}/works/{work}/image/?").with(ComicController.class, "image");
+            router.GET().route("/api/users/{user}/works/{work}/image/?").with(ComicController.class,
+                "image");
 
-            router.GET().route("/api/users/{user}/works/{work}/remixes/?").with(ComicController.class, "remixes");
+            router.GET().route("/api/users/{user}/works/{work}/remixes/?").with(ComicController.class,
+                "remixes");
             // Get the remixes of any work
 
-            router.GET().route("/api/users/{user}/works/{work}/likes/?").with(ComicController.class, "likes");
+            router.GET().route("/api/users/{user}/works/{work}/likes/?").with(ComicController.class,
+                "likes");
 
-            router.GET().route("/api/users/{user}/works/{work}/parent/?").with(ComicController.class, "parent");
+            router.GET().route("/api/users/{user}/works/{work}/parent/?").with(ComicController.class,
+                "parent");
 
             router.GET().route("/api/users/{user}/works/{work}/root/?").with(ComicController.class, "root");
           }
@@ -185,7 +192,7 @@ public class Routes implements ApplicationRoutes {
 
     // Page to create or upload a new work
     router.GET().route("/create/muro/?").with(ComicController.class, "muro");
-      router.GET().route("/create/upload/?").with(ComicController.class, "upload");
+    router.GET().route("/create/upload/?").with(ComicController.class, "upload");
 
     // Page to actually submit a work
     router.POST().route("/create/?").with(ComicController.class, "newWork");
