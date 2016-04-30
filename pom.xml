@@ -214,9 +214,9 @@
     <dependencies>
     
         <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>tinymce-jquery</artifactId>
-            <version>3.4.9</version>
+				    <groupId>org.webjars.npm</groupId>
+				    <artifactId>jquery</artifactId>
+				    <version>3.0.0-beta1</version>
         </dependency>
 
         <dependency>
