@@ -1,59 +1,60 @@
 <#macro myLayout title="Mixxy">
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>${title}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="src/main/java/www/purple/mixxy/views/meta/about.ftl.html">
-        <meta name="author" content="www.purple">
-        <!-- Le styles -->
-        <link href="/assets/webjars/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Optional theme -->
 
-        <link rel="stylesheet" href="/assets/webjars/Semantic-UI/2.1.8/semantic.min.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>${title}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="src/main/java/www/purple/mixxy/views/meta/about.ftl.html">
+  <meta name="author" content="www.purple">
+  <!-- Le styles -->
+  <link href="/assets/webjars/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Optional theme -->
+  
+  <link rel="stylesheet" href="/assets/webjars/Semantic-UI/2.1.8/semantic.min.css">
+  
+  <link rel="stylesheet" type="text/css" href="/assets/webjars/slick/1.5.0/slick.css" />
+  <link rel="stylesheet" type="text/css" href="/assets/webjars/slick/1.5.0/slick-theme.css" />
+  <link rel="stylesheet" href="/assets/mixxy.css">
+  
+  
+  <!-- Latest compiled and minified JavaScript -->
+  
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+          <![endif]-->
+</head>
 
-        <link rel="stylesheet" type="text/css" href="/assets/webjars/slick/1.5.0/slick.css"/>
-        <link rel="stylesheet" type="text/css" href="/assets/webjars/slick/1.5.0/slick-theme.css"/>
-        <link rel="stylesheet" href="/assets/mixxy.css">
 
+<body>
+  <div class="container">
+    <#include "header.ftl.html"/>
+    
+    <#if (flash.error)??>
+      <div class="alert alert-danger">
+        ${flash.error}
+      </div>
+    </#if>
+    
+    <#if (flash.success)??>
+      <div class="alert alert-success">
+        ${flash.success}
+      </div>
+    </#if>
+    
+    <#nested/>
+    
+    <#include "footer.ftl.html"/>
+  </div>
 
-        <!-- Latest compiled and minified JavaScript -->
+  <script type="text/javascript" src="/assets/webjars/jquery/3.0.0-beta1/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/assets/webjars/Semantic-UI/2.1.8/semantic.min.js"></script>
+  <script type="text/javascript" src="/assets/jquery.deviantartmuro.js"></script>
+  <script type="text/javascript" src="/assets/webjars/slick/1.5.0/slick.min.js"></script>
+  <script type="text/javascript" src="/assets/mixxy.js"></script>
 
-        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-    </head>
-
-
-    <body>
-    <div class="container">
-        <#include "header.ftl.html"/>
-
-        <#if (flash.error)??>
-            <div class="alert alert-danger">
-                ${flash.error}
-            </div>
-        </#if>
-
-        <#if (flash.success)??>
-            <div class="alert alert-success">
-                ${flash.success}
-            </div>
-        </#if>
-
-        <#nested/>
-
-        <#include "footer.ftl.html"/>
-    </div>
-
-    <script type="text/javascript" src="/assets/webjars/jquery/3.0.0-beta1/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/webjars/Semantic-UI/2.1.8/semantic.min.js"></script>
-    <script type="text/javascript" src="/assets/jquery.deviantartmuro.js"></script>
-    <script type="text/javascript" src="/assets/webjars/slick/1.5.0/slick.min.js"></script>
-    <script type="text/javascript" src="/assets/mixxy.js"></script>
-
-    </body>
-    </html>
+</body>
+</html>
 </#macro>

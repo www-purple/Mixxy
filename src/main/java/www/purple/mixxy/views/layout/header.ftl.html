@@ -1,46 +1,43 @@
 <header>
-    <div class="ui stackable two column grid">
-        <div class="eight wide left floated column">
-            <a href="/"><img id="logo" class="ui medium image" src="/assets/images/logo.png"
-                                                     alt="Mixxy - Make Art Great!"></a>
-            <p id="tagline">Make Art Great!</p>
-        </div>
-        <div class="eight wide right floated column">
-            <div class="ui grid">
-                <div class="row">
-                    <div class="right aligned column">
-                        <div class="ui dropdown" id="login">
-                            <#if (session.username)??>
-                                <div class="text">Hi, <a class="item" href="#">${session.username}</a></div>
-                                <i class="dropdown icon"></i>
-                                <div class="right menu">
-                                    <a class="item">Subscriptions</a>
-                                    <a class="item">Profile</a>
-                                    <a class="item" href="/logout">${i18n("header.logout")}</a>
-                                </div>
-                                <#else>
-                                    <div class="text">Sign In</div>
-                                    <i class="dropdown icon"></i>
-                                    <div class="right menu">
-                                        <a class="item" href="/login?provider=facebook"
-                                           id="Facebook">${i18n("header.facebook")}</a>
-                                        <a class="item" href="/login?provider=google"
-                                           id="Google">${i18n("header.google")}</a>
-                                        <a class="item" href="/login?provider=deviantart" id="Deviant Art">${i18n("header.deviantart")}</a>
-                                    </div>
-                            </#if>
-                        </div>
-                    </div>
+  <div class="ui stackable two column grid">
+    <div class="eight wide left floated column">
+      <a href="/"><img id="logo" class="ui medium image" src="/assets/images/logo.png" alt="Mixxy - Make Art Great!"></a>
+      <p id="tagline">Make Art Great!</p>
+    </div>
+    <div class="eight wide right floated column">
+      <div class="ui grid">
+        <div class="row">
+          <div class="right aligned column">
+            <div class="ui dropdown" id="login">
+              <#if (session.username)??>
+                <div class="text">
+                  Hi, <a class="item" href="#">${session.username}</a>
                 </div>
-                <div class="centered row">
-                    <div class="left aligned column" id="navbox">
-                        <!-- need to be logged in -- if we're not logged in, redir to login page -->
-                        <div id="nav" class="ui massive horizontal link list">
-                            <a class="item" href="/create"><h2>Draw</h2></a>
-                            <a class="item" href="/find"><h2>Discover</h2></a>
-                        </div>
-                    </div>
+                <i class="dropdown icon"></i>
+                <div class="right menu">
+                  <a class="item">Subscriptions</a> <a class="item">Profile</a> <a class="item" href="/logout">${i18n("header.logout")}</a>
                 </div>
+              <#else>
+                <div class="text">Sign In</div>
+                <i class="dropdown icon"></i>
+                <div class="right menu">
+                  <a class="item" href="/login?provider=facebook" id="Facebook">${i18n("header.facebook")}</a> <a
+                    class="item" href="/login?provider=google" id="Google">${i18n("header.google")}</a> <a class="item"
+                    href="/login?provider=deviantart" id="Deviant Art">${i18n("header.deviantart")}</a>
+                </div>
+              </#if>
             </div>
+          </div>
         </div>
+        <div class="centered row">
+          <div class="left aligned column" id="navbox">
+            <!-- need to be logged in -- if we're not logged in, redir to login page -->
+            <div id="nav" class="ui massive horizontal link list">
+              <a class="item" href="/create"><h2>Draw</h2></a> <a class="item" href="/find"><h2>Discover</h2></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>

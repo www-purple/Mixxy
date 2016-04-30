@@ -1,66 +1,61 @@
 <#import "../layout/defaultLayout.ftl.html" as layout>
-    <@layout.myLayout "Upload a Comic">
-    <div class="ui large breadcrumb">
-        <a class="section" href="/">Home</a>
-        <i class="right angle icon divider"></i>
-        <a class="section" href="/create">Draw</a>
-        <i class="right angle icon divider"></i>
-        <div class="active section">Upload</div>
-    </div>
-    <div class="ui container grey-box">
-        <div class="ui centered padded stackable grid">
-            <div class="row">
-                <div class="ui sixteen wide column comic">
-                    <h1 class="ui header">Upload a Comic</h1>
-                    <div class="ui white-box">
-                        <div class="ui form">
-                            <div class="required field">
-                                <label>Title</label>
-                                <input type="text">
-                            </div>
-                            <div class="field">
-                                <label>Description</label>
-                                <textarea rows="2"></textarea>
-                            </div>
-                            <div class="field">
-                                <label>Series</label>
-                                <select class="ui dropdown">
-                                    <option value="">Series</option>
-                                    <option value="1">Married with Children</option>
-                                    <option value="0">Space Invaders</option>
-                                </select>
-                            </div>
-                            <div class="inline fields">
-                                <div class="fourteen wide required field">
-                                    <select class="ui fluid search dropdown" multiple="">
-                                        <option value="">Tags</option>
-                                        <option value="bears">Bears</option>
-                                        <option value="beers">Beers</option>
-                                        <option value="beards">Beards</option>
-                                        <option value="bees">Bees</option>
-                                        <option value="bats">Bats</option>
-                                        <option value="rats">Rats</option>
-                                        <option value="cats">Cats</option>
-                                        <option value="hats">Hats</option>
-                                    </select>
-                                </div>
-                                <div class="inline right floated required field">
-                                    <div class="ui toggle checkbox">
-                                        <input class="hidden" tabindex="0" type="checkbox">
-                                        <label>NSFW?</label>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="ui action input">
-                                    <input placeholder="Choose Comic" type="text">
-                                    <button class="ui button">Select</button>
-                                </div>
-                                <button class="ui right floated button">Upload Comic</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<@layout.myLayout "Upload a Comic">
+<div class="ui large breadcrumb">
+  <a class="section" href="/">Home</a> <i class="right angle icon divider"></i> <a class="section" href="/create">Draw</a>
+  <i class="right angle icon divider"></i>
+  <div class="active section">Upload</div>
+</div>
+<div class="ui container grey-box">
+  <div class="ui centered padded stackable grid">
+    <div class="row">
+      <div class="ui sixteen wide column comic">
+        <h1 class="ui header">Upload a Comic</h1>
+        <div class="ui white-box">
+          <div class="ui form">
+            <div class="required field">
+              <label>Title</label> <input type="text">
             </div>
+            <div class="field">
+              <label>Description</label>
+              <textarea rows="2"></textarea>
+            </div>
+            <div class="field">
+              <label>Series</label> <select class="ui dropdown">
+                <option value="">Series</option>
+                <option value="1">Married with Children</option>
+                <option value="0">Space Invaders</option>
+              </select>
+            </div>
+            <div class="inline fields">
+              <div class="fourteen wide required field">
+                <select class="ui fluid search dropdown" multiple="">
+                  <option value="">Tags</option>
+                  <option value="bears">Bears</option>
+                  <option value="beers">Beers</option>
+                  <option value="beards">Beards</option>
+                  <option value="bees">Bees</option>
+                  <option value="bats">Bats</option>
+                  <option value="rats">Rats</option>
+                  <option value="cats">Cats</option>
+                  <option value="hats">Hats</option>
+                </select>
+              </div>
+              <div class="inline right floated required field">
+                <div class="ui toggle checkbox">
+                  <input class="hidden" tabindex="0" type="checkbox"> <label>NSFW?</label>
+                </div>
+              </div>
+            </div>
+            <div class="ui action input">
+              <input placeholder="Choose Comic" type="text">
+              <button class="ui button">Select</button>
+            </div>
+            <button class="ui right floated button">Upload Comic</button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+</div>
+</div>
 </@layout.myLayout>
