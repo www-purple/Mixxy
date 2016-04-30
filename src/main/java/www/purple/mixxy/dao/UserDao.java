@@ -35,11 +35,10 @@ public class UserDao {
 
   /**
    * Given a username, get the underlying {@link User}.
-   * 
+   *
    * @param username
    *          The user whose details should be retrieved.
-   * @return The {@link User} if it exists, {@code null} if doesn't or if
-   *         {@code username} is {@code null}.
+   * @return The {@link User} if it exists, {@code null} if doesn't or if {@code username} is {@code null}.
    */
   public User getUser(String username) {
     User user = null;
@@ -52,18 +51,10 @@ public class UserDao {
 
     return user;
   }
-  
-  public void createUser(String username, String firstName, String lastName, String gender,
-		  String email, String pictureUrl, String locale, String providerId, String provider) {
-	  
-	  User user = new User(username, firstName, lastName, gender, email, 
-			  pictureUrl, locale, providerId, provider);
-	  objectify.get().save().entity(user).now();
-  }
 
   /**
    * Given a user ID, get the underlying {@link User}.
-   * 
+   *
    * @param id
    *          The ID user whose details should be retrieved.
    * @return The {@link User} if it exists, {@code null} if doesn't.
@@ -71,7 +62,15 @@ public class UserDao {
   public User getUser(long id) {
     return objectify.get().load().type(User.class).id(id).now();
   }
-  
+
+  public void createUser(String username, String firstName, String lastName, String gender,
+      String email, String pictureUrl, String locale, String providerId, String provider) {
+
+    User user = new User(username, firstName, lastName, gender, email,
+        pictureUrl, locale, providerId, provider);
+    objectify.get().save().entity(user).now();
+  }
+
   public boolean updateUser(String username, User info) {
     return false;
   }

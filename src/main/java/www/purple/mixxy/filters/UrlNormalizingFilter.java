@@ -13,18 +13,18 @@ import ninja.FilterChain;
 import ninja.Result;
 
 /**
- * Any URLs that almost follow a specific convention, but not quite, will be
- * fixed and the user redirected to the proper URL. This is for SEO purposes;
- * {@code /resource} and {@code /resource/} (note the trailing slash) are two
- * separate Web pages, as far as Google is concerned.
- * 
+ * Fixes URLs that almost (but not quite) follow a specific convention and redirects users to the correct URL. This is
+ * for SEO purposes; {@code /resource} and {@code /resource/} (note the trailing slash) are two separate Web pages, as
+ * far as Google is concerned.
+ *
+ * <p>
  * This {@code Filter} transforms URLs in the following ways:
  * <ul>
  * <li>Strips trailing slashes</li>
  * </ul>
- * 
- * @author Jesse Talavera-Greenberg
+ * </p>
  *
+ * @author Jesse Talavera-Greenberg
  */
 @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
 public class UrlNormalizingFilter implements Filter {
@@ -38,9 +38,10 @@ public class UrlNormalizingFilter implements Filter {
     try {
       originalPath = new URI(originalPath).normalize().toString();
       // Normalize the request URI, if it's valid
-    } catch (URISyntaxException e) {
+    }
+    catch (URISyntaxException e) {
       logger.info("Request to URL with invalid syntax \"{}\" (index {})", e.getInput(), e.getIndex());
-      // TODO: Should strange-looking URIs just be an error?  Must do research
+      // TODO: Should strange-looking URIs just be an error? Must do research
     }
 
     String path = originalPath;
@@ -52,12 +53,14 @@ public class UrlNormalizingFilter implements Filter {
       transformed = true;
       path = originalPath.substring(0, path.length() - 1);
     }
+    // TODO: Support query parameters and case-insensitivity
 
     if (transformed) {
       // If we normalized the URL at all...
       logger.debug("Incoming request for \"{}\", normalizing to \"{}\"", originalPath, path);
       return filterChain.next(context).redirect(path).status(Result.SC_301_MOVED_PERMANENTLY);
-    } else {
+    }
+    else {
       return filterChain.next(context);
     }
 
