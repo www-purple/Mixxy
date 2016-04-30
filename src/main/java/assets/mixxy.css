@@ -112,6 +112,14 @@ p, .item, body{
 	display: inline;
 }
 
+#muro {
+    color: white;
+    width: 900px;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .ui.breadcrumb {
     background: none;
 }
