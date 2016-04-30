@@ -13,37 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package www.purple.mixxy.controllers;
+
+import com.google.inject.Singleton;
 
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
+import ninja.appengine.AppEngineFilter;
+
 import www.purple.mixxy.conf.ObjectifyProvider;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
-
-import com.google.inject.Singleton;
-
-import ninja.appengine.AppEngineFilter;
 
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class ApplicationController {
-   
-    /**
-     * Method to put initial data in the db...
-     * @return A successful Result
-     */
-    public Result setup() {
-        
-        ObjectifyProvider.setup();
-        
-        return Results.ok();
-    }
 
-    public Result index() {
+  /**
+   * Method to put initial data in the db...
+   *
+   * @return A successful Result
+   */
+  public Result setup() {
 
-        return Results.ok().html();
+    ObjectifyProvider.setup();
 
-    }
+    return Results.ok();
+  }
+
+  public Result index() {
+
+    return Results.ok().html();
+
+  }
 
 }
