@@ -16,32 +16,28 @@
 
 package www.purple.mixxy.controllers;
 
-import static org.junit.Assert.assertTrue;
 import ninja.NinjaFluentLeniumTest;
 
-import org.junit.Before;
-import org.junit.Test;
-
 public class ApplicationControllerFluentLeniumTest extends NinjaFluentLeniumTest {
-    
-    //@Before
-    public void setup() {
-        
-        goTo(getServerAddress() + "setup");
-        goTo(getServerAddress() + "/");
-        
-    }
 
-    //@Test
-    public void testThatHomepageWorks() {
-        //assertTrue(title().contains("Home page"));
-    }
-    
-    //@Test
-    public void testNavigateToLogin() {
-        //click("#login");
-        
-        //assertTrue(url().contains("login"));
-    }
+  // @Before
+  public void setup() {
+
+    goTo(getServerAddress() + "setup");
+    goTo(getServerAddress() + "/");
+
+  }
+
+  // @Test
+  public void testThatHomepageWorks() {
+    // assertTrue(title().contains("Home page"));
+  }
+
+  // @Test
+  public void testNavigateToLogin() {
+    // click("#login");
+
+    // assertTrue(url().contains("login"));
+  }
 
 }

@@ -16,31 +16,27 @@
 
 package www.purple.mixxy.controllers;
 
-import static org.junit.Assert.assertTrue;
 import ninja.NinjaTest;
 
-import org.junit.Before;
-import org.junit.Test;
-
 public class ApplicationControllerTest extends NinjaTest {
-    
-    //@Before
-    public void setup() {
-        
-        ninjaTestBrowser.makeRequest(getServerAddress() + "setup");
-        
-    }
 
-    //@Test
-    public void testThatHomepageWorks() {
+  // @Before
+  public void setup() {
 
-        // /redirect will send a location: redirect in the headers
-        String result = ninjaTestBrowser.makeRequest(getServerAddress() + "/");
+    ninjaTestBrowser.makeRequest(getServerAddress() + "setup");
 
-        // If the redirect has worked we must see the following text
-        // from the index screen:
-        //assertTrue(result.contains("My second post"));
+  }
 
-    }
+  // @Test
+  public void testThatHomepageWorks() {
+
+    // /redirect will send a location: redirect in the headers
+    String result = ninjaTestBrowser.makeRequest(getServerAddress() + "/");
+
+    // If the redirect has worked we must see the following text
+    // from the index screen:
+    // assertTrue(result.contains("My second post"));
+
+  }
 
 }

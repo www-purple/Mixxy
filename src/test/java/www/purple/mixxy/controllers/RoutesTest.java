@@ -21,24 +21,22 @@ import ninja.NinjaTest;
 import ninja.Route;
 import ninja.Router;
 
-import static org.junit.Assert.*;
-
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Singleton;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 /**
  * This test class is <em>only</em> for anything involving the routes; for the
  * server's reaction to actually navigating to these routes, see
  * {@link NavigationTest}.
- * 
+ *
  * @author Jesse Talavera-Greenberg
  * @see NavigationTest
  */
-@Singleton
 public class RoutesTest extends NinjaTest {
 
   @Inject
@@ -148,7 +146,7 @@ public class RoutesTest extends NinjaTest {
   @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
   public void testAllRoutesEndWithOptionalSlash() {
     for (final Route r : router.getRoutes()) {
-      assertTrue(r.getUrl().endsWith("/?"));
+      assertThat(r.getUrl(), endsWith("/?"));
     }
   }
 }

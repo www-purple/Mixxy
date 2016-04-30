@@ -1,18 +1,14 @@
 package www.purple.mixxy.controllers;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
-
-import com.google.inject.Singleton;
-
 import ninja.NinjaFluentLeniumTest;
 
-@Singleton
+import static org.junit.Assert.*;
+
 public class NavigationTest extends NinjaFluentLeniumTest {
 
   @Test
-  public void indexWithTrailingSlashIsOk() {
+  public void testIndexWithTrailingSlashIsOk() {
     String url = getServerAddress();
 
     goTo(url + "/");
@@ -21,7 +17,7 @@ public class NavigationTest extends NinjaFluentLeniumTest {
   }
 
   @Test
-  public void indexWithoutTrailingSlashIsOk() {
+  public void testIndexWithoutTrailingSlashIsOk() {
     String url = getServerAddress();
 
     goTo(url);
