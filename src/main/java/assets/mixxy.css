@@ -1,156 +1,139 @@
 @import url(https://fonts.googleapis.com/css?family=Molengo|Bangers|Acme|Permanent+Marker|PT+Serif|PT+Sans);
 
 body {
-	background-image: url("images/bg.png");
+  background-image: url("images/bg.png");
 }
 
 a {
-    color: #b10600;
+  color: #b10600;
 }
+
 #footer-nav a {
-    color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 #footer-nav a:hover, #footer-nav a:active {
-    color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.9);
 }
 
-h1.ui.header, h1{
-    text-align: center; !important;
-    font-size: 3.75rem;
-    font-family: 'Bangers', cursive;
-    color: gold;
-    text-shadow:
-            -1px -1px 0 #000,
-            1px -1px 0 #000,
-            -1px 1px 0 #000,
-            1px 1px 0 #000;
-    text-decoration: none;
+h1.ui.header, h1 {
+  text-align: center; ! important;
+  font-size: 3.75rem;
+  font-family: 'Bangers', cursive;
+  color: gold;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-decoration: none;
 }
 
-
-#nav h2, h2.ui.header, h2{
-    font-size: 3rem;
-    font-family: 'Permanent Marker', cursive;
+#nav h2, h2.ui.header, h2 {
+  font-size: 3rem;
+  font-family: 'Permanent Marker', cursive;
 }
 
 #nav a.item:link, #nav a.item:visited, #nav a {
-    color: white;
-    text-shadow:
-            -1px -1px 0 #000,
-            1px -1px 0 #000,
-            -1px 1px 0 #000,
-            1px 1px 0 #000;
-    text-decoration: none;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-decoration: none;
 }
 
 #nav a.item:hover, #nav a.item:active, .ui.link.list .item a.create:link, .ui.link.list .item a.create:visited {
-    color: gold;
-    text-shadow:
-            -1px -1px 0 #000,
-            1px -1px 0 #000,
-            -1px 1px 0 #000,
-            1px 1px 0 #000;
-    text-decoration: none;
+  color: gold;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-decoration: none;
 }
 
-.ui.link.list .item a.create:hover, .ui.link.list .item a.create:active{
-    color: #b10600;
-    transition-duration: 0.5s;
-    text-shadow:
-            -1px -1px 0 black,
-            1px -1px 0 black,
-            -1px 1px 0 black,
-            1px 1px 0 black;
+.ui.link.list .item a.create:hover, .ui.link.list .item a.create:active {
+  color: #b10600;
+  transition-duration: 0.5s;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
 
 .ui.massive.list {
-    text-align: center;
+  text-align: center;
 }
 
-p, .item, body{
-	font-family: 'Acme', sans-serif;
-	font-size: 1rem;
+p, .item, body {
+  font-family: 'Acme', sans-serif;
+  font-size: 1rem;
 }
 
 .grey-box {
-	background-color: lightgrey;
-	border: 2px black solid;
-    margin-bottom: 20px;
+  background-color: lightgrey;
+  border: 2px black solid;
+  margin-bottom: 20px;
 }
 
 .white-box {
-    margin-bottom: 10px;
-	background-color: white;
-	border: 1px black solid;
-    padding: 10px 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  border: 1px black solid;
+  padding: 10px 10px;
 }
 
 .rounded {
-	border-radius: 25px;
+  border-radius: 25px;
 }
 
 #featured-comics {
-	text-align: center;
+  text-align: center;
 }
 
-#featured-comics a{
-    color: black;
+#featured-comics a {
+  color: black;
 }
 
-.boring h1, .boring h2, .boring h3{
-	font-family: "PT Serif", serif;
-    color: black; !important
+.boring h1, .boring h2, .boring h3 {
+  font-family: "PT Serif", serif;
+  color: black;
+  !
+  important
 }
 
-.boring p, .boring li{
-	font-family: "PT Sans", Helvetica, sans-serif;
-    list-style-type: circle;
+.boring p, .boring li {
+  font-family: "PT Sans", Helvetica, sans-serif;
+  list-style-type: circle;
 }
 
 .comic h1, .comic h2 {
-	display: inline;
+  display: inline;
 }
 
 #muro {
-    color: white;
-    width: 900px;
-    height: 600px;
-    margin-left: auto;
-    margin-right: auto;
+  color: white;
+  width: 900px;
+  height: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .ui.breadcrumb {
-    background: none;
+  background: none;
 }
 
-.ui.breadcrumb a.section{
-    color: black;
+.ui.breadcrumb a.section {
+  color: black;
 }
 
-.ui.breadcrumb .active.section{
-    color: white;
-    text-shadow:
-            -1px -1px 0 #000,
-            1px -1px 0 #000,
-            -1px 1px 0 #000,
-            1px 1px 0 #000;
+.ui.breadcrumb .active.section {
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .ui.dropdown#login {
-    margin-top: 10px;
-    margin-right: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 #navbox {
-    margin-top: 20px;
-    margin-right: 10px;
+  margin-top: 20px;
+  margin-right: 10px;
 }
+
 .ui.medium.image#logo {
-    float: left;
-    margin-bottom: 10px;
+  float: left;
+  margin-bottom: 10px;
 }
 
 #tagline {
-    margin-top: 30px;
+  margin-top: 30px;
 }
