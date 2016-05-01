@@ -40,7 +40,13 @@ public class ComicDao {
 
 		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
 
-		return objectify.get().load().type(Comic.class).filter("authorId", user.id).list();
+		if (user != null) {
+		  // If the requested user exists...
+		  return objectify.get().load().type(Comic.class).filter("authorId", user.id).list();
+		}
+		else {
+		  return null;
+		}
 	}
 	
 	public List<Like> getLikes(String username, String slug){
@@ -56,10 +62,18 @@ public class ComicDao {
 	}
 
 	public Comic getComic(String username, String slug) {
-		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+	    if (username == null || slug == null) return null;
+
+	    User user = objectify.get().load().type(User.class).filter("username", username).first().now();
 
 		return objectify.get().load().type(Comic.class).filter("authorId", user.id).filter("sluggedTitle", slug).first()
 				.now();
+	}
+
+	public Comic getComic(User user, String slug) {
+	    if (user == null || slug == null) return null;
+
+	    return getComic(user.username, slug);
 	}
 
 	public Comic getRemix(long id) {
@@ -137,7 +151,7 @@ public class ComicDao {
 			return false;
 		}
 
-		objectify.get().delete().type(Comic.class).id(comic.id);
+		objectify.get().delete().entity(comic);
 
 		return true;
 	}
