@@ -18,6 +18,8 @@ a {
 h1.ui.header, h1{
     font-size: 3.75rem;
     font-family: 'Bangers', cursive;
+    margin-left: 4rem;
+    margin-bottom: -2rem;
 }
 
 
@@ -68,14 +70,14 @@ p, .item, body{
 .grey-box {
 	background-color: lightgrey;
 	border: 2px black solid;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
 }
 
 .white-box {
-    margin-bottom: 10px;
 	background-color: white;
 	border: 1px black solid;
-    padding: 10px 10px;
+    padding: 1rem;
+    margin: 3rem;
 }
 
 .rounded {
