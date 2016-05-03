@@ -240,3 +240,6 @@ mixxy.iml
 
 # PMD ruleset added
 .pmd
+
+# Checkstyle plugin from Eclipse
+.checkstyle

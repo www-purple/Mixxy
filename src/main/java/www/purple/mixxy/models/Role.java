@@ -1,9 +1,16 @@
 package www.purple.mixxy.models;
 
 /**
- * Created by Brian_Sabz on 4/5/16.
+ * Describe the role a {@link User} plays in the application's community.
  */
 public enum Role {
-    USER,
-    MODERATOR
-};
+  /**
+   * Typical users of this application.
+   */
+  USER,
+
+  /**
+   * Users who enforce community standards.
+   */
+  MODERATOR
+}

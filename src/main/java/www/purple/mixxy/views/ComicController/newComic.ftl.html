@@ -1,0 +1,34 @@
+<#import "../layout/defaultLayout.ftl.html" as layout>
+<@layout.myLayout "Create a Comic">
+
+<div class="ui large breadcrumb">
+  <a class="section" href="/">Home</a> <i class="right angle icon divider"></i>
+  <div class="active section" href="/create">Draw</div>
+</div>
+<div class="ui container grey-box">
+  <div class="ui centered padded stackable grid">
+    <div class="row">
+      <div class="ui sixteen wide column comic">
+        <div class="ui white-box">
+          <div class="ui relaxed massive link list">
+            <!-- need to be logged in -- if we're not logged in, redir to login page -->
+            <div class="item">
+              <h1>
+                <a class="create" href="/create/muro">Create a Comic with Muro</a>
+              </h1>
+            </div>
+            <!-- link to Muro editor page -->
+            <div class="item">
+              <h1>
+                <a class="create" href="/create/upload">Upload a Comic</a>
+              </h1>
+            </div>
+            <!-- do some ajax call to bring up an upload module -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</@layout.myLayout>

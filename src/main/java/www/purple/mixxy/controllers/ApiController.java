@@ -16,18 +16,21 @@
 
 package www.purple.mixxy.controllers;
 
+import com.google.inject.Singleton;
+
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
-import ninja.SecureFilter;
 import ninja.appengine.AppEngineFilter;
-import www.purple.mixxy.etc.LoggedInUser;
+
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-
+/**
+ * Controls state about the API itself. Currently not used.
+ *
+ * @author Jesse Talavera-Greenberg
+ */
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class ApiController {

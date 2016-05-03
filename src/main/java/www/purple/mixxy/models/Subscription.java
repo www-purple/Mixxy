@@ -1,33 +1,45 @@
 package www.purple.mixxy.models;
 
-/**
- * Created by Brian_Sabz on 4/5/16.
- * 
- * @author Brian_Sabz
- */
 import java.util.Date;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
+/**
+ * Represents the act of one {@link User} following another.
+ *
+ * @author Brian Sabzjadid
+ */
 @Entity
 public class Subscription {
-	@Id
-	public Long id;
+  /**
+   * Unique identifier for this {@link Subscription}. Do not assume any particular pattern.
+   */
+  @Id
+  public Long id;
 
-	// can refer to these Entities using the already fetched Comic, this solve
-	// performance problems
-	// See: https://github.com/objectify/objectify/wiki/Entities#load
-	public Long subscriberId;
-	public Long publisherId;
+  /**
+   * The unique ID of the {@link User} doing the following. Must not equal {@link #publisherId}.
+   */
+  public Long subscriberId;
 
-	public Date createdAt;
-	
-	public Subscription(){ /* Needed by Objectify */ }
+  /**
+   * The unique ID of the {@link User} who was followed. Must not equal {@link #subscriberId}.
+   */
+  public Long publisherId;
 
-	public Subscription(final User subscriber, final User publisher) {
-		this.subscriberId = subscriber.id;
-		this.publisherId = publisher.id;
-		this.createdAt = new Date();
-	}
+  /**
+   * The date on which this {@link Subscription} was made.
+   */
+  public Date createdAt;
+
+  public Subscription() {
+    /* Needed by Objectify */
+  }
+
+  public Subscription(final User subscriber, final User publisher) {
+    this.subscriberId = subscriber.id;
+    this.publisherId = publisher.id;
+    this.createdAt = new Date();
+  }
 }

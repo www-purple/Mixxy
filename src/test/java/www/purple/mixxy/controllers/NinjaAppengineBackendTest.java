@@ -14,22 +14,22 @@ import java.io.Closeable;
 
 public class NinjaAppengineBackendTest extends NinjaTest {
 
-    private final LocalServiceTestHelper helper = new LocalServiceTestHelper(
-            new LocalDatastoreServiceTestConfig());
-    
-    private Closeable session;
+  private final LocalServiceTestHelper helper = new LocalServiceTestHelper(
+      new LocalDatastoreServiceTestConfig());
 
-    @Before
-    public void setUp() {
-        helper.setUp();
-        session = ObjectifyService.begin();
-        ObjectifyProvider.setup();
-    }
+  private Closeable session;
 
-    @After
-    public void tearDown() throws Exception {
-        helper.tearDown();
-        session.close();
-    }
+  @Before
+  public void setUp() {
+    helper.setUp();
+    session = ObjectifyService.begin();
+    ObjectifyProvider.setup();
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    helper.tearDown();
+    session.close();
+  }
 
 }
