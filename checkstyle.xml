@@ -29,7 +29,7 @@ maven-checkstyle-plugin configuration validate
       <property name="allowNonPrintableEscapes" value="true"/>
     </module>
     <module name="LineLength">
-      <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
+      <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://|router\.[A-Z]+"/>
       <property name="max" value="120"/>
       <property name="tabWidth" value="2"/>
     </module>
