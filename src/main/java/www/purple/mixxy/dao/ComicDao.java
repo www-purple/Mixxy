@@ -67,18 +67,21 @@ public class ComicDao {
   }
 
   public Comic getComic(String username, String slug) {
-    if (username == null || slug == null)
+    if (username == null || slug == null) {
       return null;
+    }
 
     User user = objectify.get().load().type(User.class).filter("username", username).first().now();
 
-    return objectify.get().load().type(Comic.class).filter("authorId", user.id).filter("sluggedTitle", slug).first()
+    return objectify.get().load().type(Comic.class).filter("authorId", user.id)
+        .filter("sluggedTitle", slug).first()
         .now();
   }
 
   public Comic getComic(User user, String slug) {
-    if (user == null || slug == null)
+    if (user == null || slug == null) {
       return null;
+    }
 
     return getComic(user.username, slug);
   }
@@ -169,7 +172,8 @@ public class ComicDao {
 
     Comic parentComic = objectify.get().load().type(Comic.class).id(id).now();
 
-    Comic remixedComic = new Comic(parentComic, user, parentComic.title, parentComic.description, parentComic.tags);
+    Comic remixedComic = new Comic(parentComic, user, parentComic.title, parentComic.description,
+        parentComic.tags);
 
     objectify.get().save().entity(remixedComic).now();
     remixedComic.ancestorComicId.add(remixedComic.id);

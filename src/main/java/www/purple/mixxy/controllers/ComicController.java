@@ -108,7 +108,8 @@ public class ComicController {
     Comic comic = comicDao.getComic(author, work);
 
     if (author == null || comic == null) {
-      return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
+      return Results.notFound()
+          .template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
     }
 
     return Results.ok().render("comic", comic).render("author", author).html();
@@ -252,11 +253,13 @@ public class ComicController {
 
     if (comic != null) {
       // If this Comic actually exists...
-      return Results.redirectTemporary("https://www.cs.stonybrook.edu/sites/default/files/wwwfiles/mckenna_0.jpg")
+      return Results.redirectTemporary(
+          "https://www.cs.stonybrook.edu/sites/default/files/wwwfiles/mckenna_0.jpg")
           .supportedContentTypes("image/gif", "image/png", "image/jpeg");
     }
     else {
-      return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
+      return Results.notFound()
+          .template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
     }
   }
 

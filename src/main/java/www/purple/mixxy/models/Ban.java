@@ -58,7 +58,8 @@ public class Ban {
     /* Needed by Objectify */
   }
 
-  public Ban(final User offender, final User victim, final User mod, final String reason, final Date banExpiration) {
+  public Ban(final User offender, final User victim, final User mod, final String reason,
+      final Date banExpiration) {
     this.offenderId = offender.id;
     this.victimId = victim.id;
     this.modId = mod.id;

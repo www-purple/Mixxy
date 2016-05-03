@@ -85,7 +85,8 @@ public class Comic {
     /* needed by Objectify */
   }
 
-  public Comic(final Comic ancestorComic, final User author, final String title, final String description,
+  public Comic(final Comic ancestorComic, final User author, final String title,
+      final String description,
       final List<String> tags) {
 
     if (ancestorComic == null) {

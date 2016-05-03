@@ -99,9 +99,7 @@ public class LoginLogoutController {
   }
 
   // SUPPRESS CHECKSTYLE HERE
-  public Result validate(
-      @Param("state") String state,
-      @Param("code") String code,
+  public Result validate(@Param("state") String state, @Param("code") String code,
       Context context) {
 
     if (state.contains(OAuthProviders.FACEBOOK)) {
