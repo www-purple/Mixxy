@@ -16,15 +16,14 @@ a {
 }
 
 h1.ui.header, h1{
-    text-align: center; !important;
     font-size: 3.75rem;
     font-family: 'Bangers', cursive;
     margin-left: 4rem;
     margin-bottom: -2rem;
     color: gold;
     text-shadow:
+            3px 3px 0 #000,
             -1px -1px 0 #000,
-            1px -1px 0 #000,
             -1px 1px 0 #000,
             1px 1px 0 #000;
     text-decoration: none;
