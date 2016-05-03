@@ -12,14 +12,18 @@ import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Unindex;
 
 /**
- * Created by Brian_Sabz on 4/5/16.
+ * Represents a comic or other work of art in the application. This is why people will want to use
+ * Mixxy, so you'd better make this good!
  *
- * @author Brian_Sabz
+ * @author Brian Sabzjadid
  */
 @Entity
 @Index
 public class Comic {
 
+  /**
+   * Unique identifier for this {@link Comic}. Do not assume any particular pattern.
+   */
   @Id
   public Long id;
 
@@ -29,19 +33,53 @@ public class Comic {
   // @Load
   // public Ref<User> author;
 
+  /**
+   * The unique identifier of the {@link User} who authored or remixed this {@link Comic}. Don't
+   * assume this will never change; it's possible we may later on implement some kind of ownership
+   * transfer, like with GitHub repos.
+   */
+  public Long authorId;
+
+  /**
+   * List of {@link Comic} IDs that this one is derived from, with the first being the most recent.
+   * An empty list means this is a root-level {@link Comic}.
+   */
   public List<Long> ancestorComicId;
 
+  /**
+   * The {@link User}-designated title of this {@link Comic}. Multiple {@link Comic}s, whether from
+   * the same {@link User} or not, may have the same title.
+   */
   public String title;
+
+  /**
+   * The {@linkplain Slugify slug-cased} title of this {@link Comic}, a transformed version of
+   * {@link #title}. Used for identification via URL. To resolve ambiguity, append {@link #id} to
+   * the end of this. Should never change, even if {@link #title} does.
+   */
   public String sluggedTitle;
 
+  /**
+   * The {@link User}-designated description of this {@link Comic}.
+   */
   @Unindex
   public String description;
+
+  /**
+   * Key words the {@link User} has chosen to identify this {@link Comic} with.
+   */
   public List<String> tags;
 
+  /**
+   * The {@link Date} on which this {@link Comic} was created or remixed. Should never change.
+   */
   public Date createdAt;
-  public Date updatedAt;
 
-  public Long authorId;
+  /**
+   * The {@link Date} on which this {@link Comic} was last updated, either in its content or in its
+   * metadata ({@link #tags}, {@link #description}, etc.).
+   */
+  public Date updatedAt;
 
   public Comic() {
     /* needed by Objectify */

@@ -12,6 +12,9 @@ import com.googlecode.objectify.ObjectifyService;
 import ninja.lifecycle.Start;
 import ninja.utils.NinjaProperties;
 
+/**
+ * Executes actions upon application startup. Configure order with the {@link Start} annotation.
+ */
 @Singleton
 public class StartupActions {
 

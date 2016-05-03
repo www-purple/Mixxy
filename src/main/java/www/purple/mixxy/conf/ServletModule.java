@@ -6,6 +6,9 @@ import com.googlecode.objectify.ObjectifyFilter;
 
 import ninja.servlet.NinjaServletDispatcher;
 
+/**
+ * Allows Ninja applications to be run through servlet containers.
+ */
 public class ServletModule extends com.google.inject.servlet.ServletModule {
 
   @Override

@@ -2,6 +2,7 @@ package www.purple.mixxy.conf;
 
 import java.util.Arrays;
 
+import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
@@ -13,6 +14,12 @@ import www.purple.mixxy.models.Like;
 import www.purple.mixxy.models.Subscription;
 import www.purple.mixxy.models.User;
 
+/**
+ * Provides an {@link Objectify} instance for {@linkplain Inject injection} into any class,
+ * especially those used with Ninja. {@link ObjectifyService#ofy()} does not recommend actually
+ * holding on to an {@link Objectify} instance, hence the injection of a {@link Provider} instead of
+ * an {@link Objectify} instance directly.
+ */
 public class ObjectifyProvider implements Provider<Objectify> {
 
   @Override
@@ -32,6 +39,10 @@ public class ObjectifyProvider implements Provider<Objectify> {
     setup();
   }
 
+  /**
+   * Initializes dummy data, for use in development and testing. <b>Do not call in production
+   * mode.</b>
+   */
   public static void setup() {
     Objectify ofy = ObjectifyService.ofy();
     User user = ofy.load().type(User.class).first().now();

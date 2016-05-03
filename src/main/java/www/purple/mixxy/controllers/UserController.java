@@ -10,9 +10,18 @@ import ninja.params.PathParam;
 
 import www.purple.mixxy.filters.JsonEndpoint;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
+import www.purple.mixxy.models.Comic;
+import www.purple.mixxy.models.User;
 
 /**
+ * Handles management and retrieval of {@link User}s. For information pertaining to the
+ * {@link Comic}s authored by a {@link User}, please see {@link ComicController}.
+ *
+ * @see User
+ * @see ComicController
+ *
  * @author Jesse Talavera-Greenberg
+ * @author Brian Sabzjadid
  */
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })

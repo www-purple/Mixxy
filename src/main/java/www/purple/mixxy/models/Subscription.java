@@ -6,21 +6,31 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
 /**
- * Created by Brian_Sabz on 4/5/16.
+ * Represents the act of one {@link User} following another.
  *
- * @author Brian_Sabz
+ * @author Brian Sabzjadid
  */
 @Entity
 public class Subscription {
+  /**
+   * Unique identifier for this {@link Subscription}. Do not assume any particular pattern.
+   */
   @Id
   public Long id;
 
-  // can refer to these Entities using the already fetched Comic, this solve
-  // performance problems
-  // See: https://github.com/objectify/objectify/wiki/Entities#load
+  /**
+   * The unique ID of the {@link User} doing the following. Must not equal {@link #publisherId}.
+   */
   public Long subscriberId;
+
+  /**
+   * The unique ID of the {@link User} who was followed. Must not equal {@link #subscriberId}.
+   */
   public Long publisherId;
 
+  /**
+   * The date on which this {@link Subscription} was made.
+   */
   public Date createdAt;
 
   public Subscription() {

@@ -31,6 +31,12 @@ import www.purple.mixxy.controllers.LoginLogoutController;
 import www.purple.mixxy.controllers.SearchController;
 import www.purple.mixxy.controllers.UserController;
 
+/**
+ * Defines all the mappings from URL patterns to controllers.
+ *
+ * @author Jesse Talavera-Greenberg
+ * @TODO Can we load this from a file?
+ */
 public class Routes implements ApplicationRoutes {
 
   // Use this to route to static pages (e.g. for about, privacy policy, etc.)

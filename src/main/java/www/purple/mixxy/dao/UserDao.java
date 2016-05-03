@@ -6,6 +6,13 @@ import com.googlecode.objectify.Objectify;
 
 import www.purple.mixxy.models.User;
 
+/**
+ * Provide common operations for creating and managing {@link User}s.
+ *
+ * @see User
+ *
+ * @author Brian Sabzjadid
+ */
 public class UserDao {
 
   @Inject
@@ -34,11 +41,12 @@ public class UserDao {
   }
 
   /**
-   * Given a username, get the underlying {@link User}.
+   * Given a {@code username}, get the underlying {@link User}.
    *
    * @param username
    *          The user whose details should be retrieved.
-   * @return The {@link User} if it exists, {@code null} if doesn't or if {@code username} is {@code null}.
+   * @return The {@link User} if it exists, {@code null} if doesn't or if {@code username} is
+   *         {@code null}.
    */
   public User getUser(String username) {
     User user = null;

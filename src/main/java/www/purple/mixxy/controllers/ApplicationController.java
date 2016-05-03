@@ -26,6 +26,11 @@ import ninja.appengine.AppEngineFilter;
 import www.purple.mixxy.conf.ObjectifyProvider;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 
+/**
+ * Behavior common to the entire application.
+ *
+ * @author Jesse Talavera-Greenberg
+ */
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class ApplicationController {

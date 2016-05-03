@@ -25,6 +25,14 @@ import www.purple.mixxy.models.ComicDto;
 import www.purple.mixxy.models.Like;
 import www.purple.mixxy.models.User;
 
+/**
+ * Behavior pertaining to the creation, retrieval, deletion, and management of {@link Comic}s.
+ *
+ * @see Comic
+ *
+ * @author Jesse Talavera-Greenberg
+ * @author Brian Sabzjadid
+ */
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class ComicController {
@@ -47,8 +55,8 @@ public class ComicController {
    * @param comicDto
    *          Data model for the comic object
    * @param validation
-   *          Checks for various violations such as: field violations (on controller method fields), bean violations (on
-   *          an injected beans field) or general violations (deprecated)
+   *          Checks for various violations such as: field violations (on controller method fields),
+   *          bean violations (on an injected beans field) or general violations (deprecated)
    *
    * @return resulting route to redirect with content
    */
@@ -111,14 +119,14 @@ public class ComicController {
    * Creates a new comic.
    *
    * @param username
-   *          Author of the new comic (the current user).
+   *          Author of the new {@link Comic} (the current user).
    * @param context
    *          html context
    * @param comicDto
-   *          Data model for the comic object
+   *          Data model for the {@link Comic}
    * @param validation
-   *          Checks for various violations such as: field violations (on controller method fields), bean violations (on
-   *          an injected beans field) or general violations (deprecated)
+   *          Checks for various violations such as: field violations (on controller method fields),
+   *          bean violations (on an injected beans field) or general violations (deprecated)
    *
    * @return resulting route to redirect with content
    */
@@ -219,13 +227,15 @@ public class ComicController {
   }
 
   /**
-   * Returns the {@link Result} containing the actual image data for a {@link Comic}. The lack of a {@link JsonEndpoint}
-   * annotation is intentional. Should be accessible through the {@code /api/} prefix for consistency, but the behavior
-   * for this case is identical, unlike that of the other routes. An image can be accessed with a plain old HTTP
-   * request, and will be returned to the client as its constituent bytes (as opposed to some encoding like base64).
+   * Returns the {@link Result} containing the actual image data for a {@link Comic}. The lack of a
+   * {@link JsonEndpoint} annotation is intentional. Should be accessible through the {@code /api/}
+   * prefix for consistency, but the behavior for this case is identical, unlike that of the other
+   * routes. An image can be accessed with a plain old HTTP request, and will be returned to the
+   * client as its constituent bytes (as opposed to some encoding like base64).
    *
    * <p>
-   * Whether this image comes from DeviantArt or from Mixxy should be irrelevant to the user of this route.
+   * Whether this image comes from DeviantArt or from Mixxy should be irrelevant to the user of this
+   * route.
    * </p>
    *
    * @param user

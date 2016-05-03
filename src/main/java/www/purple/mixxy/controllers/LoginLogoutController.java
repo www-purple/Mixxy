@@ -42,7 +42,13 @@ import www.purple.mixxy.helpers.FacebookUser;
 import www.purple.mixxy.helpers.GoogleAuthHelper;
 import www.purple.mixxy.helpers.GoogleUser;
 import www.purple.mixxy.helpers.OAuthProviders;
+import www.purple.mixxy.models.User;
 
+/**
+ * Behavior for authentication and registration of {@link User}s.
+ *
+ * @author Cristiano Jesus
+ */
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class LoginLogoutController {

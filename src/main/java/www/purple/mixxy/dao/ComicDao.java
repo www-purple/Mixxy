@@ -14,9 +14,12 @@ import www.purple.mixxy.models.Like;
 import www.purple.mixxy.models.User;
 
 /**
- * Created by Brian_Sabz on 4/7/16.
+ * Provide common operations for creating, modifying, or retrieving {@link Comic}s from the Google
+ * Data Store.
  *
- * @author Brian_Sabz
+ * @see Comic
+ *
+ * @author Brian Sabzjadid
  */
 public class ComicDao {
 

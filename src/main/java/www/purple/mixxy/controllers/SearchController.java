@@ -10,7 +10,11 @@ import ninja.appengine.AppEngineFilter;
 import ninja.params.PathParam;
 
 import www.purple.mixxy.filters.UrlNormalizingFilter;
+import www.purple.mixxy.models.Comic;
 
+/**
+ * Controls qualified retrieval of {@link Comic}s.
+ */
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class SearchController {

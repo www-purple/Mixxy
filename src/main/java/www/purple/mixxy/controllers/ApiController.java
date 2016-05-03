@@ -26,6 +26,11 @@ import ninja.appengine.AppEngineFilter;
 
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 
+/**
+ * Controls state about the API itself. Currently not used.
+ *
+ * @author Jesse Talavera-Greenberg
+ */
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class ApiController {

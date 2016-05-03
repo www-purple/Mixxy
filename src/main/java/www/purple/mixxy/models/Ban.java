@@ -6,24 +6,52 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
 /**
- * Created by Brian_Sabz on 4/5/16.
+ * Models an instance of disciplinary action by a moderator towards a {@link User}.
  *
- * @author Brian_Sabz
+ * @see User
+ *
+ * @author Brian Sabzjadid
  */
 @SuppressWarnings("PMD.ShortClassName")
 @Entity
 public class Ban {
+
+  /**
+   * Unique identifier for this {@link Ban}. Do not assume any particular pattern.
+   */
   @Id
   public Long id;
 
   // See: https://github.com/objectify/objectify/wiki/Entities#load
+
+  /**
+   * The unique ID of the {@link User} who committed this transgression.
+   */
   public Long offenderId;
+
+  /**
+   * The unique ID of the {@link User} who reported this transgression, if any.
+   */
   public Long victimId;
+
+  /**
+   * The unique ID of the moderator who enacted this {@link Ban}.
+   */
   public Long modId;
 
+  /**
+   * The reason the {@linkplain #offenderId offender}'s privileges were revoked.
+   */
   public String reason;
 
+  /**
+   * The {@link Date} on which the {@linkplain #offenderId offender}'s privileges were revoked.
+   */
   public Date bannedOn;
+
+  /**
+   * The {@link Date} on which the {@linkplain #offenderId offender}'s privileges will be restored.
+   */
   public Date expires;
 
   public Ban() {
