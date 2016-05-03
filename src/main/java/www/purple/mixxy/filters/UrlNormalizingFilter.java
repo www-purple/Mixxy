@@ -2,8 +2,7 @@ package www.purple.mixxy.filters;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import org.slf4j.Logger;
+import java.util.Locale;
 
 import com.google.inject.Inject;
 
@@ -12,16 +11,19 @@ import ninja.Filter;
 import ninja.FilterChain;
 import ninja.Result;
 
+import org.slf4j.Logger;
+
 /**
- * Fixes URLs that almost (but not quite) follow a specific convention and redirects users to the correct URL. This is
- * for SEO purposes; {@code /resource} and {@code /resource/} (note the trailing slash) are two separate Web pages, as
- * far as Google is concerned.
+ * Fixes URLs that almost (but not quite) follow a specific convention and redirects users to the
+ * correct URL. This is for SEO purposes; {@code /resource} and {@code /resource/} (note the
+ * trailing slash) are two separate Web pages, as far as Google is concerned.
  *
  * <p>
- * This {@code Filter} transforms URLs in the following ways:
- * <ul>
+ * This {@code Filter} transforms URLs in the following ways, in order:
+ * <ol>
  * <li>Strips trailing slashes</li>
- * </ul>
+ * <li>Lower-case the URL</li>
+ * </ol>
  * </p>
  *
  * @author Jesse Talavera-Greenberg
@@ -40,7 +42,7 @@ public class UrlNormalizingFilter implements Filter {
       // Normalize the request URI, if it's valid
     }
     catch (URISyntaxException e) {
-      logger.info("Request to URL with invalid syntax \"{}\" (index {})", e.getInput(), e.getIndex());
+      logger.info("Request to URL with bad syntax \"{}\" (index {})", e.getInput(), e.getIndex());
       // TODO: Should strange-looking URIs just be an error? Must do research
     }
 
@@ -53,7 +55,17 @@ public class UrlNormalizingFilter implements Filter {
       transformed = true;
       path = originalPath.substring(0, path.length() - 1);
     }
-    // TODO: Support query parameters and case-insensitivity
+
+    String lowerCase = path.toLowerCase(Locale.ENGLISH);
+    // URLs will primarily be in English
+
+    if (!lowerCase.equals(originalPath)) {
+      // If some of the characters in the original URL were upper-case...
+      transformed = true;
+      path = lowerCase;
+      // NOTE: This will lower-case query parameters, too!
+    }
+    // TODO: Support query parameters
 
     if (transformed) {
       // If we normalized the URL at all...
