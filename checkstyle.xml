@@ -147,7 +147,9 @@ maven-checkstyle-plugin configuration validate
       <property name="allowSamelineMultipleAnnotations" value="true"/>
     </module>
     <module name="NonEmptyAtclauseDescription"/>
-    <module name="JavadocTagContinuationIndentation"/>
+    <module name="JavadocTagContinuationIndentation">
+      <property name="offset" value="2"/>
+    </module>
     <module name="SummaryJavadoc">
       <property name="forbiddenSummaryFragments" value="^@return the *|^This (.+) |^A [{]@code [a-zA-Z0-9]+[}]( is a )"/>
     </module>
@@ -189,7 +191,6 @@ maven-checkstyle-plugin configuration validate
     <module name="JavadocVariable">
       <property name="scope" value="protected"/>
     </module>
-    <module name="JavadocTagContinuationIndentation"/>
     <module name="SummaryJavadoc"/>
     <module name="ConstantName"/>
     <module name="LocalFinalVariableName"/>
