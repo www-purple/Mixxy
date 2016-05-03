@@ -22,7 +22,6 @@ import org.slf4j.Logger;
  * This {@code Filter} transforms URLs in the following ways, in order:
  * <ol>
  * <li>Strips trailing slashes</li>
- * <li>Lower-case the URL</li>
  * </ol>
  * </p>
  *
@@ -55,17 +54,7 @@ public class UrlNormalizingFilter implements Filter {
       transformed = true;
       path = originalPath.substring(0, path.length() - 1);
     }
-
-    String lowerCase = path.toLowerCase(Locale.ENGLISH);
-    // URLs will primarily be in English
-
-    if (!lowerCase.equals(originalPath)) {
-      // If some of the characters in the original URL were upper-case...
-      transformed = true;
-      path = lowerCase;
-      // NOTE: This will lower-case query parameters, too!
-    }
-    // TODO: Support query parameters
+    // TODO: Support query parameters and lower-casing
 
     if (transformed) {
       // If we normalized the URL at all...
