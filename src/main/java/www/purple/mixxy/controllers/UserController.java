@@ -73,12 +73,12 @@ public class UserController {
   }
 
   @FilterWith(JsonEndpoint.class)
-  public Result works() {
+  public Result comics() {
     return Results.TODO();
   }
 
   @FilterWith(JsonEndpoint.class)
-  public Result work(@PathParam("user") String user, @PathParam("work") String work) {
-    return Results.html().render("user", user).render("work", work);
+  public Result comic(@PathParam("user") String user, @PathParam("comic") String comic) {
+    return Results.html().render("user", user).render("comic", comic);
   }
 }
