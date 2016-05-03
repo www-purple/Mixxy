@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 import com.googlecode.objectify.Objectify;
 
 import www.purple.mixxy.models.Comic;
@@ -21,6 +22,7 @@ import www.purple.mixxy.models.User;
  *
  * @author Brian Sabzjadid
  */
+@Singleton
 public class ComicDao {
 
   @Inject
