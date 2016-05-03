@@ -61,8 +61,8 @@ public class ComicController {
    * @return resulting route to redirect with content
    */
   @FilterWith(JsonEndpoint.class)
-  public Result newRemix(@PathParam("user") String user, @PathParam("work") String slug, Context context,
-      @JSR303Validation ComicDto comicDto, Validation validation) {
+  public Result newRemix(@PathParam("user") String user, @PathParam("comic") String slug,
+      Context context, @JSR303Validation ComicDto comicDto, Validation validation) {
 
     if (validation.hasViolations()) {
 
@@ -102,10 +102,10 @@ public class ComicController {
 
   // TODO: Move image-loading logic to here
   @FilterWith(JsonEndpoint.class)
-  public Result comic(@PathParam("user") String user, @PathParam("work") String work) {
+  public Result comic(@PathParam("user") String user, @PathParam("comic") String comicSlug) {
 
     User author = userDao.getUser(user);
-    Comic comic = comicDao.getComic(author, work);
+    Comic comic = comicDao.getComic(author, comicSlug);
 
     if (author == null || comic == null) {
       return Results.notFound()
@@ -132,8 +132,8 @@ public class ComicController {
    * @return resulting route to redirect with content
    */
   @FilterWith(JsonEndpoint.class)
-  public Result newWork(@LoggedInUser String username, Context context, @JSR303Validation ComicDto comicDto,
-      Validation validation) {
+  public Result newComic(@LoggedInUser String username, Context context,
+      @JSR303Validation ComicDto comicDto, Validation validation) {
 
     if (validation.hasViolations()) {
 
@@ -166,7 +166,7 @@ public class ComicController {
   }
 
   @FilterWith(JsonEndpoint.class)
-  public Result likes(@PathParam("user") String username, @PathParam("work") String slug) {
+  public Result likes(@PathParam("user") String username, @PathParam("comic") String slug) {
     List<Like> likes = null;
 
     if (slug != null) {
@@ -183,7 +183,7 @@ public class ComicController {
   }
 
   @FilterWith(JsonEndpoint.class)
-  public Result remixes(@PathParam("user") String username, @PathParam("work") String slug) {
+  public Result remixes(@PathParam("user") String username, @PathParam("comic") String slug) {
     List<Comic> comics = null;
 
     if (slug != null) {
@@ -198,7 +198,8 @@ public class ComicController {
   }
 
   @FilterWith(JsonEndpoint.class)
-  public Result delete(@PathParam("user") String username, @PathParam("work") String slug, Context context) {
+  public Result delete(@PathParam("user") String username, @PathParam("comic") String slug,
+      Context context) {
 
     boolean didDeleteComic = false;
     didDeleteComic = comicDao.deleteComic(username, slug);
@@ -213,7 +214,8 @@ public class ComicController {
   }
 
   @FilterWith(JsonEndpoint.class)
-  public Result update(@PathParam("user") String username, @PathParam("work") String slug, Context context) {
+  public Result update(@PathParam("user") String username, @PathParam("comic") String slug,
+      Context context) {
 
     boolean didSaveComic = false;
     didSaveComic = comicDao.saveComic(username, slug);
@@ -246,7 +248,7 @@ public class ComicController {
    *
    * @return A {@link Result} containing the relevant {@link Comic}'s image data.
    */
-  public Result image(@PathParam("user") String user, @PathParam("work") String slug) {
+  public Result image(@PathParam("user") String user, @PathParam("comic") String slug) {
 
     User author = userDao.getUser(user);
     Comic comic = comicDao.getComic(author, slug);

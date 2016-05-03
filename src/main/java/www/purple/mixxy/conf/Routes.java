@@ -60,6 +60,7 @@ public class Routes implements ApplicationRoutes {
       router.GET().route("/setup/?").with(ApplicationController.class, "setup");
     }
 
+    // CHECKSTYLE:OFF
     router.GET().route("/?").with(ApplicationController.class, "index");
 
     ///////////////////////////////////////////////////////////////////////////
@@ -116,31 +117,31 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/api/user/likes/?").with(UserController.class, "likes");
         router.PUT().route("/api/user/likes/?").with(UserController.class, "like");
         router.DELETE().route("/api/user/likes/?").with(UserController.class, "unlike");
-        // Gets, adds to, or removes from the works this user likes
+        // Gets, adds to, or removes from the comics this user likes
 
-        router.GET().route("/api/user/works/?").with(UserController.class, "works");
-        router.POST().route("/api/user/works/?").with(ComicController.class, "newWork");
-        // Get the list of all works this user has created, or submits a new
-        // one (possibly with a URL with another work to remix)
+        router.GET().route("/api/user/comics/?").with(UserController.class, "comics");
+        router.POST().route("/api/user/comics/?").with(ComicController.class, "newComic");
+        // Get the list of all comics this user has created, or submits a new
+        // one (possibly with a URL with another comic to remix)
 
         {
-          router.GET().route("/api/user/works/{work}/?").with(ComicController.class, "comic");
-          router.METHOD(PATCH).route("/api/user/works/{work}/?").with(ComicController.class, "update");
-          router.DELETE().route("/api/user/works/{work}/?").with(ComicController.class, "delete");
-          // Gets, updates, or delete's a user's own work
+          router.GET().route("/api/user/comics/{comic}/?").with(ComicController.class, "comic");
+          router.METHOD(PATCH).route("/api/user/comics/{comic}/?").with(ComicController.class, "update");
+          router.DELETE().route("/api/user/comics/{comic}/?").with(ComicController.class, "delete");
+          // Gets, updates, or delete's a user's own comic
 
           {
-            // Get the list of all users that like this work
-            router.GET().route("/api/user/works/{work}/likes/?").with(ComicController.class, "likes");
+            // Get the list of all users that like this comic
+            router.GET().route("/api/user/comics/{comic}/likes/?").with(ComicController.class, "likes");
 
             // Get the list of all remixes
-            router.GET().route("/api/user/works/{work}/remixes/?").with(ComicController.class, "remixes");
+            router.GET().route("/api/user/comics/{comic}/remixes/?").with(ComicController.class, "remixes");
 
             // Get the parent, if any
-            router.GET().route("/api/user/works/{work}/parent/?").with(ComicController.class, "parent");
+            router.GET().route("/api/user/comics/{comic}/parent/?").with(ComicController.class, "parent");
 
-            // Gets the work this one is ultimately based on
-            router.GET().route("/api/user/works/{work}/root/?").with(ComicController.class, "root");
+            // Gets the comic this one is ultimately based on
+            router.GET().route("/api/user/comics/{comic}/root/?").with(ComicController.class, "root");
           }
         }
       }
@@ -160,30 +161,26 @@ public class Routes implements ApplicationRoutes {
         // Gets any user's subcriptions
 
         router.GET().route("/api/users/{user}/likes/?").with(UserController.class, "likes");
-        // Get the list of all works any user has liked
+        // Get the list of all comics any user has liked
 
-        router.GET().route("/api/users/{user}/works/?").with(UserController.class, "works");
-        // Get a list of any user's works
+        router.GET().route("/api/users/{user}/comics/?").with(UserController.class, "comics");
+        // Get a list of any user's comics
 
         {
-          router.GET().route("/api/users/{user}/works/{work}/?").with(ComicController.class, "comic");
-          // Get a specific work from any user
+          router.GET().route("/api/users/{user}/comics/{comic}/?").with(ComicController.class, "comic");
+          // Get a specific comic from any user
 
           {
-            router.GET().route("/api/users/{user}/works/{work}/image/?").with(ComicController.class,
-                "image");
+            router.GET().route("/api/users/{user}/comics/{comic}/image/?").with(ComicController.class, "image");
 
-            router.GET().route("/api/users/{user}/works/{work}/remixes/?").with(ComicController.class,
-                "remixes");
-            // Get the remixes of any work
+            router.GET().route("/api/users/{user}/comics/{comic}/remixes/?").with(ComicController.class, "remixes");
+            // Get the remixes of any comic
 
-            router.GET().route("/api/users/{user}/works/{work}/likes/?").with(ComicController.class,
-                "likes");
+            router.GET().route("/api/users/{user}/comics/{comic}/likes/?").with(ComicController.class, "likes");
 
-            router.GET().route("/api/users/{user}/works/{work}/parent/?").with(ComicController.class,
-                "parent");
+            router.GET().route("/api/users/{user}/comics/{comic}/parent/?").with(ComicController.class, "parent");
 
-            router.GET().route("/api/users/{user}/works/{work}/root/?").with(ComicController.class, "root");
+            router.GET().route("/api/users/{user}/comics/{comic}/root/?").with(ComicController.class, "root");
           }
         }
       }
@@ -193,15 +190,15 @@ public class Routes implements ApplicationRoutes {
     // Site URLs (user-facing)
     ///////////////////////////////////////////////////////////////////////////
 
-    // Page to create or upload a new work
-    router.GET().route("/create/?").with(ComicController.class, "newWork");
+    // Page to create or upload a new comic
+    router.GET().route("/create/?").with(ComicController.class, "newComic");
 
-    // Page to create or upload a new work
+    // Page to create or upload a new comic
     router.GET().route("/create/muro/?").with(ComicController.class, "muro");
     router.GET().route("/create/upload/?").with(ComicController.class, "upload");
 
-    // Page to actually submit a work
-    router.POST().route("/create/?").with(ComicController.class, "newWork");
+    // Page to actually submit a comic
+    router.POST().route("/create/?").with(ComicController.class, "newComic");
 
     // User profile page
     router.GET().route("(?:/users)?/{user}/?").with(UserController.class, "user");
@@ -215,23 +212,24 @@ public class Routes implements ApplicationRoutes {
     // Page that lists all of a user's likes
     router.GET().route("(?:/users)?/{user}/likes/?").with(UserController.class, "likes");
 
-    // Get a given work from any user
-    router.GET().route("(?:/users)?/{user}/works/?").with(UserController.class, "works");
+    // Get a given comic from any user
+    router.GET().route("(?:/users)?/{user}/comics/?").with(UserController.class, "comics");
 
-    // Get a specific work from any user
-    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/?").with(ComicController.class, "comic");
+    // Get a specific comic from any user
+    router.GET().route("(?:/users)?/{user}(?:/comics)?/{comic}/?").with(ComicController.class, "comic");
 
-    // Get the actual image from a given work
-    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/image/?").with(ComicController.class, "image");
+    // Get the actual image from a given comic
+    router.GET().route("(?:/users)?/{user}(?:/comics)?/{comic}/image/?").with(ComicController.class, "image");
 
     // Load the new remixing page
-    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/remix/?").with(ComicController.class, "newRemix");
+    router.GET().route("(?:/users)?/{user}(?:/comics)?/{comic}/remix/?").with(ComicController.class, "newRemix");
 
-    // Submit the remixed work
-    router.POST().route("(?:/users)?/{user}(?:/works)?/{work}/remix/?").with(ComicController.class, "newRemix");
+    // Submit the remixed comic
+    router.POST().route("(?:/users)?/{user}(?:/comics)?/{comic}/remix/?").with(ComicController.class, "newRemix");
 
     // Load the remixes page
-    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/remixes/?").with(ComicController.class, "remixes");
+    router.GET().route("(?:/users)?/{user}(?:/comics)?/{comic}/remixes/?").with(ComicController.class, "remixes");
+    // CHECKSTYLE:ON
   }
 
 }
