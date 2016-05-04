@@ -2,7 +2,6 @@ package www.purple.mixxy.controllers;
 
 import ninja.Context;
 import ninja.FilterWith;
-import ninja.Ninja;
 import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
@@ -13,7 +12,6 @@ import ninja.validation.Validation;
 import www.purple.mixxy.dao.ComicDao;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.etc.LoggedInUser;
-import www.purple.mixxy.etc.UserParameter;
 import www.purple.mixxy.filters.JsonEndpoint;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 import www.purple.mixxy.models.Comic;
@@ -25,8 +23,6 @@ import java.util.List;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-
-import com.google.appengine.api.images.Image;
 
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
