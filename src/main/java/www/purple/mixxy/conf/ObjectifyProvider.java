@@ -2,7 +2,6 @@ package www.purple.mixxy.conf;
 
 import java.util.Arrays;
 
-import com.google.appengine.api.images.ImagesServicePb.ImageData;
 import com.google.inject.Provider;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
@@ -10,6 +9,7 @@ import com.googlecode.objectify.ObjectifyService;
 import www.purple.mixxy.models.Ban;
 import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.Flag;
+import www.purple.mixxy.models.ImageData;
 import www.purple.mixxy.models.Like;
 import www.purple.mixxy.models.Subscription;
 import www.purple.mixxy.models.User;
