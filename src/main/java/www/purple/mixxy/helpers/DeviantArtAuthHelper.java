@@ -25,13 +25,17 @@ import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
 
 public class DeviantArtAuthHelper {
 
-	private static final String CLIENT_ID = "4606";
-	private static final String CLIENT_SECRET = "f61c2bd48549550afb55e9c3bbd5feef";
-	private static final String CALLBACK_URI = "http://localhost:8080/validate";
-	
+	private String callbackURI;
+	private String clientId;
+	private String clientSecret;
 	private String stateToken;
 	
-	public DeviantArtAuthHelper() {
+	public DeviantArtAuthHelper(String clientId, String clientSecret, String callbackURI) {
+		
+		this.callbackURI = callbackURI;
+		this.clientId = clientId;
+		this.clientSecret = clientSecret;
+		
 		generateStateToken();
 	}
 	
@@ -42,8 +46,8 @@ public class DeviantArtAuthHelper {
 		String url = "";
 		try {
 			url = "https://www.deviantart.com/oauth2/authorize?" +
-				"response_type=code" + "&client_id=" + CLIENT_ID + 
-				"&redirect_uri=" + URLEncoder.encode(CALLBACK_URI, "UTF-8") +
+				"response_type=code" + "&client_id=" + clientId + 
+				"&redirect_uri=" + URLEncoder.encode(callbackURI, "UTF-8") +
 				"&state=" + stateToken + "&scope=basic";
 		} catch(UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -63,9 +67,9 @@ public class DeviantArtAuthHelper {
 		String url = "";
 		try {
 			url = "https://www.deviantart.com/oauth2/token?" +
-				"client_id=" + CLIENT_ID +  "&client_secret=" + CLIENT_SECRET +
+				"client_id=" + clientId +  "&client_secret=" + clientSecret +
 				"&grant_type=authorization_code" +
-				"&redirect_uri=" + URLEncoder.encode(CALLBACK_URI, "UTF-8") +
+				"&redirect_uri=" + URLEncoder.encode(callbackURI, "UTF-8") +
 				"&code=" + code;
 		} catch(UnsupportedEncodingException e) {
 			e.printStackTrace();

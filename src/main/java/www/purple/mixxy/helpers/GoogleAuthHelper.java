@@ -18,19 +18,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public final class GoogleAuthHelper {
-	/**
-	 * Please provide a value for the CLIENT_ID constant before proceeding, set this up at https://code.google.com/apis/console/
-	 */
-	private static final String CLIENT_ID = "734052615495-2751ophn3s30pvldar5j7tkicgp7ga2s.apps.googleusercontent.com";
-	/**
-	 * Please provide a value for the CLIENT_SECRET constant before proceeding, set this up at https://code.google.com/apis/console/
-	 */
-	private static final String CLIENT_SECRET = "Cq1apvDYRE2AVwr_ZaOeMwJs";
-
-	/**
-	 * Callback URI that google will redirect to after successful authentication
-	 */
-	private static final String CALLBACK_URI = "http://localhost:8080/validate";
 	
 	// start google authentication constants
 	private static final Collection<String> SCOPE = Arrays.asList("profile;email".split(";"));
@@ -39,6 +26,7 @@ public final class GoogleAuthHelper {
 	private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 	// end google authentication constants
 	
+	private String callbackURI;
 	private String stateToken;
 	
 	private final GoogleAuthorizationCodeFlow flow;
@@ -46,9 +34,12 @@ public final class GoogleAuthHelper {
 	/**
 	 * Constructor initializes the Google Authorization Code Flow with CLIENT ID, SECRET, and SCOPE 
 	 */
-	public GoogleAuthHelper() {
+	public GoogleAuthHelper(String clientId, String clientSecret, String callbackURI) {
+		
+		this.callbackURI = callbackURI;
+		
 		flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT,
-				JSON_FACTORY, CLIENT_ID, CLIENT_SECRET, SCOPE).build();
+				JSON_FACTORY, clientId, clientSecret, SCOPE).build();
 		
 		generateStateToken();
 	}
@@ -60,7 +51,7 @@ public final class GoogleAuthHelper {
 		
 		final GoogleAuthorizationCodeRequestUrl url = flow.newAuthorizationUrl();
 		
-		return url.setRedirectUri(CALLBACK_URI).setState(stateToken).build();
+		return url.setRedirectUri(callbackURI).setState(stateToken).build();
 	}
 	
 	/**
@@ -88,7 +79,7 @@ public final class GoogleAuthHelper {
 	 */
 	public String getUserInfoJson(final String authCode) throws IOException {
 
-		final GoogleTokenResponse response = flow.newTokenRequest(authCode).setRedirectUri(CALLBACK_URI).execute();
+		final GoogleTokenResponse response = flow.newTokenRequest(authCode).setRedirectUri(callbackURI).execute();
 		final Credential credential = flow.createAndStoreCredential(response, null);
 		final HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory(credential);
 		// Make an authenticated request
