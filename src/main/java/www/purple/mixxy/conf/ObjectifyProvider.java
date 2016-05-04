@@ -2,6 +2,7 @@ package www.purple.mixxy.conf;
 
 import java.util.Arrays;
 
+import com.google.appengine.api.images.ImagesServicePb.ImageData;
 import com.google.inject.Provider;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
@@ -28,6 +29,7 @@ public class ObjectifyProvider implements Provider<Objectify> {
         ObjectifyService.register(Flag.class);
         ObjectifyService.register(Like.class);
         ObjectifyService.register(Subscription.class);
+        ObjectifyService.register(ImageData.class);
 
         setup();
     }
