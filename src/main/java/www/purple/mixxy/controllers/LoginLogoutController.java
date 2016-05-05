@@ -59,9 +59,6 @@ public class LoginLogoutController {
     
     @Inject
     private NinjaProperties ninjaProperties;
-    
-    //@Inject
-    //private ApiKeys apiKeys;
 
     ///////////////////////////////////////////////////////////////////////////
     // Logout
@@ -129,8 +126,6 @@ public class LoginLogoutController {
     	// Get json response
     	try {
     		data = helper.getUserInfoJson(code);
-    		
-    		System.out.println(data);
     	} catch (IOException e) {
     		logger.error("Cannot get Google User Info", e);
     		return loginError(context);
@@ -194,6 +189,8 @@ public class LoginLogoutController {
     	FacebookAuthHelper helper = new FacebookAuthHelper(apiKeys.getFacebookId(), apiKeys.getFacebookSecret(), ninjaProperties.get("callback.uri"));
     	String data = helper.getUserInfoJson(code);
     	
+    	System.out.println(data);
+    	
     	// Parse json response
     	ObjectMapper mapper = new ObjectMapper();
     	try {
@@ -201,10 +198,10 @@ public class LoginLogoutController {
     		Map<String,Object> user = mapper.readValue(data, Map.class);
     		
     		// Validate user
-        	if(userDao.isUserValid((String)user.get(GoogleUser.EMAIL))) {
+        	if(userDao.isUserValid((String)user.get(FacebookUser.EMAIL))) {
         		// If user exists
         		// Start session
-			    newSession((String)user.get(GoogleUser.EMAIL), context);
+			    newSession((String)user.get(FacebookUser.EMAIL), context);
         	}
         	else
         	{
