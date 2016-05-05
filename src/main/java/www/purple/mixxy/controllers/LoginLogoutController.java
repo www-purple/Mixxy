@@ -59,9 +59,6 @@ public class LoginLogoutController {
     
     @Inject
     private NinjaProperties ninjaProperties;
-    
-    //@Inject
-    //private ApiKeys apiKeys;
 
     ///////////////////////////////////////////////////////////////////////////
     // Logout
@@ -201,10 +198,10 @@ public class LoginLogoutController {
     		Map<String,Object> user = mapper.readValue(data, Map.class);
     		
     		// Validate user
-        	if(userDao.isUserValid((String)user.get(GoogleUser.EMAIL))) {
+        	if(userDao.isUserValid((String)user.get(FacebookUser.EMAIL))) {
         		// If user exists
         		// Start session
-			    newSession((String)user.get(GoogleUser.EMAIL), context);
+			    newSession((String)user.get(FacebookUser.EMAIL), context);
         	}
         	else
         	{
@@ -226,7 +223,7 @@ public class LoginLogoutController {
 						provider);
 				
 				// Start session
-				newSession((String)user.get(GoogleUser.EMAIL), context);
+				newSession((String)user.get(FacebookUser.EMAIL), context);
 				
 		        // TODO: Redirect to profile
 				return Results.redirect("/privacy");
