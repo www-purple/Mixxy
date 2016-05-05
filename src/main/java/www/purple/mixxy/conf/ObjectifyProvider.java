@@ -1,5 +1,10 @@
 package www.purple.mixxy.conf;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 
 import com.google.inject.Provider;
@@ -35,27 +40,75 @@ public class ObjectifyProvider implements Provider<Objectify> {
     }
 
 
+    public static byte[] downloadUrl(URL toDownload) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        try {
+            byte[] chunk = new byte[4096];
+            int bytesRead;
+            InputStream stream = toDownload.openStream();
+
+            while ((bytesRead = stream.read(chunk)) > 0) {
+                outputStream.write(chunk, 0, bytesRead);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new byte[1];
+        }
+
+        return outputStream.toByteArray();
+    }
+    
     public static void setup() {
         Objectify ofy = ObjectifyService.ofy();
         User user = ofy.load().type(User.class).first().now();
 
         User bob = new User("BobTheBuilder", "Bob", "Smith", "male", "bob@gmail.com", "url", "en", "123", "google");
-        bob.id = (long) -32;
+        bob.id = (long) 32;
 
         Comic bobComic = new Comic(null, bob, "cool title", "interesting description", Arrays.asList("18+", "sci-fi", "sexy"));
-        bobComic.id = (long) -1;
+        bobComic.id = (long) 1;
 
         Comic bobComic2 = new Comic(bobComic, bob, "cool title222", "interesting description222", Arrays.asList("parody", "derp"));
-        bobComic2.id = (long) -2;
+        bobComic2.id = (long) 2;
 
         bobComic2.ancestorComicId.add(bobComic.id);
+        
+        
         if (user == null) {
             // Create a new user and save it
             if (ofy.load().entity(bob).now() == null) {
               ofy.save().entity(bob).now();
             }
         }
-
+        
+        URL imageURL;
+        ImageData image1, image2;
+        
+		try {
+			imageURL = new URL("https://www.cs.stonybrook.edu/sites/default/files/wwwfiles/mckenna_0.jpg");
+			byte[] imageBlob = downloadUrl(imageURL);
+			
+			image1 = new ImageData(bobComic.id, imageBlob);
+			image1.id = (long) 26;
+			
+			image2 = new ImageData(bobComic2.id, imageBlob);
+	        image2.id = (long) 69;
+	        
+			if (ofy.load().entity(image1).now() == null) {
+	              ofy.save().entity(image1).now();
+	        }
+			
+			if (ofy.load().entity(image2).now() == null) {
+	              ofy.save().entity(image2).now();
+	        }
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         // Comic ancestry working
         if (ofy.load().type(Comic.class).first().now() == null) {
             ofy.save().entities(bobComic, bobComic2).now();

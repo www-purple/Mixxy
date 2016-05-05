@@ -26,6 +26,7 @@ import ninja.utils.NinjaProperties;
 import www.purple.mixxy.controllers.ApiController;
 import www.purple.mixxy.controllers.ApplicationController;
 import www.purple.mixxy.controllers.ComicController;
+import www.purple.mixxy.controllers.ImageController;
 import www.purple.mixxy.controllers.LoginLogoutController;
 import www.purple.mixxy.controllers.SearchController;
 import www.purple.mixxy.controllers.UserController;
@@ -209,8 +210,8 @@ public class Routes implements ApplicationRoutes {
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/?").with(ComicController.class, "comic");
 
     // Get the actual image from a given work
-    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/image/?").with(ComicController.class, "image");
-
+    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/image/?").with(ImageController.class, "image");
+    
     // Load the new remixing page
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/remix/?").with(ComicController.class, "newRemix");
 

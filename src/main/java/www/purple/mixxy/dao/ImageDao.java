@@ -13,15 +13,10 @@ public class ImageDao {
 
 	@Inject
 	private Provider<Objectify> objectify;
-	
-	public List<ImageData> getImagesForComic(Comic comic) {
-		return objectify.get().load().type(ImageData.class).filter("comicId", comic.id).list();
-	}
 
 	public ImageData getImageForComic(long id) {
 		return objectify.get().load().type(ImageData.class).id(id).now();
 	}
-	
 	
 	public boolean saveImage(Comic comic, byte[] imageBlob) {
 		
