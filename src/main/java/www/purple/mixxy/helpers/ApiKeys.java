@@ -15,6 +15,9 @@ public final class ApiKeys {
 
   private String facebookId;
   private String facebookSecret;
+  
+  private String deviantartId;
+  private String deviantartKey;
 
   public ApiKeys() {
     properties = SwissKnife.loadConfigurationInUtf8("www/purple/mixxy/helpers/auth.properties");
@@ -23,6 +26,8 @@ public final class ApiKeys {
     googleSecret = properties.getString("google.secret");
     facebookId = properties.getString("facebook.id");
     facebookSecret = properties.getString("facebook.secret");
+    deviantartId = properties.getString("deviantart.id");
+    deviantartKey = properties.getString("deviantart.secret");
   }
 
   public String getGoogleId() {
@@ -39,5 +44,13 @@ public final class ApiKeys {
 
   public String getFacebookSecret() {
     return facebookSecret;
+  }
+
+  public String getDeviantartId() {
+	return deviantartId;
+  }
+
+  public String getDeviantartKey() {
+	return deviantartKey;
   }
 }
