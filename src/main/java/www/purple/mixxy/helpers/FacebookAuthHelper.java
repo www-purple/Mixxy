@@ -18,13 +18,18 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class FacebookAuthHelper {
-	public static final String APP_ID = "1525243031118871";
-	public static final String APP_SECRET = "33448c710b2ba227461752c3abe7dc06";
-	public static final String CALLBACK_URI = "http://localhost:8080/validate";
 
+	private String callbackURI;
+	private String clientId;
+	private String clientSecret;
 	private String stateToken;
 	
-	public FacebookAuthHelper() {
+	public FacebookAuthHelper(String clientId, String clientSecret, String callbackURI) {
+		
+		this.callbackURI = callbackURI;
+		this.clientId = clientId;
+		this.clientSecret = clientSecret;
+		
 		generateStateToken();
 	}
 	
@@ -35,7 +40,7 @@ public class FacebookAuthHelper {
 		String url = "";
 		try {
 			url = "http://www.facebook.com/dialog/oauth?" + 
-				"client_id=" + APP_ID + "&redirect_uri=" + URLEncoder.encode(CALLBACK_URI, "UTF-8") +
+				"client_id=" + clientId + "&redirect_uri=" + URLEncoder.encode(callbackURI, "UTF-8") +
 				"&state=" + stateToken + "&scope=public_profile";
 		} catch(UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -55,8 +60,8 @@ public class FacebookAuthHelper {
 		String url = "";
 		try {
 			url = "https://graph.facebook.com/v2.4/oauth/access_token?" +
-				"client_id=" + APP_ID + "&redirect_uri=" + URLEncoder.encode(CALLBACK_URI, "UTF-8") +
-				"&client_secret=" + APP_SECRET + "&code=" + code;
+				"client_id=" + clientId + "&redirect_uri=" + URLEncoder.encode(callbackURI, "UTF-8") +
+				"&client_secret=" + clientSecret + "&code=" + code;
 		} catch(UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
