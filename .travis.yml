@@ -1,9 +1,5 @@
 language: java
 sudo: false
-addons:
-  apt:
-    packages:
-    - git-crypt
 jdk:
   - openjdk7
   - oraclejdk7
