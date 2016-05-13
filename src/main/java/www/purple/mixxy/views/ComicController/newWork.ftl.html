@@ -7,25 +7,27 @@
     </div>
     <div class="ui container grey-box">
         <div class="ui white-box">
-            <div class="ui centered grid">
-                <div class="column comic">
-                    <!-- need to be logged in -- if we're not logged in, redir to login page -->
-                    <div class="muro">
-                        <h1>Create a Comic with Muro</h1>
-                        <div id="muro"></div>
-                    </div>
-                    <div class="upload">
-                        <h1>Upload a Comic</h1>
-                        <!-- should be an ajax call to file chooser -->
-                        <div class="ui action input">
-                            <input placeholder="Choose Comic" type="text">
-                            <button class="ui button">Select</button>
-                        </div>
+            <div class="ui fluid accordion">
+                <!-- need to be logged in -- if we're not logged in, redir to login page -->
+                <div class="muro active title">
+                    <h1>Create a Comic with Muro</h1>
+                </div>
+                <div class="active content">
+                    <!--<div class="transition hidden"><div id="muro"></div></div>-->
+                    <div id="muro"></div>
+                </div>
+                <div class="upload title">
+                    <h1>Upload a Comic</h1>
+                </div>
+                <div class="draw-form content">
+                    <div class="ui action input">
+                        <input placeholder="Choose Comic" type="text">
+                        <button class="ui button">Select</button>
                     </div>
                 </div>
             </div>
-            <div class="ui ten column centered grid">
-                <div class="column comic">
+            <div class="ui centered grid">
+                <div class="draw-form column comic">
                     <div class="ui form">
                         <h2>Details</h2>
                         <div class="required field">
@@ -38,7 +40,7 @@
                         </div>
                         <div class="field">
                             <label>Series</label>
-                            <select class="ui dropdown">
+                            <select class="ui tags fluid search dropdown">
                                 <option value="">Series</option>
                                 <option value="1">Married with Children</option>
                                 <option value="0">Space Invaders</option>
@@ -46,7 +48,7 @@
                         </div>
                         <div class="inline fields">
                             <div class="required field">
-                                <select class="ui fluid search dropdown" multiple="">
+                                <select class="ui tags fluid search dropdown" multiple="">
                                     <option value="">Tags</option>
                                     <option value="bears">Bears</option>
                                     <option value="beers">Beers</option>
@@ -59,7 +61,7 @@
                                 </select>
                             </div>
                             <div class="inline right floated required field">
-                                <div class="ui toggle checkbox">
+                                <div class="ui right floated toggle checkbox">
                                     <input class="hidden" tabindex="0" type="checkbox">
                                     <label>NSFW?</label>
                                 </div>
@@ -71,5 +73,6 @@
             </div>
         </div>
     </div>
+
 
 </@layout.myLayout>
