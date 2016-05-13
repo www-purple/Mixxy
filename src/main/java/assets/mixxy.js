@@ -21,7 +21,7 @@ $(document).ready(function(){
     $('#muro').damuro({
         loadingText: 'This is a customized loading message...',
         sandbox:     '/assets/deviantart_muro_sandbox.html',
-        autoload: false,
+        autoload: true,
         background: "rgba(255, 255, 255, 1.0)",
         splashCss: {
             color: '#33a'

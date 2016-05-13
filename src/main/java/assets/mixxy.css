@@ -18,7 +18,7 @@ a {
 h1.ui.header, h1{
     font-size: 3.75rem;
     font-family: 'Bangers', cursive;
-    margin-left: 4rem;
+    margin-left: 4rem !important;
     margin-bottom: -2rem;
     color: gold;
     text-shadow:
@@ -113,10 +113,14 @@ p, .item, body{
 	display: inline;
 }
 
+#muro iframe.damuro-app-view{
+    position: static !important;
+}
+
 #muro {
     color: white;
-    width: 900px;
-    height: 600px;
+    width: 100rem;
+    height: 38rem;
     margin-left: auto;
     margin-right: auto;
 }
