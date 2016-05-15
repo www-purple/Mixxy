@@ -18,7 +18,7 @@ a {
 h1.ui.header, h1{
     font-size: 3.75rem;
     font-family: 'Bangers', cursive;
-    margin-left: 4rem !important;
+    margin-left: 4rem;
     margin-bottom: -2rem;
     color: gold;
     text-shadow:

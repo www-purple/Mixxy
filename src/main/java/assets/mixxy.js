@@ -10,11 +10,10 @@ $(document).ready(function(){
         prevArrow: null,
         nextArrow: null
     });
-    $('.tags.ui.dropdown')
-        .dropdown({
+
+    $('.ui.dropdown').dropdown({
             allowAdditions: true
-        })
-    ;
+    });
 
     $('.ui.checkbox')
         .checkbox()
@@ -32,6 +31,4 @@ $(document).ready(function(){
         })
     .one('click', function () { $(this).damuro().open(); })
     .damuro();
-
-
 });

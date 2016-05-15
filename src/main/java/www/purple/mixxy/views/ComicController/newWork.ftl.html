@@ -28,7 +28,7 @@
             </div>
             <div class="ui centered grid">
                 <div class="draw-form column comic">
-                    <div class="ui form">
+                    <form class="ui form">
                         <h2>Details</h2>
                         <div class="required field">
                             <label>Title</label>
@@ -40,35 +40,25 @@
                         </div>
                         <div class="field">
                             <label>Series</label>
-                            <select class="ui tags fluid search dropdown">
-                                <option value="">Series</option>
-                                <option value="1">Married with Children</option>
-                                <option value="0">Space Invaders</option>
+                            <select class="ui tags fluid search selection dropdown">
+                                <label>Series</label>
                             </select>
                         </div>
                         <div class="inline fields">
-                            <div class="required field">
-                                <select class="ui tags fluid search dropdown" multiple="">
-                                    <option value="">Tags</option>
-                                    <option value="bears">Bears</option>
-                                    <option value="beers">Beers</option>
-                                    <option value="beards">Beards</option>
-                                    <option value="bees">Bees</option>
-                                    <option value="bats">Bats</option>
-                                    <option value="rats">Rats</option>
-                                    <option value="cats">Cats</option>
-                                    <option value="hats">Hats</option>
+                            <div class="inline fourteen wide required field">
+                                <label>Tags</label>
+                                <select class="ui tags fluid multiple search selection dropdown" multiple="">
                                 </select>
                             </div>
-                            <div class="inline right floated required field">
-                                <div class="ui right floated toggle checkbox">
+                            <div class="inline required field">
+                                <div class="ui checkbox">
                                     <input class="hidden" tabindex="0" type="checkbox">
                                     <label>NSFW?</label>
                                 </div>
                             </div>
                         </div>
                         <button class="ui button">Upload Comic</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
