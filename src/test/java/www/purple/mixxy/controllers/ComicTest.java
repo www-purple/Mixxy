@@ -27,7 +27,7 @@ public class ComicTest extends NinjaAppengineBackendTest {
 		ofy.save().entity(yetAnotherBob).now();
 
 		// Create a new comic
-		Comic comic = new Comic(null, yetAnotherBob, "cool title", "interesting description", null);
+		Comic comic = new Comic(null, yetAnotherBob, "cool title", "interesting description", "who cares", null);
 
 		//comic.author = Ref.create(yetAnotherBob);
 		ofy.save().entity(comic).now();

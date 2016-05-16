@@ -14,8 +14,10 @@ public class ComicDto {
 	@Size(min = 5)
 	public String title;
 
-	@Size(min = 5)
+	//@Size(min = 5)
 	public String description;
+
+	public String series;
 
 	public List<Image> images;
 

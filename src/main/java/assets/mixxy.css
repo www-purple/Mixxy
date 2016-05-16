@@ -110,15 +110,18 @@ p, .item, body{
 }
 
 .comic h1, .comic h2 {
-	display: inline;
+	margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.draw-form .ui.input, .draw-form .ui.form{
+    margin: 0px 100px 20px 100px;
 }
 
 #muro {
     color: white;
-    width: 900px;
-    height: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    height: 40rem;
 }
 
 .ui.breadcrumb {

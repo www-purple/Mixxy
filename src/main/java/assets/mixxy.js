@@ -1,5 +1,6 @@
 /**
- * Created by MURDERBUS on 4/7/16.
+ * Little JS stuff for Mixxy
+ * Created by Clearydude on 4/7/16.
  */
 $(document).ready(function(){
     $('#featured-comics').slick({
@@ -10,25 +11,33 @@ $(document).ready(function(){
         prevArrow: null,
         nextArrow: null
     });
-    $('.ui.dropdown')
-        .dropdown()
-    ;
+
+    $('.ui.dropdown').dropdown({
+            allowAdditions: true
+    });
 
     $('.ui.checkbox')
         .checkbox()
     ;
+
+    $('.ui.accordion')
+        .accordion()
+    ;
     
     $('#muro').damuro({
-        loadingText: 'This is a customized loading message...',
+        loadingText: 'Loading Muro',
         sandbox:     '/assets/deviantart_muro_sandbox.html',
-        autoload: false,
+        autoload: true,
         background: "rgba(255, 255, 255, 1.0)",
-        splashCss: {
-            color: '#33a'
-        }
+        // width: "100%",
+        // height: "38rem"
+        })
+    .one('click', function () {
+        $(this).damuro().open();
     })
-    .one('click', function () { $(this).damuro().open(); })
-    .damuro();
-
-
+    .query('image', null, function (data) {
+        if (data.image) {
+            // Send it to my server as an autosave.
+        }
+    });
 });

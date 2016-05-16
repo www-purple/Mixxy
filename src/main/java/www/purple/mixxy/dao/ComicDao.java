@@ -114,7 +114,7 @@ public class ComicDao {
 			return false;
 		}
 
-		Comic comic = new Comic(null, user, comicDto.title, comicDto.description, comicDto.tags);
+		Comic comic = new Comic(null, user, comicDto.title, comicDto.description, comicDto.series, comicDto.tags);
 
 		// comic.author = Ref.create(user);
 
@@ -162,7 +162,7 @@ public class ComicDao {
 
 		Comic parentComic = objectify.get().load().type(Comic.class).id(id).now();
 
-		Comic remixedComic = new Comic(parentComic, user, parentComic.title, parentComic.description, parentComic.tags);
+		Comic remixedComic = new Comic(parentComic, user, parentComic.title, parentComic.description, parentComic.series, parentComic.tags);
 
 		objectify.get().save().entity(remixedComic).now();
 		remixedComic.ancestorComicId.add(remixedComic.id);

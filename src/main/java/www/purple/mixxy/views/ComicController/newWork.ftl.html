@@ -6,22 +6,58 @@
         <div class="active section" href="/create">Draw</div>
     </div>
     <div class="ui container grey-box">
-        <div class="ui centered padded stackable grid">
-            <div class="row">
-                <div class="ui sixteen wide column comic">
-                    <div class="ui white-box">
-                        <div class="ui relaxed massive link list">
-                            <!-- need to be logged in -- if we're not logged in, redir to login page -->
-                            <div class="item">
-                                <h1><a class="create" href="/create/muro">Create a Comic with Muro</a></h1>
-                            </div>
-                            <!-- link to Muro editor page -->
-                            <div class="item">
-                                <h1><a class="create" href="/create/upload">Upload a Comic</a></h1>
-                            </div>
-                            <!-- do some ajax call to bring up an upload module -->
-                        </div>
+        <div class="ui white-box">
+            <div class="ui fluid accordion">
+                <!-- need to be logged in -- if we're not logged in, redir to login page -->
+                <div class="muro active title">
+                    <h1>Create a Comic with Muro</h1>
+                </div>
+                <div class="active content">
+                    <!--<div class="transition hidden"><div id="muro"></div></div>-->
+                    <div id="muro"></div>
+                </div>
+                <div class="upload title">
+                    <h1>Upload a Comic</h1>
+                </div>
+                <div class="draw-form content">
+                    <div class="ui input">
+                        <input placeholder="Choose Comic" type="file">
+                        <!--//<button class="ui button">Select</button>-->
                     </div>
+                </div>
+            </div>
+            <div class="ui centered grid">
+                <div class="draw-form column comic">
+                    <form method="post" class="ui form">
+                        <h2>Details</h2>
+                        <div class="required field">
+                            <label>Title</label>
+                            <input type="text" id="title" name="title">
+                        </div>
+                        <div class="field">
+                            <label>Description</label>
+                            <textarea rows="2" name="description"></textarea>
+                        </div>
+                        <div class="inline field">
+                            <label>Series</label>
+                            <select class="ui tags fluid search selection dropdown" name="series">
+                            </select>
+                        </div>
+                        <div class="inline fields">
+                            <div class="inline fourteen wide required field">
+                                <label>Tags</label>
+                                <select class="ui tags fluid multiple search selection dropdown" multiple="" name="tags">
+                                </select>
+                            </div>
+                            <div class="inline required field">
+                                <div class="ui checkbox">
+                                    <input class="hidden" tabindex="0" type="checkbox" name="nsfw">
+                                    <label>NSFW?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="ui button" type="submit">Upload Comic</button>
+                    </form>
                 </div>
             </div>
         </div>

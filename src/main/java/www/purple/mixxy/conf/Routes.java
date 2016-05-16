@@ -184,12 +184,8 @@ public class Routes implements ApplicationRoutes {
     // Page to create or upload a new work
     router.GET().route("/create/?").with(ComicController.class, "newWork");
 
-    // Page to create or upload a new work
-    router.GET().route("/create/muro/?").with(ComicController.class, "muro");
-      router.GET().route("/create/upload/?").with(ComicController.class, "upload");
-
     // Page to actually submit a work
-    router.POST().route("/create/?").with(ComicController.class, "newWork");
+    router.POST().route("/create/?").with(ComicController.class, "postWork");
 
     // User profile page
     router.GET().route("(?:/users)?/{user}/?").with(UserController.class, "user");
