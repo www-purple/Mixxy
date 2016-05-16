@@ -69,9 +69,11 @@ public class ObjectifyProvider implements Provider<Objectify> {
 
         Comic bobComic = new Comic(null, bob, "cool title", "interesting description", Arrays.asList("18+", "sci-fi", "sexy"));
         bobComic.id = (long) 1;
+        bobComic.title = bobComic.title + "-" + Long.toString(bobComic.id);
 
         Comic bobComic2 = new Comic(bobComic, bob, "cool title222", "interesting description222", Arrays.asList("parody", "derp"));
         bobComic2.id = (long) 2;
+        bobComic2.title = bobComic2.title + "-" + Long.toString(bobComic2.id);
 
         bobComic2.ancestorComicId.add(bobComic.id);
         
@@ -82,6 +84,10 @@ public class ObjectifyProvider implements Provider<Objectify> {
               ofy.save().entity(bob).now();
             }
         }
+        
+        //	Save comics
+        ofy.save().entities(bobComic, bobComic2).now();
+        
         
         URL imageURL;
         ImageData image1, image2;

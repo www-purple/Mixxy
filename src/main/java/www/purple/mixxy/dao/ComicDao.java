@@ -123,7 +123,7 @@ public class ComicDao {
 		// comic.ancestorComics.add(Ref.create(comic));
 		objectify.get().save().entity(comic).now();
 		comic.ancestorComicId.add(comic.id);
-		comic.sluggedTitle = comic.sluggedTitle + Long.toString(comic.id);
+		comic.sluggedTitle = comic.sluggedTitle + "-" + Long.toString(comic.id);
 		objectify.get().save().entity(comic).now();
 
 		return true;
