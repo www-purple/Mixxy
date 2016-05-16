@@ -7,6 +7,8 @@ import ninja.Ninja;
 import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
+import ninja.params.Param;
+import ninja.params.Params;
 import ninja.params.PathParam;
 import ninja.utils.NinjaConstant;
 import ninja.validation.JSR303Validation;
@@ -22,6 +24,8 @@ import www.purple.mixxy.models.ComicDto;
 import www.purple.mixxy.models.Like;
 import www.purple.mixxy.models.User;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.inject.Inject;
@@ -179,39 +183,37 @@ public class ComicController {
 	 *            Current user's username
 	 * @param context
 	 *            html context
-	 * @param comicDto
-	 *            Data model for the comic object
-	 * @param validation
-	 *            Checks for various violations such as: field violations (on
-	 *            controller method fields), bean violations (on an injected
-	 *            beans field) or general violations (deprecated)
 	 *
 	 * @return resulting route to redirect with content
 	 */
 	@FilterWith(JsonEndpoint.class)
-	public Result postWork(@LoggedInUser String username, Context context, @JSR303Validation ComicDto comicDto,
-						  Validation validation) {
+	public Result postWork(@LoggedInUser String username, Context context, @Param("title") String title,
+						   @Param("description") String description,
+						   @Param("series") String series,
+						   @Params("tags") String[] tags) {
 
 		if (username == null){
 			context.getFlashScope().error("Must be signed in to save comic.");
 			return Results.redirect("/");
 
 		}
-		comicDto = new ComicDto();
+		ComicDto comicDto = new ComicDto();
 		// try to create comic
-		boolean didCreateComic = false;
+		comicDto.title = title;
+		comicDto.description = description;
+		comicDto.series = series;
+		comicDto.tags = new ArrayList<String>();
+		for (String tag: tags) {
+			comicDto.tags.add((tag));
 
-		//comicDto.title = "blshhahuusdjjidijaisjds!!";
-		comicDto.title = context.getParameter("title");
-		System.out.println(context.getParameter("title"));
+		}
+		//comicDto.tags = Arrays.asList(tags);
+		System.out.println(tags.toString());
 		System.out.println(context.getParameters());
 		//comicDto.description = context.getParameter("description");
 		//comicDto.tags.addAll(context.getParameterValues("tags"));
 
-
-		didCreateComic = comicDao.newComic(username, comicDto);
-
-		if (didCreateComic == false){
+		if (!(comicDao.newComic(username, comicDto))){
 			return Results.noContent();
 		}
 
