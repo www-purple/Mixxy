@@ -206,7 +206,7 @@ public class Routes implements ApplicationRoutes {
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/?").with(ComicController.class, "comic");
 
     // Get the actual image from a given work
-    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/image/?").with(ImageController.class, "image");
+    router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/image/?").with(ComicController.class, "image");
     
     // Load the new remixing page
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/remix/?").with(ComicController.class, "newRemix");

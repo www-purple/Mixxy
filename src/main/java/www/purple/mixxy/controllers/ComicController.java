@@ -69,7 +69,7 @@ public class ComicController {
 			context.getFlashScope().error("Please correct field.");
 			context.getFlashScope().put("title", comicDto.title);
 			context.getFlashScope().put("description", comicDto.description);
-			context.getFlashScope().put("images", comicDto.images);
+			context.getFlashScope().put("image", comicDto.image);
 			context.getFlashScope().put("likes", comicDto.likes);
 			context.getFlashScope().put("tags", comicDto.tags);
 
@@ -149,7 +149,7 @@ public class ComicController {
 			context.getFlashScope().error("Please correct field.");
 			context.getFlashScope().put("title", comicDto.title);
 			context.getFlashScope().put("description", comicDto.description);
-			context.getFlashScope().put("images", comicDto.images);
+			context.getFlashScope().put("image", comicDto.image);
 			context.getFlashScope().put("likes", comicDto.likes);
 			context.getFlashScope().put("tags", comicDto.tags);
 
@@ -199,17 +199,20 @@ public class ComicController {
 		comicDto.description = description;
 		comicDto.series = series;
 		comicDto.tags = new ArrayList<>();
-		for (String tag: tags) {
-			comicDto.tags.add((tag));
-
+		if (tags != null){
+			for (String tag: tags) {
+				comicDto.tags.add((tag));
+	
+			}
 		}
-		System.out.println(tags.toString());
+		//System.out.println(tags.toString());
 		System.out.println(context.getParameters());
 		//comicDto.description = context.getParameter("description");
 		//comicDto.tags.addAll(context.getParameterValues("tags"));
 
 		if (!(comicDao.newComic(username, comicDto))){
-			return Results.noContent();
+			context.getFlashScope().error("Must have some content to upload.");
+			return Results.redirect("/");
 		}
 
 		context.getFlashScope().success("New comic created.");

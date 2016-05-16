@@ -110,7 +110,7 @@ public class ComicDao {
 
 		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
 
-		if (user == null) {
+		if (user == null || comicDto.title == null || comicDto.tags == null) {
 			return false;
 		}
 
