@@ -220,6 +220,12 @@
         </dependency>
 
       <dependency>
+          <groupId>com.google.appengine.tools</groupId>
+          <artifactId>appengine-gcs-client</artifactId>
+          <version>RELEASE</version>
+      </dependency>
+
+      <dependency>
           <groupId>org.webjars</groupId>
           <artifactId>jquery.deviantartmuro</artifactId>
           <version>1.0.2</version>
