@@ -1,5 +1,6 @@
 package www.purple.mixxy.controllers;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Ninja;
@@ -133,23 +134,14 @@ public class ComicController {
 	 * 
 	 * @return resulting route to redirect with content
 	 */
-	//@FilterWith(JsonEndpoint.class)
+	@FilterWith(JsonEndpoint.class)
 	public Result newWork(@LoggedInUser String username, Context context, @JSR303Validation ComicDto comicDto,
 			Validation validation) {
 
-		if (context.getMethod().equals("POST")) {
+		if (username == null){
+			context.getFlashScope().error("Must be signed in to draw.");
+			return Results.redirect("/");
 
-			boolean didCreateComic = false;
-
-			didCreateComic = comicDao.newComic(username, comicDto);
-
-			if (didCreateComic == false){
-				return Results.notFound();
-			}
-
-			context.getFlashScope().success("New comic created.");
-
-			return Results.html().redirect("/");
 		}
 
 		if (validation.hasViolations()) {
@@ -162,23 +154,69 @@ public class ComicController {
 			context.getFlashScope().put("tags", comicDto.tags);
 
 			return Results.redirect("/create/");
-
 		} else {
 
 			// try to create comic
 			boolean didCreateComic = false;
 
-			didCreateComic = comicDao.newComic(username, comicDto);
+			//didCreateComic = comicDao.newComic(username, comicDto);
 
 			if (didCreateComic == false){
 				return Results.notFound();
 			}
 
 			context.getFlashScope().success("New comic created.");
+		return Results.redirect("/");
+		}
+	}
 
+	/**
+	 * This method creates a new comic.
+	 *
+	 * Pass in the current user, context and data model information.
+	 *
+	 * @param username
+	 *            Current user's username
+	 * @param context
+	 *            html context
+	 * @param comicDto
+	 *            Data model for the comic object
+	 * @param validation
+	 *            Checks for various violations such as: field violations (on
+	 *            controller method fields), bean violations (on an injected
+	 *            beans field) or general violations (deprecated)
+	 *
+	 * @return resulting route to redirect with content
+	 */
+	@FilterWith(JsonEndpoint.class)
+	public Result postWork(@LoggedInUser String username, Context context, @JSR303Validation ComicDto comicDto,
+						  Validation validation) {
+
+		if (username == null){
+			context.getFlashScope().error("Must be signed in to save comic.");
 			return Results.redirect("/");
+
+		}
+		comicDto = new ComicDto();
+		// try to create comic
+		boolean didCreateComic = false;
+
+		//comicDto.title = "blshhahuusdjjidijaisjds!!";
+		comicDto.title = context.getParameter("title");
+		System.out.println(context.getParameter("title"));
+		System.out.println(context.getParameters());
+		//comicDto.description = context.getParameter("description");
+		//comicDto.tags.addAll(context.getParameterValues("tags"));
+
+
+		didCreateComic = comicDao.newComic(username, comicDto);
+
+		if (didCreateComic == false){
+			return Results.noContent();
 		}
 
+		context.getFlashScope().success("New comic created.");
+		return Results.redirect("/");
 	}
 
 	@FilterWith(JsonEndpoint.class)
