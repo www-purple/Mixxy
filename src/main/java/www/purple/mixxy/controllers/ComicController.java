@@ -202,12 +202,11 @@ public class ComicController {
 		comicDto.title = title;
 		comicDto.description = description;
 		comicDto.series = series;
-		comicDto.tags = new ArrayList<String>();
+		comicDto.tags = new ArrayList<>();
 		for (String tag: tags) {
 			comicDto.tags.add((tag));
 
 		}
-		//comicDto.tags = Arrays.asList(tags);
 		System.out.println(tags.toString());
 		System.out.println(context.getParameters());
 		//comicDto.description = context.getParameter("description");
