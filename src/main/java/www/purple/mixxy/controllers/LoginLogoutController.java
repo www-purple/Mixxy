@@ -44,6 +44,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import com.google.appengine.api.utils.SystemProperty;
+
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class LoginLogoutController {
@@ -59,6 +61,8 @@ public class LoginLogoutController {
     
     @Inject
     private NinjaProperties ninjaProperties;
+    
+    private String callbackURI;
 
     ///////////////////////////////////////////////////////////////////////////
     // Logout
@@ -78,17 +82,21 @@ public class LoginLogoutController {
 	// Login
 	///////////////////////////////////////////////////////////////////////////
     public Result login(@Param("provider") String provider) {  
+    	
+        String appVersion = SystemProperty.applicationVersion.get();   
+        callbackURI = ninjaProperties.get("callback.uri");     
+        callbackURI = callbackURI.replace("#", appVersion.substring(0, appVersion.indexOf('.')));
 
     	switch(provider)
     	{
 	    	case OAuthProviders.GOOGLE:
-	    		GoogleAuthHelper gglHelper = new GoogleAuthHelper(apiKeys.getGoogleId(), apiKeys.getGoogleSecret(), ninjaProperties.get("callback.uri"));
+	    		GoogleAuthHelper gglHelper = new GoogleAuthHelper(apiKeys.getGoogleId(), apiKeys.getGoogleSecret(), callbackURI);
 		    	return Results.redirect(gglHelper.buildLoginUrl());
 	    	case OAuthProviders.FACEBOOK:
-	    		FacebookAuthHelper fbHelper = new FacebookAuthHelper(apiKeys.getFacebookId(), apiKeys.getFacebookSecret(), ninjaProperties.get("callback.uri"));
+	    		FacebookAuthHelper fbHelper = new FacebookAuthHelper(apiKeys.getFacebookId(), apiKeys.getFacebookSecret(), callbackURI);
 		    	return Results.redirect(fbHelper.buildLoginUrl());
 	    	case OAuthProviders.DEVIANTART:
-	    		DeviantArtAuthHelper daHelper = new DeviantArtAuthHelper(apiKeys.getDeviantartId(), apiKeys.getDeviantartKey(), ninjaProperties.get("callback.uri"));
+	    		DeviantArtAuthHelper daHelper = new DeviantArtAuthHelper(apiKeys.getDeviantartId(), apiKeys.getDeviantartKey(), callbackURI);
 	    		return Results.redirect(daHelper.buildLoginUrl());
 	    	default:
 	    		return Results.redirect("/");
@@ -120,7 +128,7 @@ public class LoginLogoutController {
 			return loginError(context);
 		}
     	
-    	GoogleAuthHelper helper = new GoogleAuthHelper(apiKeys.getGoogleId(), apiKeys.getGoogleSecret(), ninjaProperties.get("callback.uri"));
+    	GoogleAuthHelper helper = new GoogleAuthHelper(apiKeys.getGoogleId(), apiKeys.getGoogleSecret(), callbackURI);
     	String data;
     	
     	// Get json response
@@ -188,7 +196,7 @@ public class LoginLogoutController {
 		}
     	
     	// Exchange code for an access token
-    	FacebookAuthHelper helper = new FacebookAuthHelper(apiKeys.getFacebookId(), apiKeys.getFacebookSecret(), ninjaProperties.get("callback.uri"));
+    	FacebookAuthHelper helper = new FacebookAuthHelper(apiKeys.getFacebookId(), apiKeys.getFacebookSecret(), callbackURI);
     	String data = helper.getUserInfoJson(code);
     	
     	// Parse json response
