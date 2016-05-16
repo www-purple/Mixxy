@@ -36,6 +36,7 @@ public class Comic {
 	
 	@Unindex
 	public String description;
+	public String series;
 	public List<String> tags;
 
 	public Date createdAt;
@@ -45,7 +46,7 @@ public class Comic {
 
 	public Comic() {/* needed by Objectify */ }
 
-	public Comic(final Comic ancestorComic, final User author, final String title, final String description, final List<String> tags) {
+	public Comic(final Comic ancestorComic, final User author, final String title, final String description, final String series, final List<String> tags) {
 		
 		if (ancestorComic == null){
 			this.ancestorComicId = Lists.newArrayList();
@@ -68,6 +69,7 @@ public class Comic {
 		
 		this.title = title;
 		this.description = description;
+		this.series = series;
 		this.tags = tags;
 		this.createdAt = new Date();
 		this.updatedAt = new Date();

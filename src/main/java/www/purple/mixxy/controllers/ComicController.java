@@ -1,11 +1,14 @@
 package www.purple.mixxy.controllers;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Ninja;
 import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
+import ninja.params.Param;
+import ninja.params.Params;
 import ninja.params.PathParam;
 import ninja.utils.NinjaConstant;
 import ninja.validation.JSR303Validation;
@@ -21,6 +24,8 @@ import www.purple.mixxy.models.ComicDto;
 import www.purple.mixxy.models.Like;
 import www.purple.mixxy.models.User;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.inject.Inject;
@@ -137,6 +142,12 @@ public class ComicController {
 	public Result newWork(@LoggedInUser String username, Context context, @JSR303Validation ComicDto comicDto,
 			Validation validation) {
 
+		if (username == null){
+			context.getFlashScope().error("Must be signed in to draw.");
+			return Results.redirect("/");
+
+		}
+
 		if (validation.hasViolations()) {
 
 			context.getFlashScope().error("Please correct field.");
@@ -147,23 +158,66 @@ public class ComicController {
 			context.getFlashScope().put("tags", comicDto.tags);
 
 			return Results.redirect("/create/");
-
 		} else {
-			
+
+			// try to create comic
 			boolean didCreateComic = false;
 
-			didCreateComic = comicDao.newComic(username, comicDto);
-			
+			//didCreateComic = comicDao.newComic(username, comicDto);
+
 			if (didCreateComic == false){
 				return Results.notFound();
 			}
 
 			context.getFlashScope().success("New comic created.");
+		return Results.redirect("/");
+		}
+	}
 
+	/**
+	 * This method creates a new comic.
+	 *
+	 * Pass in the current user, context and data model information.
+	 *
+	 * @param username
+	 *            Current user's username
+	 * @param context
+	 *            html context
+	 *
+	 * @return resulting route to redirect with content
+	 */
+	@FilterWith(JsonEndpoint.class)
+	public Result postWork(@LoggedInUser String username, Context context, @Param("title") String title,
+						   @Param("description") String description,
+						   @Param("series") String series,
+						   @Params("tags") String[] tags) {
+
+		if (username == null){
+			context.getFlashScope().error("Must be signed in to save comic.");
 			return Results.redirect("/");
 
 		}
+		ComicDto comicDto = new ComicDto();
+		// try to create comic
+		comicDto.title = title;
+		comicDto.description = description;
+		comicDto.series = series;
+		comicDto.tags = new ArrayList<>();
+		for (String tag: tags) {
+			comicDto.tags.add((tag));
 
+		}
+		System.out.println(tags.toString());
+		System.out.println(context.getParameters());
+		//comicDto.description = context.getParameter("description");
+		//comicDto.tags.addAll(context.getParameterValues("tags"));
+
+		if (!(comicDao.newComic(username, comicDto))){
+			return Results.noContent();
+		}
+
+		context.getFlashScope().success("New comic created.");
+		return Results.redirect("/");
 	}
 
 	@FilterWith(JsonEndpoint.class)
@@ -264,12 +318,5 @@ public class ComicController {
 	public Result parent() {
 		return Results.TODO();
 	}
-
-    public Result muro() {
-        return Results.ok().html();
-    }
-
-    public Result upload() {
-        return Results.ok().html();
-    }
+	
 }

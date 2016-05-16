@@ -40,10 +40,10 @@ public class ObjectifyProvider implements Provider<Objectify> {
         User bob = new User("BobTheBuilder", "Bob", "Smith", "male", "bob@gmail.com", "url", "en", "123", "google");
         bob.id = (long) -32;
 
-        Comic bobComic = new Comic(null, bob, "cool title", "interesting description", Arrays.asList("18+", "sci-fi", "sexy"));
+        Comic bobComic = new Comic(null, bob, "cool title", "interesting description", "boring junk", Arrays.asList("18+", "sci-fi", "sexy"));
         bobComic.id = (long) -1;
 
-        Comic bobComic2 = new Comic(bobComic, bob, "cool title222", "interesting description222", Arrays.asList("parody", "derp"));
+        Comic bobComic2 = new Comic(bobComic, bob, "cool title222", "interesting description222", "nada", Arrays.asList("parody", "derp"));
         bobComic2.id = (long) -2;
 
         bobComic2.ancestorComicId.add(bobComic.id);
