@@ -20,49 +20,47 @@
                     <h1>Upload a Comic</h1>
                 </div>
                 <div class="draw-form content">
-                    <div class="ui action input">
-                        <input placeholder="Choose Comic" type="text">
-                        <button class="ui button">Select</button>
+                    <div class="ui input">
+                        <input placeholder="Choose Comic" type="file">
+                        <!--//<button class="ui button">Select</button>-->
                     </div>
                 </div>
             </div>
             <div class="ui centered grid">
                 <div class="draw-form column comic">
-                    <form class="ui form">
+                    <form method="post" enctype="multipart/form-data" action="/create" class="ui form">
                         <h2>Details</h2>
                         <div class="required field">
                             <label>Title</label>
-                            <input type="text">
+                            <input type="text" name="title">
                         </div>
                         <div class="field">
                             <label>Description</label>
-                            <textarea rows="2"></textarea>
+                            <textarea rows="2" name="description"></textarea>
                         </div>
-                        <div class="field">
+                        <div class="inline field">
                             <label>Series</label>
-                            <select class="ui tags fluid search selection dropdown">
-                                <label>Series</label>
+                            <select class="ui tags fluid search selection dropdown" name="series">
                             </select>
                         </div>
                         <div class="inline fields">
                             <div class="inline fourteen wide required field">
                                 <label>Tags</label>
-                                <select class="ui tags fluid multiple search selection dropdown" multiple="">
+                                <select class="ui tags fluid multiple search selection dropdown" multiple="" name="tags">
                                 </select>
                             </div>
                             <div class="inline required field">
                                 <div class="ui checkbox">
-                                    <input class="hidden" tabindex="0" type="checkbox">
+                                    <input class="hidden" tabindex="0" type="checkbox" name="nsfw">
                                     <label>NSFW?</label>
                                 </div>
                             </div>
                         </div>
-                        <button class="ui button">Upload Comic</button>
+                        <button class="ui button" type="submit">Upload Comic</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
 
 </@layout.myLayout>

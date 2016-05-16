@@ -133,9 +133,24 @@ public class ComicController {
 	 * 
 	 * @return resulting route to redirect with content
 	 */
-	@FilterWith(JsonEndpoint.class)
+	//@FilterWith(JsonEndpoint.class)
 	public Result newWork(@LoggedInUser String username, Context context, @JSR303Validation ComicDto comicDto,
 			Validation validation) {
+
+		if (context.getMethod().equals("POST")) {
+
+			boolean didCreateComic = false;
+
+			didCreateComic = comicDao.newComic(username, comicDto);
+
+			if (didCreateComic == false){
+				return Results.notFound();
+			}
+
+			context.getFlashScope().success("New comic created.");
+
+			return Results.html().redirect("/");
+		}
 
 		if (validation.hasViolations()) {
 
@@ -149,11 +164,12 @@ public class ComicController {
 			return Results.redirect("/create/");
 
 		} else {
-			
+
+			// try to create comic
 			boolean didCreateComic = false;
 
 			didCreateComic = comicDao.newComic(username, comicDto);
-			
+
 			if (didCreateComic == false){
 				return Results.notFound();
 			}
@@ -161,7 +177,6 @@ public class ComicController {
 			context.getFlashScope().success("New comic created.");
 
 			return Results.redirect("/");
-
 		}
 
 	}
@@ -264,12 +279,5 @@ public class ComicController {
 	public Result parent() {
 		return Results.TODO();
 	}
-
-    public Result muro() {
-        return Results.ok().html();
-    }
-
-    public Result upload() {
-        return Results.ok().html();
-    }
+	
 }
