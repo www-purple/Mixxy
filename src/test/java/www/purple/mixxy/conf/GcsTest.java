@@ -32,7 +32,7 @@ public class GcsTest extends NinjaTest {
 
   private String bucket;
   private String imageDir;
-  private GcsFileOptions defaultFileOptions;
+  private GcsFileOptions fileOptions;
   private GcsFilename testFilename;
   private byte[] content;
 
@@ -42,7 +42,7 @@ public class GcsTest extends NinjaTest {
   public void setup() {
     this.bucket = properties.get("gcs.bucket");
     this.imageDir = properties.get("gcs.imagedir");
-    this.defaultFileOptions = GcsFileOptions.getDefaultInstance();
+    this.fileOptions = GcsFileOptions.getDefaultInstance();
     this.testFilename = new GcsFilename(bucket, TEST_FILE);
     this.content = new byte[1024];
     new Random().nextBytes(this.content);
@@ -82,10 +82,9 @@ public class GcsTest extends NinjaTest {
 
   @Test
   public void testStoreFile() throws IOException {
-    GcsFilename file = new GcsFilename(bucket, TEST_FILE);
     ByteBuffer buffer = ByteBuffer.wrap(this.content);
 
-    gcs.createOrReplace(file, defaultFileOptions, buffer);
+    gcs.createOrReplace(testFilename, fileOptions, buffer);
     // fails if this throws an exception
   }
 
@@ -93,7 +92,7 @@ public class GcsTest extends NinjaTest {
   public void testStoreAndDeleteFile() throws IOException {
     ByteBuffer buffer = ByteBuffer.wrap(this.content);
 
-    gcs.createOrReplace(testFilename, defaultFileOptions, buffer);
+    gcs.createOrReplace(testFilename, fileOptions, buffer);
     // fails if this throws an exception
 
     assertTrue(gcs.delete(testFilename));
@@ -103,7 +102,7 @@ public class GcsTest extends NinjaTest {
   public void testStoreAndRetrieveFile() throws IOException {
     ByteBuffer buffer = ByteBuffer.wrap(this.content);
 
-    gcs.createOrReplace(testFilename, defaultFileOptions, buffer);
+    gcs.createOrReplace(testFilename, fileOptions, buffer);
     // fails if this throws an exception
 
     GcsInputChannel file = gcs.openReadChannel(testFilename, 0);
