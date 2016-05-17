@@ -1,8 +1,16 @@
 package www.purple.mixxy.dao;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
+import com.google.appengine.tools.cloudstorage.GcsFileOptions;
+import com.google.appengine.tools.cloudstorage.GcsFilename;
+import com.google.appengine.tools.cloudstorage.GcsOutputChannel;
+import com.google.appengine.tools.cloudstorage.GcsService;
+import com.google.appengine.tools.cloudstorage.GcsServiceFactory;
 /**
  * Created by Brian_Sabz on 4/7/16.
  * 
@@ -22,6 +30,9 @@ public class ComicDao {
 
 	@Inject
 	private Provider<Objectify> objectify;
+	
+	@Inject
+	private GcsService gcs = GcsServiceFactory.createGcsService();
 
 	public ComicsDto getAllComics() {
 
@@ -125,6 +136,43 @@ public class ComicDao {
 
 		Comic comic = new Comic(null, user, comicDto.title, comicDto.description, comicDto.series, comicDto.tags);
 
+//		//Generate string for my photo
+//        String unique = UUID.randomUUID().toString();
+//        
+//		GcsFilename fileName = new GcsFilename("mixxy-1249.appspot.com", unique + ".png");
+//		
+//		//Set Option for that file
+//        GcsFileOptions options = new GcsFileOptions.Builder()
+//                .mimeType("image/png")
+//                .acl("public-read")
+//                .build();
+//        
+//		try {
+//			// Canal to write on it
+//			GcsOutputChannel writeChannel = gcs.createOrReplace(fileName, options);
+//
+//			// Write data from photo
+//			try {
+//
+//				writeChannel.write(ByteBuffer.wrap(comicDto.image.getImageData()));
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} finally {
+//				try {
+//					writeChannel.close();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//        
+//		
+//		comic.url = unique + ".png";
 		// comic.author = Ref.create(user);
 
 		// lowest index is the root Parent comic (index 0 is the first comic
