@@ -8,7 +8,6 @@ import com.google.inject.Singleton;
 
 import ninja.NinjaFluentLeniumTest;
 
-@Singleton
 public class NavigationTest extends NinjaFluentLeniumTest {
 
   @Test
