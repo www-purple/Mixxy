@@ -1,4 +1,4 @@
-package www.purple.mixxy.controllers;
+package www.purple.mixxy.conf;
 
 import static org.junit.Assert.*;
 

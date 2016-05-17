@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import com.google.inject.Injector;
 
+import ninja.NinjaAppengineBackendTest;
 import www.purple.mixxy.dao.ComicDao;
 import www.purple.mixxy.models.Comic;
 

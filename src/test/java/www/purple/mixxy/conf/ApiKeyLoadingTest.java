@@ -1,4 +1,4 @@
-package www.purple.mixxy.controllers;
+package www.purple.mixxy.conf;
 
 import com.google.inject.Injector;
 import com.google.inject.Singleton;

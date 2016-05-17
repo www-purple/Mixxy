@@ -3,8 +3,8 @@ package www.purple.mixxy.conf;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 
+import ninja.NinjaAppengineBackendTest;
 import ninja.NinjaTest;
-import www.purple.mixxy.controllers.NinjaAppengineBackendTest;
 import www.purple.mixxy.helpers.ApiKeys;
 
 import static org.junit.Assert.*;

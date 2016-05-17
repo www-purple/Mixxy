@@ -1,7 +1,9 @@
-package www.purple.mixxy.controllers;
+package www.purple.mixxy.dao;
 
 import com.googlecode.objectify.Objectify;
 //import com.googlecode.objectify.Ref;
+
+import ninja.NinjaAppengineBackendTest;
 
 import org.junit.Test;
 import www.purple.mixxy.conf.ObjectifyProvider;

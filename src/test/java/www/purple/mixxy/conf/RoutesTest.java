@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-package www.purple.mixxy.controllers;
+package www.purple.mixxy.conf;
 
 import ninja.AssetsController;
 import ninja.NinjaTest;
 import ninja.Route;
 import ninja.Router;
+import www.purple.mixxy.controllers.ApiController;
+import www.purple.mixxy.controllers.LoginLogoutController;
+import www.purple.mixxy.controllers.UserController;
 
 import static org.junit.Assert.*;
 
