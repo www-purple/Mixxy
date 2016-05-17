@@ -26,7 +26,6 @@ import ninja.utils.NinjaProperties;
 import www.purple.mixxy.controllers.ApiController;
 import www.purple.mixxy.controllers.ApplicationController;
 import www.purple.mixxy.controllers.ComicController;
-import www.purple.mixxy.controllers.ImageController;
 import www.purple.mixxy.controllers.LoginLogoutController;
 import www.purple.mixxy.controllers.SearchController;
 import www.purple.mixxy.controllers.UserController;

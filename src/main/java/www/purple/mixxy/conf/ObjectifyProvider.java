@@ -14,7 +14,6 @@ import com.googlecode.objectify.ObjectifyService;
 import www.purple.mixxy.models.Ban;
 import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.Flag;
-import www.purple.mixxy.models.ImageData;
 import www.purple.mixxy.models.Like;
 import www.purple.mixxy.models.Subscription;
 import www.purple.mixxy.models.User;
@@ -34,30 +33,8 @@ public class ObjectifyProvider implements Provider<Objectify> {
         ObjectifyService.register(Flag.class);
         ObjectifyService.register(Like.class);
         ObjectifyService.register(Subscription.class);
-        ObjectifyService.register(ImageData.class);
 
         setup();
-    }
-
-
-    public static byte[] downloadUrl(URL toDownload) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-        try {
-            byte[] chunk = new byte[4096];
-            int bytesRead;
-            InputStream stream = toDownload.openStream();
-
-            while ((bytesRead = stream.read(chunk)) > 0) {
-                outputStream.write(chunk, 0, bytesRead);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new byte[1];
-        }
-
-        return outputStream.toByteArray();
     }
     
     public static void setup() {
@@ -86,35 +63,6 @@ public class ObjectifyProvider implements Provider<Objectify> {
         }
         
         //	Save comics
-        ofy.save().entities(bobComic, bobComic2).now();
-        
-        
-        URL imageURL;
-        ImageData image1, image2;
-        
-		try {
-			imageURL = new URL("https://www.cs.stonybrook.edu/sites/default/files/wwwfiles/mckenna_0.jpg");
-			byte[] imageBlob = downloadUrl(imageURL);
-			
-			image1 = new ImageData(bobComic.id, imageBlob);
-			image1.id = (long) 26;
-			
-			image2 = new ImageData(bobComic2.id, imageBlob);
-	        image2.id = (long) 69;
-	        
-			if (ofy.load().entity(image1).now() == null) {
-	              ofy.save().entity(image1).now();
-	        }
-			
-			if (ofy.load().entity(image2).now() == null) {
-	              ofy.save().entity(image2).now();
-	        }
-			
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
         // Comic ancestry working
         if (ofy.load().type(Comic.class).first().now() == null) {
             ofy.save().entities(bobComic, bobComic2).now();

@@ -35,9 +35,21 @@ $(document).ready(function(){
     .one('click', function () {
         $(this).damuro().open();
     })
-    .query('image', null, function (data) {
-        if (data.image) {
-            // Send it to my server as an autosave.
-        }
-    });
+    damuro()
+    // The .damuro() object is a promise, so lets bind a done() and fail() handler.
+    .done(function (data) {
+            if (data.image && !/\'/.test(data.image)) {
+               $('#muroimage').prop('value', data.image);
+            }
+
+        })
+    .fail(function (data) {
+            if (data.error) {
+                // Something failed in saving the image.
+                $('body').append('<p>All aboard the fail whale: ' + data.error + '.</p>');
+            } else {
+                // The user pressed "done" without making any changes.
+                $('body').append("<p>Be that way then, don't edit anything.</p>");
+            }
+        });
 });

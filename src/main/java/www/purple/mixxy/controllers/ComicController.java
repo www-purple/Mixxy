@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -183,7 +185,8 @@ public class ComicController {
 	 * @return resulting route to redirect with content
 	 */
 	@FilterWith(JsonEndpoint.class)
-	public Result postWork(@LoggedInUser String username, Context context, @Param("title") String title,
+	public Result postWork(@LoggedInUser String username, Context context, @Param("muroimage") String muroimage,
+						   @Param("title") String title,
 						   @Param("description") String description,
 						   @Param("series") String series,
 						   @Params("tags") String[] tags) {
@@ -195,6 +198,11 @@ public class ComicController {
 		}
 		ComicDto comicDto = new ComicDto();
 		// try to create comic
+		
+		
+		byte[] imgInByteArr = Base64.decodeBase64(muroimage);	
+		comicDto.image.setImageData(imgInByteArr);
+		
 		comicDto.title = title;
 		comicDto.description = description;
 		comicDto.series = series;
