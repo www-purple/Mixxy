@@ -158,9 +158,9 @@ public class ComicController {
 				}
 
 			}
-
-			context.getFlashScope().success("New comic created.");
-		return Results.redirect("/");
+			
+			// so we can render the series in the list of series options
+			return Results.html().render("series", series);
 	}
 	
 
