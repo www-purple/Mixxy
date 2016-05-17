@@ -141,38 +141,41 @@ public class LoginLogoutController {
     		logger.error("Cannot get Google User Info", e);
     		return loginError(context);
     	}
+    	
+    	User user = null;
 
     	// Parse json response
     	ObjectMapper mapper = new ObjectMapper();
     	try {
     		@SuppressWarnings("unchecked")
-    		Map<String,Object> user = mapper.readValue(data, Map.class);
+    		Map<String,Object> userMap = mapper.readValue(data, Map.class);
 
     		// Validate user
-        	if(userDao.isUserValid((String)user.get(GoogleUser.EMAIL))) {
+        	if((user = userDao.isUserValid((String)userMap.get(GoogleUser.EMAIL))) != null) {
         		// If user exists
         		// Start session
-			    newSession((String)user.get(GoogleUser.EMAIL), context);
+			    newSession(user, context);
         	}
         	else
         	{
         		// Create new user
-				userDao.createUser(
-						(String)user.get(GoogleUser.EMAIL),
-						(String)user.get(GoogleUser.FIRST_NAME),
-						(String)user.get(GoogleUser.LAST_NAME),
-						(String)user.get(GoogleUser.GENDER),
-						(String)user.get(GoogleUser.EMAIL),
-						(String)user.get(GoogleUser.PICTURE_URL),
-						(String)user.get(GoogleUser.LOCALE),
-						(String)user.get(GoogleUser.ID),
-						provider);
+				user = userDao.createUser(
+						(String)userMap.get(GoogleUser.EMAIL),
+						(String)userMap.get(GoogleUser.FIRST_NAME),
+						(String)userMap.get(GoogleUser.LAST_NAME),
+						(String)userMap.get(GoogleUser.GENDER),
+						(String)userMap.get(GoogleUser.EMAIL),
+						(String)userMap.get(GoogleUser.PICTURE_URL),
+						(String)userMap.get(GoogleUser.LOCALE),
+						(String)userMap.get(GoogleUser.ID),
+						provider
+				);
 
 				// Start session
-				newSession((String)user.get(GoogleUser.EMAIL), context);
+				newSession(user, context);
 
 		        // TODO: Redirect to profile
-				return Results.redirect("/privacy");
+				return Results.redirect("/users/" + (String)userMap.get(GoogleUser.EMAIL));
         	}
 
 		} catch (JsonGenerationException e) {
@@ -199,43 +202,54 @@ public class LoginLogoutController {
     	// Exchange code for an access token
     	FacebookAuthHelper helper = new FacebookAuthHelper(apiKeys.getFacebookId(), apiKeys.getFacebookSecret(), callbackURI);
     	String data = helper.getUserInfoJson(code);
+    	
+    	System.out.println(data);
+    	
+    	User user = null;
 
     	// Parse json response
     	ObjectMapper mapper = new ObjectMapper();
     	try {
     		@SuppressWarnings("unchecked")
-    		Map<String,Object> user = mapper.readValue(data, Map.class);
+    		Map<String,Object> userMap = mapper.readValue(data, Map.class);
+    		
+    		if((String)userMap.get(FacebookUser.EMAIL) == null) {
+		    	userMap.put(FacebookUser.USERNAME, (String)userMap.get(FacebookUser.FIRST_NAME));
+		    } else {
+		    	userMap.put(FacebookUser.USERNAME, (String)userMap.get(FacebookUser.EMAIL));
+		    }
 
     		// Validate user
-        	if(userDao.isUserValid((String)user.get(FacebookUser.EMAIL))) {
+        	if((user = userDao.isUserValid((String)userMap.get(FacebookUser.USERNAME))) != null) {
         		// If user exists
         		// Start session
-			    newSession((String)user.get(FacebookUser.EMAIL), context);
+			    newSession(user, context);
         	}
         	else
         	{
         		@SuppressWarnings("unchecked")
-	    		Map<String,Object> picture = (Map<String, Object>) user.get("picture");
+	    		Map<String,Object> picture = (Map<String, Object>) userMap.get("picture");
 			    @SuppressWarnings("unchecked")
 				Map<String,Object> pictureUrl = (Map<String, Object>) picture.get("data");
 
         		// Create new user
-				userDao.createUser(
-						(String)user.get(FacebookUser.EMAIL),
-						(String)user.get(FacebookUser.FIRST_NAME),
-						(String)user.get(FacebookUser.LAST_NAME),
-						(String)user.get(FacebookUser.GENDER),
-						(String)user.get(FacebookUser.EMAIL),
+				user = userDao.createUser(
+						(String)userMap.get(FacebookUser.USERNAME),
+						(String)userMap.get(FacebookUser.FIRST_NAME),
+						(String)userMap.get(FacebookUser.LAST_NAME),
+						(String)userMap.get(FacebookUser.GENDER),
+						(String)userMap.get(FacebookUser.EMAIL),
 						(String)pictureUrl.get(FacebookUser.PICTURE_URL),
-						(String)user.get(FacebookUser.LOCALE),
-						(String)user.get(FacebookUser.ID),
-						provider);
+						(String)userMap.get(FacebookUser.LOCALE),
+						(String)userMap.get(FacebookUser.ID),
+						provider
+				);
 
 				// Start session
-				newSession((String)user.get(FacebookUser.EMAIL), context);
+				newSession(user, context);
 
 		        // TODO: Redirect to profile
-				return Results.redirect("/privacy");
+				return Results.redirect("/users/" + (String)userMap.get(FacebookUser.USERNAME));
         	}
     	} catch (JsonGenerationException e) {
             logger.error("Invalid JSON response from Google", e);
@@ -267,16 +281,12 @@ public class LoginLogoutController {
     	return Results.redirect("/terms");
 	}
 
-	public void newSession(String username, Context context) {
-		// here???????
-		User user = userDao.getUser(username);
-		if (user == null) {
-			context.getFlashScope().error("Invalid user.");
-			loginError(context);
-		}
+	public void newSession(User user, Context context) {
+		
 		context.getSession().put("username", user.username);
 		context.getSession().put("userNickname", user.firstname);
-		context.getSession().put("userAvatar", user.pictureUrl);
+		context.getSession().put("userAvatar",  user.pictureUrl);
+		
 		context.getFlashScope().success("login.loginSuccessful");
 	}
 
