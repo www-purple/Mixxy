@@ -161,8 +161,8 @@ public class ComicController {
 
 			context.getFlashScope().success("New comic created.");
 		return Results.redirect("/");
-		}
 	}
+	
 
 	/**
 	 * This method creates a new comic.
