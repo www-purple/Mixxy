@@ -45,6 +45,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import com.google.appengine.api.utils.SystemProperty;
+import www.purple.mixxy.models.User;
 
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
@@ -267,7 +268,15 @@ public class LoginLogoutController {
 	}
 	
 	public void newSession(String username, Context context) {
-		context.getSession().put("username", username);
+		// here???????
+		User user = userDao.getUser(username);
+		if (user == null) {
+			context.getFlashScope().error("Invalid user.");
+			loginError(context);
+		}
+		context.getSession().put("username", user.username);
+		context.getSession().put("userNickname", user.firstname);
+		context.getSession().put("userAvatar", user.pictureUrl);
 		context.getFlashScope().success("login.loginSuccessful");
 	}
 	

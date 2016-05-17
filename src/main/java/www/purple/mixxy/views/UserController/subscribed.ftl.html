@@ -1,0 +1,22 @@
+
+<#import "../layout/defaultLayout.ftl.html" as layout>
+    <@layout.myLayout "${user}'s Subscriptions">
+<div class="ui large breadcrumb">
+    <a class="section" href="/">Home</a>
+    <i class="right angle icon divider"></i>
+    <a class="section" href="/users/${user}">${user}</a>
+    <i class="right angle icon divider"></i>
+    <div class="active section">Subscriptions</div>
+</div>
+<div class="ui container grey-box">
+    <div class="ui grid">
+        <div class="column">
+            <div class="white-box">
+                <h1>Subscriptions</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</@layout.myLayout>

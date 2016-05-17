@@ -1,23 +1,24 @@
 <#import "../layout/defaultLayout.ftl.html" as layout>
-    <@layout.myLayout "${comic}">
+    <@layout.myLayout "${comic.title}">
     <div class="ui large breadcrumb">
         <a class="section" href="/">Home</a>
         <i class="right angle icon divider"></i>
-        <a class="section" href="/${author}">${author}</a>
+        <a class="section" href="/${user}">${user}</a>
         <i class="right angle icon divider"></i>
-        <div class="active section">${comic}</div>
+        <div class="active section">${comic.title}</div>
     </div>
     <div class="ui container grey-box">
         <div class="ui centered padded stackable grid">
-            <h1 class="ui header">${comic}</h1>
-            <h3 class="ui header"> by <a href="/${author}">${author}</a></h3>
+            <h1>${comic.title}</h1>
+            <h3> by <a href="/users/${user}">${user}</a></h3>
             <div class="row">
                 <div class="ten wide column comic">
                     <div class="ui white-box">
-                        <img class="ui centered large image" src="/assets/images/harrypotter.jpg" alt="${comic.title}">
+                        <img class="ui centered large image" src="#" alt="${comic.title}">
+                        <!--<img class="ui centered large image" src="/assets/images/harrypotter.jpg" alt="${comic.title}">-->
                     </div>
                     <div class="ui white-box">
-                        <p>Tags:</p>
+                        <p>Tags: <#list comic.tags as tag>${tag}<#sep>, </#list></p>
                     </div>
                     <div class="ui white-box">
                         <p>Comments:</p>
@@ -28,8 +29,12 @@
                 <div class="ui four wide column">
                     <div class="white-box">
                         <!-- eventually needs to be a news feed of some sort -->
-                        <p><strong>Hagrid is a bad teacher</strong></p>
-                        <a href="/series">Harry Potter</a><br/>
+                        <#if comic.description ??>
+                            <p><strong>${comic.description}</strong></p>
+                        </#if>
+                        <#if comic.series ??>
+                            <a href="/users/${user}/series/${comic.series}">${comic.series}</a><br/>
+                        </#if>
                         <br/>
                         <br/>
                         Remix<br/>

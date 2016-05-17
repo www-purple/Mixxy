@@ -50,6 +50,11 @@
                             <div class="inline fourteen wide required field">
                                 <label>Tags</label>
                                 <select class="ui tags fluid multiple search selection dropdown" multiple="" name="tags">
+                                    <#if series??>
+                                        <#list series as s>
+                                            <option value="${s}">${s}</option>
+                                        </#list>
+                                    </#if>
                                 </select>
                             </div>
                             <div class="inline required field">

@@ -11,9 +11,7 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.condition.IfNotDefault;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 public class User {
@@ -50,7 +48,6 @@ public class User {
 		this.lastname = lastname;
 		this.gender = gender;
 		this.email = email;
-		
 		this.pictureUrl = pictureUrl;
 		this.locale = locale;
 
@@ -61,5 +58,5 @@ public class User {
 		this.updatedAt = new Date();
 		this.isActive = true;
 	}
-	
+
 }
