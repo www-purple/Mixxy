@@ -15,7 +15,7 @@ a {
     color: rgba(255, 255, 255, 0.9);
 }
 
-h1.ui.header, h1{
+h1 {
     font-size: 3.75rem;
     font-family: 'Bangers', cursive;
     margin-left: 4rem;
@@ -27,12 +27,16 @@ h1.ui.header, h1{
             -1px 1px 0 #000,
             1px 1px 0 #000;
     text-decoration: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 
-#nav h2, h2.ui.header, h2{
+h2 {
     font-size: 3rem;
     font-family: 'Permanent Marker', cursive;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 #nav a.item:link, #nav a.item:visited, #nav a {
@@ -107,11 +111,6 @@ p, .item, body{
 .boring p, .boring li{
 	font-family: "PT Sans", Helvetica, sans-serif;
     list-style-type: circle;
-}
-
-.comic h1, .comic h2 {
-	margin-top: 10px;
-    margin-bottom: 20px;
 }
 
 .draw-form .ui.input, .draw-form .ui.form{

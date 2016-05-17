@@ -45,23 +45,24 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import com.google.appengine.api.utils.SystemProperty;
+import www.purple.mixxy.models.User;
 
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class LoginLogoutController {
-    
+
     @Inject
     private Logger logger;
-    
+
     @Inject
     private UserDao userDao;
-    
+
     @Inject
     private ApiKeys apiKeys;
-    
+
     @Inject
     private NinjaProperties ninjaProperties;
-    
+
     private String callbackURI;
 
     ///////////////////////////////////////////////////////////////////////////
@@ -81,10 +82,10 @@ public class LoginLogoutController {
 	///////////////////////////////////////////////////////////////////////////
 	// Login
 	///////////////////////////////////////////////////////////////////////////
-    public Result login(@Param("provider") String provider) {  
-    	
-        String appVersion = SystemProperty.applicationVersion.get();   
-        callbackURI = ninjaProperties.get("callback.uri");     
+    public Result login(@Param("provider") String provider) {
+
+        String appVersion = SystemProperty.applicationVersion.get();
+        callbackURI = ninjaProperties.get("callback.uri");
         callbackURI = callbackURI.replace("#", appVersion.substring(0, appVersion.indexOf('.')));
 
     	switch(provider)
@@ -101,16 +102,16 @@ public class LoginLogoutController {
 	    	default:
 	    		return Results.redirect("/");
     	}
-    	
+
     }
-    
+
     public Result validate(
     		@Param("state") String state,
     		@Param("code") String code,
     		Context context) {
-    	
+
     	System.out.println("State: " + state + " Code: " + code);
-    	
+
     	if(state.contains(OAuthProviders.FACEBOOK))
     		return validateFacebookResponse(OAuthProviders.FACEBOOK, code, context);
     	else if(state.contains(OAuthProviders.GOOGLE))
@@ -120,33 +121,33 @@ public class LoginLogoutController {
     	else
     		return Results.redirect("/terms");
     }
-    
+
     public Result validateGoogleResponse(String provider, String code, Context context) {
-    	
+
     	if (code == null || code.equals("")) {
     		logger.error("User cancelled google auth or no code returned");
 			return loginError(context);
 		}
-    	
+
     	GoogleAuthHelper helper = new GoogleAuthHelper(apiKeys.getGoogleId(), apiKeys.getGoogleSecret(), callbackURI);
     	String data;
-    	
+
     	// Get json response
     	try {
     		data = helper.getUserInfoJson(code);
-    		
+
     		System.out.println(data);
     	} catch (IOException e) {
     		logger.error("Cannot get Google User Info", e);
     		return loginError(context);
     	}
-    	
+
     	// Parse json response
     	ObjectMapper mapper = new ObjectMapper();
     	try {
     		@SuppressWarnings("unchecked")
     		Map<String,Object> user = mapper.readValue(data, Map.class);
-    		
+
     		// Validate user
         	if(userDao.isUserValid((String)user.get(GoogleUser.EMAIL))) {
         		// If user exists
@@ -166,14 +167,14 @@ public class LoginLogoutController {
 						(String)user.get(GoogleUser.LOCALE),
 						(String)user.get(GoogleUser.ID),
 						provider);
-				
+
 				// Start session
 				newSession((String)user.get(GoogleUser.EMAIL), context);
-				
+
 		        // TODO: Redirect to profile
 				return Results.redirect("/privacy");
         	}
-    		
+
 		} catch (JsonGenerationException e) {
             logger.error("Invalid JSON response from Google", e);
             return loginError(context);
@@ -187,24 +188,24 @@ public class LoginLogoutController {
 
     	return Results.redirect("/");
     }
-    
+
     private Result validateFacebookResponse(String provider, String code, Context context) {
-		
+
     	if (code == null || code.equals("")) {
     		logger.error("User cancelled facebook auth or no code returned");
 			return loginError(context);
 		}
-    	
+
     	// Exchange code for an access token
     	FacebookAuthHelper helper = new FacebookAuthHelper(apiKeys.getFacebookId(), apiKeys.getFacebookSecret(), callbackURI);
     	String data = helper.getUserInfoJson(code);
-    	
+
     	// Parse json response
     	ObjectMapper mapper = new ObjectMapper();
     	try {
     		@SuppressWarnings("unchecked")
     		Map<String,Object> user = mapper.readValue(data, Map.class);
-    		
+
     		// Validate user
         	if(userDao.isUserValid((String)user.get(FacebookUser.EMAIL))) {
         		// If user exists
@@ -217,7 +218,7 @@ public class LoginLogoutController {
 	    		Map<String,Object> picture = (Map<String, Object>) user.get("picture");
 			    @SuppressWarnings("unchecked")
 				Map<String,Object> pictureUrl = (Map<String, Object>) picture.get("data");
-			    
+
         		// Create new user
 				userDao.createUser(
 						(String)user.get(FacebookUser.EMAIL),
@@ -229,10 +230,10 @@ public class LoginLogoutController {
 						(String)user.get(FacebookUser.LOCALE),
 						(String)user.get(FacebookUser.ID),
 						provider);
-				
+
 				// Start session
 				newSession((String)user.get(FacebookUser.EMAIL), context);
-				
+
 		        // TODO: Redirect to profile
 				return Results.redirect("/privacy");
         	}
@@ -246,31 +247,39 @@ public class LoginLogoutController {
 			logger.error("IO Error", e);
 			return loginError(context);
 		}
-		
+
 		return Results.redirect("/");
 	}
-    
+
     private Result validateDeviantartResponse(String provider, String code, Context context) {
-		
+
     	if (code == null || code.equals("")) {
     		logger.error("User cancelled deviantart auth or no code returned");
 			return loginError(context);
 		}
-    	
+
     	// Exchange code for an access token
     	DeviantArtAuthHelper helper = new DeviantArtAuthHelper(apiKeys.getDeviantartId(), apiKeys.getDeviantartKey(), ninjaProperties.get("callback.uri"));
     	String data = helper.getAccessToken(code);
-    	
+
     	System.out.println(code);
 
     	return Results.redirect("/terms");
 	}
-	
+
 	public void newSession(String username, Context context) {
-		context.getSession().put("username", username);
+		// here???????
+		User user = userDao.getUser(username);
+		if (user == null) {
+			context.getFlashScope().error("Invalid user.");
+			loginError(context);
+		}
+		context.getSession().put("username", user.username);
+		context.getSession().put("userNickname", user.firstname);
+		context.getSession().put("userAvatar", user.pictureUrl);
 		context.getFlashScope().success("login.loginSuccessful");
 	}
-	
+
 	public Result loginError(Context context) {
 		context.getFlashScope().error("login.adminError");
 		return Results.redirect("/");
