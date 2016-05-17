@@ -107,17 +107,15 @@ public class ComicController {
 	@FilterWith(JsonEndpoint.class)
 	public Result comic(@PathParam("user") String user, @PathParam("work") String work) {
 
-	    User author = userDao.getUser(user);
-		Comic comic = comicDao.getComic(author, work);
+	    User username = userDao.getUser(user);
+		Comic comic = comicDao.getComic(username, work);
 
-		System.out.println(comic);
 
-		if (author == null || comic == null) {
+		if (username == null || comic == null) {
 		  return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
 		}
 
-		return Results.ok().render("comic", comic).render("author", author).html();
-
+		return Results.ok().render("comic", comic).render("user", user).html();
 	}
 
 	/**
@@ -147,31 +145,26 @@ public class ComicController {
 			return Results.redirect("/");
 
 		}
+			User user = userDao.getUser(username);
+			List<Comic> comics = comicDao.getComics(username);
+			List<String> series = new ArrayList();
 
-		if (validation.hasViolations()) {
+			// stringify the series
+			for (Comic comic: comics) {
+				if (comic.series != null && !series.contains(comic.series)) {
+					series.add(comic.series);
+					System.out.println(comic.series);
+				}
 
-			context.getFlashScope().error("Please correct field.");
-			context.getFlashScope().put("title", comicDto.title);
-			context.getFlashScope().put("description", comicDto.description);
-			context.getFlashScope().put("images", comicDto.images);
-			context.getFlashScope().put("likes", comicDto.likes);
-			context.getFlashScope().put("tags", comicDto.tags);
-
-			return Results.redirect("/create/");
-		} else {
-
-			// try to create comic
-			boolean didCreateComic = false;
-
-			//didCreateComic = comicDao.newComic(username, comicDto);
-
-			if (didCreateComic == false){
-				return Results.notFound();
 			}
+		System.out.println(user.username);
+		System.out.println(comics.toString());
+		System.out.println(series.toString());
 
-			context.getFlashScope().success("New comic created.");
-		return Results.redirect("/");
-		}
+		// okayyyyyy y u no pass series to newWork.ftl.html
+
+			// so we can render the series in the list of series options
+			return Results.html().render("series", series);
 	}
 
 	/**
@@ -190,7 +183,8 @@ public class ComicController {
 	public Result postWork(@LoggedInUser String username, Context context, @Param("title") String title,
 						   @Param("description") String description,
 						   @Param("series") String series,
-						   @Params("tags") String[] tags) {
+						   @Params("tags") String[] tags,
+						   @Param("nsfw") boolean nsfw) {
 
 		if (username == null){
 			context.getFlashScope().error("Must be signed in to save comic.");
@@ -205,12 +199,9 @@ public class ComicController {
 		comicDto.tags = new ArrayList<>();
 		for (String tag: tags) {
 			comicDto.tags.add((tag));
-
 		}
-		System.out.println(tags.toString());
-		System.out.println(context.getParameters());
-		//comicDto.description = context.getParameter("description");
-		//comicDto.tags.addAll(context.getParameterValues("tags"));
+		// does this work?
+		if (nsfw) comicDto.tags.add("18+");
 
 		if (!(comicDao.newComic(username, comicDto))){
 			return Results.noContent();
@@ -317,6 +308,21 @@ public class ComicController {
 	@FilterWith(JsonEndpoint.class)
 	public Result parent() {
 		return Results.TODO();
+	}
+
+	// go to series page
+	@FilterWith(JsonEndpoint.class)
+	public Result series(@PathParam("user") String user, @PathParam("series") String series) {
+
+		User username = userDao.getUser(user);
+		List<Comic> comics = comicDao.getSeries(user, series);
+
+
+		if (username == null || comics == null) {
+			return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
+		}
+
+		return Results.ok().render("comics", comics).render("user", user).html().render("series", series);
 	}
 	
 }
