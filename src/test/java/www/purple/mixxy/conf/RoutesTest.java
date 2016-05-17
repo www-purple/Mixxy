@@ -17,6 +17,7 @@
 package www.purple.mixxy.conf;
 
 import ninja.AssetsController;
+import ninja.NinjaRunner;
 import ninja.NinjaTest;
 import ninja.Route;
 import ninja.Router;
@@ -26,12 +27,10 @@ import www.purple.mixxy.controllers.UserController;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Singleton;
 
 /**
  * This test class is <em>only</em> for anything involving the routes; for the
@@ -41,17 +40,11 @@ import com.google.inject.Singleton;
  * @author Jesse Talavera-Greenberg
  * @see NavigationTest
  */
-@Singleton
+@RunWith(NinjaRunner.class)
 public class RoutesTest extends NinjaTest {
 
   @Inject
   private Router router;
-
-  @Before
-  public void injectRouter() {
-    Injector injector = getInjector();
-    router = injector.getInstance(Router.class);
-  }
 
   @Test
   public void testRouterAvailable() {

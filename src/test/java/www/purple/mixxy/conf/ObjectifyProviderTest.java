@@ -1,26 +1,20 @@
 package www.purple.mixxy.conf;
 
-import com.google.inject.Injector;
-import com.google.inject.Singleton;
+import com.google.inject.Inject;
 
 import ninja.NinjaAppengineBackendTest;
-import ninja.NinjaTest;
-import www.purple.mixxy.helpers.ApiKeys;
+import ninja.NinjaRunner;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(NinjaRunner.class)
 public class ObjectifyProviderTest extends NinjaAppengineBackendTest {
 
+  @Inject
   private ObjectifyProvider provider;
-
-  @Before
-  public void injectObjectifyProvider() {
-    Injector injector = this.getInjector();
-    provider = injector.getInstance(ObjectifyProvider.class);
-  }
 
   @Test
   public void testObjectifyProviderInjected() {

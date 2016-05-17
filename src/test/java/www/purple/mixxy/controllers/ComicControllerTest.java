@@ -9,25 +9,27 @@ import java.util.Map;
 import org.apache.http.HttpResponse;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 
 import ninja.NinjaAppengineBackendTest;
+import ninja.NinjaRunner;
 import www.purple.mixxy.dao.ComicDao;
 import www.purple.mixxy.models.Comic;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
+@RunWith(NinjaRunner.class)
 public class ComicControllerTest extends NinjaAppengineBackendTest {
 
+  @Inject
   private ComicDao comicDao;
 
   @Before
   public void before() {
-    Injector injector = this.getInjector();
     ninjaTestBrowser.makeRequest(getServerAddress() + "setup");
-    comicDao = injector.getInstance(ComicDao.class);
   }
 
   @Test

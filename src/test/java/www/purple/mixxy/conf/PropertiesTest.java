@@ -1,23 +1,21 @@
 package www.purple.mixxy.conf;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import static org.junit.Assert.*;
 
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 
+import ninja.NinjaRunner;
 import ninja.NinjaTest;
 import ninja.utils.NinjaProperties;
 
+@RunWith(NinjaRunner.class)
 public class PropertiesTest extends NinjaTest {
 
+  @Inject
   private NinjaProperties properties;
-
-  @Before
-  public void injectProperties() {
-    Injector injector = this.getInjector();
-    properties = injector.getInstance(NinjaProperties.class);
-  }
 
   @Test
   public void testPropertiesInjected() {
