@@ -52,8 +52,6 @@ public class UserController {
       if (comic.series != null && !series.contains(comic.series)) series.add(comic.series);
     }
 
-    System.out.println(series.toString());
-
       return Results.html().render("user", username.username).render("userPhoto", username.pictureUrl)
               .render("comics", comics).render("series", series);
   }
