@@ -203,8 +203,6 @@ public class LoginLogoutController {
     	FacebookAuthHelper helper = new FacebookAuthHelper(apiKeys.getFacebookId(), apiKeys.getFacebookSecret(), callbackURI);
     	String data = helper.getUserInfoJson(code);
     	
-    	System.out.println(data);
-    	
     	User user = null;
 
     	// Parse json response
