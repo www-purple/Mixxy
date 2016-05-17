@@ -115,7 +115,7 @@ public class ComicController {
 		  return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
 		}
 
-		return Results.ok().render("comic", comic).render("author", author).html();
+		return Results.ok().render("comic", comic).render("user", author).html();
 
 	}
 
@@ -189,13 +189,15 @@ public class ComicController {
 			return Results.redirect("/");
 
 		}
-		ComicDto comicDto = new ComicDto();
-		// try to create comic
 		
+		ComicDto comicDto = new ComicDto();
+		
+		// If Base64 image is invalid, send a bad request
 		if( !muroimage.matches("data\\:image\\/(png|jpe?g|gif)\\;base64,.+")){
 			return Results.badRequest();
 		}
 		
+		//Strip Bsae64 header 
 		String replacedMuroImage = muroimage.replaceAll("data\\:image\\/(png|jpe?g|gif)\\;base64,", "");
 		System.out.println(replacedMuroImage);
 		
