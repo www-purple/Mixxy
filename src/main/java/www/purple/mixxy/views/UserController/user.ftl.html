@@ -6,28 +6,32 @@
         <div class="active section">${user}</div>
     </div>
     <div class="ui container grey-box">
-        <div class="ui centered padded grid">
-            <h1>${user}</h1>
-            <div class="row">
-                <div class="sixteen wide column comic">
-                    <div class="slim white-box">
-                        <h2>Comics</h2>
-                        <div class="ui small images">
-                            <a href="/comic">
-                                <img class="ui image" src="/assets/images/harrypotter.jpg" alt="Bad Hagrid">
-                            </a>
-                            <img class="ui image" src="/assets/images/potter2.jpg" alt="Bad Dumbledore">
-                            <img class="ui image" src="/assets/images/potter3.jpg" alt="Badder Dumbledore">
+        <div class="ui grid">
+            <div class="column">
+                <div class="white-box">
+                    <h1 style="display: inline;">${user}</h1>
+                    <img class="ui circular tiny left floated image" src="${userPhoto}">
+                    <h2>${user}'s Comics</h2>
+                    <#if comics ??>
+                        <div class="ui large horizontal list">
+                            <#list comics as comic>
+                                <div class="item">
+                                    <img class="ui tiny image" src="#">
+                                    <div class="content">
+                                        <a class="header" href="/users/${user}/${comic.sluggedTitle}">${comic.title}</a>
+                                        <div class="description">${comic.description}</div>
+                                    </div>
+                                </div>
+                            </#list>
                         </div>
-                    </div>
-                    <div class="slim white-box">
-                        <h2>Series</h2>
-                    </div>
-                    <div class="slim white-box">
-                        <h2>Remixes</h2>
-                    </div>
-                    <!-- tags -->
-                    <!-- comments -->
+                        </#if>
+                    <h2>${user}'s Series</h2>
+                    <#if series??>
+                    <#list series as s>
+                            <p><a href="/users/${user}/series/${s}">${s}</a></p>
+                    </#list>
+                    </#if>
+                    <h2>${user}'s Remixes</h2>
                 </div>
             </div>
         </div>

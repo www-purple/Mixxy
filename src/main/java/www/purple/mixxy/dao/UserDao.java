@@ -4,7 +4,11 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.googlecode.objectify.Objectify;
 
+import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao {
 
@@ -54,7 +58,7 @@ public class UserDao {
   }
   
   public void createUser(String username, String firstName, String lastName, String gender,
-		  String email, String pictureUrl, String locale, String providerId, String provider) {
+                         String email, String pictureUrl, String locale, String providerId, String provider) {
 	  
 	  User user = new User(username, firstName, lastName, gender, email, 
 			  pictureUrl, locale, providerId, provider);

@@ -70,6 +70,15 @@ public class ComicDao {
 				.now();
 	}
 
+	// return comics by user of a certain series
+	public List<Comic> getSeries(String username, String series) {
+		if (username == null || series == null) return null;
+
+		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+
+		return objectify.get().load().type(Comic.class).filter("authorId", user.id).filter("series", series).list();
+	}
+
 	public Comic getComic(User user, String slug) {
 	    if (user == null || slug == null) return null;
 

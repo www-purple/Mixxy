@@ -204,6 +204,9 @@ public class Routes implements ApplicationRoutes {
     // Get a specific work from any user
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/?").with(ComicController.class, "comic");
 
+    // get comics from a series by a user
+    router.GET().route("(?:/users)?/{user}/series/{series}/?").with(ComicController.class, "series");
+
     // Get the actual image from a given work
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/image/?").with(ComicController.class, "image");
 

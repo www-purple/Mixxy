@@ -1,0 +1,32 @@
+<#import "../layout/defaultLayout.ftl.html" as layout>
+    <@layout.myLayout "${series}">
+    <div class="ui large breadcrumb">
+        <a class="section" href="/">Home</a>
+        <i class="right angle icon divider"></i>
+        <a class="section" href="/users/${user}">${user}</a>
+        <i class="right angle icon divider"></i>
+        <div class="active section">${series}</div>
+    </div>
+    <div class="ui container grey-box">
+        <div class="ui grid">
+            <div class="column">
+                <div class="white-box">
+                    <h1>${series}</h1>
+                    <div class="ui large horizontal list">
+                        <#list comics as comic>
+                            <div class="item">
+                                <img class="ui tiny image" src="#">
+                                <div class="content">
+                                    <a class="header" href="/users/${user}/${comic.sluggedTitle}">${comic.title}</a>
+                                    <div class="description">${comic.description}</div>
+                                </div>
+                            </div>
+                        </#list>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</@layout.myLayout>
