@@ -11,11 +11,12 @@
                     <div class="right aligned column">
                         <div class="ui dropdown" id="login">
                             <#if (session.username)??>
-                                <div class="text">Hi, <a class="item" href="#">${session.username}</a></div>
+                                <img class="ui avatar image" src="${session.userAvatar}">
+                                <span>Hi, <a class="item" href="#">${session.userNickname}</a></span>
                                 <i class="dropdown icon"></i>
                                 <div class="right menu">
-                                    <a class="item">Subscriptions</a>
-                                    <a class="item">Profile</a>
+                                    <a class="item" href="/users/${session.username}/subscribed">Subscriptions</a>
+                                    <a class="item" href="/users/${session.username}">Profile</a>
                                     <a class="item" href="/logout">${i18n("header.logout")}</a>
                                 </div>
                                 <#else>

@@ -38,7 +38,6 @@ public class Comic {
 	public String description;
 	public String series;
 	public List<String> tags;
-
 	public Date createdAt;
 	public Date updatedAt;
 	

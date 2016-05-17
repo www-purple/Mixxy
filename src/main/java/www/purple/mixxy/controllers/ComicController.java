@@ -107,17 +107,15 @@ public class ComicController {
 	@FilterWith(JsonEndpoint.class)
 	public Result comic(@PathParam("user") String user, @PathParam("work") String work) {
 
-	    User author = userDao.getUser(user);
-		Comic comic = comicDao.getComic(author, work);
+	    User username = userDao.getUser(user);
+		Comic comic = comicDao.getComic(username, work);
 
-		System.out.println(comic);
 
-		if (author == null || comic == null) {
+		if (username == null || comic == null) {
 		  return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
 		}
 
-		return Results.ok().render("comic", comic).render("author", author).html();
-
+		return Results.ok().render("comic", comic).render("user", user).html();
 	}
 
 	/**
@@ -207,10 +205,6 @@ public class ComicController {
 			comicDto.tags.add((tag));
 
 		}
-		System.out.println(tags.toString());
-		System.out.println(context.getParameters());
-		//comicDto.description = context.getParameter("description");
-		//comicDto.tags.addAll(context.getParameterValues("tags"));
 
 		if (!(comicDao.newComic(username, comicDto))){
 			return Results.noContent();
@@ -317,6 +311,21 @@ public class ComicController {
 	@FilterWith(JsonEndpoint.class)
 	public Result parent() {
 		return Results.TODO();
+	}
+
+	// go to series page
+	@FilterWith(JsonEndpoint.class)
+	public Result series(@PathParam("user") String user, @PathParam("series") String series) {
+
+		User username = userDao.getUser(user);
+		List<Comic> comics = comicDao.getSeries(user, series);
+
+
+		if (username == null || comics == null) {
+			return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
+		}
+
+		return Results.ok().render("comics", comics).render("user", user).html().render("series", series);
 	}
 	
 }
