@@ -19,11 +19,12 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 import ninja.utils.NinjaProperties;
+import ninja.NinjaAppengineBackendTest;
 import ninja.NinjaRunner;
 import ninja.NinjaTest;
 
 @RunWith(NinjaRunner.class)
-public class GcsTest extends NinjaTest {
+public class GcsTest extends NinjaAppengineBackendTest {
   @Inject
   private GcsService gcs;
 
