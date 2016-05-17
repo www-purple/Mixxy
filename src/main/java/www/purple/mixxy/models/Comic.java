@@ -32,7 +32,10 @@ public class Comic {
 	public List<Long> ancestorComicId;
 
 	public String title;
-	public String sluggedTitle; 
+	public String sluggedTitle;
+	
+	@Unindex
+	public String url;
 	
 	@Unindex
 	public String description;

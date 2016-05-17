@@ -28,6 +28,8 @@ import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.google.appengine.api.images.Image;
+import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -199,10 +201,18 @@ public class ComicController {
 		ComicDto comicDto = new ComicDto();
 		// try to create comic
 		
+		if( !muroimage.matches("data\\:image\\/(png|jpe?g|gif)\\;base64,.+")){
+			return Results.badRequest();
+		}
 		
-		byte[] imgInByteArr = Base64.decodeBase64(muroimage);	
-		comicDto.image.setImageData(imgInByteArr);
+		String replacedMuroImage = muroimage.replaceAll("data\\:image\\/(png|jpe?g|gif)\\;base64,", "");
+		System.out.println(replacedMuroImage);
 		
+		byte[] imgInByteArr = Base64.decodeBase64(replacedMuroImage);
+		
+		Image image = ImagesServiceFactory.makeImage(imgInByteArr);
+		
+		comicDto.image = image;
 		comicDto.title = title;
 		comicDto.description = description;
 		comicDto.series = series;

@@ -29,17 +29,26 @@ $(document).ready(function(){
         sandbox:     '/assets/deviantart_muro_sandbox.html',
         autoload: true,
         background: "rgba(255, 255, 255, 1.0)",
+        splashText: "Splash!",
+        savingText: "Saving!",
+        splashCss: {
+        	color: "black"
+        },
+        loadingCss: {
+        	color: "red"
+        },
+        savingCss: {
+        	color: "orange"
+        }
         // width: "100%",
         // height: "38rem"
         })
-    .one('click', function () {
-        $(this).damuro().open();
-    })
-    damuro()
+    .damuro()
     // The .damuro() object is a promise, so lets bind a done() and fail() handler.
     .done(function (data) {
             if (data.image && !/\'/.test(data.image)) {
                $('#muroimage').prop('value', data.image);
+               console.log(data.image);
             }
 
         })
