@@ -105,13 +105,14 @@ public class ComicController {
 
 	// TODO: Move image-loading logic to here
 	@FilterWith(JsonEndpoint.class)
-	public Result comic(@PathParam("user") String user, @PathParam("work") String work) {
+	public Result comic(@PathParam("user") String username, @PathParam("work") String work) {
 
-	    User username = userDao.getUser(user);
+	    User user = userDao.getUser(username);
 		Comic comic = comicDao.getComic(username, work);
+		
+		System.out.println(user);
 
-
-		if (username == null || comic == null) {
+		if (user == null || comic == null) {
 		  return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
 		}
 
