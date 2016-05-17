@@ -50,4 +50,16 @@ public class ApiKeyLoadingTest extends NinjaTest {
     assertNotNull(apiKeys.getFacebookSecret());
     assertFalse(apiKeys.getFacebookSecret().isEmpty());
   }
+
+  @Test
+  public void testDeviantartIdLoaded() {
+    assertNotNull(apiKeys.getDeviantartId());
+    assertFalse(apiKeys.getDeviantartId().isEmpty());
+  }
+
+  @Test
+  public void testDeviantartKeyLoaded() {
+    assertNotNull(apiKeys.getDeviantartKey());
+    assertFalse(apiKeys.getDeviantartKey().isEmpty());
+  }
 }
