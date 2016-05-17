@@ -80,7 +80,7 @@ public class ComicDao {
 		return objectify.get().load().type(Comic.class).filter("authorId", user.id).filter("sluggedTitle", slug).first()
 				.now();
 	}
-
+	
 	// return comics by user of a certain series
 	public List<Comic> getSeries(String username, String series) {
 		if (username == null || series == null) return null;
@@ -173,7 +173,7 @@ public class ComicDao {
 		}
         
 		
-		comic.url = unique + ".png";
+		comic.url = "https://storage.googleapis.com/mixxy-1249.appspot.com/" + unique + ".png";
 
 		// lowest index is the root Parent comic (index 0 is the first comic
 		// iteration)
