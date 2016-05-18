@@ -342,4 +342,16 @@ public class ComicController {
 		return Results.ok().render("comics", comics).render("user", user).html().render("series", series);
 	}
 	
+	public Result search(@Params("tags") String[] tags, Context context) {
+		
+		if (tags == null) {
+			context.getFlashScope().error("Cannot find what you are looking for :(");
+			return Results.redirect("/");
+		}
+		
+		List<Comic> comics = comicDao.getComicsByTags(tags);
+		context.getFlashScope().success("Results found");
+		return Results.ok().html().render("searchedcomics", comics);
+	}
+	
 }

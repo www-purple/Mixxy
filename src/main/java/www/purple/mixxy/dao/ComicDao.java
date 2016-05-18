@@ -101,6 +101,16 @@ public class ComicDao {
 
 	    return getComic(user.username, slug);
 	}
+	
+	@SuppressWarnings("null")
+	public List<Comic> getComicsByTags(String[] tags) {
+		if (tags == null)
+			return null;
+
+		List<Comic> comics = null;
+		comics.addAll(objectify.get().load().type(Comic.class).filter("tags", tags).list());
+		return comics;
+	}
 
 	public Comic getRemix(long id) {
 		return objectify.get().load().type(Comic.class).filter("ancestorComicId", id).first().now();
