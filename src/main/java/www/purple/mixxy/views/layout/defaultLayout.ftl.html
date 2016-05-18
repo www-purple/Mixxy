@@ -35,9 +35,7 @@
             <div class="alert alert-danger">
                 ${flash.error}
             </div>
-        </#if>
-
-        <#if (flash.success)??>
+        <#elseif (flash.success)??>
             <div class="alert alert-success">
                 ${flash.success}
             </div>

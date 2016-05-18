@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -356,6 +357,24 @@ public class ComicController {
 		return Results.ok().render("comics", comics).render("user", user).html().render("series", series);
 	}
 
+	public Result search(@Params("tags") String[] tags, Context context) {
+
+		if (tags == null) {
+			return Results.ok().html().template("www/purple/mixxy/views/ComicController/search.ftl.html");
+		}
+
+		Set<Comic> setOfComics = comicDao.getComicsByTags(tags);
+		List<Comic> comics = new ArrayList<Comic>(setOfComics);
+		
+		context.getFlashScope().discard();
+		if (comics.isEmpty()) {
+			context.getFlashScope().error("Cannot find the comics you want :(");
+		} else {
+			context.getFlashScope().success("Results found");
+		}
+		return Results.ok().html().render("searchedcomics", comics);
+	}
+
 	@FilterWith(JsonEndpoint.class)
 	public Result works(
 			@PathParam("user") String user, Context context) {
@@ -367,4 +386,5 @@ public class ComicController {
 
 		return Results.TODO();
 	}
+
 }

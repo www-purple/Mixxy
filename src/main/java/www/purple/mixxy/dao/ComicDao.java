@@ -3,7 +3,10 @@ package www.purple.mixxy.dao;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import com.google.appengine.tools.cloudstorage.GcsFileOptions;
@@ -87,6 +90,12 @@ public class ComicDao {
 				.now();
 	}
 	
+	public List<Comic> getMostRecentComics(int n){
+		if (n == 0) return Collections.emptyList();
+		
+		return objectify.get().load().type(Comic.class).filter("createdAt <", new Date()).limit(n).order("-createdAt").list();
+	}
+	
 	// return comics by user of a certain series
 	public List<Comic> getSeries(String username, String series) {
 		if (username == null || series == null) return null;
@@ -100,6 +109,19 @@ public class ComicDao {
 	    if (user == null || slug == null) return null;
 
 	    return getComic(user.username, slug);
+	}
+	
+	@SuppressWarnings("null")
+	public Set<Comic> getComicsByTags(String[] tags) {
+		if (tags == null)
+			return null;
+
+		HashSet<Comic> comics = new HashSet<Comic>();
+		for (String tag : tags) {
+			comics.addAll(objectify.get().load().type(Comic.class).filter("tags", tag).list());
+		}
+
+		return comics;
 	}
 
 	public Comic getRemix(long id) {

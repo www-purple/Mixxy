@@ -27,7 +27,6 @@ import www.purple.mixxy.controllers.ApiController;
 import www.purple.mixxy.controllers.ApplicationController;
 import www.purple.mixxy.controllers.ComicController;
 import www.purple.mixxy.controllers.LoginLogoutController;
-import www.purple.mixxy.controllers.SearchController;
 import www.purple.mixxy.controllers.UserController;
 
 public class Routes implements ApplicationRoutes {
@@ -74,7 +73,7 @@ public class Routes implements ApplicationRoutes {
     ///////////////////////////////////////////////////////////////////////////
     // Search
     ///////////////////////////////////////////////////////////////////////////
-    router.GET().route("/find/?").with(SearchController.class, "search");
+    router.GET().route("/find/?").with(ComicController.class, "search");
 
     ///////////////////////////////////////////////////////////////////////////
     // Login / Logout

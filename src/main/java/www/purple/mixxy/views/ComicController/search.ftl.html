@@ -11,26 +11,38 @@
                 <div class="ui sixteen wide column comic">
                     <h1>Find Your Next Favorite!</h1>
                     <div class="ui white-box">
-                            <div class="column">
-                                <form method="post" class="ui form" name="search">
-                                    <div class="field">
-                                        <label>Tag</label>
-                                        <input type="text" id="tag" name="tag">
-                                    </div>
-                                    <div class="field">
+					<div class="column">
+						<form method="get" class="ui form" name="find">
+							<div class="inline fourteen wide field">
+								<label>Search by Tags</label> 
+								<select class="ui tags fluid multiple search selection dropdown" multiple="" id="tags" name="tags"></select>
+							</div>
+							<!-- <div class="field">
                                         <label>Author</label>
                                         <input type="text" name="author" id="author"></input>
                                     </div>
                                     <div class="field">
                                         <label>Series</label>
                                         <input type="text" id="series" name="series">
+                                    </div> -->
+							<button class="ui button" type="submit">Search Comics</button>
+						</form>
+						<div class="results">
+						<#if searchedcomics ??>
+                        <div class="ui large horizontal list">
+                            <#list searchedcomics as comic>
+                                <div class="item">
+                                    <img class="ui tiny image" src="${comic.url}">
+                                    <div class="content">
+                                        <div class="description">${comic.description}</div>
                                     </div>
-                                    <button class="ui button" type="submit">Search Comics
-                                    </button>
-                                </form>
-                            <div class="results"></div>
+                                </div>
+                            </#list>
                         </div>
-                    </div>
+                        </#if>
+						</div>
+					</div>
+				</div>
                     <div class="ui white-box">
                         <h2>Fresh Comics</h2>
                         <div class="ui small images">
