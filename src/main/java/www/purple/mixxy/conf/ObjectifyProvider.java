@@ -1,5 +1,10 @@
 package www.purple.mixxy.conf;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 
 import com.google.inject.Provider;
@@ -31,29 +36,33 @@ public class ObjectifyProvider implements Provider<Objectify> {
 
         setup();
     }
-
-
+    
     public static void setup() {
         Objectify ofy = ObjectifyService.ofy();
         User user = ofy.load().type(User.class).first().now();
 
         User bob = new User("BobTheBuilder", "Bob", "Smith", "male", "bob@gmail.com", "url", "en", "123", "google");
-        bob.id = (long) -32;
+        bob.id = (long) 32;
 
-        Comic bobComic = new Comic(null, bob, "cool title", "interesting description", "boring junk", Arrays.asList("18+", "sci-fi", "sexy"));
-        bobComic.id = (long) -1;
+		Comic bobComic = new Comic(null, bob, "cool title", "interesting description", "boring junk", Arrays.asList("18+", "sci-fi", "sexy"));
+        bobComic.id = (long) 1;
+        bobComic.title = bobComic.title + "-" + Long.toString(bobComic.id);
 
         Comic bobComic2 = new Comic(bobComic, bob, "cool title222", "interesting description222", "nada", Arrays.asList("parody", "derp"));
-        bobComic2.id = (long) -2;
+        bobComic2.id = (long) 2;
+        bobComic2.title = bobComic2.title + "-" + Long.toString(bobComic2.id);
 
         bobComic2.ancestorComicId.add(bobComic.id);
+        
+        
         if (user == null) {
             // Create a new user and save it
             if (ofy.load().entity(bob).now() == null) {
               ofy.save().entity(bob).now();
             }
         }
-
+        
+        //	Save comics
         // Comic ancestry working
         if (ofy.load().type(Comic.class).first().now() == null) {
             ofy.save().entities(bobComic, bobComic2).now();
