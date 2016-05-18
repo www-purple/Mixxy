@@ -146,7 +146,7 @@ public class ComicDao {
 		 * (since comicId isn't generated at this point */
         String unique = UUID.randomUUID().toString();
         
-		GcsFilename fileName = new GcsFilename("mixxy-1249.appspot.com", unique + ".png");
+		GcsFilename fileName = new GcsFilename("mixxy-1249.appspot.com", "comic/" + unique + ".png");
 		
 		//Set Option for that file
         GcsFileOptions options = new GcsFileOptions.Builder()
@@ -179,7 +179,7 @@ public class ComicDao {
 		}
         
 		
-		comic.url = "https://storage.googleapis.com/mixxy-1249.appspot.com/" + unique + ".png";
+		comic.url = "https://storage.googleapis.com/mixxy-1249.appspot.com/comic/" + unique + ".png";
 
 		// lowest index is the root Parent comic (index 0 is the first comic
 		// iteration)
