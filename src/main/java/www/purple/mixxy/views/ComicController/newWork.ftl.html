@@ -1,5 +1,18 @@
 <#import "../layout/defaultLayout.ftl.html" as layout>
     <@layout.myLayout "Create a Comic">
+    <script>
+    function checkform() {
+        if(document.upload.muroimage.value == "") {
+            alert("Comic is still processing, please try again in 30 seconds!");
+            return false;
+        } else if (document.upload.title.value == ""){
+        	alert("Please enter a title for your comic!");
+        	return false;
+        } else{
+            document.upload.submit();
+        }
+    }
+    </script>
     <div class="ui large breadcrumb">
         <a class="section" href="/">Home</a>
         <i class="right angle icon divider"></i>
@@ -28,7 +41,7 @@
             </div>
             <div class="ui centered grid">
                 <div class="draw-form column comic">
-                    <form method="post" class="ui form">
+                    <form method="post" class="ui form" name="upload">
                     
                     <input class="hidden" type="hidden" id="muroimage" name="muroimage">
                     
@@ -64,7 +77,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="ui button" type="submit">Upload Comic</button>
+                        <button class="ui button" type="submit" onclick="return checkform()">Upload Comic</button>
                     </form>
                 </div>
             </div>
