@@ -105,6 +105,11 @@ public class LoginLogoutController {
 
     }
 
+	// redirect to login page, where a new user can choose a username
+	public Result signup() {
+		return Results.html();
+	}
+
     public Result validate(
     		@Param("state") String state,
     		@Param("code") String code,
@@ -175,7 +180,7 @@ public class LoginLogoutController {
 				newSession(user, context);
 
 		        // TODO: Redirect to profile
-				return Results.redirect("/users/" + (String)userMap.get(GoogleUser.EMAIL));
+				return Results.redirect("/login");
         	}
 
 		} catch (JsonGenerationException e) {
