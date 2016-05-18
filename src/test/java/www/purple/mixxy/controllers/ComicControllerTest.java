@@ -64,7 +64,8 @@ public class ComicControllerTest extends NinjaAppengineBackendTest {
     String[] results = new String[urls.length];
 
     for (int i = 0; i < results.length; ++i) {
-      results[i] = ninjaTestBrowser.makeRequest(urls[i]);
+      results[i] = ninjaTestBrowser.makeRequest(urls[i]).substring(0, 1024);
+      // substring because we don't want to include the part of the page with the timestamp
     }
 
     for (String result : results) {
