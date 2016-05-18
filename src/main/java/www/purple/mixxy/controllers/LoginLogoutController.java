@@ -84,6 +84,8 @@ public class LoginLogoutController {
 	///////////////////////////////////////////////////////////////////////////
     public Result login(@Param("provider") String provider) {
 
+        if (provider == null) return Results.redirect("/");
+
         String appVersion = SystemProperty.applicationVersion.get();
         callbackURI = ninjaProperties.get("callback.uri");
         callbackURI = callbackURI.replace("#", appVersion.substring(0, appVersion.indexOf('.')));
@@ -111,6 +113,8 @@ public class LoginLogoutController {
     		Context context) {
 
     	System.out.println("State: " + state + " Code: " + code);
+
+    	if (state == null || code == null) return Results.redirect("/");
 
     	if(state.contains(OAuthProviders.FACEBOOK))
     		return validateFacebookResponse(OAuthProviders.FACEBOOK, code, context);

@@ -7,6 +7,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.PathParam;
+import ninja.utils.NinjaConstant;
 import www.purple.mixxy.dao.ComicDao;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.etc.UserParameter;
@@ -37,23 +38,23 @@ public class UserController {
 
   @FilterWith(JsonEndpoint.class)
   public Result user(
-          @PathParam("user") String user, Context context) {
+      @PathParam("user") String user, Context context) {
 
     User username = userDao.getUser(user);
     if (username == null) {
-      context.getFlashScope().error("Invalid user.");
-      return Results.redirect("/");
+      return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
     }
-      List<Comic> comics = comicDao.getComics(user);
-      List<String> series = new ArrayList();
+    List<Comic> comics = comicDao.getComics(user);
+    List<String> series = new ArrayList<>();
 
     // stringify the series
-    for (Comic comic: comics) {
-      if (comic.series != null && !series.contains(comic.series)) series.add(comic.series);
+    for (Comic comic : comics) {
+      if (comic.series != null && !series.contains(comic.series))
+        series.add(comic.series);
     }
 
-      return Results.html().render("user", username.username).render("userPhoto", username.pictureUrl)
-              .render("comics", comics).render("series", series);
+    return Results.html().render("user", username.username).render("userPhoto", username.pictureUrl)
+        .render("comics", comics).render("series", series);
   }
   
   @FilterWith(JsonEndpoint.class)
@@ -72,21 +73,24 @@ public class UserController {
   }
 
   @FilterWith(JsonEndpoint.class)
-  public Result subscribed(
-          @PathParam("user") String user, Context context) {
+  public Result subscribed(@PathParam("user") String username, Context context) {
 
-    User username = userDao.getUser(user);
-    if (username == null) {
-      context.getFlashScope().error("Invalid user.");
-      return Results.redirect("/");
+    User user = userDao.getUser(username);
+    if (user == null) {
+      return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
     }
 
-    return Results.html().render("user", username.username);
+    return Results.TODO().render("user", user);
   }
   
   @FilterWith(JsonEndpoint.class)
-  public Result subscribers() {
-    return Results.TODO();
+  public Result subscribers(@PathParam("user") String username, Context context) {
+    User user = userDao.getUser(username);
+    if (user == null) {
+      return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
+    }
+
+    return Results.TODO().render("user", user);
   }
 
   @FilterWith(JsonEndpoint.class)
@@ -100,19 +104,12 @@ public class UserController {
   }
   
   @FilterWith(JsonEndpoint.class)
-  public Result likes() {
-    return Results.TODO();
-  }
-  
-  @FilterWith(JsonEndpoint.class)
-  public Result works() {
-    return Results.TODO();
-  }
-  
-  @FilterWith(JsonEndpoint.class)
-  public Result work(
-          @PathParam("user") String user,
-          @PathParam("work") String work) {
-      return Results.html().render("user", user).render("work", work);
+  public Result likes(@PathParam("user") String username, Context context) {
+    User user = userDao.getUser(username);
+    if (user == null) {
+      return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
+    }
+
+    return Results.TODO().render("user", user);
   }
 }
