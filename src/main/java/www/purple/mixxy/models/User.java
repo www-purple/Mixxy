@@ -40,7 +40,7 @@ public class User {
 
 	public User() {/* Needed by Objectify */ }
 
-	public User(final String username, final String firstname, final String lastname, final String gender,
+	public User(String username, final String firstname, final String lastname, final String gender,
 			final String email, final String pictureUrl, String locale, final String providerId, final String provider) {
 
 		this.username = username;

@@ -65,6 +65,9 @@ public class LoginLogoutController {
 
     private String callbackURI;
 
+	private User user;
+	private String auth;
+
     ///////////////////////////////////////////////////////////////////////////
     // Logout
     ///////////////////////////////////////////////////////////////////////////
@@ -107,6 +110,24 @@ public class LoginLogoutController {
 
     }
 
+	// redirect to login page, where a new user can choose a username
+	public Result signup(@Param("username") String username, Context context) {
+
+		if (username == null) {
+			//context.getFlashScope().error("you fucked up");
+			return Results.html();
+		}
+		else {
+			userDao.changeUsername(user.username, username);
+			// get the new user object
+			// super dumb code but whatever
+			user = userDao.getUser(username);
+			// Start session
+			newSession(user, context);
+			return Results.redirect("/");
+		}
+	}
+
     public Result validate(
     		@Param("state") String state,
     		@Param("code") String code,
@@ -145,8 +166,6 @@ public class LoginLogoutController {
     		logger.error("Cannot get Google User Info", e);
     		return loginError(context);
     	}
-    	
-    	User user = null;
 
     	// Parse json response
     	ObjectMapper mapper = new ObjectMapper();
@@ -162,7 +181,8 @@ public class LoginLogoutController {
         	}
         	else
         	{
-        		// Create new user
+				auth = "google";
+				// Create new user
 				user = userDao.createUser(
 						(String)userMap.get(GoogleUser.EMAIL),
 						(String)userMap.get(GoogleUser.FIRST_NAME),
@@ -174,12 +194,9 @@ public class LoginLogoutController {
 						(String)userMap.get(GoogleUser.ID),
 						provider
 				);
-
-				// Start session
-				newSession(user, context);
-
-		        // TODO: Redirect to profile
-				return Results.redirect("/users/" + (String)userMap.get(GoogleUser.EMAIL));
+				System.out.println(user);
+				// TODO: Redirect to profile
+				return Results.redirect("/signup");
         	}
 
 		} catch (JsonGenerationException e) {
@@ -193,7 +210,7 @@ public class LoginLogoutController {
 			return loginError(context);
 		}
 
-    	return Results.redirect("/");
+    	return Results.redirect("/signup");
     }
 
     private Result validateFacebookResponse(String provider, String code, Context context) {
@@ -206,8 +223,7 @@ public class LoginLogoutController {
     	// Exchange code for an access token
     	FacebookAuthHelper helper = new FacebookAuthHelper(apiKeys.getFacebookId(), apiKeys.getFacebookSecret(), callbackURI);
     	String data = helper.getUserInfoJson(code);
-    	
-    	User user = null;
+
 
     	// Parse json response
     	ObjectMapper mapper = new ObjectMapper();
@@ -234,6 +250,7 @@ public class LoginLogoutController {
 			    @SuppressWarnings("unchecked")
 				Map<String,Object> pictureUrl = (Map<String, Object>) picture.get("data");
 
+				auth = "facebook";
         		// Create new user
 				user = userDao.createUser(
 						(String)userMap.get(FacebookUser.USERNAME),
@@ -247,11 +264,10 @@ public class LoginLogoutController {
 						provider
 				);
 
-				// Start session
-				newSession(user, context);
 
+				System.out.println(user);
 		        // TODO: Redirect to profile
-				return Results.redirect("/users/" + (String)userMap.get(FacebookUser.USERNAME));
+				return Results.redirect("/signup");
         	}
     	} catch (JsonGenerationException e) {
             logger.error("Invalid JSON response from Google", e);

@@ -34,17 +34,4 @@ public class UserLoginTest extends NinjaFluentLeniumTest {
     assertThat(url, containsString("facebook"));
     //assertThat(title(), not(containsString("error")));
   }
-
-  @Test
-  public void testClickDeviantart() {
-    goTo(getServerAddress() + "/");
-
-    click("#login");
-    click("#Deviantart");
-
-    String url = this.url();
-    assertThat(url, containsString("login"));
-    assertThat(url, containsString("deviantart"));
-    //assertThat(title(), not(containsString("error")));
-  }
 }
