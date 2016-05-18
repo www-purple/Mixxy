@@ -9,32 +9,44 @@
         <div class="ui centered padded stackable grid">
             <div class="row">
                 <div class="ui sixteen wide column comic">
-                    <h1 class="ui header">Find Your Next Favorite!</h1>
+                    <h1>Find Your Next Favorite!</h1>
                     <div class="ui white-box">
-                        <div class="ui search">
-                            <div class="ui icon input">
-                                <input class="prompt" placeholder="Search!" type="text">
-                                <i class="search icon"></i>
-                            </div>
+                            <div class="column">
+                                <form method="post" class="ui form" name="search">
+                                    <div class="field">
+                                        <label>Tag</label>
+                                        <input type="text" id="tag" name="tag">
+                                    </div>
+                                    <div class="field">
+                                        <label>Author</label>
+                                        <input type="text" name="author" id="author"></input>
+                                    </div>
+                                    <div class="field">
+                                        <label>Series</label>
+                                        <input type="text" id="series" name="series">
+                                    </div>
+                                    <button class="ui button" type="submit">Search Comics
+                                    </button>
+                                </form>
                             <div class="results"></div>
                         </div>
                     </div>
-                        <div class="ui white-box">
-                            <h2>Fresh Comics</h2>
-                            <div class="ui small images">
-                                <a href="/comic">
-                                    <img class="ui image" src="/assets/images/harrypotter.jpg" alt="Bad Hagrid">
-                                </a>
-                                <img class="ui image" src="/assets/images/potter2.jpg" alt="Bad Dumbledore">
-                                <img class="ui image" src="/assets/images/potter3.jpg" alt="Badder Dumbledore">
-                            </div>
+                    <div class="ui white-box">
+                        <h2>Fresh Comics</h2>
+                        <div class="ui small images">
+                            <a href="/comic">
+                                <img class="ui image" src="/assets/images/harrypotter.jpg" alt="Bad Hagrid">
+                            </a>
+                            <img class="ui image" src="/assets/images/potter2.jpg" alt="Bad Dumbledore">
+                            <img class="ui image" src="/assets/images/potter3.jpg" alt="Badder Dumbledore">
                         </div>
-                        <div class="slim white-box">
-                            <h2>Popular Series</h2>
-                        </div>
-                        <div class="slim white-box">
-                            <h2>New Remixes</h2>
-                        </div>
+                    </div>
+                    <div class="slim white-box">
+                        <h2>Popular Series</h2>
+                    </div>
+                    <div class="slim white-box">
+                        <h2>New Remixes</h2>
+                    </div>
                 </div>
             </div>
         </div>

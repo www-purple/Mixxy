@@ -3,7 +3,6 @@ package www.purple.mixxy.controllers;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import ninja.Context;
 import ninja.FilterWith;
-import ninja.Ninja;
 import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
@@ -30,10 +29,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
+import org.apache.commons.codec.binary.Base64;
 
 import com.google.appengine.api.images.Image;
+import com.google.appengine.api.images.ImagesServiceFactory;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
@@ -78,7 +79,7 @@ public class ComicController {
 			context.getFlashScope().error("Please correct field.");
 			context.getFlashScope().put("title", comicDto.title);
 			context.getFlashScope().put("description", comicDto.description);
-			context.getFlashScope().put("images", comicDto.images);
+			context.getFlashScope().put("image", comicDto.image);
 			context.getFlashScope().put("likes", comicDto.likes);
 			context.getFlashScope().put("tags", comicDto.tags);
 
@@ -112,19 +113,20 @@ public class ComicController {
 	@FilterWith(JsonEndpoint.class)
 	public Result comic(@PathParam("user") String username, @PathParam("work") String work) {
 
-	    User user = userDao.getUser(username);
-		Comic comic = comicDao.getComic(username, work);
+	    User author = userDao.getUser(username);
+		Comic comic = comicDao.getComic(author, work);
 
-		if (user == null || comic == null) {
+
+		if (author == null || comic == null) {
 		  return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
 		}
 		
 		// Get SSO message body
 		DisqusSSOHelper sso = new DisqusSSOHelper(
-				(user.id).toString(), 
-				user.username, 
-				user.email,
-				user.pictureUrl,
+				(author.id).toString(), 
+				author.username, 
+				author.email,
+				author.pictureUrl,
 				apiKeys.getDisqusSecret()
 		);
 		
@@ -133,7 +135,8 @@ public class ComicController {
 		comic.timestamp = sso.timestamp;
 		comic.disqusKey = apiKeys.getDisqusKey();
 
-		return Results.ok().render("comic", comic).render("user", user).html();
+		return Results.ok().render("comic", comic).render("user", author).html();
+
 	}
 
 	/**
@@ -175,15 +178,11 @@ public class ComicController {
 				}
 
 			}
-		System.out.println(user.username);
-		System.out.println(comics.toString());
-		System.out.println(series.toString());
-
-		// okayyyyyy y u no pass series to newWork.ftl.html
-
+			
 			// so we can render the series in the list of series options
 			return Results.html().render("series", series);
 	}
+	
 
 	/**
 	 * This method creates a new comic.
@@ -198,7 +197,8 @@ public class ComicController {
 	 * @return resulting route to redirect with content
 	 */
 	@FilterWith(JsonEndpoint.class)
-	public Result postWork(@LoggedInUser String username, Context context, @Param("title") String title,
+	public Result postWork(@LoggedInUser String username, Context context, @Param("muroimage") String muroimage,
+						   @Param("title") String title,
 						   @Param("description") String description,
 						   @Param("series") String series,
 						   @Params("tags") String[] tags,
@@ -209,20 +209,39 @@ public class ComicController {
 			return Results.redirect("/");
 
 		}
+		
 		ComicDto comicDto = new ComicDto();
-		// try to create comic
+		
+		// If Base64 image is invalid, send a bad request
+		if( !muroimage.matches("data\\:image\\/(png|jpe?g|gif)\\;base64,.+")){
+			return Results.badRequest();
+		}
+		
+		//Strip Bsae64 header 
+		String replacedMuroImage = muroimage.replaceAll("data\\:image\\/(png|jpe?g|gif)\\;base64,", "");
+		System.out.println(replacedMuroImage);
+		
+		byte[] imgInByteArr = Base64.decodeBase64(replacedMuroImage);
+		
+		Image image = ImagesServiceFactory.makeImage(imgInByteArr);
+		
+		comicDto.image = image;
 		comicDto.title = title;
 		comicDto.description = description;
 		comicDto.series = series;
 		comicDto.tags = new ArrayList<>();
-		for (String tag: tags) {
-			comicDto.tags.add((tag));
+		if (tags != null){
+			for (String tag: tags) {
+				comicDto.tags.add((tag));
+	
+			}
 		}
 		// does this work?
 		if (nsfw) comicDto.tags.add("18+");
 
 		if (!(comicDao.newComic(username, comicDto))){
-			return Results.noContent();
+			context.getFlashScope().error("Must have some content to upload.");
+			return Results.redirect("/");
 		}
 
 		context.getFlashScope().success("New comic created.");

@@ -1,5 +1,15 @@
 <#import "../layout/defaultLayout.ftl.html" as layout>
     <@layout.myLayout "Create a Comic">
+    <script>
+    function checkform() {
+        if(document.upload.muroimage.value == "") {
+            alert("Comic is still processing, please try again in 30 seconds!");
+            return false;
+        } else{
+            return true;
+        }
+    }
+    </script>
     <div class="ui large breadcrumb">
         <a class="section" href="/">Home</a>
         <i class="right angle icon divider"></i>
@@ -9,7 +19,7 @@
         <div class="ui white-box">
             <div class="ui fluid accordion">
                 <!-- need to be logged in -- if we're not logged in, redir to login page -->
-                <div class="muro active title">
+                <div class="active title">
                     <h1>Create a Comic with Muro</h1>
                 </div>
                 <div class="active content">
@@ -28,11 +38,14 @@
             </div>
             <div class="ui centered grid">
                 <div class="draw-form column comic">
-                    <form method="post" class="ui form">
+                    <form method="post" class="ui form" name="upload">
+                    
+                    <input class="hidden" type="hidden" id="muroimage" name="muroimage" required>
+                    
                         <h2>Details</h2>
                         <div class="required field">
                             <label>Title</label>
-                            <input type="text" id="title" name="title">
+                            <input type="text" id="title" name="title" required>
                         </div>
                         <div class="field">
                             <label>Description</label>
@@ -61,7 +74,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="ui button" type="submit">Upload Comic</button>
+                        <button class="ui button" type="submit" onclick="return checkform()">Upload Comic</button>
                     </form>
                 </div>
             </div>

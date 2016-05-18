@@ -81,6 +81,7 @@ public class Routes implements ApplicationRoutes {
     ///////////////////////////////////////////////////////////////////////////
     router.GET().route("/login/?").with(LoginLogoutController.class, "login");
     router.GET().route("/logout/?").with(LoginLogoutController.class, "logout");
+    router.GET().route("/signup/?").with(LoginLogoutController.class, "signup");
     router.GET().route("/validate/?").with(LoginLogoutController.class, "validate");
 
     // Get information about the API (version) and Mixxy in general
@@ -209,7 +210,7 @@ public class Routes implements ApplicationRoutes {
 
     // Get the actual image from a given work
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/image/?").with(ComicController.class, "image");
-
+    
     // Load the new remixing page
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/remix/?").with(ComicController.class, "newRemix");
 

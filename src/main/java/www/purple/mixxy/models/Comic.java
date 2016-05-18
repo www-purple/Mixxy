@@ -34,10 +34,15 @@ public class Comic {
 	public String title;
 	public String sluggedTitle;
 	
+
 	public String message;
 	public String signature;
 	public long timestamp;
 	public String disqusKey;
+
+	@Unindex
+	public String url;
+
 	
 	@Unindex
 	public String description;
