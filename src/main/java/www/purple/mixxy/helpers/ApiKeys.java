@@ -32,7 +32,7 @@ public final class ApiKeys {
     deviantartId = properties.getString("deviantart.id");
     deviantartKey = properties.getString("deviantart.secret");
     disqusKey = properties.getString("disqus.key");
-    disqusSecret = properties.getString("disqusSecret");
+    disqusSecret = properties.getString("disqus.secret");
   }
 
   public String getGoogleId() {
