@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import com.google.appengine.tools.cloudstorage.GcsFileOptions;
@@ -104,11 +106,11 @@ public class ComicDao {
 	}
 	
 	@SuppressWarnings("null")
-	public List<Comic> getComicsByTags(String[] tags) {
+	public Set<Comic> getComicsByTags(String[] tags) {
 		if (tags == null)
 			return null;
 
-		List<Comic> comics = new ArrayList<Comic>();
+		HashSet<Comic> comics = new HashSet<Comic>();
 		for (String tag : tags) {
 			comics.addAll(objectify.get().load().type(Comic.class).filter("tags", tag).list());
 		}

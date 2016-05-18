@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -362,8 +363,9 @@ public class ComicController {
 			return Results.ok().html().template("www/purple/mixxy/views/ComicController/search.ftl.html");
 		}
 
-		List<Comic> comics = comicDao.getComicsByTags(tags);
-
+		Set<Comic> setOfComics = comicDao.getComicsByTags(tags);
+		List<Comic> comics = new ArrayList<Comic>(setOfComics);
+		
 		context.getFlashScope().discard();
 		if (comics.isEmpty()) {
 			context.getFlashScope().error("Cannot find the comics you want :(");
