@@ -19,7 +19,7 @@ public class ComicDto {
 
 	public String series;
 
-	public List<Image> images;
+	public Image image;
 
 	public List<String> tags;
 
