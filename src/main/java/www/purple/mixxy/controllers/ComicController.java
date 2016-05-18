@@ -363,15 +363,20 @@ public class ComicController {
 	}
 	
 	public Result search(@Params("tags") String[] tags, Context context) {
-		
+
 		if (tags == null) {
-			context.getFlashScope().error("Cannot find what you are looking for :(");
-			return Results.redirect("/");
+			return Results.ok().html().template("www/purple/mixxy/views/ComicController/search.ftl.html");
 		}
-		
+
 		List<Comic> comics = comicDao.getComicsByTags(tags);
-		context.getFlashScope().success("Results found");
+
+		context.getFlashScope().discard();
+		if (comics.isEmpty()) {
+			context.getFlashScope().error("Cannot find the comics you want :(");
+		} else {
+			context.getFlashScope().success("Results found");
+		}
 		return Results.ok().html().render("searchedcomics", comics);
 	}
-	
+
 }

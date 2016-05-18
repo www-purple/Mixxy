@@ -2,6 +2,7 @@ package www.purple.mixxy.dao;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -107,8 +108,11 @@ public class ComicDao {
 		if (tags == null)
 			return null;
 
-		List<Comic> comics = null;
-		comics.addAll(objectify.get().load().type(Comic.class).filter("tags", tags).list());
+		List<Comic> comics = new ArrayList<Comic>();
+		for (String tag : tags) {
+			comics.addAll(objectify.get().load().type(Comic.class).filter("tags", tag).list());
+		}
+
 		return comics;
 	}
 
