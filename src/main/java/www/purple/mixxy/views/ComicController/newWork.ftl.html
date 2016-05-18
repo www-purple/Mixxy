@@ -5,11 +5,8 @@
         if(document.upload.muroimage.value == "") {
             alert("Comic is still processing, please try again in 30 seconds!");
             return false;
-        } else if (document.upload.title.value == ""){
-        	alert("Please enter a title for your comic!");
-        	return false;
         } else{
-            document.upload.submit();
+            return true;
         }
     }
     </script>
@@ -43,12 +40,12 @@
                 <div class="draw-form column comic">
                     <form method="post" class="ui form" name="upload">
                     
-                    <input class="hidden" type="hidden" id="muroimage" name="muroimage">
+                    <input class="hidden" type="hidden" id="muroimage" name="muroimage" required>
                     
                         <h2>Details</h2>
                         <div class="required field">
                             <label>Title</label>
-                            <input type="text" id="title" name="title">
+                            <input type="text" id="title" name="title" required>
                         </div>
                         <div class="field">
                             <label>Description</label>
