@@ -326,4 +326,15 @@ public class ComicController {
 		return Results.ok().render("comics", comics).render("user", user).html().render("series", series);
 	}
 	
+  public Result devImage(@PathParam("user") String user, @PathParam("work") String work, Context context) {
+    User author = userDao.getUser(user);
+    Comic comic = comicDao.getComic(user, work);
+
+    if (author == null || comic == null) {
+      return Results.notFound().render(Result.NO_HTTP_BODY);
+    }
+
+    return null;
+  }
+
 }

@@ -49,6 +49,7 @@ public class Routes implements ApplicationRoutes {
     if (!ninjaProperties.isProd()) {
       // If this is not a production build...
       router.GET().route("/setup/?").with(ApplicationController.class, "setup");
+      router.GET().route("/_dev/image/{user}/{work}/?").with(ComicController.class, "devImage");
     }
 
     router.GET().route("/?").with(ApplicationController.class, "index");
