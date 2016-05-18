@@ -3,24 +3,45 @@
     <div class="ui large breadcrumb">
         <a class="section" href="/">Home</a>
         <i class="right angle icon divider"></i>
-        <a class="section" href="/${user}">${user}</a>
+        <a class="section" href="/${user.username}">${user.username}</a>
         <i class="right angle icon divider"></i>
         <div class="active section">${comic.title}</div>
     </div>
     <div class="ui container grey-box">
         <div class="ui centered padded stackable grid">
             <h1>${comic.title}</h1>
-            <h3> by <a href="/users/${user}">${user}</a></h3>
+            <h3> by <a href="/users/${user.username}">${user.username}</a></h3>
             <div class="row">
                 <div class="ten wide column comic">
                     <div class="ui white-box">
-                        <img class="ui centered large image" src="${comic.url}" alt="${comic.title}">
+                        <img class="ui centered large image" src="<#if comic.url??>${comic.url}<#else>#</#if>" alt="${comic.title}">
                     </div>
                     <div class="ui white-box">
                         <p>Tags: <#list comic.tags as tag>${tag}<#sep>, </#list></p>
                     </div>
                     <div class="ui white-box">
-                        <p>Comments:</p>
+                        <div id="disqus_thread"></div>
+							<script>
+							/**
+							* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+							* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+							*/
+							/*
+							var disqus_config = function () {
+							this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+							this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+							};
+							*/
+							(function() { // DON'T EDIT BELOW THIS LINE
+							var d = document, s = d.createElement('script');
+							
+							s.src = '//mixxy-1249.disqus.com/embed.js';
+							
+							s.setAttribute('data-timestamp', +new Date());
+							(d.head || d.body).appendChild(s);
+							})();
+							</script>
+							<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
                     </div>
                     <!-- tags -->
                     <!-- comments -->
@@ -32,7 +53,7 @@
                             <p><strong>${comic.description}</strong></p>
                         </#if>
                         <#if comic.series ??>
-                            <a href="/users/${user}/series/${comic.series}">${comic.series}</a><br/>
+                            <a href="/users/${user.username}/series/${comic.series}">${comic.series}</a><br/>
                         </#if>
                         <br/>
                         <br/>
@@ -46,5 +67,6 @@
             </div>
         </div>
     </div>
+
 
 </@layout.myLayout>

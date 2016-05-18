@@ -105,9 +105,9 @@ public class ComicController {
 
 	// TODO: Move image-loading logic to here
 	@FilterWith(JsonEndpoint.class)
-	public Result comic(@PathParam("user") String user, @PathParam("work") String work) {
+	public Result comic(@PathParam("user") String username, @PathParam("work") String work) {
 
-	    User author = userDao.getUser(user);
+	    User author = userDao.getUser(username);
 		Comic comic = comicDao.getComic(author, work);
 
 

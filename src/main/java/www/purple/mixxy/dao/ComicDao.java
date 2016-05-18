@@ -34,6 +34,9 @@ public class ComicDao {
 	@Inject
 	private GcsService gcs = GcsServiceFactory.createGcsService();
 
+	@Inject
+	private UserDao userDao;
+
 	public ComicsDto getAllComics() {
 
 		ComicsDto comicsDto = new ComicsDto();
@@ -73,9 +76,12 @@ public class ComicDao {
 	}
 
 	public Comic getComic(String username, String slug) {
-	    if (username == null || slug == null) return null;
+	    
+		if (username == null || slug == null) return null;
 
-	    User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+	    User user = userDao.getUser(username);
+	    
+	    if(user == null) return null;
 
 		return objectify.get().load().type(Comic.class).filter("authorId", user.id).filter("sluggedTitle", slug).first()
 				.now();
