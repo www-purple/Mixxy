@@ -1,8 +1,16 @@
 package www.purple.mixxy.dao;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
+import com.google.appengine.tools.cloudstorage.GcsFileOptions;
+import com.google.appengine.tools.cloudstorage.GcsFilename;
+import com.google.appengine.tools.cloudstorage.GcsOutputChannel;
+import com.google.appengine.tools.cloudstorage.GcsService;
+import com.google.appengine.tools.cloudstorage.GcsServiceFactory;
 /**
  * Created by Brian_Sabz on 4/7/16.
  * 
@@ -23,6 +31,9 @@ public class ComicDao {
 	@Inject
 	private Provider<Objectify> objectify;
 	
+	@Inject
+	private GcsService gcs = GcsServiceFactory.createGcsService();
+
 	@Inject
 	private UserDao userDao;
 
@@ -75,7 +86,7 @@ public class ComicDao {
 		return objectify.get().load().type(Comic.class).filter("authorId", user.id).filter("sluggedTitle", slug).first()
 				.now();
 	}
-
+	
 	// return comics by user of a certain series
 	public List<Comic> getSeries(String username, String series) {
 		if (username == null || series == null) return null;
@@ -125,20 +136,57 @@ public class ComicDao {
 
 		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
 
-		if (user == null) {
+		if (user == null || comicDto.title == null || comicDto.tags == null) {
 			return false;
 		}
 
 		Comic comic = new Comic(null, user, comicDto.title, comicDto.description, comicDto.series, comicDto.tags);
 
-		// comic.author = Ref.create(user);
+		/* Generate string for my photo to store into the Comic 
+		 * (since comicId isn't generated at this point */
+        String unique = UUID.randomUUID().toString();
+        
+		GcsFilename fileName = new GcsFilename("mixxy-1249.appspot.com", unique + ".png");
+		
+		//Set Option for that file
+        GcsFileOptions options = new GcsFileOptions.Builder()
+                .mimeType("image/png")
+                .acl("public-read")
+                .build();
+        
+		try {
+			// Canal to write on it
+			GcsOutputChannel writeChannel = gcs.createOrReplace(fileName, options);
+
+			// Write data from photo
+			try {
+
+				writeChannel.write(ByteBuffer.wrap(comicDto.image.getImageData()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					writeChannel.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        
+		
+		comic.url = "https://storage.googleapis.com/mixxy-1249.appspot.com/" + unique + ".png";
 
 		// lowest index is the root Parent comic (index 0 is the first comic
 		// iteration)
 		// comic.ancestorComics.add(Ref.create(comic));
 		objectify.get().save().entity(comic).now();
 		comic.ancestorComicId.add(comic.id);
-		comic.sluggedTitle = comic.sluggedTitle + Long.toString(comic.id);
+		comic.sluggedTitle = comic.sluggedTitle + "-" + Long.toString(comic.id);
 		objectify.get().save().entity(comic).now();
 
 		return true;
