@@ -19,8 +19,17 @@ import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import www.purple.mixxy.conf.ObjectifyProvider;
+import www.purple.mixxy.dao.ComicDao;
+import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
+import www.purple.mixxy.models.Comic;
+import www.purple.mixxy.models.User;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import ninja.appengine.AppEngineFilter;
@@ -28,22 +37,35 @@ import ninja.appengine.AppEngineFilter;
 @Singleton
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class ApplicationController {
-   
-    /**
-     * Method to put initial data in the db...
-     * @return A successful Result
-     */
-    public Result setup() {
-        
-        ObjectifyProvider.setup();
-        
-        return Results.ok();
-    }
 
-    public Result index() {
+	@Inject
+	private ComicDao comicDao;
 
-        return Results.ok().html();
+	@Inject
+	private UserDao userDao;
 
-    }
+	/**
+	 * Method to put initial data in the db...
+	 *
+	 * @return A successful Result
+	 */
+	public Result setup() {
+
+		ObjectifyProvider.setup();
+
+		return Results.ok();
+	}
+
+	public Result index() {
+		List<Comic> recent = comicDao.getMostRecentComics(10);
+
+		Map<String, User> authorToComic = new HashMap<>();
+		for (Comic c : recent) {
+			User u = userDao.getUser(c.authorId);
+			authorToComic.put(c.authorId.toString(), u);
+		}
+		return Results.ok().html().render("latest_comics", recent).render("id_to_user", authorToComic);
+
+	}
 
 }
