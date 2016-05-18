@@ -18,16 +18,18 @@ public class DisqusSSOHelper {
 	// User data, replace values with authenticated user data
 	private HashMap<String,String> message = new HashMap<String,String>();
 	
-	public DisqusSSOHelper(String id, String username, String email, String disqusSecret) {
+	public String base64EncodedStr;
+	public String signature;
+	public long timestamp;
+	
+	public DisqusSSOHelper(String id, String username, String email, String avatar, String disqusSecret) {
 		
 		try {
-			
-			disqusSecret = "<" + disqusSecret + ">";
 			
 			message.put("id", id);
 			message.put("username", username);
 			message.put("email", email);
-			//message.put("avatar","http://example.com/path-to-avatar.jpg"); // User's avatar URL (optional)
+			message.put("avatar",avatar); // User's avatar URL (optional)
 			//message.put("url","http://example.com/"); // User's website or profile URL (optional)
 			 
 			// Encode user data
@@ -35,13 +37,13 @@ public class DisqusSSOHelper {
 
 			String jsonMessage = mapper.writeValueAsString(message);
 
-			String base64EncodedStr = new String(Base64.encodeBase64(jsonMessage.getBytes()));
+			base64EncodedStr = new String(Base64.encodeBase64(jsonMessage.getBytes()));
 
 			// Get the timestamp
-			long timestamp = System.currentTimeMillis()/1000;
+			timestamp = System.currentTimeMillis()/1000;
 			 
 			// Assemble the HMAC-SHA1 signature
-			String signature = calculateRFC2104HMAC(base64EncodedStr + " " + timestamp, disqusSecret);
+			signature = calculateRFC2104HMAC(base64EncodedStr + " " + timestamp, disqusSecret);
 
 			// Output string to use in remote_auth_s3 variable
 			System.out.println(base64EncodedStr + " " + signature + " " + timestamp);

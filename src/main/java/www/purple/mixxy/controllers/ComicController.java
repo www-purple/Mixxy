@@ -15,8 +15,11 @@ import ninja.validation.Validation;
 import www.purple.mixxy.dao.ComicDao;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.etc.LoggedInUser;
+import www.purple.mixxy.etc.UserParameter;
 import www.purple.mixxy.filters.JsonEndpoint;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
+import www.purple.mixxy.helpers.ApiKeys;
+import www.purple.mixxy.helpers.DisqusSSOHelper;
 import www.purple.mixxy.models.Comic;
 import www.purple.mixxy.models.ComicDto;
 import www.purple.mixxy.models.Like;
@@ -42,6 +45,9 @@ public class ComicController {
 
 	@Inject
 	private UserDao userDao;
+	
+	@Inject
+    private ApiKeys apiKeys;
 
 	/**
 	 * This method creates a new remix for a specific comic.
@@ -114,6 +120,20 @@ public class ComicController {
 		if (author == null || comic == null) {
 		  return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
 		}
+		
+		// Get SSO message body
+		DisqusSSOHelper sso = new DisqusSSOHelper(
+				(author.id).toString(), 
+				author.username, 
+				author.email,
+				author.pictureUrl,
+				apiKeys.getDisqusSecret()
+		);
+		
+		comic.message = sso.base64EncodedStr;
+		comic.signature = sso.signature;
+		comic.timestamp = sso.timestamp;
+		comic.disqusKey = apiKeys.getDisqusKey();
 
 		return Results.ok().render("comic", comic).render("user", author).html();
 
