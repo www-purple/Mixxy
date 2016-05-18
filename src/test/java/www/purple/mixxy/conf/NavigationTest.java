@@ -1,4 +1,4 @@
-package www.purple.mixxy.controllers;
+package www.purple.mixxy.conf;
 
 import static org.junit.Assert.*;
 
@@ -8,7 +8,6 @@ import com.google.inject.Singleton;
 
 import ninja.NinjaFluentLeniumTest;
 
-@Singleton
 public class NavigationTest extends NinjaFluentLeniumTest {
 
   @Test

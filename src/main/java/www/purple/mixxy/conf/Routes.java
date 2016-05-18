@@ -109,7 +109,7 @@ public class Routes implements ApplicationRoutes {
         router.DELETE().route("/api/user/likes/?").with(UserController.class, "unlike");
         // Gets, adds to, or removes from the works this user likes
 
-        router.GET().route("/api/user/works/?").with(UserController.class, "works");
+        router.GET().route("/api/user/works/?").with(ComicController.class, "works");
         router.POST().route("/api/user/works/?").with(ComicController.class, "newWork");
         // Get the list of all works this user has created, or submits a new
         // one (possibly with a URL with another work to remix)
@@ -153,7 +153,7 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/api/users/{user}/likes/?").with(UserController.class, "likes");
         // Get the list of all works any user has liked
 
-        router.GET().route("/api/users/{user}/works/?").with(UserController.class, "works");
+        router.GET().route("/api/users/{user}/works/?").with(ComicController.class, "works");
         // Get a list of any user's works
 
         {
@@ -199,7 +199,7 @@ public class Routes implements ApplicationRoutes {
     router.GET().route("(?:/users)?/{user}/likes/?").with(UserController.class, "likes");
 
     // Get a given work from any user
-    router.GET().route("(?:/users)?/{user}/works/?").with(UserController.class, "works");
+    router.GET().route("(?:/users)?/{user}/works/?").with(ComicController.class, "works");
 
     // Get a specific work from any user
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/?").with(ComicController.class, "comic");
