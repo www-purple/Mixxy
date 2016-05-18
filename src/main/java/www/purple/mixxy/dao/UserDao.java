@@ -81,4 +81,12 @@ public class UserDao {
   public boolean updateUser(String username, User info) {
     return false;
   }
+
+    public void changeUsername(String oldUsername, String newUsername) {
+        User user = getUser(oldUsername);
+        user.username = newUsername;
+
+        objectify.get().save().entity(user).now();
+
+    }
 }
