@@ -1,0 +1,28 @@
+<#import "../layout/defaultLayout.ftl.html" as layout> <@layout.myLayout "Username">
+
+    <div class="ui large breadcrumb">
+        <a class="section" href="/">Home</a>
+        <i class="right angle icon divider"></i>
+        <div class="active section">Signup</div>
+    </div>
+    <div class="ui container grey-box">
+        <div class="ui centered padded stackable grid">
+            <div class="row">
+                <div class="ui white-box column">
+                    <!--<form method="post" class="ui form" name="upload">-->
+                    <h1>Welcome to Mixxy!</h1>
+                    <h3>Since this is your first time here, please choose your handle.</h3>
+                    <form class="ui large form">
+                        <div class="large field">
+                            <label>Username</label>
+                            <input name="username" placeholder="Iron Pen" type="text">
+                        </div>
+                        <button class="ui button" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</@layout.myLayout>
