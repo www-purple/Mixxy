@@ -14,8 +14,7 @@
             <div class="row">
                 <div class="ten wide column comic">
                     <div class="ui white-box">
-                        <img class="ui centered large image" src="#" alt="${comic.title}">
-                        <!--<img class="ui centered large image" src="/assets/images/harrypotter.jpg" alt="${comic.title}">-->
+                        <img class="ui centered large image" src="<#if comic.url??>${comic.url}<#else>#</#if>" alt="${comic.title}">
                     </div>
                     <div class="ui white-box">
                         <p>Tags: <#list comic.tags as tag>${tag}<#sep>, </#list></p>

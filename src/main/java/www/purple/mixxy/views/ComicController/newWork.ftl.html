@@ -9,7 +9,7 @@
         <div class="ui white-box">
             <div class="ui fluid accordion">
                 <!-- need to be logged in -- if we're not logged in, redir to login page -->
-                <div class="muro active title">
+                <div class="active title">
                     <h1>Create a Comic with Muro</h1>
                 </div>
                 <div class="active content">
@@ -29,6 +29,9 @@
             <div class="ui centered grid">
                 <div class="draw-form column comic">
                     <form method="post" class="ui form">
+                    
+                    <input class="hidden" type="hidden" id="muroimage" name="muroimage">
+                    
                         <h2>Details</h2>
                         <div class="required field">
                             <label>Title</label>
