@@ -1,71 +1,59 @@
 <#import "../layout/defaultLayout.ftl.html" as layout>
-    <@layout.myLayout "Mixxy - Make Art Great!">
+<@layout.myLayout "Mixxy - Make Art Great!">
 
-    <div class="ui container grey-box">
-        <div class="ui centered padded stackable grid">
-            <div class="row">
-                <div class="ten wide column">
-                    <h1>Featured</h1>
-                    <div class="white-box" id="featured-comics">
-                            <!-- get rid of hardcoding here -->
-                            <a href="/kcleary/thecomic">
-                                <div>
-                                    <h2>Bad Hagrid</h2>
-                                    <img class="ui centered large image" src="/assets/images/harrypotter.jpg" alt="Bad Hagrid">
-                                </div>
-                            </a>
-                            <div>
-                                <h2>Bad Dumbledore</h2>
-                                <img class="ui centered large image" src="/assets/images/potter2.jpg" alt="Bad Dumbledore 1">
-                            </div>
-                            <div>
-                     <h2>Worse Dumbledore</h2>
-                                <img class="ui centered large image" src="/assets/images/potter3.jpg" alt="Bad Dumbledore 2">
-                        </div>
-                    </div>
-                </div>
-                <div class="six wide column">
-                    <h1>Latest</h1>
-                    <div class="white-box">
-                        <div class="ui feed">
-                            <div class="event">
-                                <div class="label">
-                                    <img src="/assets/images/potter3.jpg">
-                                </div>
-                                <div class="content">
-                                    <div class="date">
-                                        3 days ago
-                                    </div>
-                                    <div class="summary">
-                                        <a>Some dude</a> added 2 photos
-                                    </div>
-                                    <div class="extra images">
-                                        <a><img src="/assets/images/potter2.jpg"></a>
-                                        <a><img src="/assets/images/potter3.jpg"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="event">
-                                <div class="label">
-                                    <img src="/assets/images/harrypotter.jpg">
-                                </div>
-                                <div class="content">
-                                    <div class="date">
-                                        3 days ago
-                                    </div>
-                                    <div class="summary">
-                                        <a>Blah D. Blah</a> created a post
-                                    </div>
-                                    <div class="extra text">
-                                        Look at my kewl new series!
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="ui container grey-box">
+  <div class="ui centered padded stackable grid">
+    <div class="row">
+      <div class="ten wide column">
+        <h1>Featured</h1>
+        <div class="white-box" id="featured-comics">
+          <#list latest_comics as comic>
+          <div>
+            <h2>${comic.title}</h2>
+            <a href="/${id_to_user[comic.authorId?string].username}/${comic.sluggedTitle}">
+              <img class="ui centered large image" src="<#if comic.url??>${comic.url}<#else>#</#if>" alt="${comic.title}"/>
+            </a>
+          </div>
+          </#list>
         </div>
+        
+      </div>
+      <div class="six wide column">
+        <h1>Latest</h1>
+        <div class="white-box">
+          <div class="ui feed">
+            <div class="event">
+              <div class="label">
+                <img src="/assets/images/potter3.jpg">
+              </div>
+              <div class="content">
+                <div class="date">3 days ago</div>
+                <div class="summary">
+                  <a>Some dude</a> added 2 photos
+                </div>
+                <div class="extra images">
+                  <a><img src="/assets/images/potter2.jpg"></a> <a><img
+                    src="/assets/images/potter3.jpg"></a>
+                </div>
+              </div>
+            </div>
+            <div class="event">
+              <div class="label">
+                <img src="/assets/images/harrypotter.jpg">
+              </div>
+              <div class="content">
+                <div class="date">3 days ago</div>
+                <div class="summary">
+                  <a>Blah D. Blah</a> created a post
+                </div>
+                <div class="extra text">Look at my kewl new series!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
 
 </@layout.myLayout>
