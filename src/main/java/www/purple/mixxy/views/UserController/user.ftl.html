@@ -16,7 +16,7 @@
                         <div class="ui large horizontal list">
                             <#list comics as comic>
                                 <div class="item">
-                                    <img class="ui tiny image" src="${comic.url}">
+                                    <img class="ui tiny image" src="<#if comic.url??>${comic.url}<#else>#</#if>">
                                     <div class="content">
                                         <a class="header" href="/users/${user}/${comic.sluggedTitle}">${comic.title}</a>
                                         <div class="description">${comic.description}</div>
