@@ -21,7 +21,7 @@ public class UserDao {
    * @return True if a user with this name actually exists.
    * @TODO Can be optimized, maybe with a projection query or something.
    */
-  public boolean isUserValid(String username) {
+  public User isUserValid(String username) {
 
     if (username != null) {
 
@@ -30,11 +30,11 @@ public class UserDao {
 
       if (user != null) {
         // If a user with this name actually exists...
-        return true;
+        return user;
       }
     }
 
-    return false;
+    return null;
   }
 
   /**
@@ -45,24 +45,26 @@ public class UserDao {
    * @return The {@link User} if it exists, {@code null} if doesn't or if
    *         {@code username} is {@code null}.
    */
-  public User getUser(String username) {
-    User user = null;
-
-    if (username != null) {
-      // If we were given a valid username...
-      user = objectify.get().load().type(User.class)
-          .filter(User.USERNAME, username).first().now();
-    }
-
-    return user;
+  public User getUser(String username) {  
+	  
+	  if(username != null) {
+		  User user = objectify.get().load().type(User.class)
+				  .filter(User.USERNAME, username).first().now();
+		  
+		  if(user != null) return user;
+	  }
+	  
+	  return null;
   }
   
-  public void createUser(String username, String firstName, String lastName, String gender,
+  public User createUser(String username, String firstName, String lastName, String gender,
                          String email, String pictureUrl, String locale, String providerId, String provider) {
 	  
 	  User user = new User(username, firstName, lastName, gender, email, 
 			  pictureUrl, locale, providerId, provider);
 	  objectify.get().save().entity(user).now();
+	  
+	  return user;
   }
 
   /**
