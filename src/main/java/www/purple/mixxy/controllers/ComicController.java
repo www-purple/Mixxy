@@ -84,7 +84,7 @@ public class ComicController {
 			context.getFlashScope().put("likes", comicDto.likes);
 			context.getFlashScope().put("tags", comicDto.tags);
 
-			return Results.badRequest().redirect("/remix/");
+			return Results.redirect("/remix/");
 
 		}
 		else {
@@ -105,7 +105,7 @@ public class ComicController {
 
 			context.getFlashScope().success("New remix created.");
 
-			return Results.created(Optional.<String> absent()).redirect("/");
+			return Results.redirect("/");
 
 		}
 
@@ -162,7 +162,7 @@ public class ComicController {
 
 		if (username == null) {
 			context.getFlashScope().error("Must be signed in to draw.");
-			return Results.redirect("/").status(Result.SC_403_FORBIDDEN);
+			return Results.redirect("/");
 
 		}
 		User user = userDao.getUser(username);
@@ -203,7 +203,7 @@ public class ComicController {
 
 		if (username == null) {
 			context.getFlashScope().error("Must be signed in to save comic.");
-			return Results.forbidden().redirect("/");
+			return Results.redirect("/");
 
 		}
 
@@ -211,7 +211,7 @@ public class ComicController {
 
 		// If Base64 image is invalid, send a bad request
 		if (!muroimage.matches("data\\:image\\/(png|jpe?g|gif)\\;base64,.+")) {
-			return Results.badRequest().redirect("/");
+			return Results.redirect("/");
 		}
 
 		// Strip Bsae64 header
@@ -238,12 +238,12 @@ public class ComicController {
 
 		if (!(comicDao.newComic(username, comicDto))) {
 			context.getFlashScope().error("Must have some content to upload.");
-			return Results.badRequest().redirect("/");
+			return Results.redirect("/");
 		}
 
 		context.getFlashScope().success("New comic created.");
 		// TODO: Add in the resulting URL
-		return Results.created(Optional.<String> absent()).redirect("/");
+		return Results.redirect("/");
 	}
 
 	@FilterWith(JsonEndpoint.class)
