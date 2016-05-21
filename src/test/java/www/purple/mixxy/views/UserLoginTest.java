@@ -19,7 +19,7 @@ public class UserLoginTest extends NinjaFluentLeniumTest {
     String url = this.url();
     assertThat(url, containsString("login"));
     assertThat(url, containsString("google"));
-    //assertThat(title(), not(containsString("error")));
+    // assertThat(title(), not(containsString("error")));
   }
 
   @Test
@@ -32,6 +32,6 @@ public class UserLoginTest extends NinjaFluentLeniumTest {
     String url = this.url();
     assertThat(url, containsString("login"));
     assertThat(url, containsString("facebook"));
-    //assertThat(title(), not(containsString("error")));
+    // assertThat(title(), not(containsString("error")));
   }
 }

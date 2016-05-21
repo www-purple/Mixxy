@@ -42,7 +42,8 @@ public class UserController {
 
     User username = userDao.getUser(user);
     if (username == null) {
-      return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
+      return Results.notFound()
+          .template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
     }
     List<Comic> comics = comicDao.getComics(user);
     List<String> series = new ArrayList<>();
@@ -56,7 +57,7 @@ public class UserController {
     return Results.html().render("user", username.username).render("userPhoto", username.pictureUrl)
         .render("comics", comics).render("series", series);
   }
-  
+
   @FilterWith(JsonEndpoint.class)
   public Result settings() {
     return Results.TODO();
@@ -77,17 +78,19 @@ public class UserController {
 
     User user = userDao.getUser(username);
     if (user == null) {
-      return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
+      return Results.notFound()
+          .template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
     }
 
     return Results.TODO().render("user", user);
   }
-  
+
   @FilterWith(JsonEndpoint.class)
   public Result subscribers(@PathParam("user") String username, Context context) {
     User user = userDao.getUser(username);
     if (user == null) {
-      return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
+      return Results.notFound()
+          .template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
     }
 
     return Results.TODO().render("user", user);
@@ -102,12 +105,13 @@ public class UserController {
   public Result unlike() {
     return Results.TODO();
   }
-  
+
   @FilterWith(JsonEndpoint.class)
   public Result likes(@PathParam("user") String username, Context context) {
     User user = userDao.getUser(username);
     if (user == null) {
-      return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
+      return Results.notFound()
+          .template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
     }
 
     return Results.TODO().render("user", user);

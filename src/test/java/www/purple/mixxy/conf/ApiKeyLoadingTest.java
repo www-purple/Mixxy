@@ -22,25 +22,25 @@ public class ApiKeyLoadingTest extends NinjaTest {
   public void testApiKeysLoaded() {
     assertNotNull(apiKeys);
   }
-  
+
   @Test
   public void testGoogleIdLoaded() {
     assertNotNull(apiKeys.getGoogleId());
     assertFalse(apiKeys.getGoogleId().isEmpty());
   }
-  
+
   @Test
   public void testGoogleSecretLoaded() {
     assertNotNull(apiKeys.getGoogleSecret());
     assertFalse(apiKeys.getGoogleSecret().isEmpty());
   }
-  
+
   @Test
   public void testFacebookIdLoaded() {
     assertNotNull(apiKeys.getFacebookId());
     assertFalse(apiKeys.getFacebookId().isEmpty());
   }
-  
+
   @Test
   public void testFacebookSecretLoaded() {
     assertNotNull(apiKeys.getFacebookSecret());

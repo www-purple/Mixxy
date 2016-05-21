@@ -44,7 +44,8 @@ public class ComicControllerTest extends NinjaAppengineBackendTest {
     List<Comic> comics = comicDao.getComics(USER);
 
     Map<String, String> headers = new HashMap<>();
-    String url = getServerAddress() + "users/BobTheBuilder/" + comics.get(0).sluggedTitle + "/image";
+    String url = getServerAddress() + "users/BobTheBuilder/" + comics.get(0).sluggedTitle
+        + "/image";
     HttpResponse response = ninjaTestBrowser.makeRequestAndGetResponse(url, headers);
 
     assertThat(response.getFirstHeader("Content-Type").getValue(), startsWith("image/"));
@@ -52,7 +53,7 @@ public class ComicControllerTest extends NinjaAppengineBackendTest {
 
   @Test
   public void testMultipleRoutesToComicPageAreTheSame() {
-    //"(?:/users)?/{user}(?:/works)?/{work}/?"
+    // "(?:/users)?/{user}(?:/works)?/{work}/?"
 
     String[] urls = {
         getServerAddress() + "BobTheBuilder/cool-title",

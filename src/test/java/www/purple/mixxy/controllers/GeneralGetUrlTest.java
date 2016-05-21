@@ -72,16 +72,12 @@ public class GeneralGetUrlTest extends NinjaAppengineBackendTest {
 
         // Series list
         /*
-        { "BobTheBuilder/series", 200 },
-        { "BobTheBuilder/series/", 200 },
-        { "users/BobTheBuilder/series/", 200 },
-        { "users/BobTheBuilder/series/", 200 },
-
-        { "ggggggtgtgtgtgt/series", 404 },
-        { "ggggggtgtgtgtgt/series/", 404 },
-        { "users/ggggggtgtgtgtgt/series/", 404 },
-        { "users/ggggggtgtgtgtgt/series/", 404 },
-        */
+         * { "BobTheBuilder/series", 200 }, { "BobTheBuilder/series/", 200 }, {
+         * "users/BobTheBuilder/series/", 200 }, { "users/BobTheBuilder/series/", 200 },
+         * 
+         * { "ggggggtgtgtgtgt/series", 404 }, { "ggggggtgtgtgtgt/series/", 404 }, {
+         * "users/ggggggtgtgtgtgt/series/", 404 }, { "users/ggggggtgtgtgtgt/series/", 404 },
+         */
 
         // Comic page
         { "BobTheBuilder/cool-title", 200 },

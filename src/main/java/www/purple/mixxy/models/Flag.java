@@ -12,27 +12,28 @@ import com.googlecode.objectify.annotation.Id;
 
 @Entity
 public class Flag {
-	@Id
-	public Long id;
+  @Id
+  public Long id;
 
-	// can refer to these Entities using the already fetched Comic, this solve
-	// performance problems
-	// See: https://github.com/objectify/objectify/wiki/Entities#load
+  // can refer to these Entities using the already fetched Comic, this solve
+  // performance problems
+  // See: https://github.com/objectify/objectify/wiki/Entities#load
 
-	public Long flaggerId;
-	public Long flaggedUserId;
-	
-	public String reason;
+  public Long flaggerId;
+  public Long flaggedUserId;
 
-	public Date createdAt;
-	
-	public Flag() {/* Needed by Objectify */}
+  public String reason;
 
-	public Flag(final User flagger, final User flaggedUser, final String reason) {
-		/* Needed by Objectify */
-		this.flaggerId = flagger.id;
-		this.flaggedUserId = flaggedUser.id;
-		this.reason = reason;
-		this.createdAt = new Date();
-	}
+  public Date createdAt;
+
+  public Flag() {
+    /* Needed by Objectify */}
+
+  public Flag(final User flagger, final User flaggedUser, final String reason) {
+    /* Needed by Objectify */
+    this.flaggerId = flagger.id;
+    this.flaggedUserId = flaggedUser.id;
+    this.reason = reason;
+    this.createdAt = new Date();
+  }
 }

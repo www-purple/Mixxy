@@ -20,75 +20,76 @@ import java.util.List;
 @Index
 public class Comic {
 
-	@Id
-	public Long id;
+  @Id
+  public Long id;
 
-	// can refer to these Entities using the already fetched Comic, this solve
-	// performance problems
-	// See: https://github.com/objectify/objectify/wiki/Entities#load
-	//@Load
-	//public Ref<User> author;
-	
-	public List<Long> ancestorComicId;
+  // can refer to these Entities using the already fetched Comic, this solve
+  // performance problems
+  // See: https://github.com/objectify/objectify/wiki/Entities#load
+  // @Load
+  // public Ref<User> author;
 
-	public String title;
-	public String sluggedTitle;
-	
+  public List<Long> ancestorComicId;
 
-    @Unindex
-	public String message;
+  public String title;
+  public String sluggedTitle;
 
-    @Unindex
-	public String signature;
+  @Unindex
+  public String message;
 
-    @Unindex
-	public long timestamp;
+  @Unindex
+  public String signature;
 
-    @Unindex
-	public String disqusKey;
+  @Unindex
+  public long timestamp;
 
-	@Unindex
-	public String url;
+  @Unindex
+  public String disqusKey;
 
-	
-	@Unindex
-	public String description;
-	public String series;
-	public List<String> tags;
-	public Date createdAt;
-	public Date updatedAt;
-	
-	public Long authorId;
+  @Unindex
+  public String url;
 
-	public Comic() {/* needed by Objectify */ }
+  @Unindex
+  public String description;
+  public String series;
+  public List<String> tags;
+  public Date createdAt;
+  public Date updatedAt;
 
-	public Comic(final Comic ancestorComic, final User author, final String title, final String description, final String series, final List<String> tags) {
-		
-		if (ancestorComic == null){
-			this.ancestorComicId = Lists.newArrayList();
-		} 
-		else {
-			this.ancestorComicId = ancestorComic.ancestorComicId;
-		}
-		this.authorId = author.id;
-		
-		Slugify slg;
-		try {
-			slg = new Slugify();
-			this.sluggedTitle = slg.slugify(title); 
-		} catch (IOException e) {
-		    // NOTE: Unlikely to occur; if it does, there's likely a bigger problem.
-		    // Slugify reads from a .properties file that is included in its own resources,
-		    // and you can't override it (so no chance of misuse).
-			e.printStackTrace();
-		}
-		
-		this.title = title;
-		this.description = description;
-		this.series = series;
-		this.tags = tags;
-		this.createdAt = new Date();
-		this.updatedAt = new Date();
-	}
+  public Long authorId;
+
+  public Comic() {
+    /* needed by Objectify */ }
+
+  public Comic(final Comic ancestorComic, final User author, final String title,
+      final String description, final String series, final List<String> tags) {
+
+    if (ancestorComic == null) {
+      this.ancestorComicId = Lists.newArrayList();
+    }
+    else {
+      this.ancestorComicId = ancestorComic.ancestorComicId;
+    }
+    this.authorId = author.id;
+
+    Slugify slg;
+    try {
+      slg = new Slugify();
+      this.sluggedTitle = slg.slugify(title);
+    }
+    catch (IOException e) {
+      // NOTE: Unlikely to occur; if it does, there's likely a bigger problem.
+      // Slugify reads from a .properties file that is included in its own resources,
+      // and you can't override it (so no chance of misuse).
+      e.printStackTrace();
+    }
+
+    this.title = title;
+    this.description = description;
+    this.series = series;
+    this.tags = tags;
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
+  }
 
 }

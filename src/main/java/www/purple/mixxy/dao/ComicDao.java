@@ -31,246 +31,261 @@ import www.purple.mixxy.models.User;
 
 public class ComicDao {
 
-	@Inject
-	private Provider<Objectify> objectify;
-	
-	@Inject
-	private GcsService gcs = GcsServiceFactory.createGcsService();
+  @Inject
+  private Provider<Objectify> objectify;
 
-	@Inject
-	private UserDao userDao;
+  @Inject
+  private GcsService gcs = GcsServiceFactory.createGcsService();
 
-	public ComicsDto getAllComics() {
+  @Inject
+  private UserDao userDao;
 
-		ComicsDto comicsDto = new ComicsDto();
-		comicsDto.comics = objectify.get().load().type(Comic.class).list();
+  public ComicsDto getAllComics() {
 
-		return comicsDto;
+    ComicsDto comicsDto = new ComicsDto();
+    comicsDto.comics = objectify.get().load().type(Comic.class).list();
 
-	}
+    return comicsDto;
 
-	public List<Comic> getComics(User author) {
-		return objectify.get().load().type(Comic.class).filter("authorIds", author.id).list();
-	}
+  }
 
-	public List<Comic> getComics(String username) {
+  public List<Comic> getComics(User author) {
+    return objectify.get().load().type(Comic.class).filter("authorIds", author.id).list();
+  }
 
-		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+  public List<Comic> getComics(String username) {
 
-		if (user != null) {
-		  // If the requested user exists...
-		  return objectify.get().load().type(Comic.class).filter("authorId", user.id).list();
-		}
-		else {
-		  return null;
-		}
-	}
-	
-	public List<Like> getLikes(String username, String slug){
-		
-		Comic comic = getComic(username, slug);
-		
-		return objectify.get().load().type(Like.class).filter("comicId", comic.id).list();
-		
-	}
+    User user = objectify.get().load().type(User.class).filter("username", username).first().now();
 
-	public Comic getComic(long id) {
-		return objectify.get().load().type(Comic.class).id(id).now();
-	}
+    if (user != null) {
+      // If the requested user exists...
+      return objectify.get().load().type(Comic.class).filter("authorId", user.id).list();
+    }
+    else {
+      return null;
+    }
+  }
 
-	public Comic getComic(String username, String slug) {
-	    
-		if (username == null || slug == null) return null;
+  public List<Like> getLikes(String username, String slug) {
 
-	    User user = userDao.getUser(username);
-	    
-	    if(user == null) return null;
+    Comic comic = getComic(username, slug);
 
-		return objectify.get().load().type(Comic.class).filter("authorId", user.id).filter("sluggedTitle", slug).first()
-				.now();
-	}
-	
-	public List<Comic> getMostRecentComics(int n){
-		if (n == 0) return Collections.emptyList();
-		
-		return objectify.get().load().type(Comic.class).filter("createdAt <", new Date()).limit(n).order("-createdAt").list();
-	}
-	
-	// return comics by user of a certain series
-	public List<Comic> getSeries(String username, String series) {
-		if (username == null || series == null) return null;
+    return objectify.get().load().type(Like.class).filter("comicId", comic.id).list();
 
-		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+  }
 
-		return objectify.get().load().type(Comic.class).filter("authorId", user.id).filter("series", series).list();
-	}
+  public Comic getComic(long id) {
+    return objectify.get().load().type(Comic.class).id(id).now();
+  }
 
-	public Comic getComic(User user, String slug) {
-	    if (user == null || slug == null) return null;
+  public Comic getComic(String username, String slug) {
 
-	    return getComic(user.username, slug);
-	}
-	
-	@SuppressWarnings("null")
-	public Set<Comic> getComicsByTags(String[] tags) {
-		if (tags == null)
-			return null;
+    if (username == null || slug == null)
+      return null;
 
-		HashSet<Comic> comics = new HashSet<Comic>();
-		for (String tag : tags) {
-			comics.addAll(objectify.get().load().type(Comic.class).filter("tags", tag).list());
-		}
+    User user = userDao.getUser(username);
 
-		return comics;
-	}
+    if (user == null)
+      return null;
 
-	public Comic getRemix(long id) {
-		return objectify.get().load().type(Comic.class).filter("ancestorComicId", id).first().now();
-	}
+    return objectify.get().load().type(Comic.class).filter("authorId", user.id)
+        .filter("sluggedTitle", slug).first()
+        .now();
+  }
 
-	public List<Comic> getRemixes(String username, String slug) {
-		
-		Comic comic = getComic(username, slug);
-		
-		return objectify.get().load().type(Comic.class).filter("ancestorComicId", comic.id).list();
-	}
+  public List<Comic> getMostRecentComics(int n) {
+    if (n == 0)
+      return Collections.emptyList();
 
-	public List<Comic> getRemixes(long id) {
-		return objectify.get().load().type(Comic.class).filter("ancestorComicId", id).list();
-	}
+    return objectify.get().load().type(Comic.class).filter("createdAt <", new Date()).limit(n)
+        .order("-createdAt").list();
+  }
 
-	public List<Comic> getAncestors(Comic comic) {
-		return Collections.EMPTY_LIST;
-	}
+  // return comics by user of a certain series
+  public List<Comic> getSeries(String username, String series) {
+    if (username == null || series == null)
+      return null;
 
-	public List<Comic> getAncestors(long id) {
-		return Collections.EMPTY_LIST;
-	}
+    User user = objectify.get().load().type(User.class).filter("username", username).first().now();
 
-	/**
-	 * @param username
-	 *            Name of the user who is posting this Comic
-	 * @param comicDto
-	 *            ComicDto that contains comic's content
-	 * @return false if user cannot be found in database.
-	 */
-	public boolean newComic(String username, ComicDto comicDto) {
+    return objectify.get().load().type(Comic.class).filter("authorId", user.id)
+        .filter("series", series).list();
+  }
 
-		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+  public Comic getComic(User user, String slug) {
+    if (user == null || slug == null)
+      return null;
 
-		if (user == null || comicDto.title == null || comicDto.tags == null) {
-			return false;
-		}
+    return getComic(user.username, slug);
+  }
 
-		Comic comic = new Comic(null, user, comicDto.title, comicDto.description, comicDto.series, comicDto.tags);
+  @SuppressWarnings("null")
+  public Set<Comic> getComicsByTags(String[] tags) {
+    if (tags == null)
+      return null;
 
-		/* Generate string for my photo to store into the Comic 
-		 * (since comicId isn't generated at this point */
-        String unique = UUID.randomUUID().toString();
-        
-		GcsFilename fileName = new GcsFilename("mixxy-1249.appspot.com", "comic/" + unique + ".png");
-		
-		//Set Option for that file
-        GcsFileOptions options = new GcsFileOptions.Builder()
-                .mimeType("image/png")
-                .acl("public-read")
-                .build();
-        
-		try {
-			// Canal to write on it
-			GcsOutputChannel writeChannel = gcs.createOrReplace(fileName, options);
+    HashSet<Comic> comics = new HashSet<Comic>();
+    for (String tag : tags) {
+      comics.addAll(objectify.get().load().type(Comic.class).filter("tags", tag).list());
+    }
 
-			// Write data from photo
-			try {
+    return comics;
+  }
 
-				writeChannel.write(ByteBuffer.wrap(comicDto.image.getImageData()));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				try {
-					writeChannel.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        
-		
-		comic.url = "https://storage.googleapis.com/mixxy-1249.appspot.com/comic/" + unique + ".png";
+  public Comic getRemix(long id) {
+    return objectify.get().load().type(Comic.class).filter("ancestorComicId", id).first().now();
+  }
 
-		// lowest index is the root Parent comic (index 0 is the first comic
-		// iteration)
-		// comic.ancestorComics.add(Ref.create(comic));
-		objectify.get().save().entity(comic).now();
-		comic.ancestorComicId.add(comic.id);
-		comic.sluggedTitle = comic.sluggedTitle + "-" + Long.toString(comic.id);
-		objectify.get().save().entity(comic).now();
+  public List<Comic> getRemixes(String username, String slug) {
 
-		return true;
+    Comic comic = getComic(username, slug);
 
-	}
+    return objectify.get().load().type(Comic.class).filter("ancestorComicId", comic.id).list();
+  }
 
-	public boolean saveComic(String username, String slug) {
+  public List<Comic> getRemixes(long id) {
+    return objectify.get().load().type(Comic.class).filter("ancestorComicId", id).list();
+  }
 
-		Comic comic = getComic(username, slug);
-		
-		if (comic == null) {
-			return false;
-		}
+  public List<Comic> getAncestors(Comic comic) {
+    return Collections.EMPTY_LIST;
+  }
 
-		objectify.get().save().entity(comic).now();
+  public List<Comic> getAncestors(long id) {
+    return Collections.EMPTY_LIST;
+  }
 
-		return true;
-	}
+  /**
+   * @param username
+   *          Name of the user who is posting this Comic
+   * @param comicDto
+   *          ComicDto that contains comic's content
+   * @return false if user cannot be found in database.
+   */
+  public boolean newComic(String username, ComicDto comicDto) {
 
-	public boolean deleteComic(String username, String slug) {
-		
-		Comic comic = getComic(username, slug);
+    User user = objectify.get().load().type(User.class).filter("username", username).first().now();
 
-		if (comic == null) {
-			return false;
-		}
+    if (user == null || comicDto.title == null || comicDto.tags == null) {
+      return false;
+    }
 
-		objectify.get().delete().entity(comic);
+    Comic comic = new Comic(null, user, comicDto.title, comicDto.description, comicDto.series,
+        comicDto.tags);
 
-		return true;
-	}
+    /*
+     * Generate string for my photo to store into the Comic (since comicId isn't generated at this
+     * point
+     */
+    String unique = UUID.randomUUID().toString();
 
-	public Comic branchComic(String username, Long id) {
+    GcsFilename fileName = new GcsFilename("mixxy-1249.appspot.com", "comic/" + unique + ".png");
 
-		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+    // Set Option for that file
+    GcsFileOptions options = new GcsFileOptions.Builder()
+        .mimeType("image/png")
+        .acl("public-read")
+        .build();
 
-		Comic parentComic = objectify.get().load().type(Comic.class).id(id).now();
+    try {
+      // Canal to write on it
+      GcsOutputChannel writeChannel = gcs.createOrReplace(fileName, options);
 
-		Comic remixedComic = new Comic(parentComic, user, parentComic.title, parentComic.description, parentComic.series, parentComic.tags);
+      // Write data from photo
+      try {
 
-		objectify.get().save().entity(remixedComic).now();
-		remixedComic.ancestorComicId.add(remixedComic.id);
-		objectify.get().save().entity(remixedComic).now();
+        writeChannel.write(ByteBuffer.wrap(comicDto.image.getImageData()));
+      }
+      catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      finally {
+        try {
+          writeChannel.close();
+        }
+        catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+      }
+    }
+    catch (IOException e1) {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+    }
 
-		return remixedComic;
-	}
+    comic.url = "https://storage.googleapis.com/mixxy-1249.appspot.com/comic/" + unique + ".png";
 
-	public boolean likeComic(String username, Long comicId) {
+    // lowest index is the root Parent comic (index 0 is the first comic
+    // iteration)
+    // comic.ancestorComics.add(Ref.create(comic));
+    objectify.get().save().entity(comic).now();
+    comic.ancestorComicId.add(comic.id);
+    comic.sluggedTitle = comic.sluggedTitle + "-" + Long.toString(comic.id);
+    objectify.get().save().entity(comic).now();
 
-		User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+    return true;
 
-		if (user == null) {
-			return false;
-		}
+  }
 
-		Comic likedComic = objectify.get().load().type(Comic.class).id(comicId).now();
+  public boolean saveComic(String username, String slug) {
 
-		Like like = new Like(likedComic, user);
+    Comic comic = getComic(username, slug);
 
-		objectify.get().save().entity(like).now();
+    if (comic == null) {
+      return false;
+    }
 
-		return true;
-	}
+    objectify.get().save().entity(comic).now();
+
+    return true;
+  }
+
+  public boolean deleteComic(String username, String slug) {
+
+    Comic comic = getComic(username, slug);
+
+    if (comic == null) {
+      return false;
+    }
+
+    objectify.get().delete().entity(comic);
+
+    return true;
+  }
+
+  public Comic branchComic(String username, Long id) {
+
+    User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+
+    Comic parentComic = objectify.get().load().type(Comic.class).id(id).now();
+
+    Comic remixedComic = new Comic(parentComic, user, parentComic.title, parentComic.description,
+        parentComic.series, parentComic.tags);
+
+    objectify.get().save().entity(remixedComic).now();
+    remixedComic.ancestorComicId.add(remixedComic.id);
+    objectify.get().save().entity(remixedComic).now();
+
+    return remixedComic;
+  }
+
+  public boolean likeComic(String username, Long comicId) {
+
+    User user = objectify.get().load().type(User.class).filter("username", username).first().now();
+
+    if (user == null) {
+      return false;
+    }
+
+    Comic likedComic = objectify.get().load().type(Comic.class).id(comicId).now();
+
+    Like like = new Like(likedComic, user);
+
+    objectify.get().save().entity(like).now();
+
+    return true;
+  }
 
 }

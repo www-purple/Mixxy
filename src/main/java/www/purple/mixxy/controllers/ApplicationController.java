@@ -38,34 +38,34 @@ import ninja.appengine.AppEngineFilter;
 @FilterWith({ AppEngineFilter.class, UrlNormalizingFilter.class })
 public class ApplicationController {
 
-	@Inject
-	private ComicDao comicDao;
+  @Inject
+  private ComicDao comicDao;
 
-	@Inject
-	private UserDao userDao;
+  @Inject
+  private UserDao userDao;
 
-	/**
-	 * Method to put initial data in the db...
-	 *
-	 * @return A successful Result
-	 */
-	public Result setup() {
+  /**
+   * Method to put initial data in the db...
+   *
+   * @return A successful Result
+   */
+  public Result setup() {
 
-		ObjectifyProvider.setup();
+    ObjectifyProvider.setup();
 
-		return Results.ok();
-	}
+    return Results.ok();
+  }
 
-	public Result index() {
-		List<Comic> recent = comicDao.getMostRecentComics(10);
+  public Result index() {
+    List<Comic> recent = comicDao.getMostRecentComics(10);
 
-		Map<String, User> authorToComic = new HashMap<>();
-		for (Comic c : recent) {
-			User u = userDao.getUser(c.authorId);
-			authorToComic.put(c.authorId.toString(), u);
-		}
-		return Results.ok().html().render("latest_comics", recent).render("id_to_user", authorToComic);
+    Map<String, User> authorToComic = new HashMap<>();
+    for (Comic c : recent) {
+      User u = userDao.getUser(c.authorId);
+      authorToComic.put(c.authorId.toString(), u);
+    }
+    return Results.ok().html().render("latest_comics", recent).render("id_to_user", authorToComic);
 
-	}
+  }
 
 }

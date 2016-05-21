@@ -53,7 +53,8 @@ public class GcsTest extends NinjaAppengineBackendTest {
   public void teardown() {
     try {
       gcs.delete(testFilename);
-    } catch (IOException e) {
+    }
+    catch (IOException e) {
       // We're only interested in cleanup here, it's okay if this fails
       e.printStackTrace();
     }

@@ -6,7 +6,5 @@ package www.purple.mixxy.models;
  * @author Brian_Sabz
  */
 public enum OAuthProvider {
-	GOOGLE,
-	FACEBOOK,
-	DEVIANTART
+  GOOGLE, FACEBOOK, DEVIANTART
 };

@@ -15,10 +15,10 @@ public final class ApiKeys {
 
   private String facebookId;
   private String facebookSecret;
-  
+
   private String deviantartId;
   private String deviantartKey;
-  
+
   private String disqusKey;
   private String disqusSecret;
 
@@ -52,18 +52,18 @@ public final class ApiKeys {
   }
 
   public String getDeviantartId() {
-	return deviantartId;
+    return deviantartId;
   }
 
   public String getDeviantartKey() {
-	return deviantartKey;
+    return deviantartKey;
   }
 
-public String getDisqusKey() {
-	return disqusKey;
-}
+  public String getDisqusKey() {
+    return disqusKey;
+  }
 
-public String getDisqusSecret() {
-	return disqusSecret;
-}
+  public String getDisqusSecret() {
+    return disqusSecret;
+  }
 }
