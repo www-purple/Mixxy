@@ -181,7 +181,6 @@
     <module name="JavadocVariable">
       <property name="scope" value="protected"/>
     </module>
-    <module name="JavadocTagContinuationIndentation"/>
     <module name="ConstantName"/>
     <module name="LocalFinalVariableName"/>
     <module name="AbstractClassName"/>
@@ -209,7 +208,6 @@
       <property name="allowEmptyConstructors" value="true"/>
       <property name="allowEmptyMethods" value="true"/>
     </module>
-    <module name="EmptyLineSeparator"/>
     <module name="RedundantModifier"/>
     <module name="CovariantEquals"/>
     <module name="DefaultComesLast"/>
