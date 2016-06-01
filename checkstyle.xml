@@ -70,10 +70,6 @@
       <property name="option" value="nl"/>
       <property name="tokens" value="DOT"/>
     </module>
-    <module name="SeparatorWrap">
-      <property name="option" value="EOL"/>
-      <property name="tokens" value="COMMA"/>
-    </module>
     <module name="PackageName">
       <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
       <message key="name.invalidPattern" value="Package name ''{0}'' must match pattern ''{1}''."/>
@@ -276,6 +272,9 @@
       <property name="lineWrappingIndentation" value="2"/>
       <message key="indentation.child.error" value="&quot;{0}&quot; child has incorrect indentation level {1}, expected level should be {2}."/>
       <message key="indentation.error" value="&quot;{0}&quot; has incorrect indentation level {1}, expected level should be {2}."/>
+    </module>
+    <module name="SeparatorWrap">
+      <property name="tokens" value="COMMA,SEMI"/>
     </module>
   </module>
   <module name="NewlineAtEndOfFile"/>
