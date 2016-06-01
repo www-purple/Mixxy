@@ -175,6 +175,7 @@
       <property name="excludeScope" value="private"/>
     </module>
     <module name="JavadocType">
+      <property name="severity" value="warning"/>
       <property name="allowUnknownTags" value="true"/>
     </module>
     <module name="JavadocVariable">
