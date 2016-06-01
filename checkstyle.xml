@@ -236,6 +236,7 @@
     </module>
     <module name="InnerAssignment"/>
     <module name="MagicNumber">
+      <property name="severity" value="warning"/>
       <property name="ignoreHashCodeMethod" value="true"/>
       <property name="ignoreAnnotation" value="true"/>
       <property name="ignoreFieldDeclaration" value="true"/>
