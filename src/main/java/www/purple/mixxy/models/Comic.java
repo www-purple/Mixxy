@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.OnSave;
 import com.googlecode.objectify.annotation.Unindex;
 
 /**
@@ -131,6 +132,11 @@ public class Comic {
     this.series = series;
     this.tags = tags;
     this.createdAt = new Date();
+    this.updatedAt = new Date();
+  }
+
+  @OnSave
+  private void updateUpdatedAt() {
     this.updatedAt = new Date();
   }
 
