@@ -39,6 +39,8 @@ public class Routes implements ApplicationRoutes {
   private NinjaProperties ninjaProperties;
 
   /**
+   * Initializes the application's mappings from URLs to Web pages.
+   *
    * @param router
    *          The default router of this application
    */

@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * NinjaTestRunner is not used here, this test breaks if so
- * 
+ * NinjaTestRunner is not used here, this test breaks if so.
+ *
  * @author jesse
  *
  */

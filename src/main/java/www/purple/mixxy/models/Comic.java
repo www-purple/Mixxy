@@ -4,7 +4,7 @@ import com.github.slugify.Slugify;
 import com.google.common.collect.Lists;
 /**
  * Created by Brian_Sabz on 4/5/16.
- * 
+ *
  * @author Brian_Sabz
  */
 import com.googlecode.objectify.annotation.Entity;
@@ -59,7 +59,8 @@ public class Comic {
   public Long authorId;
 
   public Comic() {
-    /* needed by Objectify */ }
+    /* needed by Objectify */
+  }
 
   public Comic(final Comic ancestorComic, final User author, final String title,
       final String description, final String series, final List<String> tags) {

@@ -5,4 +5,4 @@ package www.purple.mixxy.models;
  */
 public enum Role {
   USER, MODERATOR
-};
+}

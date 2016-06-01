@@ -2,7 +2,7 @@ package www.purple.mixxy.models;
 
 /**
  * Created by Brian_Sabz on 4/5/16.
- * 
+ *
  * @author Brian_Sabz
  */
 import java.util.Date;
@@ -24,7 +24,8 @@ public class Like {
   public Date createdAt;
 
   public Like() {
-    /* Needed by Objectify */ }
+    /* Needed by Objectify */
+  }
 
   public Like(final Comic comic, final User user) {
     this.comicId = comic.id;

@@ -9,14 +9,14 @@ import java.security.SecureRandom;
 
 public class DeviantArtAuthHelper {
 
-  private String callbackURI;
+  private String callbackUri;
   private String clientId;
   private String clientSecret;
   private String stateToken;
 
-  public DeviantArtAuthHelper(String clientId, String clientSecret, String callbackURI) {
+  public DeviantArtAuthHelper(String clientId, String clientSecret, String callbackUri) {
 
-    this.callbackURI = callbackURI;
+    this.callbackUri = callbackUri;
     this.clientId = clientId;
     this.clientSecret = clientSecret;
 
@@ -31,7 +31,7 @@ public class DeviantArtAuthHelper {
     try {
       url = "https://www.deviantart.com/oauth2/authorize?" +
           "response_type=code" + "&client_id=" + clientId +
-          "&redirect_uri=" + URLEncoder.encode(callbackURI, "UTF-8") +
+          "&redirect_uri=" + URLEncoder.encode(callbackUri, "UTF-8") +
           "&state=" + stateToken + "&scope=basic";
     }
     catch (UnsupportedEncodingException e) {
@@ -54,7 +54,7 @@ public class DeviantArtAuthHelper {
       url = "https://www.deviantart.com/oauth2/token?" +
           "client_id=" + clientId + "&client_secret=" + clientSecret +
           "&grant_type=authorization_code" +
-          "&redirect_uri=" + URLEncoder.encode(callbackURI, "UTF-8") +
+          "&redirect_uri=" + URLEncoder.encode(callbackUri, "UTF-8") +
           "&code=" + code;
     }
     catch (UnsupportedEncodingException e) {
@@ -83,10 +83,10 @@ public class DeviantArtAuthHelper {
 
     /*
      * ObjectMapper mapper = new ObjectMapper(); try {
-     * 
+     *
      * @SuppressWarnings("unchecked") Map<String,Object> user = mapper.readValue(response,
      * Map.class);
-     * 
+     *
      * accessToken = (String) user.get("access_token"); } catch (JsonGenerationException e) {
      * e.printStackTrace(); } catch (JsonMappingException e) { e.printStackTrace(); } catch
      * (IOException e) { e.printStackTrace(); }
@@ -99,15 +99,15 @@ public class DeviantArtAuthHelper {
     String accessToken = getAccessToken(code);
     /*
      * String line = ""; String json = "";
-     * 
+     *
      * try { URL url = new URL("https://www.deviantart.com/api/v1/oauth2/user/whoami?" +
      * "access_token=" + accessToken);
-     * 
+     *
      * BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
-     * 
+     *
      * while (null != (line = br.readLine())) { json += line; } } catch (MalformedURLException e) {
      * e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-     * 
+     *
      * String userJson = StringEscapeUtils.unescapeJava(json);
      */
 

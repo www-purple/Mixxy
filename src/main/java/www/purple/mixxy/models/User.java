@@ -2,16 +2,18 @@ package www.purple.mixxy.models;
 
 /**
  * Modified by Brian_Sabz on 4/5/16.
- * 
+ *
  * @author Brian_Sabz
  */
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.condition.IfNotDefault;
-
-import java.util.*;
 
 @Entity
 public class User {
@@ -39,7 +41,8 @@ public class User {
   public Boolean isActive;
 
   public User() {
-    /* Needed by Objectify */ }
+    /* Needed by Objectify */
+  }
 
   public User(String username, final String firstname, final String lastname, final String gender,
       final String email, final String pictureUrl, String locale, final String providerId,

@@ -61,8 +61,8 @@ public class ApplicationController {
 
     Map<String, User> authorToComic = new HashMap<>();
     for (Comic c : recent) {
-      User u = userDao.getUser(c.authorId);
-      authorToComic.put(c.authorId.toString(), u);
+      User user = userDao.getUser(c.authorId);
+      authorToComic.put(c.authorId.toString(), user);
     }
     return Results.ok().html().render("latest_comics", recent).render("id_to_user", authorToComic);
 

@@ -53,9 +53,9 @@ public class ComicController {
    * Pass in the id of the parent comic to remix on along with the current user, context and data
    * model information.
    *
-   * @param id
+   * @param slug
    *          Identifier of the Parent comic
-   * @param username
+   * @param user
    *          Current user's username
    * @param context
    *          html context

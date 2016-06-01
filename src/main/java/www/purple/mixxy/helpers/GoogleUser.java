@@ -1,6 +1,6 @@
 package www.purple.mixxy.helpers;
 
-public class GoogleUser {
+public final class GoogleUser {
   public static final String ID = "id";
   public static final String EMAIL = "email";
   public static final String NAME = "name";
@@ -10,4 +10,6 @@ public class GoogleUser {
   public static final String PICTURE_URL = "picture";
   public static final String LOCALE = "locale";
   public static final String DOMAIN = "hd";
+
+  private GoogleUser() {}
 }

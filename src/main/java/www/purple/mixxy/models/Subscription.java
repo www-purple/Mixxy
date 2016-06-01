@@ -2,7 +2,7 @@ package www.purple.mixxy.models;
 
 /**
  * Created by Brian_Sabz on 4/5/16.
- * 
+ *
  * @author Brian_Sabz
  */
 import java.util.Date;
@@ -24,7 +24,8 @@ public class Subscription {
   public Date createdAt;
 
   public Subscription() {
-    /* Needed by Objectify */ }
+    /* Needed by Objectify */
+  }
 
   public Subscription(final User subscriber, final User publisher) {
     this.subscriberId = subscriber.id;

@@ -49,8 +49,9 @@ public class UserController {
 
     // stringify the series
     for (Comic comic : comics) {
-      if (comic.series != null && !series.contains(comic.series))
+      if (comic.series != null && !series.contains(comic.series)) {
         series.add(comic.series);
+      }
     }
 
     return Results.html().render("user", username.username).render("userPhoto", username.pictureUrl)

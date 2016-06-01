@@ -2,7 +2,7 @@ package www.purple.mixxy.models;
 
 /**
  * Created by Brian_Sabz on 4/5/16.
- * 
+ *
  * @author Brian_Sabz
  */
 import java.util.Date;
@@ -29,7 +29,8 @@ public class Ban {
   public Date expires;
 
   public Ban() {
-    /* Needed by Objectify */}
+    /* Needed by Objectify */
+  }
 
   public Ban(final User offender, final User victim, final User mod, final String reason,
       final Date banExpiration) {
