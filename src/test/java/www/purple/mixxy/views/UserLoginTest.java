@@ -3,7 +3,7 @@ package www.purple.mixxy.views;
 import org.junit.Test;
 
 import ninja.NinjaFluentLeniumTest;
-import static org.fluentlenium.core.filter.FilterConstructor.*;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 

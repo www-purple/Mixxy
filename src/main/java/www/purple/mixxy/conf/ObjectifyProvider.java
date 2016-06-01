@@ -1,10 +1,5 @@
 package www.purple.mixxy.conf;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 
 import com.google.inject.Provider;

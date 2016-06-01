@@ -4,7 +4,6 @@ import ninja.Context;
 import ninja.Filter;
 import ninja.FilterChain;
 import ninja.Result;
-import ninja.Route;
 
 /**
  * Filter that makes a Controller method double as a Web endpoint (for users) and a JSON endpoint

@@ -10,7 +10,6 @@ import ninja.params.PathParam;
 import ninja.utils.NinjaConstant;
 import www.purple.mixxy.dao.ComicDao;
 import www.purple.mixxy.dao.UserDao;
-import www.purple.mixxy.etc.UserParameter;
 import www.purple.mixxy.filters.JsonEndpoint;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 

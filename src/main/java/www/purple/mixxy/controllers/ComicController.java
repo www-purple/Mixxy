@@ -1,6 +1,5 @@
 package www.purple.mixxy.controllers;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
@@ -15,7 +14,6 @@ import ninja.validation.Validation;
 import www.purple.mixxy.dao.ComicDao;
 import www.purple.mixxy.dao.UserDao;
 import www.purple.mixxy.etc.LoggedInUser;
-import www.purple.mixxy.etc.UserParameter;
 import www.purple.mixxy.filters.JsonEndpoint;
 import www.purple.mixxy.filters.UrlNormalizingFilter;
 import www.purple.mixxy.helpers.ApiKeys;
@@ -26,8 +24,6 @@ import www.purple.mixxy.models.Like;
 import www.purple.mixxy.models.User;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -35,7 +31,6 @@ import org.apache.commons.codec.binary.Base64;
 
 import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesServiceFactory;
-import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
