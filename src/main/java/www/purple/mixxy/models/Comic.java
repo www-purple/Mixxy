@@ -13,8 +13,8 @@ import com.googlecode.objectify.annotation.OnSave;
 import com.googlecode.objectify.annotation.Unindex;
 
 /**
- * Represents a comic or other work of art in the application. This is why people will want to use
- * Mixxy, so you'd better make this good!
+ * Represents a comic or other work of art in the application. This is why people will want to use Mixxy, so you'd
+ * better make this good!
  *
  * @author Brian Sabzjadid
  */
@@ -27,36 +27,33 @@ public class Comic {
    */
   @Id
   public Long id;
-
-  // can refer to these Entities using the already fetched Comic, this solve
-  // performance problems
-  // See: https://github.com/objectify/objectify/wiki/Entities#load
-  // @Load
-  // public Ref<User> author;
-
   /**
-   * The unique identifier of the {@link User} who authored or remixed this {@link Comic}. Don't
-   * assume this will never change; it's possible we may later on implement some kind of ownership
-   * transfer, like with GitHub repos.
+   * The unique identifier of the {@link User} who authored or remixed this {@link Comic}. Don't assume this will never
+   * change; it's possible we may later on implement some kind of ownership transfer, like with GitHub repos.
+   *
+   * @TODO: Can we use Refs here?
    */
   public Long authorId;
 
   /**
-   * List of {@link Comic} IDs that this one is derived from, with the first being the most recent.
-   * An empty list means this is a root-level {@link Comic}.
+   * List of {@link Comic} IDs that this one is derived from, with the first being the most recent. An empty list means
+   * this is a root-level {@link Comic}.
+   *
+   * @TODO: Can we use Refs here?
+   * @TODO: Should this include its own Comic?
    */
   public List<Long> ancestorComicId;
 
   /**
-   * The {@link User}-designated title of this {@link Comic}. Multiple {@link Comic}s, whether from
-   * the same {@link User} or not, may have the same title.
+   * The {@link User}-designated title of this {@link Comic}. Multiple {@link Comic}s, whether from the same
+   * {@link User} or not, may have the same title.
    */
   public String title;
 
   /**
-   * The {@linkplain Slugify slug-cased} title of this {@link Comic}, a transformed version of
-   * {@link #title}. Used for identification via URL. To resolve ambiguity, append {@link #id} to
-   * the end of this. Should never change, even if {@link #title} does.
+   * The {@linkplain Slugify slug-cased} title of this {@link Comic}, a transformed version of {@link #title}. Used for
+   * identification via URL. To resolve ambiguity, append {@link #id} to the end of this. Should never change, even if
+   * {@link #title} does.
    */
   public String sluggedTitle;
 
@@ -72,16 +69,23 @@ public class Comic {
   @Unindex
   public String disqusKey;
 
+  /**
+   * The URL of the actual image. Usually (but not necessarily!) on Google Cloud Storage.
+   */
   @Unindex
   public String url;
-
-  @Unindex
 
   /**
    * The {@link User}-designated description of this {@link Comic}.
    */
+  @Unindex
   public String description;
 
+  /**
+   * Series that this comic belongs to.
+   *
+   * @TODO Can we just use tags instead?
+   */
   public String series;
 
   /**
@@ -95,8 +99,8 @@ public class Comic {
   public Date createdAt;
 
   /**
-   * The {@link Date} on which this {@link Comic} was last updated, either in its content or in its
-   * metadata ({@link #tags}, {@link #description}, etc.).
+   * The {@link Date} on which this {@link Comic} was last updated, either in its content or in its metadata (
+   * {@link #tags}, {@link #description}, etc.).
    */
   public Date updatedAt;
 
