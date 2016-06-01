@@ -128,7 +128,6 @@
       <property name="severity" value="ignore"/>
       <property name="customImportOrderRules" value="STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SAME_PACKAGE(3)###SPECIAL_IMPORTS###STATIC"/>
       <property name="specialImportsRegExp" value="www.purple.mixxy"/>
-      <property name="samePackageMatchingDepth" value="3"/>
       <property name="sortImportsInGroupAlphabetically" value="true"/>
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
