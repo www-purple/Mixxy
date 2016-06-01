@@ -209,7 +209,6 @@
       <property name="allowEmptyMethods" value="true"/>
     </module>
     <module name="EmptyLineSeparator"/>
-    <module name="EmptyLineSeparator"/>
     <module name="RedundantModifier"/>
     <module name="CovariantEquals"/>
     <module name="DefaultComesLast"/>
