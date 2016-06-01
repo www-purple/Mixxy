@@ -195,7 +195,9 @@
     <module name="OuterTypeNumber"/>
     <module name="EmptyForInitializerPad"/>
     <module name="EmptyForIteratorPad"/>
-    <module name="NoWhitespaceAfter"/>
+    <module name="NoWhitespaceAfter">
+      <property name="tokens" value="BNOT,DEC,DOT,INC,LNOT,UNARY_MINUS,UNARY_PLUS,TYPECAST"/>
+    </module>
     <module name="NoWhitespaceBefore"/>
     <module name="ParenPad"/>
     <module name="TypecastParenPad">
