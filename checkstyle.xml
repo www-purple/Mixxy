@@ -185,7 +185,6 @@
       <property name="scope" value="protected"/>
     </module>
     <module name="JavadocTagContinuationIndentation"/>
-    <module name="SummaryJavadoc"/>
     <module name="ConstantName"/>
     <module name="LocalFinalVariableName"/>
     <module name="AbstractClassName"/>
