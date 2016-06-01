@@ -119,7 +119,9 @@
       <property name="ignoreFinal" value="false"/>
     </module>
     <module name="OverloadMethodsDeclarationOrder"/>
-    <module name="VariableDeclarationUsageDistance"/>
+    <module name="VariableDeclarationUsageDistance">
+      <property name="severity" value="warning"/>
+    </module>
     <module name="CustomImportOrder">
       <property name="severity" value="ignore"/>
       <property name="customImportOrderRules" value="STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SAME_PACKAGE(3)###SPECIAL_IMPORTS###STATIC"/>
@@ -143,7 +145,9 @@
     <module name="SummaryJavadoc">
       <property name="forbiddenSummaryFragments" value="^@return the *|^This method returns |^A [{]@code [a-zA-Z0-9]+[}]( is a )"/>
     </module>
-    <module name="JavadocParagraph"/>
+    <module name="JavadocParagraph">
+      <property name="severity" value="warning"/>
+    </module>
     <module name="AtclauseOrder">
       <property name="target" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF"/>
       <property name="tagOrder" value="@param, @return, @throws, @deprecated"/>
@@ -179,6 +183,7 @@
       <property name="allowUnknownTags" value="true"/>
     </module>
     <module name="JavadocVariable">
+      <property name="severity" value="warning"/>
       <property name="scope" value="protected"/>
     </module>
     <module name="ConstantName"/>
