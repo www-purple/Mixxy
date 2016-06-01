@@ -39,12 +39,15 @@ public class Routes implements ApplicationRoutes {
   private NinjaProperties ninjaProperties;
 
   /**
+   * Initializes the application's mappings from URLs to Web pages.
+   *
    * @param router
    *          The default router of this application
    */
   @Override
   @SuppressWarnings({ "PMD.ExcessiveMethodLength", "PMD.AvoidDuplicateLiterals" })
   public void init(final Router router) {
+    // CHECKSTYLE:OFF
     if (!ninjaProperties.isProd()) {
       // If this is not a production build...
       router.GET().route("/setup/?").with(ApplicationController.class, "setup");
@@ -209,7 +212,7 @@ public class Routes implements ApplicationRoutes {
 
     // Get the actual image from a given work
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/image/?").with(ComicController.class, "image");
-    
+
     // Load the new remixing page
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/remix/?").with(ComicController.class, "newRemix");
 
@@ -218,6 +221,7 @@ public class Routes implements ApplicationRoutes {
 
     // Load the remixes page
     router.GET().route("(?:/users)?/{user}(?:/works)?/{work}/remixes/?").with(ComicController.class, "remixes");
+    // CHECKSTYLE:ON
   }
 
 }

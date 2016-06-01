@@ -11,18 +11,18 @@ import com.google.appengine.api.images.Image;
 
 public class ComicDto {
 
-	@Size(min = 5)
-	public String title;
+  @Size(min = 5)
+  public String title;
 
-	//@Size(min = 5)
-	public String description;
+  // @Size(min = 5)
+  public String description;
 
-	public String series;
+  public String series;
 
-	public Image image;
+  public Image image;
 
-	public List<String> tags;
+  public List<String> tags;
 
-	public int likes;
+  public int likes;
 
 }

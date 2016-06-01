@@ -1,6 +1,5 @@
 package www.purple.mixxy.conf;
 
-
 import ninja.NinjaAppengineBackendTest;
 
 import static org.junit.Assert.*;
@@ -9,7 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * NinjaTestRunner is not used here, this test breaks if so
+ * NinjaTestRunner is not used here, this test breaks if so.
+ *
  * @author jesse
  *
  */

@@ -26,8 +26,8 @@ import org.slf4j.Logger;
 import com.google.inject.Inject;
 
 /**
- * This is just a demo for a filter. This filter just logs a request in level
- * info. Be inspired and use your own filter.
+ * This is just a demo for a filter. This filter just logs a request in level info. Be inspired and
+ * use your own filter.
  * 
  * Filters can be attached to classes or methods via @FilterWith(LoggerFilter.class)
  * 
@@ -36,18 +36,18 @@ import com.google.inject.Inject;
  */
 public class LoggerFilter implements Filter {
 
-    private final Logger logger;
+  private final Logger logger;
 
-    @Inject
-    public LoggerFilter(Logger logger) {
-        this.logger = logger;
-    }
+  @Inject
+  public LoggerFilter(Logger logger) {
+    this.logger = logger;
+  }
 
-    @Override
-    public Result filter(FilterChain chain, Context context) {
+  @Override
+  public Result filter(FilterChain chain, Context context) {
 
-        logger.info("Got request from: %s", context.getRequestPath());
-        return chain.next(context);
-    }
+    logger.info("Got request from: %s", context.getRequestPath());
+    return chain.next(context);
+  }
 
 }

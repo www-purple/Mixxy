@@ -33,9 +33,8 @@ import org.junit.runner.RunWith;
 import com.google.inject.Inject;
 
 /**
- * This test class is <em>only</em> for anything involving the routes; for the
- * server's reaction to actually navigating to these routes, see
- * {@link NavigationTest}.
+ * This test class is <em>only</em> for anything involving the routes; for the server's reaction to
+ * actually navigating to these routes, see {@link NavigationTest}.
  * 
  * @author Jesse Talavera-Greenberg
  * @see NavigationTest

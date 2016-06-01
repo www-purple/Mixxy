@@ -16,12 +16,10 @@ import com.google.appengine.tools.cloudstorage.GcsFileOptions;
 import com.google.appengine.tools.cloudstorage.GcsFilename;
 import com.google.appengine.tools.cloudstorage.GcsInputChannel;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 import ninja.utils.NinjaProperties;
 import ninja.NinjaAppengineBackendTest;
 import ninja.NinjaRunner;
-import ninja.NinjaTest;
 
 @RunWith(NinjaRunner.class)
 public class GcsTest extends NinjaAppengineBackendTest {
@@ -53,7 +51,8 @@ public class GcsTest extends NinjaAppengineBackendTest {
   public void teardown() {
     try {
       gcs.delete(testFilename);
-    } catch (IOException e) {
+    }
+    catch (IOException e) {
       // We're only interested in cleanup here, it's okay if this fails
       e.printStackTrace();
     }

@@ -7,29 +7,28 @@ import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestC
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.googlecode.objectify.ObjectifyService;
 
-import ninja.NinjaTest;
 import www.purple.mixxy.conf.ObjectifyProvider;
 
 import java.io.Closeable;
 
 public class NinjaAppengineBackendTest extends NinjaTest {
 
-    private final LocalServiceTestHelper helper = new LocalServiceTestHelper(
-            new LocalDatastoreServiceTestConfig());
-    
-    private Closeable session;
+  private final LocalServiceTestHelper helper = new LocalServiceTestHelper(
+      new LocalDatastoreServiceTestConfig());
 
-    @Before
-    public void setUp() {
-        helper.setUp();
-        session = ObjectifyService.begin();
-        ObjectifyProvider.setup();
-    }
+  private Closeable session;
 
-    @After
-    public void tearDown() throws Exception {
-        helper.tearDown();
-        session.close();
-    }
+  @Before
+  public void setUp() {
+    helper.setUp();
+    session = ObjectifyService.begin();
+    ObjectifyProvider.setup();
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    helper.tearDown();
+    session.close();
+  }
 
 }

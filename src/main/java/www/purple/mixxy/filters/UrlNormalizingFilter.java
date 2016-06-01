@@ -13,10 +13,9 @@ import ninja.FilterChain;
 import ninja.Result;
 
 /**
- * Any URLs that almost follow a specific convention, but not quite, will be
- * fixed and the user redirected to the proper URL. This is for SEO purposes;
- * {@code /resource} and {@code /resource/} (note the trailing slash) are two
- * separate Web pages, as far as Google is concerned.
+ * Any URLs that almost follow a specific convention, but not quite, will be fixed and the user
+ * redirected to the proper URL. This is for SEO purposes; {@code /resource} and {@code /resource/}
+ * (note the trailing slash) are two separate Web pages, as far as Google is concerned.
  * 
  * This {@code Filter} transforms URLs in the following ways:
  * <ul>
@@ -38,9 +37,11 @@ public class UrlNormalizingFilter implements Filter {
     try {
       originalPath = new URI(originalPath).normalize().toString();
       // Normalize the request URI, if it's valid
-    } catch (URISyntaxException e) {
-      logger.info("Request to URL with invalid syntax \"{}\" (index {})", e.getInput(), e.getIndex());
-      // TODO: Should strange-looking URIs just be an error?  Must do research
+    }
+    catch (URISyntaxException e) {
+      logger.info("Request to URL with invalid syntax \"{}\" (index {})", e.getInput(),
+          e.getIndex());
+      // TODO: Should strange-looking URIs just be an error? Must do research
     }
 
     String path = originalPath;
@@ -57,7 +58,8 @@ public class UrlNormalizingFilter implements Filter {
       // If we normalized the URL at all...
       logger.debug("Incoming request for \"{}\", normalizing to \"{}\"", originalPath, path);
       return filterChain.next(context).redirect(path).status(Result.SC_301_MOVED_PERMANENTLY);
-    } else {
+    }
+    else {
       return filterChain.next(context);
     }
 

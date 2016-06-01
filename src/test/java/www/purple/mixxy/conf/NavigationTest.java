@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.google.inject.Singleton;
-
 import ninja.NinjaFluentLeniumTest;
 
 public class NavigationTest extends NinjaFluentLeniumTest {

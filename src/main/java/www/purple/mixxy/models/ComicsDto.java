@@ -9,6 +9,6 @@ import java.util.List;
 
 public class ComicsDto {
 
-    public List<Comic> comics;
+  public List<Comic> comics;
 
 }
