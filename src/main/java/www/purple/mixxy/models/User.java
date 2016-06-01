@@ -7,6 +7,7 @@ import java.util.Map;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.OnSave;
 import com.googlecode.objectify.condition.IfNotDefault;
 
 /**
@@ -92,7 +93,7 @@ public class User {
   /**
    * The {@link Date} on which this {@link User} registered.
    */
-  public Date createdAt;
+  public Date createdAt = new Date();
 
   /**
    * The {@link Date} on which this {@link User} last updated their account information.
@@ -100,7 +101,7 @@ public class User {
    * @TODO: What does it mean to "update"? Log on? Change personal info? Submit a comic? Write a
    *        comment?
    */
-  public Date updatedAt;
+  public Date updatedAt = new Date();
 
   /**
    * False if this {@link User} has deactivated their account for whatever reason. They could still
@@ -130,6 +131,12 @@ public class User {
     this.createdAt = new Date();
     this.updatedAt = new Date();
     this.isActive = true;
+  }
+
+
+  @OnSave
+  private void updateUpdatedAt() {
+    this.updatedAt = new Date();
   }
 
 }
