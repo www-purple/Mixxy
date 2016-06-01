@@ -92,7 +92,7 @@ public class FacebookAuthHelper {
       @SuppressWarnings("unchecked")
       Map<String, Object> user = mapper.readValue(response, Map.class);
 
-      accessToken = (String) user.get("access_token");
+      accessToken = (String)user.get("access_token");
     }
     catch (JsonGenerationException e) {
       e.printStackTrace();

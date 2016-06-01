@@ -87,8 +87,9 @@ public class LoginLogoutController {
   ///////////////////////////////////////////////////////////////////////////
   public Result login(@Param("provider") String provider) {
 
-    if (provider == null)
+    if (provider == null) {
       return Results.redirect("/");
+    }
 
     String appVersion = SystemProperty.applicationVersion.get();
     callbackURI = ninjaProperties.get("callback.uri");
@@ -180,7 +181,7 @@ public class LoginLogoutController {
       Map<String, Object> userMap = mapper.readValue(data, Map.class);
 
       // Validate user
-      if ((user = userDao.isUserValid((String) userMap.get(GoogleUser.EMAIL))) != null) {
+      if ((user = userDao.isUserValid((String)userMap.get(GoogleUser.EMAIL))) != null) {
         // If user exists
         // Start session
         newSession(user, context);
@@ -189,14 +190,14 @@ public class LoginLogoutController {
         auth = "google";
         // Create new user
         user = userDao.createUser(
-            (String) userMap.get(GoogleUser.EMAIL),
-            (String) userMap.get(GoogleUser.FIRST_NAME),
-            (String) userMap.get(GoogleUser.LAST_NAME),
-            (String) userMap.get(GoogleUser.GENDER),
-            (String) userMap.get(GoogleUser.EMAIL),
-            (String) userMap.get(GoogleUser.PICTURE_URL),
-            (String) userMap.get(GoogleUser.LOCALE),
-            (String) userMap.get(GoogleUser.ID),
+            (String)userMap.get(GoogleUser.EMAIL),
+            (String)userMap.get(GoogleUser.FIRST_NAME),
+            (String)userMap.get(GoogleUser.LAST_NAME),
+            (String)userMap.get(GoogleUser.GENDER),
+            (String)userMap.get(GoogleUser.EMAIL),
+            (String)userMap.get(GoogleUser.PICTURE_URL),
+            (String)userMap.get(GoogleUser.LOCALE),
+            (String)userMap.get(GoogleUser.ID),
             provider);
         System.out.println(user);
         // TODO: Redirect to profile
@@ -238,36 +239,36 @@ public class LoginLogoutController {
       @SuppressWarnings("unchecked")
       Map<String, Object> userMap = mapper.readValue(data, Map.class);
 
-      if ((String) userMap.get(FacebookUser.EMAIL) == null) {
-        userMap.put(FacebookUser.USERNAME, (String) userMap.get(FacebookUser.FIRST_NAME));
+      if ((String)userMap.get(FacebookUser.EMAIL) == null) {
+        userMap.put(FacebookUser.USERNAME, (String)userMap.get(FacebookUser.FIRST_NAME));
       }
       else {
-        userMap.put(FacebookUser.USERNAME, (String) userMap.get(FacebookUser.EMAIL));
+        userMap.put(FacebookUser.USERNAME, (String)userMap.get(FacebookUser.EMAIL));
       }
 
       // Validate user
-      if ((user = userDao.isUserValid((String) userMap.get(FacebookUser.USERNAME))) != null) {
+      if ((user = userDao.isUserValid((String)userMap.get(FacebookUser.USERNAME))) != null) {
         // If user exists
         // Start session
         newSession(user, context);
       }
       else {
         @SuppressWarnings("unchecked")
-        Map<String, Object> picture = (Map<String, Object>) userMap.get("picture");
+        Map<String, Object> picture = (Map<String, Object>)userMap.get("picture");
         @SuppressWarnings("unchecked")
-        Map<String, Object> pictureUrl = (Map<String, Object>) picture.get("data");
+        Map<String, Object> pictureUrl = (Map<String, Object>)picture.get("data");
 
         auth = "facebook";
         // Create new user
         user = userDao.createUser(
-            (String) userMap.get(FacebookUser.USERNAME),
-            (String) userMap.get(FacebookUser.FIRST_NAME),
-            (String) userMap.get(FacebookUser.LAST_NAME),
-            (String) userMap.get(FacebookUser.GENDER),
-            (String) userMap.get(FacebookUser.EMAIL),
-            (String) pictureUrl.get(FacebookUser.PICTURE_URL),
-            (String) userMap.get(FacebookUser.LOCALE),
-            (String) userMap.get(FacebookUser.ID),
+            (String)userMap.get(FacebookUser.USERNAME),
+            (String)userMap.get(FacebookUser.FIRST_NAME),
+            (String)userMap.get(FacebookUser.LAST_NAME),
+            (String)userMap.get(FacebookUser.GENDER),
+            (String)userMap.get(FacebookUser.EMAIL),
+            (String)pictureUrl.get(FacebookUser.PICTURE_URL),
+            (String)userMap.get(FacebookUser.LOCALE),
+            (String)userMap.get(FacebookUser.ID),
             provider);
 
         System.out.println(user);
