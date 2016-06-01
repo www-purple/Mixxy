@@ -115,10 +115,8 @@ public class Comic {
     }
     this.authorId = author.id;
 
-    Slugify slg;
     try {
-      slg = new Slugify();
-      this.sluggedTitle = slg.slugify(title);
+      this.sluggedTitle = new Slugify().slugify(title);
     }
     catch (IOException e) {
       // NOTE: Unlikely to occur; if it does, there's likely a bigger problem.
