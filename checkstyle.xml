@@ -114,10 +114,6 @@
       <message key="ws.preceded" value="GenericWhitespace ''{0}'' is preceded with whitespace."/>
       <message key="ws.illegalFollow" value="GenericWhitespace ''{0}'' should followed by whitespace."/>
     </module>
-    <module name="Indentation">
-      <property name="caseIndent" value="2"/>
-      <property name="arrayInitIndent" value="2"/>
-    </module>
     <module name="AbbreviationAsWordInName">
       <property name="allowedAbbreviationLength" value="1"/>
       <property name="ignoreFinal" value="false"/>
@@ -269,6 +265,15 @@
     <module name="MutableException"/>
     <module name="ThrowsCount"/>
     <module name="FinalClass"/>
+    <module name="Indentation">
+      <property name="basicOffset" value="2"/>
+      <property name="caseIndent" value="2"/>
+      <property name="throwsIndent" value="2"/>
+      <property name="arrayInitIndent" value="2"/>
+      <property name="lineWrappingIndentation" value="2"/>
+      <message key="indentation.child.error" value="&quot;{0}&quot; child has incorrect indentation level {1}, expected level should be {2}."/>
+      <message key="indentation.error" value="&quot;{0}&quot; has incorrect indentation level {1}, expected level should be {2}."/>
+    </module>
   </module>
   <module name="NewlineAtEndOfFile"/>
   <module name="UniqueProperties"/>
