@@ -190,9 +190,9 @@ public class LoginLogoutController {
 						(String)userMap.get(GoogleUser.ID),
 						provider
 				);
-				System.out.println(user);
+				newSession(user, context);
 				// TODO: Redirect to profile
-				return Results.redirect("/signup");
+				return Results.redirect("/");
         	}
 
 		} catch (JsonGenerationException e) {
@@ -206,7 +206,7 @@ public class LoginLogoutController {
 			return loginError(context);
 		}
 
-    	return Results.redirect("/signup");
+    	return Results.redirect("/");
     }
 
     private Result validateFacebookResponse(String provider, String code, Context context) {
@@ -261,9 +261,9 @@ public class LoginLogoutController {
 				);
 
 
-				System.out.println(user);
+				newSession(user, context);
 		        // TODO: Redirect to profile
-				return Results.redirect("/signup");
+				return Results.redirect("/");
         	}
     	} catch (JsonGenerationException e) {
             logger.error("Invalid JSON response from Google", e);

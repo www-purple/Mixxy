@@ -111,7 +111,7 @@ public class ComicController {
 
 	// TODO: Move image-loading logic to here
 	@FilterWith(JsonEndpoint.class)
-	public Result comic(@PathParam("user") String username, @PathParam("work") String work) {
+	public Result comic(@PathParam("user") String username, @PathParam("work") String work, Context context) {
 
 	    User author = userDao.getUser(username);
 		Comic comic = comicDao.getComic(author, work);
@@ -121,22 +121,36 @@ public class ComicController {
 		  return Results.notFound().template("www/purple/mixxy/" + NinjaConstant.LOCATION_VIEW_FTL_HTML_NOT_FOUND);
 		}
 		
-		// Get SSO message body
-		DisqusSSOHelper sso = new DisqusSSOHelper(
-				(author.id).toString(), 
-				author.username, 
-				author.email,
-				author.pictureUrl,
-				apiKeys.getDisqusSecret()
-		);
+		// This sets up single sign on on disqus
+		if(context.getSession().get("username") != null) {
+			
+			User user = null;
+			
+			if((user = userDao.isUserValid(context.getSession().get("username"))) != null) {
+				// Get SSO message body
+				DisqusSSOHelper sso = new DisqusSSOHelper(
+						(user.id).toString(), 
+						user.username, 
+						user.email,
+						user.pictureUrl,
+						apiKeys.getDisqusSecret()
+				);
+				
+				comic.message = sso.base64EncodedStr;
+				comic.signature = sso.signature;
+				comic.timestamp = sso.timestamp;
+				comic.disqusKey = apiKeys.getDisqusKey();
+			}
+			
+			System.out.println("USER: " + user);
+		} else {
+			comic.message = "notloggedin";
+			comic.signature = "notloggedin";
+			comic.timestamp = -1;
+			comic.disqusKey = "notloggedin";
+		}
 		
-		comic.message = sso.base64EncodedStr;
-		comic.signature = sso.signature;
-		comic.timestamp = sso.timestamp;
-		comic.disqusKey = apiKeys.getDisqusKey();
-
 		return Results.ok().render("comic", comic).render("user", author).html();
-
 	}
 
 	/**

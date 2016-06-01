@@ -11,7 +11,7 @@
   <artifactId>mixxy</artifactId>
   <packaging>war</packaging>
   <groupId>www.purple.mixxy</groupId>
-  <version>5</version>
+  <version>98</version>
 
 
   <properties>
