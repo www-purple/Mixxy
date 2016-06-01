@@ -73,7 +73,7 @@ public class User {
   /**
    * Location of this {@link User} on Earth.
    *
-   * @TODO Is there an {@code enum} or something we can wrap this in?
+   * @TODO Switch this to https://github.com/TakahikoKawasaki/nv-i18n
    */
   public String locale;
 
